@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Planificador de Certificados | TransformacionIA</title>
+
+<link rel="stylesheet" href="css/styles.css">
+
+<style>
+
+.planner-container{
+max-width:1100px;
+margin:auto;
+padding:60px 20px;
+}
+
+.planner-box{
+background:rgba(255,255,255,0.04);
+border:1px solid rgba(255,255,255,0.08);
+border-radius:24px;
+padding:30px;
+margin-bottom:40px;
+}
+
+.planner-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:20px;
+}
+
+.planner-input{
+display:flex;
+flex-direction:column;
+gap:6px;
+}
+
+.planner-input input{
+padding:12px;
+border-radius:10px;
+border:1px solid rgba(255,255,255,0.1);
+background:#0f172a;
+color:white;
+}
+
+.module-row{
+display:grid;
+grid-template-columns:1fr 120px;
+gap:10px;
+margin-bottom:10px;
+}
+
+.module-row input{
+padding:10px;
+border-radius:8px;
+border:1px solid rgba(255,255,255,0.1);
+background:#0f172a;
+color:white;
+}
+
+.btn{
+padding:12px 20px;
+border:none;
+border-radius:10px;
+background:linear-gradient(135deg,#6366f1,#38bdf8);
+color:white;
+font-weight:600;
+cursor:pointer;
+}
+
+.result-table{
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
+}
+
+.result-table th,
+.result-table td{
+border-bottom:1px solid rgba(255,255,255,0.08);
+padding:12px;
+text-align:left;
+}
+
+.result-table th{
+color:#38bdf8;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header class="navbar">
+<div class="logo">TransformacionIA</div>
+
+<nav class="menu">
+<a href="index.html">Inicio</a>
+<a href="proyectos.html">Proyectos</a>
+<a href="herramientas.html">Herramientas</a>
+<a href="contacto.html">Contacto</a>
+</nav>
+</header>
+
+<main class="planner-container">
+
+<h1>Planificador de Certificados</h1>
+<p>Calcula automáticamente el cronograma de módulos formativos.</p>
+
+<div class="planner-box">
+
+<div class="planner-grid">
+
+<div class="planner-input">
+<label>Fecha de inicio</label>
+<input type="date" id="fechaInicio">
+</div>
+
+<div class="planner-input">
+<label>Horas al día</label>
+<input type="number" id="horasDia" value="5">
+</div>
+
+</div>
+
+</div>
+
+<div class="planner-box">
+
+<h2>Módulos</h2>
+
+<div id="modules"></div>
+
+<button class="btn" onclick="addModule()">Añadir módulo</button>
+
+</div>
+
+<div class="planner-box">
+
+<button class="btn" onclick="generatePlan()">Generar cronograma</button>
+
+<table class="result-table" id="resultTable">
+
+<thead>
+<tr>
+<th>Módulo</th>
+<th>Horas</th>
+<th>Inicio</th>
+<th>Fin</th>
+</tr>
+</thead>
+
+<tbody></tbody>
+
+</table>
+
+</div>
+
+</main>
+
+<script>
+
+function addModule(){
+
+const container=document.getElementById("modules")
+
+const row=document.createElement("div")
+row.className="module-row"
+
+row.innerHTML=`
+
+<input placeholder="Nombre módulo">
+
+<input type="number" placeholder="Horas">
+
+`
+
+container.appendChild(row)
+
+}
+
+addModule()
+
+function generatePlan(){
+
+const startDate=new Date(document.getElementById("fechaInicio").value)
+
+const horasDia=parseInt(document.getElementById("horasDia").value)
+
+const rows=document.querySelectorAll(".module-row")
+
+const tbody=document.querySelector("#resultTable tbody")
+
+tbody.innerHTML=""
+
+let currentDate=new Date(startDate)
+
+rows.forEach(row=>{
+
+const nombre=row.children[0].value
+const horas=parseInt(row.children[1].value)
+
+if(!nombre||!horas)return
+
+const dias=Math.ceil(horas/horasDia)
+
+const inicio=new Date(currentDate)
+
+currentDate.setDate(currentDate.getDate()+dias)
+
+const fin=new Date(currentDate)
+
+const tr=document.createElement("tr")
+
+tr.innerHTML=`
+<td>${nombre}</td>
+<td>${horas}</td>
+<td>${inicio.toLocaleDateString()}</td>
+<td>${fin.toLocaleDateString()}</td>
+`
+
+tbody.appendChild(tr)
+
+})
+
+}
+
+</script>
+
+</body>
+</html>
