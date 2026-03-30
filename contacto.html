@@ -3,28 +3,149 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contacto · Idayra Cabrera — TransformacionIA</title>
-  <meta name="description" content="Contacta con Idayra Cabrera para proyectos de transformación digital, formación FPE, consultoría Kit Digital o colaboraciones. La Laguna, Tenerife." />
-  <meta name="author" content="Idayra Cabrera" />
-  <meta name="robots" content="index,follow" />
-  <link rel="canonical" href="https://transformacionia.es/contacto.html" />
-  <meta property="og:title"       content="Contacto · Idayra Cabrera — TransformacionIA" />
-  <meta property="og:description" content="Contacta con Idayra Cabrera para proyectos de transformación digital, formación FPE, consultoría Kit Digital o colaboraciones. La Laguna, Tenerife." />
-  <meta property="og:url"         content="https://transformacionia.es/contacto.html" />
-  <meta property="og:locale"      content="es_ES" />
+
+  <title>Contacto | Idayra Cabrera · Transformación Digital, FPE e IA</title>
+  <meta
+    name="description"
+    content="Contacta con Idayra Cabrera para proyectos de transformación digital, formación FPE, inteligencia artificial o colaboraciones."
+  />
+
   <link rel="stylesheet" href="css/styles.css" />
+
+  <style>
+    .contact-hero {
+      padding: 48px 0 42px;
+      text-align: center;
+    }
+
+    .contact-hero h1 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin-bottom: 12px;
+    }
+
+    .contact-hero p {
+      color: var(--muted);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 28px;
+      margin-top: 40px;
+    }
+
+    .contact-card {
+      background: var(--bg4);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 26px;
+    }
+
+    .contact-card h2 {
+      margin-bottom: 18px;
+      font-size: 1.3rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .fg {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+
+    .fg input,
+    .fg textarea {
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--bg3);
+      color: var(--text);
+      font-size: 0.95rem;
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .contact-methods {
+      display: grid;
+      gap: 14px;
+    }
+
+    .contact-method {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: var(--bg4);
+      text-decoration: none;
+      color: var(--text);
+      transition: 0.2s;
+    }
+
+    .contact-method:hover {
+      transform: translateY(-2px);
+      border-color: rgba(59,130,246,0.3);
+    }
+
+    .cm-icon {
+      width: 42px;
+      height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      background: rgba(59,130,246,0.1);
+      font-size: 1.2rem;
+    }
+
+    .cm-label {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .cm-value {
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 900px) {
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
+
 <body>
+
 <div class="bg-glow"></div>
-<header class="navbar" role="banner">
-  <a href="index.html" class="nav-logo" aria-label="TransformacionIA inicio">
-    <img src="img/logo.png" alt="Logo TransformacionIA" />
+
+<header class="navbar">
+  <a href="index.html" class="nav-logo">
+    <span class="nav-mark">IC</span>
     <span class="nav-logo-text">Transformación IA</span>
   </a>
-  <button class="nav-toggle" id="navTog" aria-label="Abrir menú" aria-expanded="false">
+
+  <button class="nav-toggle" id="navTog">
     <span></span><span></span><span></span>
   </button>
-  <nav class="nav-links" id="navLinks" aria-label="Menú principal">
+
+  <nav class="nav-links" id="navLinks">
     <a href="sobre-mi.html">Sobre mí</a>
     <a href="proyectos.html">Proyectos</a>
     <a href="herramientas.html">Herramientas</a>
@@ -32,114 +153,130 @@
     <a href="contacto.html" class="nav-cta">Contacto</a>
   </nav>
 </header>
-<main id="main">
-<div class="container">
-  <div class="page-hero">
+
+<main>
+
+<section class="contact-hero">
+  <div class="container">
     <span class="kicker">Contacto</span>
-    <h1>Hablemos de tu proyecto</h1>
-    <p>¿Tienes un proyecto de transformación digital, necesitas formación o quieres colaborar? Cuéntame.</p>
+    <h1>¿Hablamos?</h1>
+    <p>
+      Si tienes un proyecto, necesitas formación o quieres colaborar,
+      puedes escribirme directamente o usar el formulario.
+    </p>
   </div>
-</div>
+</section>
+
 <div class="divider"></div>
+
 <section class="section">
   <div class="container">
+
     <div class="contact-grid">
 
-      <!-- Formulario -->
-      <div>
-        <form id="cform" action="https://formspree.io/f/xnjgvaja" method="POST" novalidate>
+      <!-- FORMULARIO -->
+      <div class="contact-card">
+        <h2>Enviar mensaje</h2>
+
+        <form action="https://formspree.io/f/xnjgvaja" method="POST">
+          
           <div class="form-row">
             <div class="fg">
-              <label for="fnombre">Nombre *</label>
-              <input type="text" id="fnombre" name="nombre" placeholder="Tu nombre" required autocomplete="given-name" />
+              <label>Nombre</label>
+              <input type="text" name="nombre" required />
             </div>
+
             <div class="fg">
-              <label for="femail">Email *</label>
-              <input type="email" id="femail" name="email" placeholder="tu@email.com" required autocomplete="email" />
+              <label>Email</label>
+              <input type="email" name="email" required />
             </div>
           </div>
+
           <div class="fg">
-            <label>Motivo de consulta *</label>
-            <div class="csel" id="csel">
-              <button type="button" class="csel-t" id="ctrig" aria-haspopup="listbox" aria-expanded="false">
-                <span class="csel-txt">Selecciona una opción</span>
-                <span class="csel-arr"></span>
-              </button>
-              <div class="csel-m" role="listbox">
-                <button type="button" class="csel-o" data-value="Docencia / Formación FPE">Docencia / Formación FPE</button>
-                <button type="button" class="csel-o" data-value="Kit Digital">Kit Digital</button>
-                <button type="button" class="csel-o" data-value="Kit Consulting">Kit Consulting</button>
-                <button type="button" class="csel-o" data-value="Transformación Digital">Transformación Digital</button>
-                <button type="button" class="csel-o" data-value="Colaboración">Colaboración</button>
-                <button type="button" class="csel-o" data-value="Otro">Otro</button>
-              </div>
-              <input type="hidden" name="motivo" class="csel-val" />
-            </div>
+            <label>Mensaje</label>
+            <textarea name="mensaje" required></textarea>
           </div>
-          <div class="fg">
-            <label for="fmsg">Mensaje *</label>
-            <textarea id="fmsg" name="mensaje" placeholder="Cuéntame en qué puedo ayudarte..." required></textarea>
-          </div>
+
           <input type="hidden" name="_next" value="https://transformacionia.es/gracias.html" />
-          <input type="text" name="_gotcha" style="display:none" />
-          <p id="ferr" class="ferr" role="alert"></p>
-          <button type="submit" class="btn btn-p" style="width:100%;justify-content:center;margin-top:6px">Enviar mensaje</button>
+
+          <button class="btn btn-p" style="width:100%">Enviar mensaje</button>
         </form>
       </div>
 
-      <!-- Métodos de contacto directo -->
-      <div class="cmethods">
-        <a href="https://wa.me/34620948523" class="cmethod" target="_blank" rel="noopener" aria-label="WhatsApp">
+      <!-- CONTACTO DIRECTO -->
+      <div class="contact-methods">
+
+        <a href="https://wa.me/34620948523" target="_blank" class="contact-method">
           <div class="cm-icon">💬</div>
-          <div><div class="cm-lbl">WhatsApp</div><div class="cm-val">+34 620 948 523</div></div>
+          <div>
+            <div class="cm-label">WhatsApp</div>
+            <div class="cm-value">+34 620 948 523</div>
+          </div>
         </a>
-        <a href="/cdn-cgi/l/email-protection#0d61787764696c747f6c67627f6a686e6c6f7f687f6c4d6a606c6461236e6260" class="cmethod" aria-label="Email">
+
+        <a href="mailto:formacion@transformacionia.es" class="contact-method">
           <div class="cm-icon">✉️</div>
-          <div><div class="cm-lbl">Email</div><div class="cm-val"><span class="__cf_email__" data-cfemail="96fae3ecfff2f7efe4f7fcf9e4f1f3f5f7f4e4f3e4f7d6f1fbf7fffab8f5f9fb">[email&#160;protected]</span></div></div>
+          <div>
+            <div class="cm-label">Email</div>
+            <div class="cm-value">formacion@transformacionia.es</div>
+          </div>
         </a>
-        <a href="https://www.linkedin.com/in/luzidayrajorgecabrera" class="cmethod" target="_blank" rel="noopener" aria-label="LinkedIn">
+
+        <a href="https://www.linkedin.com/in/luzidayrajorgecabrera" target="_blank" class="contact-method">
           <div class="cm-icon">🔗</div>
-          <div><div class="cm-lbl">LinkedIn</div><div class="cm-val">Idayra Cabrera</div></div>
+          <div>
+            <div class="cm-label">LinkedIn</div>
+            <div class="cm-value">Idayra Cabrera</div>
+          </div>
         </a>
-        <div class="cmethod" style="cursor:default">
+
+        <div class="contact-method" style="cursor:default">
           <div class="cm-icon">📍</div>
-          <div><div class="cm-lbl">Ubicación</div><div class="cm-val">La Laguna, Tenerife</div></div>
+          <div>
+            <div class="cm-label">Ubicación</div>
+            <div class="cm-value">Canarias</div>
+          </div>
         </div>
+
       </div>
 
     </div>
+
   </div>
 </section>
+
 </main>
-<footer class="footer" role="contentinfo">
-  <div class="container">
-    <div class="footer-grid">
-      <div class="fb-brand">
-        <a href="index.html" class="nav-logo" aria-label="Inicio">
-          <img src="img/logo.png" alt="Logo TransformacionIA" />
-          <span class="nav-logo-text">Transformación IA</span>
-        </a>
-        <p>Portfolio de Idayra Cabrera — Docente FPE, Administradora de Sistemas y especialista en transformación digital e IA.</p>
+
+<footer class="footer">
+  <div class="container footer-container">
+
+    <div class="footer-top">
+      <a href="index.html" class="nav-logo footer-logo">
+        <span class="nav-mark">IC</span>
+        <span class="nav-logo-text">Transformación IA</span>
+      </a>
+
+      <div class="footer-social">
+        <a href="https://wa.me/34620948523" target="_blank">💬</a>
+        <a href="https://www.linkedin.com/in/luzidayrajorgecabrera" target="_blank">in</a>
       </div>
-      <div class="fc">
-        <h4>Páginas</h4>
-        <a href="sobre-mi.html">Sobre mí</a>
-        <a href="proyectos.html">Proyectos</a>
-        <a href="herramientas.html">Herramientas</a>
-    <a href="acreditaciones.html">Acreditaciones</a>
-        <a href="planificador.html">Planificador</a>
-      </div>
-      <div class="fc">
-        <h4>Contacto</h4>
-        <a href="contacto.html">Formulario</a>
-        <a href="/cdn-cgi/l/email-protection#29455c53404d48505b4843465b4e4c4a484b5b4c5b48694e44484045074a4644">Email</a>
-        <a href="https://wa.me/34620948523" target="_blank" rel="noopener">WhatsApp</a>
-        <a href="https://www.linkedin.com/in/luzidayrajorgecabrera" target="_blank" rel="noopener">LinkedIn</a>
-      </div>
-      <div class="fc">
-        <h4>Legal</h4>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© <span id="currentYear"></span> Idayra Cabrera</span>
+
+      <div class="footer-legal">
         <a href="aviso-legal.html">Aviso legal</a>
         <a href="privacidad.html">Privacidad</a>
       </div>
     </div>
-    <div class="f
+
+  </div>
+</footer>
+
+<script>
+document.getElementById("currentYear").textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>

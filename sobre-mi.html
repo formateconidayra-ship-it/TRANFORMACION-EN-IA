@@ -3,228 +3,573 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sobre mí · Idayra Cabrera — Docente FPE, Administradora de Sistemas</title>
-  <meta name="description" content="Trayectoria profesional de Idayra Cabrera: Docente FPE certificada por el SCE, Agente de Transformación Digital (Fundación ULL), Administradora de Sistemas y Máster en SEO." />
+
+  <title>Sobre mí | Idayra Cabrera · Docencia, Sistemas y Transformación Digital</title>
+  <meta
+    name="description"
+    content="Conoce la trayectoria profesional de Idayra Cabrera: docente FPE acreditada, administradora de sistemas y especialista en transformación digital, SEO e inteligencia artificial aplicada en Canarias."
+  />
   <meta name="author" content="Idayra Cabrera" />
   <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#07090f" />
   <link rel="canonical" href="https://transformacionia.es/sobre-mi.html" />
-  <meta property="og:title"       content="Sobre mí · Idayra Cabrera — Docente FPE, Administradora de Sistemas" />
-  <meta property="og:description" content="Trayectoria profesional de Idayra Cabrera: Docente FPE certificada por el SCE, Agente de Transformación Digital (Fundación ULL), Administradora de Sistemas y Máster en SEO." />
-  <meta property="og:url"         content="https://transformacionia.es/sobre-mi.html" />
-  <meta property="og:locale"      content="es_ES" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Sobre mí | Idayra Cabrera · Docencia, Sistemas y Transformación Digital" />
+  <meta
+    property="og:description"
+    content="Trayectoria profesional de Idayra Cabrera: docencia FPE, administración de sistemas, transformación digital, SEO e IA aplicada."
+  />
+  <meta property="og:url" content="https://transformacionia.es/sobre-mi.html" />
+  <meta property="og:locale" content="es_ES" />
+
   <link rel="stylesheet" href="css/styles.css" />
+
+  <style>
+    .about-page-hero {
+      padding: 52px 0 44px;
+    }
+
+    .about-hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) 240px;
+      gap: 34px;
+      align-items: center;
+    }
+
+    .about-hero-copy h1 {
+      margin: 0 0 18px;
+      font-family: var(--fd);
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      line-height: 0.98;
+      text-transform: uppercase;
+      letter-spacing: -0.03em;
+    }
+
+    .about-hero-copy p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 62ch;
+    }
+
+    .about-hero-copy p + p {
+      margin-top: 14px;
+    }
+
+    .about-hero-lead {
+      color: var(--text) !important;
+      font-size: 1.06rem;
+    }
+
+    .about-hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .about-photo-wrap {
+      display: flex;
+      justify-content: center;
+    }
+
+    .about-photo {
+      width: 220px;
+      height: 220px;
+      object-fit: cover;
+      object-position: center top;
+      border-radius: 50%;
+      border: 3px solid rgba(59, 130, 246, 0.25);
+      box-shadow: 0 0 40px rgba(59, 130, 246, 0.12);
+      background: #0b1220;
+    }
+
+    .about-block {
+      padding: 76px 0;
+    }
+
+    .timeline-list {
+      display: grid;
+      gap: 18px;
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-left: 30px;
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 9px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #3b82f6, #06b6d4);
+      box-shadow: 0 0 0 6px rgba(59, 130, 246, 0.08);
+    }
+
+    .timeline-line {
+      position: absolute;
+      left: 5px;
+      top: 28px;
+      bottom: -18px;
+      width: 2px;
+      background: var(--border);
+    }
+
+    .timeline-item:last-child .timeline-line {
+      display: none;
+    }
+
+    .timeline-card {
+      background: var(--bg4);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px;
+      transition: 0.22s ease;
+    }
+
+    .timeline-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(59, 130, 246, 0.28);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .timeline-card h3 {
+      margin: 0 0 8px;
+      font-family: var(--fd);
+      font-size: 1.22rem;
+    }
+
+    .timeline-org {
+      margin-bottom: 10px;
+      color: var(--cyan);
+      font-size: 0.92rem;
+      font-weight: 600;
+    }
+
+    .timeline-card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .skills-cloud {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .skill-pill {
+      padding: 14px 16px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--text);
+      text-align: center;
+      font-size: 0.92rem;
+      transition: 0.2s ease;
+    }
+
+    .skill-pill:hover {
+      border-color: rgba(59, 130, 246, 0.28);
+      background: rgba(59, 130, 246, 0.06);
+    }
+
+    .about-section-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 26px;
+    }
+
+    @media (max-width: 1024px) {
+      .about-hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-photo-wrap {
+        justify-content: flex-start;
+      }
+
+      .skills-cloud {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 768px) {
+      .about-page-hero {
+        padding: 34px 0 34px;
+      }
+
+      .about-block {
+        padding: 60px 0;
+      }
+
+      .about-hero-actions,
+      .about-section-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .about-hero-actions .btn,
+      .about-section-actions .btn {
+        width: 100%;
+      }
+
+      .skills-cloud {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 480px) {
+      .about-photo {
+        width: 160px;
+        height: 160px;
+      }
+
+      .about-hero-copy h1 {
+        font-size: 2.1rem;
+      }
+
+      .skills-cloud {
+        grid-template-columns: 1fr;
+      }
+
+      .skill-pill {
+        border-radius: 14px;
+        text-align: left;
+      }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Idayra Cabrera",
+    "url": "https://transformacionia.es/sobre-mi.html",
+    "jobTitle": "Docente FPE y especialista en transformación digital e IA",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "La Laguna",
+      "addressRegion": "Santa Cruz de Tenerife",
+      "addressCountry": "ES"
+    },
+    "sameAs": [
+      "https://www.linkedin.com/in/luzidayrajorgecabrera"
+    ]
+  }
+  </script>
 </head>
 <body>
-<div class="bg-glow"></div>
-<header class="navbar" role="banner">
-  <a href="index.html" class="nav-logo" aria-label="TransformacionIA inicio">
-    <img src="img/logo.png" alt="Logo TransformacionIA" />
-    <span class="nav-logo-text">Transformación IA</span>
-  </a>
-  <button class="nav-toggle" id="navTog" aria-label="Abrir menú" aria-expanded="false">
-    <span></span><span></span><span></span>
-  </button>
-  <nav class="nav-links" id="navLinks" aria-label="Menú principal">
-    <a href="sobre-mi.html">Sobre mí</a>
-    <a href="proyectos.html">Proyectos</a>
-    <a href="herramientas.html">Herramientas</a>
-    <a href="acreditaciones.html">Acreditaciones</a>
-    <a href="contacto.html" class="nav-cta">Contacto</a>
-  </nav>
-</header>
+  <a class="skip-link" href="#main">Saltar al contenido</a>
 
-<main id="main">
+  <div class="bg-glow" aria-hidden="true"></div>
 
-<div class="section-sm" aria-label="Cabecera">
-  <div class="container">
-    <div style="display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center">
-      <div class="page-hero" style="padding-bottom:0">
-        <span class="kicker">Trayectoria profesional</span>
-        <h1>Tecnología, docencia<br>e innovación digital</h1>
-        <p>Más de 15 años combinando administración de sistemas, formación tecnológica y transformación digital en Canarias.</p>
-      </div>
-      <div style="flex-shrink:0">
-        <img src="img/personal.png" alt="Idayra Cabrera" style="width:200px;height:200px;object-fit:cover;border-radius:50%;border:3px solid rgba(59,130,246,.3);box-shadow:0 0 40px rgba(59,130,246,.15)" />
-      </div>
-    </div>
-  </div>
-</div>
+  <header class="navbar" role="banner">
+    <a href="index.html" class="nav-logo" aria-label="Ir a inicio">
+      <span class="nav-mark" aria-hidden="true">IC</span>
+      <span class="nav-logo-text">Transformación IA</span>
+    </a>
 
-<div class="divider"></div>
+    <button
+      class="nav-toggle"
+      id="navTog"
+      type="button"
+      aria-label="Abrir menú"
+      aria-controls="navLinks"
+      aria-expanded="false"
+    >
+      <span></span><span></span><span></span>
+    </button>
 
-<!-- Experiencia profesional -->
-<section class="section" aria-labelledby="exp-h">
-  <div class="container">
-    <div class="sh">
-      <span class="kicker">Experiencia</span>
-      <h2 class="section-title" id="exp-h">Recorrido profesional</h2>
-    </div>
-    <div class="timeline">
-      <div class="titem">
-        <div class="tdate" style="visibility:hidden">·</div>
-        <div class="tline"></div>
-        <div class="tc">
-          <h3>Docente FPE · Servicio Canario de Empleo</h3>
-          <div class="org">Focan · Aprende · Generación 21 · Formacionline · Juan Pablo Cabrera Borges S.L.</div>
-          <p>Impartición de certificados de profesionalidad y cursos especializados en el ámbito de la tecnología y las competencias digitales: Excel Avanzado, Power BI, Microsoft Office 365 con IA, Posicionamiento Web y Marketing Digital, Competencias Digitales Básicas y Avanzadas, Ofimática, Herramientas Web 2.0 y más de 1.770 horas certificadas.</p>
+    <nav class="nav-links" id="navLinks" aria-label="Menú principal">
+      <a href="sobre-mi.html" aria-current="page">Sobre mí</a>
+      <a href="proyectos.html">Proyectos</a>
+      <a href="herramientas.html">Herramientas</a>
+      <a href="acreditaciones.html">Acreditaciones</a>
+      <a href="contacto.html" class="nav-cta">Contacto</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="about-page-hero section-hero" aria-labelledby="sobre-mi-h1">
+      <div class="container">
+        <div class="about-hero-grid">
+          <div class="about-hero-copy">
+            <span class="kicker">Trayectoria profesional</span>
+            <h1 id="sobre-mi-h1">Tecnología, docencia e innovación digital</h1>
+            <p class="about-hero-lead">
+              Más de 15 años combinando administración de sistemas, formación tecnológica
+              y transformación digital en Canarias.
+            </p>
+            <p>
+              Mi trayectoria une una base técnica sólida con experiencia real en docencia,
+              digitalización empresarial y aplicación práctica de herramientas digitales,
+              SEO e inteligencia artificial.
+            </p>
+
+            <div class="about-hero-actions">
+              <a href="proyectos.html" class="btn btn-p">Ver mis proyectos</a>
+              <a href="contacto.html" class="btn btn-g">Contactar</a>
+            </div>
+          </div>
+
+          <div class="about-photo-wrap">
+            <img
+              src="img/personal.png"
+              alt="Idayra Cabrera"
+              class="about-photo"
+            />
+          </div>
         </div>
       </div>
-      <div class="titem">
-        <div class="tdate" style="visibility:hidden">·</div>
-        <div class="tline"></div>
-        <div class="tc">
-          <h3>Docente · Formación Privada</h3>
-          <div class="org">Proyecto +45 · Cámara de Comercio de Santa Cruz de Tenerife</div>
-          <p>Impartición de formación tecnológica en el marco del proyecto +45: Excel con Power BI, Microsoft Office 365 con Inteligencia Artificial, y Contabilidad y gestión laboral con A3.</p>
-        </div>
-      </div>
-      <div class="titem">
-        <div class="tdate" style="visibility:hidden">·</div>
-        <div class="tline"></div>
-        <div class="tc">
-          <h3>Agente de Transformación Digital</h3>
-          <div class="org">Fundación Universidad de La Laguna · La Laguna, Tenerife</div>
-          <p>Asesoramiento y acompañamiento a empresas y organizaciones en sus procesos de digitalización. Formación en competencias digitales avanzadas y apoyo a la implementación de soluciones tecnológicas. Formación complementaria en Transformación Digital por la ULL.</p>
-        </div>
-      </div>
-      <div class="titem">
-        <div class="tdate" style="visibility:hidden">·</div>
-        <div class="tline"></div>
-        <div class="tc">
-          <h3>Administradora de Sistemas · CFGS Sistemas en Red</h3>
-          <div class="org">CIFP César Manrique · La Laguna, Tenerife</div>
-          <p>Formación técnica de Grado Superior en Administración de Sistemas Informáticos en Red. Gestión de infraestructuras, redes, servidores, sistemas operativos y seguridad informática.</p>
-        </div>
-      </div>
-      <div class="titem">
-        <div class="tdate" style="visibility:hidden">·</div>
-        <div class="tline"></div>
-        <div class="tc">
-          <h3>Administradora de Sistemas · Gestión Informática</h3>
-          <div class="org">Craser Informática · Aena · Canarias</div>
-          <p>Administración de sistemas, soporte técnico, gestión de redes y mantenimiento de infraestructuras en entornos corporativos. Más de 15 años de experiencia acumulada en el sector tecnológico en Canarias.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<div class="divider"></div>
+    <div class="divider" aria-hidden="true"></div>
 
-<!-- Formación -->
-<section class="section" aria-labelledby="form-h">
-  <div class="container">
-    <div class="sh">
-      <span class="kicker">Formación y especialización</span>
-      <h2 class="section-title" id="form-h">Base sólida, aprendizaje continuo</h2>
-    </div>
-    <div class="timeline">
-      <div class="titem">
-        <div class="tdate" style="visibility:hidden">·</div>
-        <div class="tline"></div>
-        <div class="tc">
-          <h3>CFGS Administración de Sistemas Informáticos en Red</h3>
-          <div class="org">CIFP César Manrique · La Laguna, Tenerife</div>
-          <p>Grado superior en sistemas, redes, administración de servidores y servicios informáticos.</p>
+    <section class="about-block section-deep" aria-labelledby="exp-h">
+      <div class="container">
+        <div class="sh">
+          <span class="kicker">Experiencia</span>
+          <h2 class="section-title" id="exp-h">Recorrido profesional</h2>
+          <p class="section-sub">
+            Formación tecnológica, sistemas y acompañamiento a procesos de transformación digital.
+          </p>
+        </div>
+
+        <div class="timeline-list">
+          <article class="timeline-item">
+            <div class="timeline-line" aria-hidden="true"></div>
+            <div class="timeline-card">
+              <h3>Docente FPE</h3>
+              <div class="timeline-org">Focan · Aprende · Generación 21 · Formacionline · Juan Pablo Cabrera Borges S.L.</div>
+              <p>
+                Impartición de certificados de profesionalidad y cursos especializados en Excel Avanzado,
+                Power BI, Microsoft 365 con IA, posicionamiento web, marketing digital, competencias
+                digitales, Ofimática y herramientas Web 2.0, con más de 1.770 horas certificadas.
+              </p>
+            </div>
+          </article>
+
+          <article class="timeline-item">
+            <div class="timeline-line" aria-hidden="true"></div>
+            <div class="timeline-card">
+              <h3>Docente en formación privada</h3>
+              <div class="timeline-org">Proyecto +45 · Cámara de Comercio de Santa Cruz de Tenerife</div>
+              <p>
+                Formación tecnológica orientada a la mejora profesional y actualización de competencias:
+                Excel con Power BI, Microsoft Office 365 con IA y contabilidad y gestión laboral con A3.
+              </p>
+            </div>
+          </article>
+
+          <article class="timeline-item">
+            <div class="timeline-line" aria-hidden="true"></div>
+            <div class="timeline-card">
+              <h3>Agente de Transformación Digital</h3>
+              <div class="timeline-org">Fundación Universidad de La Laguna · Tenerife</div>
+              <p>
+                Asesoramiento y acompañamiento a empresas y organizaciones en procesos de digitalización,
+                formación en competencias digitales avanzadas e implementación de soluciones tecnológicas.
+              </p>
+            </div>
+          </article>
+
+          <article class="timeline-item">
+            <div class="timeline-line" aria-hidden="true"></div>
+            <div class="timeline-card">
+              <h3>Administradora de Sistemas</h3>
+              <div class="timeline-org">CIFP César Manrique · Craser Informática · Aena · Canarias</div>
+              <p>
+                Experiencia en redes, servidores, soporte técnico, mantenimiento de infraestructuras
+                y gestión de sistemas en entornos corporativos y formativos.
+              </p>
+            </div>
+          </article>
         </div>
       </div>
-      <div class="titem">
-        <div class="tdate" style="visibility:hidden">·</div>
-        <div class="tline"></div>
-        <div class="tc">
-          <h3>Máster en SEO</h3>
-          <div class="org">Gade Business School · Madrid</div>
-          <p>Posicionamiento en buscadores, estrategia de contenidos, analítica web, SEM y marketing digital integral.</p>
+    </section>
+
+    <div class="divider" aria-hidden="true"></div>
+
+    <section class="about-block section-soft" aria-labelledby="form-h">
+      <div class="container">
+        <div class="sh">
+          <span class="kicker">Formación</span>
+          <h2 class="section-title" id="form-h">Base técnica y especialización digital</h2>
+          <p class="section-sub">
+            Un recorrido de aprendizaje continuo para conectar tecnología, docencia e innovación.
+          </p>
+        </div>
+
+        <div class="timeline-list">
+          <article class="timeline-item">
+            <div class="timeline-line" aria-hidden="true"></div>
+            <div class="timeline-card">
+              <h3>CFGS Administración de Sistemas Informáticos en Red</h3>
+              <div class="timeline-org">CIFP César Manrique · La Laguna</div>
+              <p>
+                Formación técnica en sistemas, redes, administración de servidores
+                y servicios informáticos.
+              </p>
+            </div>
+          </article>
+
+          <article class="timeline-item">
+            <div class="timeline-line" aria-hidden="true"></div>
+            <div class="timeline-card">
+              <h3>Máster en SEO</h3>
+              <div class="timeline-org">Gade Business School · Madrid</div>
+              <p>
+                Posicionamiento en buscadores, estrategia de contenidos, analítica web,
+                SEM y marketing digital.
+              </p>
+            </div>
+          </article>
+
+          <article class="timeline-item">
+            <div class="timeline-line" aria-hidden="true"></div>
+            <div class="timeline-card">
+              <h3>Transformación Digital e Innovación</h3>
+              <div class="timeline-org">Universidad de La Laguna · Tenerife</div>
+              <p>
+                Especialización en digitalización empresarial, tecnologías emergentes,
+                IA aplicada y estrategias de cambio organizacional.
+              </p>
+            </div>
+          </article>
         </div>
       </div>
-      <div class="titem">
-        <div class="tdate" style="visibility:hidden">·</div>
-        <div class="tline"></div>
-        <div class="tc">
-          <h3>Transformación Digital e Innovación</h3>
-          <div class="org">Universidad de La Laguna · Tenerife</div>
-          <p>Digitalización empresarial, tecnologías emergentes, IA aplicada y estrategias de transformación digital organizacional. Programa de formación continua de más de un año de duración.</p>
+    </section>
+
+    <div class="divider" aria-hidden="true"></div>
+
+    <section class="about-block section-dark" aria-labelledby="skills-h">
+      <div class="container">
+        <div class="sh">
+          <span class="kicker">Áreas de trabajo</span>
+          <h2 class="section-title" id="skills-h">Competencias y herramientas</h2>
+          <p class="section-sub">
+            Un perfil que conecta lo técnico con lo docente y lo estratégico.
+          </p>
+        </div>
+
+        <div class="skills-cloud">
+          <div class="skill-pill">Excel Avanzado</div>
+          <div class="skill-pill">Power BI</div>
+          <div class="skill-pill">Microsoft 365</div>
+          <div class="skill-pill">IA Aplicada</div>
+          <div class="skill-pill">SEO / SEM</div>
+          <div class="skill-pill">Marketing Digital</div>
+          <div class="skill-pill">Competencias Digitales</div>
+          <div class="skill-pill">Transformación Digital</div>
+          <div class="skill-pill">Administración de Sistemas</div>
+          <div class="skill-pill">Redes y Servidores</div>
+          <div class="skill-pill">A3 Software</div>
+          <div class="skill-pill">Web 2.0</div>
+        </div>
+
+        <div class="about-section-actions">
+          <a href="proyectos.html" class="btn btn-p">Ver proyectos</a>
+          <a href="herramientas.html" class="btn btn-g">Explorar herramientas</a>
         </div>
       </div>
-      <div class="titem">
-        <div class="tdate" style="visibility:hidden">·</div>
-        <div class="tline"></div>
-        <div class="tc">
-          <h3>Especializaciones complementarias</h3>
-          <div class="org">Formación continua</div>
-          <p>Gestión Ágil de Proyectos con Scrum · Ofimática en la Nube: Google Drive · Digitalización Aplicada al Sector Productivo · Tutorización en Teleformación · Aplicación de las Herramientas Digitales en la Innovación Educativa.</p>
+    </section>
+
+    <div class="divider" aria-hidden="true"></div>
+
+    <section class="section section-cta-final" aria-labelledby="sobre-cta-h">
+      <div class="container">
+        <div class="cta-final">
+          <span class="kicker">Siguiente paso</span>
+          <h2 id="sobre-cta-h">Una trayectoria orientada a aplicar la tecnología con sentido</h2>
+          <p>
+            Si quieres ver cómo aterrizo esta experiencia en proyectos, herramientas y formación,
+            puedes continuar desde aquí.
+          </p>
+
+          <div class="cta-final-actions">
+            <a href="proyectos.html" class="btn btn-p">Ver proyectos</a>
+            <a href="contacto.html" class="btn btn-g">Contactar</a>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
+  </main>
 
-<div class="divider"></div>
-
-<!-- Habilidades -->
-<section class="section" aria-labelledby="skills-h">
-  <div class="container">
-    <div class="sh">
-      <span class="kicker">Competencias y herramientas</span>
-      <h2 class="section-title" id="skills-h">Tecnologías y áreas de trabajo</h2>
-    </div>
-    <div class="skills-grid">
-      <div class="skill">Excel Avanzado</div>
-      <div class="skill">Power BI</div>
-      <div class="skill">Microsoft 365</div>
-      <div class="skill">IA Aplicada</div>
-      <div class="skill">SEO / SEM</div>
-      <div class="skill">Marketing Digital</div>
-      <div class="skill">Competencias Digitales</div>
-      <div class="skill">Transformación Digital</div>
-      <div class="skill">Administración de Sistemas</div>
-      <div class="skill">Redes y Servidores</div>
-      <div class="skill">A3 Software</div>
-      <div class="skill">Web 2.0</div>
-    </div>
-    <div style="margin-top:40px;display:flex;gap:12px;flex-wrap:wrap">
-      <a href="proyectos.html" class="btn btn-p">Ver mis proyectos</a>
-      <a href="contacto.html"  class="btn btn-g">Contactar</a>
-    </div>
-  </div>
-</section>
-
-</main>
-
-<footer class="footer" role="contentinfo">
-  <div class="container">
-    <div class="footer-grid">
-      <div class="fb-brand">
-        <a href="index.html" class="nav-logo" aria-label="Inicio">
-          <img src="img/logo.png" alt="Logo TransformacionIA" />
+  <footer class="footer" role="contentinfo">
+    <div class="container footer-container">
+      <div class="footer-top">
+        <a href="index.html" class="nav-logo footer-logo" aria-label="Ir a inicio">
+          <span class="nav-mark" aria-hidden="true">IC</span>
           <span class="nav-logo-text">Transformación IA</span>
         </a>
-        <p>Portfolio de Idayra Cabrera — Docente FPE, Administradora de Sistemas y especialista en transformación digital e IA.</p>
+
+        <div class="footer-social" aria-label="Redes sociales y contacto">
+          <a
+            href="https://wa.me/34620948523"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social-icon"
+            aria-label="WhatsApp"
+            title="WhatsApp"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M19.05 4.91A9.82 9.82 0 0 0 12.03 2C6.58 2 2.13 6.42 2.13 11.88c0 1.75.46 3.46 1.33 4.96L2 22l5.3-1.39a9.9 9.9 0 0 0 4.73 1.2h.01c5.45 0 9.9-4.42 9.9-9.88 0-2.64-1.03-5.12-2.89-7.02Zm-7.02 15.23h-.01a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-3.15.83.84-3.07-.2-.31a8.13 8.13 0 0 1-1.25-4.34c0-4.48 3.67-8.13 8.18-8.13 2.18 0 4.23.84 5.77 2.37a8.06 8.06 0 0 1 2.39 5.76c0 4.48-3.67 8.21-8.09 8.21Zm4.46-6.1c-.24-.12-1.4-.69-1.62-.77-.22-.08-.38-.12-.54.12-.16.24-.62.77-.76.93-.14.16-.28.18-.52.06-.24-.12-1.01-.37-1.92-1.19-.71-.63-1.19-1.41-1.33-1.65-.14-.24-.01-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.29-.74-1.77-.2-.47-.4-.41-.54-.42h-.46c-.16 0-.42.06-.64.3-.22.24-.84.81-.84 1.97s.86 2.28.98 2.44c.12.16 1.69 2.58 4.1 3.61.57.25 1.02.4 1.37.51.58.18 1.11.15 1.53.09.47-.07 1.4-.57 1.6-1.12.2-.55.2-1.02.14-1.12-.06-.1-.22-.16-.46-.28Z"/>
+            </svg>
+          </a>
+
+          <a
+            href="https://www.linkedin.com/in/luzidayrajorgecabrera"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social-icon"
+            aria-label="LinkedIn"
+            title="LinkedIn"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6.94 8.5A1.56 1.56 0 1 1 6.94 5.38a1.56 1.56 0 0 1 0 3.12ZM5.56 9.75h2.77V18H5.56V9.75Zm4.5 0h2.66v1.13h.04c.37-.7 1.28-1.43 2.63-1.43 2.82 0 3.34 1.85 3.34 4.26V18h-2.77v-3.79c0-.9-.02-2.06-1.26-2.06-1.26 0-1.45.98-1.45 1.99V18h-2.77V9.75Z"/>
+            </svg>
+          </a>
+        </div>
       </div>
-      <div class="fc">
-        <h4>Páginas</h4>
-        <a href="sobre-mi.html">Sobre mí</a>
-        <a href="proyectos.html">Proyectos</a>
-        <a href="herramientas.html">Herramientas</a>
-    <a href="acreditaciones.html">Acreditaciones</a>
-        <a href="planificador.html">Planificador</a>
-      </div>
-      <div class="fc">
-        <h4>Contacto</h4>
-        <a href="contacto.html">Formulario</a>
-        <a href="/cdn-cgi/l/email-protection#264a535c4f42475f54474c495441434547445443544766414b474f4a0845494b">Email</a>
-        <a href="https://wa.me/34620948523" target="_blank" rel="noopener">WhatsApp</a>
-        <a href="https://www.linkedin.com/in/luzidayrajorgecabrera" target="_blank" rel="noopener">LinkedIn</a>
-      </div>
-      <div class="fc">
-        <h4>Legal</h4>
-        <a href="aviso-legal.html">Aviso legal</a>
-        <a href="privacidad.html">Privacidad</a>
+
+      <div class="footer-bottom">
+        <span>© <span id="currentYear"></span> Idayra Cabrera</span>
+
+        <div class="footer-legal">
+          <a href="aviso-legal.html">Aviso legal</a>
+          <a href="privacidad.html">Privacidad</a>
+        </div>
       </div>
     </div>
-    <div class="footer-bot">
-      <span>© <span class="yr"></span> Idayra Cabrera · TransformacionIA</span>
-      <span>Canarias</span>
-    </div>
-  </div>
-</foot
+  </footer>
+
+  <script>
+    const navToggle = document.getElementById("navTog");
+    const navLinks = document.getElementById("navLinks");
+    const currentYear = document.getElementById("currentYear");
+
+    if (currentYear) {
+      currentYear.textContent = new Date().getFullYear();
+    }
+
+    if (navToggle && navLinks) {
+      navToggle.addEventListener("click", () => {
+        const isOpen = navLinks.classList.toggle("open");
+        navToggle.setAttribute("aria-expanded", String(isOpen));
+      });
+
+      navLinks.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          navLinks.classList.remove("open");
+          navToggle.setAttribute("aria-expanded", "false");
+        });
+      });
+    }
+  </script>
+</body>
+</html>

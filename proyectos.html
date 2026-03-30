@@ -3,162 +3,649 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Proyectos · Idayra Cabrera — Kit Digital, Planificador FPE, IA Educativa</title>
-  <meta name="description" content="Proyectos de transformación digital, Kit Digital, Kit Consulting, Planificador FPE e Inteligencia Artificial aplicada a la educación y la empresa. Idayra Cabrera, La Laguna." />
+
+  <title>Proyectos | Idayra Cabrera · Transformación Digital, FPE e IA</title>
+  <meta
+    name="description"
+    content="Proyectos de Idayra Cabrera en transformación digital, formación FPE, inteligencia artificial aplicada y herramientas para empresa y docencia."
+  />
   <meta name="author" content="Idayra Cabrera" />
   <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#07090f" />
   <link rel="canonical" href="https://transformacionia.es/proyectos.html" />
-  <meta property="og:title"       content="Proyectos · Idayra Cabrera — Kit Digital, Planificador FPE, IA Educativa" />
-  <meta property="og:description" content="Proyectos de transformación digital, Kit Digital, Kit Consulting, Planificador FPE e Inteligencia Artificial aplicada a la educación y la empresa. Idayra Cabrera, La Laguna." />
-  <meta property="og:url"         content="https://transformacionia.es/proyectos.html" />
-  <meta property="og:locale"      content="es_ES" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Proyectos | Idayra Cabrera · Transformación Digital, FPE e IA" />
+  <meta
+    property="og:description"
+    content="Proyectos de transformación digital, formación FPE, consultoría e inteligencia artificial aplicada."
+  />
+  <meta property="og:url" content="https://transformacionia.es/proyectos.html" />
+  <meta property="og:locale" content="es_ES" />
+
   <link rel="stylesheet" href="css/styles.css" />
+
+  <style>
+    .projects-hero {
+      padding: 48px 0 42px;
+    }
+
+    .projects-hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(280px, 0.92fr);
+      gap: 26px;
+      align-items: start;
+    }
+
+    .projects-hero-copy h1 {
+      margin: 0 0 18px;
+      font-family: var(--fd);
+      font-size: clamp(2.05rem, 4.1vw, 3.45rem);
+      line-height: 0.98;
+      text-transform: uppercase;
+      letter-spacing: -0.03em;
+      max-width: 11ch;
+    }
+
+    .projects-hero-copy p {
+      margin: 0;
+      max-width: 62ch;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .projects-hero-copy p + p {
+      margin-top: 14px;
+    }
+
+    .projects-hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .projects-hero-side {
+      display: grid;
+      gap: 12px;
+      align-content: start;
+    }
+
+    .hero-summary-card,
+    .hero-stat-card,
+    .project-card,
+    .mini-project-card {
+      background: var(--bg4);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+
+    .hero-summary-card {
+      padding: 22px;
+      background:
+        radial-gradient(circle at top right, rgba(59, 130, 246, 0.12), transparent 28%),
+        linear-gradient(180deg, rgba(12, 16, 24, 0.98), rgba(9, 13, 20, 0.98));
+      border-color: rgba(59, 130, 246, 0.22);
+    }
+
+    .hero-summary-card h2 {
+      margin: 0 0 10px;
+      font-family: var(--fd);
+      font-size: 1.35rem;
+      line-height: 1.04;
+    }
+
+    .hero-summary-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    .hero-summary-card p + p {
+      margin-top: 10px;
+    }
+
+    .hero-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .hero-stat-card {
+      padding: 18px 14px;
+      text-align: center;
+      min-height: auto;
+    }
+
+    .hero-stat-number {
+      display: block;
+      font-family: var(--fd);
+      font-size: 1.65rem;
+      font-weight: 800;
+      line-height: 1;
+      background: linear-gradient(90deg, #60a5fa, #22d3ee);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 8px;
+    }
+
+    .hero-stat-label {
+      display: block;
+      color: var(--muted);
+      font-size: 0.83rem;
+      line-height: 1.35;
+    }
+
+    .projects-section {
+      padding: 72px 0;
+    }
+
+    .project-card {
+      padding: 28px;
+      transition: 0.22s ease;
+    }
+
+    .project-card:hover,
+    .mini-project-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(59, 130, 246, 0.28);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .project-card.featured {
+      background:
+        radial-gradient(circle at top right, rgba(59, 130, 246, 0.12), transparent 28%),
+        linear-gradient(180deg, rgba(12, 16, 24, 0.98), rgba(9, 13, 20, 0.98));
+      border-color: rgba(59, 130, 246, 0.22);
+    }
+
+    .project-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(260px, 0.92fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .project-meta {
+      display: inline-block;
+      margin-bottom: 10px;
+      font-size: 0.74rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--cyan);
+    }
+
+    .project-card h2,
+    .project-card h3,
+    .mini-project-card h3 {
+      margin: 0 0 12px;
+      font-family: var(--fd);
+      line-height: 1.04;
+    }
+
+    .project-card h2,
+    .project-card h3 {
+      font-size: clamp(1.45rem, 2.5vw, 1.95rem);
+    }
+
+    .mini-project-card h3 {
+      font-size: 1.35rem;
+    }
+
+    .project-card p,
+    .mini-project-card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .project-card p + p,
+    .mini-project-card p + p {
+      margin-top: 14px;
+    }
+
+    .project-side {
+      display: grid;
+      gap: 14px;
+    }
+
+    .project-box {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px;
+    }
+
+    .project-box h4 {
+      margin: 0 0 8px;
+      font-family: var(--fd);
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .project-box p {
+      margin: 0;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    .project-tag {
+      padding: 7px 12px;
+      border: 1px solid var(--border2);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    .project-actions,
+    .projects-final-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .mini-projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .mini-project-card {
+      padding: 24px;
+      transition: 0.22s ease;
+    }
+
+    @media (max-width: 1024px) {
+      .projects-hero-grid,
+      .project-layout,
+      .mini-projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-stats-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 768px) {
+      .projects-hero {
+        padding: 34px 0 34px;
+      }
+
+      .projects-section {
+        padding: 58px 0;
+      }
+
+      .project-card,
+      .mini-project-card,
+      .hero-summary-card {
+        padding: 22px;
+      }
+
+      .projects-hero-actions,
+      .project-actions,
+      .projects-final-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .projects-hero-actions .btn,
+      .project-actions .btn,
+      .projects-final-actions .btn {
+        width: 100%;
+      }
+
+      .hero-stats-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .projects-hero-copy h1 {
+        font-size: 1.95rem;
+        max-width: none;
+      }
+
+      .projects-hero-copy p,
+      .project-card p,
+      .mini-project-card p,
+      .project-box p {
+        font-size: 0.94rem;
+      }
+    }
+  </style>
 </head>
 <body>
-<div class="bg-glow"></div>
-<header class="navbar" role="banner">
-  <a href="index.html" class="nav-logo" aria-label="TransformacionIA inicio">
-    <img src="img/logo.png" alt="Logo TransformacionIA" />
-    <span class="nav-logo-text">Transformación IA</span>
-  </a>
-  <button class="nav-toggle" id="navTog" aria-label="Abrir menú" aria-expanded="false">
-    <span></span><span></span><span></span>
-  </button>
-  <nav class="nav-links" id="navLinks" aria-label="Menú principal">
-    <a href="sobre-mi.html">Sobre mí</a>
-    <a href="proyectos.html">Proyectos</a>
-    <a href="herramientas.html">Herramientas</a>
-    <a href="acreditaciones.html">Acreditaciones</a>
-    <a href="contacto.html" class="nav-cta">Contacto</a>
-  </nav>
-</header>
-<main id="main">
-<div class="container">
-  <div class="page-hero">
-    <span class="kicker">Proyectos</span>
-    <h1>Iniciativas donde tecnología<br>y educación se unen</h1>
-    <p>Proyectos concretos que combinan conocimientos técnicos, pedagógicos e innovación digital para generar impacto real.</p>
-  </div>
-</div>
-<div class="divider"></div>
-<section class="section">
-  <div class="container">
-    <div class="proj-full">
+  <a class="skip-link" href="#main">Saltar al contenido</a>
 
-      <!-- Planificador FPE -->
-      <article class="pcard-full featured">
-        <span class="tag">Herramienta propia · En activo</span>
-        <h3>Planificador de Certificados FPE</h3>
-        <p>Herramienta desarrollada para cubrir una necesidad real del día a día como docente FPE: generar automáticamente la planificación horaria de un certificado de profesionalidad.</p>
-        <p>Permite configurar fechas, días lectivos, horas diarias y módulos. Calcula automáticamente los días de clase descontando festivos nacionales y canarios, genera una tabla detallada y exporta en CSV para Excel.</p>
-        <div class="ptags">
-          <span class="ptag">Docencia FPE</span>
-          <span class="ptag">JavaScript</span>
-          <span class="ptag">HTML/CSS</span>
-          <span class="ptag">Festivos Canarias</span>
-          <span class="ptag">Exportación CSV</span>
-        </div>
-        <div style="margin-top:20px">
-          <a href="planificador.html" class="btn btn-p">Probar el planificador</a>
-        </div>
-      </article>
+  <div class="bg-glow" aria-hidden="true"></div>
 
-      <!-- Kit Digital -->
-      <article class="pcard-full">
-        <span class="tag">Consultoría · Transformación Digital</span>
-        <h3>Kit Digital</h3>
-        <p>Asesoría a pymes y autónomos para acceder a las ayudas del programa Kit Digital del Gobierno de España. Acompañamiento en la selección de soluciones digitales, tramitación del bono y seguimiento de la implantación.</p>
-        <p>Desde página web y presencia online hasta comercio electrónico, gestión de clientes (CRM), ciberseguridad y más.</p>
-        <div class="ptags">
-          <span class="ptag">Digitalización pymes</span>
-          <span class="ptag">Asesoría</span>
-          <span class="ptag">Subvenciones</span>
-          <span class="ptag">Agente Digitalizador</span>
-        </div>
-      </article>
+  <header class="navbar" role="banner">
+    <a href="index.html" class="nav-logo" aria-label="Ir a inicio">
+      <span class="nav-mark" aria-hidden="true">IC</span>
+      <span class="nav-logo-text">Transformación IA</span>
+    </a>
 
-      <!-- Kit Consulting -->
-      <article class="pcard-full">
-        <span class="tag">Consultoría · Estrategia Empresarial</span>
-        <h3>Kit Consulting</h3>
-        <p>Consultoría estratégica para pymes en el marco del programa Kit Consulting. Diagnóstico digital, hoja de ruta para la transformación empresarial e implementación de soluciones adaptadas a cada negocio.</p>
-        <p>Enfocado en empresas que quieren crecer mediante la digitalización y mejorar su competitividad de forma sostenida.</p>
-        <div class="ptags">
-          <span class="ptag">Estrategia Digital</span>
-          <span class="ptag">Diagnóstico empresarial</span>
-          <span class="ptag">Consultoría</span>
-          <span class="ptag">Crecimiento</span>
-        </div>
-      </article>
+    <button
+      class="nav-toggle"
+      id="navTog"
+      type="button"
+      aria-label="Abrir menú"
+      aria-controls="navLinks"
+      aria-expanded="false"
+    >
+      <span></span><span></span><span></span>
+    </button>
 
-      <!-- Transformación Digital ULL -->
-      <article class="pcard-full">
-        <span class="tag">Agente TD · Fundación ULL</span>
-        <h3>Agente de Transformación Digital</h3>
-        <p>Rol ejercido en la Fundación Universidad de La Laguna como agente acreditada de transformación digital. Acompañamiento a organizaciones en sus procesos de digitalización y formación en competencias digitales avanzadas.</p>
-        <div class="ptags">
-          <span class="ptag">ULL</span>
-          <span class="ptag">Competencias digitales</span>
-          <span class="ptag">Formación organizacional</span>
-        </div>
-      </article>
+    <nav class="nav-links" id="navLinks" aria-label="Menú principal">
+      <a href="sobre-mi.html">Sobre mí</a>
+      <a href="proyectos.html" aria-current="page">Proyectos</a>
+      <a href="herramientas.html">Herramientas</a>
+      <a href="acreditaciones.html">Acreditaciones</a>
+      <a href="contacto.html" class="nav-cta">Contacto</a>
+    </nav>
+  </header>
 
-      <!-- Lab IA -->
-      <article class="pcard-full">
-        <span class="tag">Innovación educativa · En desarrollo</span>
-        <h3>Laboratorio IA educativa</h3>
-        <p>Investigación y desarrollo de recursos educativos basados en inteligencia artificial. Desde la generación de materiales con IA generativa hasta la automatización de tareas docentes y la creación de herramientas pedagógicas interactivas.</p>
-        <p>Compartido progresivamente con la comunidad docente del ámbito FPE.</p>
-        <div class="ptags">
-          <span class="ptag">Inteligencia Artificial</span>
-          <span class="ptag">Docencia FPE</span>
-          <span class="ptag">IA Generativa</span>
-          <span class="ptag">Automatización</span>
-        </div>
-      </article>
+  <main id="main">
+    <section class="projects-hero section-hero" aria-labelledby="proyectos-h1">
+      <div class="container">
+        <div class="projects-hero-grid">
+          <div class="projects-hero-copy">
+            <span class="kicker">Proyectos</span>
+            <h1 id="proyectos-h1">Proyectos aplicados a formación y digitalización</h1>
+            <p>
+              Aquí reúno iniciativas donde combino tecnología, docencia y transformación digital
+              para resolver necesidades reales en empresa, formación y productividad.
+            </p>
+            <p>
+              No son solo ideas: son herramientas, consultoría y proyectos pensados para aportar
+              utilidad concreta y resultados prácticos.
+            </p>
 
-    </div>
-    <div style="margin-top:44px;display:flex;gap:12px;flex-wrap:wrap">
-      <a href="herramientas.html" class="btn btn-p">Ver herramientas</a>
-      <a href="contacto.html" class="btn btn-g">Contactar para proyectos</a>
-    </div>
-  </div>
-</section>
-</main>
-<footer class="footer" role="contentinfo">
-  <div class="container">
-    <div class="footer-grid">
-      <div class="fb-brand">
-        <a href="index.html" class="nav-logo" aria-label="Inicio">
-          <img src="img/logo.png" alt="Logo TransformacionIA" />
+            <div class="projects-hero-actions">
+              <a href="herramientas.html" class="btn btn-p">Ver herramientas</a>
+              <a href="contacto.html" class="btn btn-g">Hablar de un proyecto</a>
+            </div>
+          </div>
+
+          <aside class="projects-hero-side" aria-label="Resumen de proyectos">
+            <div class="hero-summary-card">
+              <h2>Experiencia aplicada a casos reales</h2>
+              <p>
+                Desde el planificador FPE hasta proyectos de consultoría y digitalización,
+                esta página muestra cómo convierto conocimiento técnico en soluciones útiles.
+              </p>
+            </div>
+
+            <div class="hero-stats-grid">
+              <div class="hero-stat-card">
+                <span class="hero-stat-number">4</span>
+                <span class="hero-stat-label">Líneas principales</span>
+              </div>
+              <div class="hero-stat-card">
+                <span class="hero-stat-number">+1.770h</span>
+                <span class="hero-stat-label">Base docente</span>
+              </div>
+              <div class="hero-stat-card">
+                <span class="hero-stat-number">+15a</span>
+                <span class="hero-stat-label">Experiencia técnica</span>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider" aria-hidden="true"></div>
+
+    <section class="projects-section section-deep" aria-labelledby="destacado-h">
+      <div class="container">
+        <div class="sh">
+          <span class="kicker">Proyecto destacado</span>
+          <h2 class="section-title" id="destacado-h">Planificador de Certificados FPE</h2>
+          <p class="section-sub">
+            Una herramienta propia creada desde una necesidad real del trabajo docente.
+          </p>
+        </div>
+
+        <article class="project-card featured">
+          <div class="project-layout">
+            <div>
+              <span class="project-meta">Herramienta propia · En activo</span>
+              <h3>Planificación automática de certificados de profesionalidad</h3>
+              <p>
+                Este proyecto nace de una necesidad real como docente FPE: generar de forma rápida,
+                clara y reutilizable la planificación horaria de un certificado de profesionalidad.
+              </p>
+              <p>
+                La herramienta permite configurar fechas, días lectivos, horas diarias y módulos.
+                Calcula automáticamente sesiones, descuenta festivos y genera una tabla lista para trabajar.
+              </p>
+
+              <div class="project-tags">
+                <span class="project-tag">Docencia FPE</span>
+                <span class="project-tag">JavaScript</span>
+                <span class="project-tag">Planificación</span>
+                <span class="project-tag">CSV</span>
+                <span class="project-tag">Automatización</span>
+              </div>
+
+              <div class="project-actions">
+                <a href="planificador.html" class="btn btn-p">Probar herramienta</a>
+                <a href="herramientas.html" class="btn btn-g">Ver más herramientas</a>
+              </div>
+            </div>
+
+            <aside class="project-side" aria-label="Resumen del proyecto">
+              <div class="project-box">
+                <h4>Problema</h4>
+                <p>La planificación manual consume tiempo y aumenta el riesgo de errores en calendario, módulos y horas.</p>
+              </div>
+              <div class="project-box">
+                <h4>Solución</h4>
+                <p>Automatización del cálculo de sesiones, distribución horaria y estructura reutilizable para certificados.</p>
+              </div>
+              <div class="project-box">
+                <h4>Valor</h4>
+                <p>Menos tiempo operativo, más claridad y una herramienta útil creada desde la práctica real.</p>
+              </div>
+            </aside>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <div class="divider" aria-hidden="true"></div>
+
+    <section class="projects-section section-soft" aria-labelledby="otros-proyectos-h">
+      <div class="container">
+        <div class="sh">
+          <span class="kicker">Otras líneas de trabajo</span>
+          <h2 class="section-title" id="otros-proyectos-h">Consultoría, digitalización e innovación</h2>
+          <p class="section-sub">
+            Proyectos donde la tecnología se aterriza en acompañamiento, estrategia y mejora real.
+          </p>
+        </div>
+
+        <div class="mini-projects-grid">
+          <article class="mini-project-card">
+            <span class="project-meta">Consultoría</span>
+            <h3>Kit Digital</h3>
+            <p>
+              Asesoría a pymes y autónomos para acceder a soluciones digitales y orientar mejor la implantación.
+            </p>
+            <p>
+              Presencia online, comercio electrónico, CRM, herramientas de productividad y mejora del entorno digital.
+            </p>
+
+            <div class="project-tags">
+              <span class="project-tag">Pymes</span>
+              <span class="project-tag">Subvenciones</span>
+              <span class="project-tag">Digitalización</span>
+            </div>
+          </article>
+
+          <article class="mini-project-card">
+            <span class="project-meta">Estrategia</span>
+            <h3>Kit Consulting</h3>
+            <p>
+              Diagnóstico digital, hoja de ruta y acompañamiento estratégico para empresas que necesitan evolucionar con criterio.
+            </p>
+            <p>
+              Un proyecto más enfocado a análisis, decisión y mejora sostenible de procesos.
+            </p>
+
+            <div class="project-tags">
+              <span class="project-tag">Consultoría</span>
+              <span class="project-tag">Diagnóstico</span>
+              <span class="project-tag">Crecimiento</span>
+            </div>
+          </article>
+
+          <article class="mini-project-card">
+            <span class="project-meta">Transformación Digital</span>
+            <h3>Agente de Transformación Digital</h3>
+            <p>
+              Acompañamiento a organizaciones en procesos de digitalización, formación y adopción tecnológica.
+            </p>
+            <p>
+              Una línea de trabajo conectada con competencias digitales avanzadas y mejora organizacional.
+            </p>
+
+            <div class="project-tags">
+              <span class="project-tag">ULL</span>
+              <span class="project-tag">Capacitación</span>
+              <span class="project-tag">Adopción digital</span>
+            </div>
+          </article>
+
+          <article class="mini-project-card">
+            <span class="project-meta">Innovación</span>
+            <h3>IA aplicada a docencia y empresa</h3>
+            <p>
+              Creación de materiales, automatización de tareas y uso de IA para enriquecer formación, productividad y recursos.
+            </p>
+            <p>
+              Un enfoque muy práctico, orientado a utilidad real y no solo a experimentar por experimentar.
+            </p>
+
+            <div class="project-tags">
+              <span class="project-tag">IA</span>
+              <span class="project-tag">Automatización</span>
+              <span class="project-tag">Formación</span>
+            </div>
+          </article>
+        </div>
+
+        <div class="projects-final-actions">
+          <a href="herramientas.html" class="btn btn-p">Explorar herramientas</a>
+          <a href="contacto.html" class="btn btn-g">Contactar</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider" aria-hidden="true"></div>
+
+    <section class="section section-cta-final" aria-labelledby="proyectos-cta-h">
+      <div class="container">
+        <div class="cta-final">
+          <span class="kicker">Siguiente paso</span>
+          <h2 id="proyectos-cta-h">Proyectos pensados para resolver y aportar valor real</h2>
+          <p>
+            Si quieres explorar mis herramientas o hablar sobre una colaboración concreta,
+            puedes continuar desde aquí.
+          </p>
+
+          <div class="cta-final-actions">
+            <a href="herramientas.html" class="btn btn-p">Ver herramientas</a>
+            <a href="contacto.html" class="btn btn-g">Contactar</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container footer-container">
+      <div class="footer-top">
+        <a href="index.html" class="nav-logo footer-logo" aria-label="Ir a inicio">
+          <span class="nav-mark" aria-hidden="true">IC</span>
           <span class="nav-logo-text">Transformación IA</span>
         </a>
-        <p>Portfolio de Idayra Cabrera — Docente FPE, Administradora de Sistemas y especialista en transformación digital e IA.</p>
+
+        <div class="footer-social" aria-label="Redes sociales y contacto">
+          <a
+            href="https://wa.me/34620948523"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social-icon"
+            aria-label="WhatsApp"
+            title="WhatsApp"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M19.05 4.91A9.82 9.82 0 0 0 12.03 2C6.58 2 2.13 6.42 2.13 11.88c0 1.75.46 3.46 1.33 4.96L2 22l5.3-1.39a9.9 9.9 0 0 0 4.73 1.2h.01c5.45 0 9.9-4.42 9.9-9.88 0-2.64-1.03-5.12-2.89-7.02Zm-7.02 15.23h-.01a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-3.15.83.84-3.07-.2-.31a8.13 8.13 0 0 1-1.25-4.34c0-4.48 3.67-8.13 8.18-8.13 2.18 0 4.23.84 5.77 2.37a8.06 8.06 0 0 1 2.39 5.76c0 4.48-3.67 8.21-8.09 8.21Zm4.46-6.1c-.24-.12-1.4-.69-1.62-.77-.22-.08-.38-.12-.54.12-.16.24-.62.77-.76.93-.14.16-.28.18-.52.06-.24-.12-1.01-.37-1.92-1.19-.71-.63-1.19-1.41-1.33-1.65-.14-.24-.01-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.29-.74-1.77-.2-.47-.4-.41-.54-.42h-.46c-.16 0-.42.06-.64.3-.22.24-.84.81-.84 1.97s.86 2.28.98 2.44c.12.16 1.69 2.58 4.1 3.61.57.25 1.02.4 1.37.51.58.18 1.11.15 1.53.09.47-.07 1.4-.57 1.6-1.12.2-.55.2-1.02.14-1.12-.06-.1-.22-.16-.46-.28Z"/>
+            </svg>
+          </a>
+
+          <a
+            href="https://www.linkedin.com/in/luzidayrajorgecabrera"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social-icon"
+            aria-label="LinkedIn"
+            title="LinkedIn"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6.94 8.5A1.56 1.56 0 1 1 6.94 5.38a1.56 1.56 0 0 1 0 3.12ZM5.56 9.75h2.77V18H5.56V9.75Zm4.5 0h2.66v1.13h.04c.37-.7 1.28-1.43 2.63-1.43 2.82 0 3.34 1.85 3.34 4.26V18h-2.77v-3.79c0-.9-.02-2.06-1.26-2.06-1.26 0-1.45.98-1.45 1.99V18h-2.77V9.75Z"/>
+            </svg>
+          </a>
+        </div>
       </div>
-      <div class="fc">
-        <h4>Páginas</h4>
-        <a href="sobre-mi.html">Sobre mí</a>
-        <a href="proyectos.html">Proyectos</a>
-        <a href="herramientas.html">Herramientas</a>
-    <a href="acreditaciones.html">Acreditaciones</a>
-        <a href="planificador.html">Planificador</a>
-      </div>
-      <div class="fc">
-        <h4>Contacto</h4>
-        <a href="contacto.html">Formulario</a>
-        <a href="/cdn-cgi/l/email-protection#513d242b3835302823303b3e2336343230332334233011363c30383d7f323e3c">Email</a>
-        <a href="https://wa.me/34620948523" target="_blank" rel="noopener">WhatsApp</a>
-        <a href="https://www.linkedin.com/in/luzidayrajorgecabrera" target="_blank" rel="noopener">LinkedIn</a>
-      </div>
-      <div class="fc">
-        <h4>Legal</h4>
-        <a href="aviso-legal.html">Aviso legal</a>
-        <a href="privacidad.html">Privacidad</a>
+
+      <div class="footer-bottom">
+        <span>© <span id="currentYear"></span> Idayra Cabrera</span>
+
+        <div class="footer-legal">
+          <a href="aviso-legal.html">Aviso legal</a>
+          <a href="privacidad.html">Privacidad</a>
+        </div>
       </div>
     </div>
-    <div class="footer-bot">
-      <span>© <span class="yr"></span> Idayra Cabrera · TransformacionIA</span>
-      <span>La Laguna, Tenerife</span>
-    </div>
-  </div>
-</foot
+  </footer>
+
+  <script>
+    const navToggle = document.getElementById("navTog");
+    const navLinks = document.getElementById("navLinks");
+    const currentYear = document.getElementById("currentYear");
+
+    if (currentYear) {
+      currentYear.textContent = new Date().getFullYear();
+    }
+
+    if (navToggle && navLinks) {
+      navToggle.addEventListener("click", () => {
+        const isOpen = navLinks.classList.toggle("open");
+        navToggle.setAttribute("aria-expanded", String(isOpen));
+      });
+
+      navLinks.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          navLinks.classList.remove("open");
+          navToggle.setAttribute("aria-expanded", "false");
+        });
+      });
+    }
+  </script>
+</body>
+</html>

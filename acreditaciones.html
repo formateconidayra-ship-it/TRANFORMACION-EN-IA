@@ -3,230 +3,595 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Acreditaciones · Idayra Cabrera — Docente FPE certificada SCE</title>
-  <meta name="description" content="Especialidades docentes acreditadas de Idayra Cabrera, certificadas por el Servicio Canario de Empleo y el SEPE para impartir formación FPE en modalidad presencial y teleformación." />
+
+  <title>Acreditaciones | Idayra Cabrera · Especialidades FPE acreditadas</title>
+  <meta
+    name="description"
+    content="Especialidades docentes acreditadas de Idayra Cabrera para impartir formación FPE en modalidad presencial y teleformación, con acreditaciones vinculadas al SCE y al SEPE."
+  />
+  <meta name="author" content="Idayra Cabrera" />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#07090f" />
   <link rel="canonical" href="https://transformacionia.es/acreditaciones.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Acreditaciones | Idayra Cabrera · Especialidades FPE acreditadas" />
+  <meta
+    property="og:description"
+    content="Especialidades acreditadas para impartir formación FPE en modalidad presencial y teleformación."
+  />
+  <meta property="og:url" content="https://transformacionia.es/acreditaciones.html" />
+  <meta property="og:locale" content="es_ES" />
+
   <link rel="stylesheet" href="css/styles.css" />
+
   <style>
-.acred-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px }
-.acred-card {
-  background:var(--bg2); border:1px solid var(--border);
-  border-radius:var(--r); padding:26px;
-  display:flex; flex-direction:column; gap:12px;
-  transition:border-color .25s, transform .25s;
-  position:relative; overflow:hidden;
-}
-.acred-card::before {
-  content:''; position:absolute; top:0; left:0; right:0; height:3px;
-  background:linear-gradient(90deg,var(--blue),var(--cyan));
-}
-.acred-card:hover { border-color:rgba(59,130,246,.3); transform:translateY(-3px) }
-.acred-code {
-  font-size:.72rem; font-weight:700; letter-spacing:.1em;
-  text-transform:uppercase; color:var(--cyan);
-}
-.acred-badge {
-  display:inline-flex; align-items:center; gap:5px;
-  padding:3px 10px; border-radius:999px; font-size:.72rem; font-weight:600;
-  background:rgba(34,197,94,.1); color:#22c55e; border:1px solid rgba(34,197,94,.2);
-  width:fit-content;
-}
-.acred-badge-dot { width:6px; height:6px; border-radius:50%; background:currentColor; animation:pdot 2.2s ease infinite }
-@keyframes pdot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.72)}}
-.acred-title { font-family:var(--fd); font-size:1rem; font-weight:700; line-height:1.35; flex:1 }
-.acred-modal { font-size:.78rem; color:var(--muted2); margin-top:auto }
-.acred-modal b { color:var(--muted); font-weight:500 }
+    .acred-hero {
+      padding: 48px 0 42px;
+    }
 
-.stats-banner {
-  display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:52px;
-}
-.sban {
-  background:var(--bg2); border:1px solid var(--border);
-  border-radius:var(--r); padding:22px; text-align:center;
-}
-.sban strong {
-  display:block; font-family:var(--fd); font-size:1.8rem; font-weight:800;
-  background:linear-gradient(90deg,#60a5fa,#22d3ee);
-  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
-  margin-bottom:5px;
-}
-.sban span { font-size:.83rem; color:var(--muted) }
+    .acred-hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(280px, 0.92fr);
+      gap: 26px;
+      align-items: start;
+    }
 
-.verify-bar {
-  margin-top:48px; padding:16px 22px;
-  background:rgba(59,130,246,.05); border:1px solid rgba(59,130,246,.15);
-  border-radius:var(--r-sm);
-  display:flex; align-items:center; gap:14px; flex-wrap:wrap;
-}
-.verify-bar .vi { font-size:1.2rem; flex-shrink:0 }
-.verify-bar p { font-size:.84rem; color:var(--muted); line-height:1.6; flex:1 }
-.verify-bar p b { color:var(--text); font-weight:500 }
+    .acred-hero-copy h1 {
+      margin: 0 0 18px;
+      font-family: var(--fd);
+      font-size: clamp(2.05rem, 4.1vw, 3.4rem);
+      line-height: 0.98;
+      text-transform: uppercase;
+      letter-spacing: -0.03em;
+      max-width: 11ch;
+    }
 
-@media(max-width:1024px){ .acred-grid { grid-template-columns:1fr 1fr } }
-@media(max-width:768px) { .acred-grid { grid-template-columns:1fr } .stats-banner { grid-template-columns:1fr } }
-@media(max-width:480px) { .stats-banner { grid-template-columns:1fr 1fr } }
+    .acred-hero-copy p {
+      margin: 0;
+      max-width: 62ch;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .acred-hero-copy p + p {
+      margin-top: 14px;
+    }
+
+    .acred-hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .acred-hero-side {
+      display: grid;
+      gap: 12px;
+      align-content: start;
+    }
+
+    .acred-summary-card,
+    .acred-stat-card,
+    .acred-card {
+      background: var(--bg4);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+
+    .acred-summary-card {
+      padding: 22px;
+      background:
+        radial-gradient(circle at top right, rgba(59, 130, 246, 0.12), transparent 28%),
+        linear-gradient(180deg, rgba(12, 16, 24, 0.98), rgba(9, 13, 20, 0.98));
+      border-color: rgba(59, 130, 246, 0.22);
+    }
+
+    .acred-summary-card h2 {
+      margin: 0 0 10px;
+      font-family: var(--fd);
+      font-size: 1.35rem;
+      line-height: 1.04;
+    }
+
+    .acred-summary-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    .acred-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .acred-stat-card {
+      padding: 18px 14px;
+      text-align: center;
+    }
+
+    .acred-stat-number {
+      display: block;
+      font-family: var(--fd);
+      font-size: 1.65rem;
+      font-weight: 800;
+      line-height: 1;
+      background: linear-gradient(90deg, #60a5fa, #22d3ee);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 8px;
+    }
+
+    .acred-stat-label {
+      display: block;
+      color: var(--muted);
+      font-size: 0.83rem;
+      line-height: 1.35;
+    }
+
+    .acred-section {
+      padding: 72px 0;
+    }
+
+    .acred-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .acred-card {
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+      transition: 0.22s ease;
+    }
+
+    .acred-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto auto 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--blue), var(--cyan));
+    }
+
+    .acred-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(59, 130, 246, 0.28);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .acred-code {
+      display: inline-block;
+      margin-bottom: 10px;
+      font-size: 0.74rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--cyan);
+    }
+
+    .acred-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      margin-bottom: 12px;
+      padding: 5px 12px;
+      border-radius: 999px;
+      font-size: 0.74rem;
+      font-weight: 600;
+      background: rgba(34, 197, 94, 0.10);
+      color: #22c55e;
+      border: 1px solid rgba(34, 197, 94, 0.18);
+    }
+
+    .acred-badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    .acred-title {
+      margin: 0 0 16px;
+      font-family: var(--fd);
+      font-size: 1.08rem;
+      line-height: 1.28;
+    }
+
+    .acred-modal {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .acred-modal strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .verify-box {
+      margin-top: 34px;
+      padding: 18px 20px;
+      border: 1px solid rgba(59, 130, 246, 0.16);
+      border-radius: 16px;
+      background: rgba(59, 130, 246, 0.05);
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .verify-icon {
+      flex-shrink: 0;
+      font-size: 1.2rem;
+      line-height: 1;
+    }
+
+    .verify-box p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+
+    .verify-box b {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .acred-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 26px;
+    }
+
+    @media (max-width: 1024px) {
+      .acred-hero-grid,
+      .acred-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .acred-stats-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 768px) {
+      .acred-hero {
+        padding: 34px 0 34px;
+      }
+
+      .acred-section {
+        padding: 58px 0;
+      }
+
+      .acred-summary-card,
+      .acred-card {
+        padding: 22px;
+      }
+
+      .acred-hero-actions,
+      .acred-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .acred-hero-actions .btn,
+      .acred-actions .btn {
+        width: 100%;
+      }
+
+      .acred-stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .verify-box {
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .acred-hero-copy h1 {
+        font-size: 1.95rem;
+        max-width: none;
+      }
+
+      .acred-hero-copy p,
+      .acred-modal,
+      .verify-box p {
+        font-size: 0.94rem;
+      }
+    }
   </style>
 </head>
 <body>
-<div class="bg-glow"></div>
-<header class="navbar" role="banner">
-  <a href="index.html" class="nav-logo" aria-label="TransformacionIA inicio">
-    <img src="img/logo.png" alt="Logo TransformacionIA" />
-    <span class="nav-logo-text">Transformación IA</span>
-  </a>
-  <button class="nav-toggle" id="navTog" aria-label="Abrir menú" aria-expanded="false">
-    <span></span><span></span><span></span>
-  </button>
-  <nav class="nav-links" id="navLinks" aria-label="Menú principal">
-    <a href="sobre-mi.html">Sobre mí</a>
-    <a href="proyectos.html">Proyectos</a>
-    <a href="herramientas.html">Herramientas</a>
-    <a href="acreditaciones.html" class="active">Acreditaciones</a>
-    <a href="contacto.html" class="nav-cta">Contacto</a>
-  </nav>
-</header>
+  <a class="skip-link" href="#main">Saltar al contenido</a>
 
-<main id="main">
-<div class="container">
-  <div class="page-hero">
-    <span class="kicker">SCE · SEPE · Habilitaciones vigentes</span>
-    <h1>Especialidades acreditadas</h1>
-    <p>Especialidades en las que estoy habilitada para impartir formación para el empleo, acreditadas por el Servicio Canario de Empleo y el SEPE, en modalidad presencial y teleformación.</p>
-  </div>
-</div>
-<div class="divider"></div>
+  <div class="bg-glow" aria-hidden="true"></div>
 
-<section class="section">
-<div class="container">
+  <header class="navbar" role="banner">
+    <a href="index.html" class="nav-logo" aria-label="Ir a inicio">
+      <span class="nav-mark" aria-hidden="true">IC</span>
+      <span class="nav-logo-text">Transformación IA</span>
+    </a>
 
-  <div class="stats-banner">
-    <div class="sban"><strong>+1.770h</strong><span>Horas de docencia acreditadas</span></div>
-    <div class="sban"><strong>12</strong><span>Especialidades habilitadas</span></div>
-    <div class="sban"><strong>2026</strong><span>Última actualización SCE</span></div>
-  </div>
+    <button
+      class="nav-toggle"
+      id="navTog"
+      type="button"
+      aria-label="Abrir menú"
+      aria-controls="navLinks"
+      aria-expanded="false"
+    >
+      <span></span><span></span><span></span>
+    </button>
 
-  <div class="acred-grid">
+    <nav class="nav-links" id="navLinks" aria-label="Menú principal">
+      <a href="sobre-mi.html">Sobre mí</a>
+      <a href="proyectos.html">Proyectos</a>
+      <a href="herramientas.html">Herramientas</a>
+      <a href="acreditaciones.html" aria-current="page">Acreditaciones</a>
+      <a href="contacto.html" class="nav-cta">Contacto</a>
+    </nav>
+  </header>
 
-    <article class="acred-card">
-      <div class="acred-code">IFCT36</div>
-      <div class="acred-badge"><span class="acred-badge-dot"></span>Acreditada · SCE</div>
-      <h3 class="acred-title">Excel Avanzado</h3>
-      <div class="acred-modal"><b>Modalidad:</b> Presencial y teleformación</div>
-    </article>
+  <main id="main">
+    <section class="acred-hero section-hero" aria-labelledby="acred-h1">
+      <div class="container">
+        <div class="acred-hero-grid">
+          <div class="acred-hero-copy">
+            <span class="kicker">SCE · SEPE · Habilitaciones vigentes</span>
+            <h1 id="acred-h1">Especialidades acreditadas para formación FPE</h1>
+            <p>
+              Aquí se recogen las especialidades en las que estoy habilitada para impartir
+              formación para el empleo, tanto en modalidad presencial como en teleformación.
+            </p>
+            <p>
+              Estas acreditaciones refuerzan una base profesional ligada a docencia tecnológica,
+              competencias digitales, transformación digital e inteligencia artificial aplicada.
+            </p>
 
-    <article class="acred-card">
-      <div class="acred-code">IFCT56</div>
-      <div class="acred-badge"><span class="acred-badge-dot"></span>Acreditada · SCE</div>
-      <h3 class="acred-title">Excel Avanzado y Power BI</h3>
-      <div class="acred-modal"><b>Modalidad:</b> Presencial y teleformación</div>
-    </article>
+            <div class="acred-hero-actions">
+              <a href="sobre-mi.html" class="btn btn-p">Ver trayectoria</a>
+              <a href="contacto.html" class="btn btn-g">Contactar</a>
+            </div>
+          </div>
 
-    <article class="acred-card">
-      <div class="acred-code">IFCT39</div>
-      <div class="acred-badge"><span class="acred-badge-dot"></span>Acreditada · SCE</div>
-      <h3 class="acred-title">Posicionamiento Web y Marketing Digital en Buscadores</h3>
-      <div class="acred-modal"><b>Modalidad:</b> Presencial y teleformación</div>
-    </article>
+          <aside class="acred-hero-side" aria-label="Resumen de acreditaciones">
+            <div class="acred-summary-card">
+              <h2>Docencia acreditada con base real</h2>
+              <p>
+                Un conjunto de especialidades vinculadas a formación tecnológica, productividad,
+                competencias digitales, SEO, transformación digital y uso de IA en empresa y formación.
+              </p>
+            </div>
 
-    <article class="acred-card">
-      <div class="acred-code">IFCT45</div>
-      <div class="acred-badge"><span class="acred-badge-dot"></span>Acreditada · SCE</div>
-      <h3 class="acred-title">Competencias Digitales Básicas</h3>
-      <div class="acred-modal"><b>Modalidad:</b> Presencial y teleformación</div>
-    </article>
+            <div class="acred-stats-grid">
+              <div class="acred-stat-card">
+                <span class="acred-stat-number">12</span>
+                <span class="acred-stat-label">Especialidades</span>
+              </div>
+              <div class="acred-stat-card">
+                <span class="acred-stat-number">+1.770h</span>
+                <span class="acred-stat-label">Horas acreditadas</span>
+              </div>
+              <div class="acred-stat-card">
+                <span class="acred-stat-number">FPE</span>
+                <span class="acred-stat-label">Enfoque docente</span>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
 
-    <article class="acred-card">
-      <div class="acred-code">IFCT46</div>
-      <div class="acred-badge"><span class="acred-badge-dot"></span>Acreditada · SCE</div>
-      <h3 class="acred-title">Competencias Digitales Avanzadas</h3>
-      <div class="acred-modal"><b>Modalidad:</b> Presencial y teleformación</div>
-    </article>
+    <div class="divider" aria-hidden="true"></div>
 
-    <article class="acred-card">
-      <div class="acred-code">IFCT37</div>
-      <div class="acred-badge"><span class="acred-badge-dot"></span>Acreditada · SCE</div>
-      <h3 class="acred-title">Herramientas Web 2.0</h3>
-      <div class="acred-modal"><b>Modalidad:</b> Presencial y teleformación</div>
-    </article>
+    <section class="acred-section section-deep" aria-labelledby="listado-h">
+      <div class="container">
+        <div class="sh">
+          <span class="kicker">Listado</span>
+          <h2 class="section-title" id="listado-h">Especialidades habilitadas</h2>
+          <p class="section-sub">
+            Acreditaciones orientadas a formación tecnológica, digitalización y nuevas competencias.
+          </p>
+        </div>
 
-    <article class="acred-card">
-      <div class="acred-code">ADGG053PO</div>
-      <div class="acred-badge"><span class="acred-badge-dot"></span>Acreditada · SCE</div>
-      <h3 class="acred-title">Ofimática</h3>
-      <div class="acred-modal"><b>Modalidad:</b> Presencial y teleformación</div>
-    </article>
+        <div class="acred-grid">
+          <article class="acred-card">
+            <span class="acred-code">IFCT36</span>
+            <div class="acred-badge"><span class="acred-badge-dot"></span>Acreditada · SCE</div>
+            <h3 class="acred-title">Excel Avanzado</h3>
+            <div class="acred-modal"><strong>Modalidad:</strong> Presencial y teleformación</div>
+          </article>
 
-    <article class="acred-card">
-      <div class="acred-code">ADGD0010</div>
-      <div class="acred-badge"><span class="acred-badge-dot"></span>Acreditada · SEPE</div>
-      <h3 class="acred-title">Transformación Digital</h3>
-      <div class="acred-modal"><b>Modalidad:</b> Presencial y teleformación</div>
-    </article>
+          <article class="acred-card">
+            <span class="acred-code">IFCT56</span>
+            <div class="acred-badge"><span class="acred-badge-dot"></span>Acreditada · SCE</div>
+            <h3 class="acred-title">Excel Avanzado y Power BI</h3>
+            <div class="acred-modal"><strong>Modalidad:</strong> Presencial y teleformación</div>
+          </article>
 
-    <article class="acred-card">
-      <div class="acred-code">ADGD352PO</div>
-      <div class="acred-badge"><span class="acred-badge-dot"></span>Acreditada · SEPE</div>
-      <h3 class="acred-title">Transformación Digital de la Empresa</h3>
-      <div class="acred-modal"><b>Modalidad:</b> Presencial y teleformación</div>
-    </article>
+          <article class="acred-card">
+            <span class="acred-code">IFCT39</span>
+            <div class="acred-badge"><span class="acred-badge-dot"></span>Acreditada · SCE</div>
+            <h3 class="acred-title">Posicionamiento Web y Marketing Digital en Buscadores</h3>
+            <div class="acred-modal"><strong>Modalidad:</strong> Presencial y teleformación</div>
+          </article>
 
-    <article class="acred-card">
-      <div class="acred-code">MF0952</div>
-      <div class="acred-badge"><span class="acred-badge-dot"></span>Acreditada</div>
-      <h3 class="acred-title">Publicación de Páginas Web</h3>
-      <div class="acred-modal"><b>Modalidad:</b> Presencial y teleformación</div>
-    </article>
+          <article class="acred-card">
+            <span class="acred-code">IFCT45</span>
+            <div class="acred-badge"><span class="acred-badge-dot"></span>Acreditada · SCE</div>
+            <h3 class="acred-title">Competencias Digitales Básicas</h3>
+            <div class="acred-modal"><strong>Modalidad:</strong> Presencial y teleformación</div>
+          </article>
 
-    <article class="acred-card">
-      <div class="acred-code">IFCT0019</div>
-      <div class="acred-badge"><span class="acred-badge-dot"></span>Acreditada</div>
-      <h3 class="acred-title">Inteligencia Artificial Aplicada a la Empresa y Comercio Electrónico</h3>
-      <div class="acred-modal"><b>Modalidad:</b> Presencial y teleformación</div>
-    </article>
+          <article class="acred-card">
+            <span class="acred-code">IFCT46</span>
+            <div class="acred-badge"><span class="acred-badge-dot"></span>Acreditada · SCE</div>
+            <h3 class="acred-title">Competencias Digitales Avanzadas</h3>
+            <div class="acred-modal"><strong>Modalidad:</strong> Presencial y teleformación</div>
+          </article>
 
-    <article class="acred-card">
-      <div class="acred-code">COMM0042</div>
-      <div class="acred-badge"><span class="acred-badge-dot"></span>Acreditada</div>
-      <h3 class="acred-title">Personalización de la Experiencia del Cliente con Inteligencia Artificial</h3>
-      <div class="acred-modal"><b>Modalidad:</b> Presencial y teleformación</div>
-    </article>
+          <article class="acred-card">
+            <span class="acred-code">IFCT37</span>
+            <div class="acred-badge"><span class="acred-badge-dot"></span>Acreditada · SCE</div>
+            <h3 class="acred-title">Herramientas Web 2.0</h3>
+            <div class="acred-modal"><strong>Modalidad:</strong> Presencial y teleformación</div>
+          </article>
 
-  </div>
+          <article class="acred-card">
+            <span class="acred-code">ADGG053PO</span>
+            <div class="acred-badge"><span class="acred-badge-dot"></span>Acreditada · SCE</div>
+            <h3 class="acred-title">Ofimática</h3>
+            <div class="acred-modal"><strong>Modalidad:</strong> Presencial y teleformación</div>
+          </article>
 
-  <div class="verify-bar" style="text-align:center;justify-content:center;align-items:center;gap:10px">
-  <span class="vi">🏛️</span>
-  <p style="flex:none">Acreditaciones verificadas por el <b>Servicio Canario de Empleo</b> y el <b>SEPE</b> </p>
-</div>
+          <article class="acred-card">
+            <span class="acred-code">ADGD0010</span>
+            <div class="acred-badge"><span class="acred-badge-dot"></span>Acreditada · SEPE</div>
+            <h3 class="acred-title">Transformación Digital</h3>
+            <div class="acred-modal"><strong>Modalidad:</strong> Presencial y teleformación</div>
+          </article>
 
-  <div style="margin-top:40px;display:flex;gap:12px;flex-wrap:wrap">
-    <a href="sobre-mi.html" class="btn btn-p">Ver trayectoria completa</a>
-    <a href="contacto.html" class="btn btn-g">Contactar</a>
-  </div>
+          <article class="acred-card">
+            <span class="acred-code">ADGD352PO</span>
+            <div class="acred-badge"><span class="acred-badge-dot"></span>Acreditada · SEPE</div>
+            <h3 class="acred-title">Transformación Digital de la Empresa</h3>
+            <div class="acred-modal"><strong>Modalidad:</strong> Presencial y teleformación</div>
+          </article>
 
-</div>
-</section>
-</main>
+          <article class="acred-card">
+            <span class="acred-code">MF0952</span>
+            <div class="acred-badge"><span class="acred-badge-dot"></span>Acreditada</div>
+            <h3 class="acred-title">Publicación de Páginas Web</h3>
+            <div class="acred-modal"><strong>Modalidad:</strong> Presencial y teleformación</div>
+          </article>
 
-<footer class="footer" role="contentinfo">
-  <div class="container">
-    <div class="footer-grid">
-      <div class="fb-brand">
-        <a href="index.html" class="nav-logo" aria-label="Inicio">
-          <img src="img/logo.png" alt="Logo TransformacionIA" />
+          <article class="acred-card">
+            <span class="acred-code">IFCT0019</span>
+            <div class="acred-badge"><span class="acred-badge-dot"></span>Acreditada</div>
+            <h3 class="acred-title">Inteligencia Artificial Aplicada a la Empresa y Comercio Electrónico</h3>
+            <div class="acred-modal"><strong>Modalidad:</strong> Presencial y teleformación</div>
+          </article>
+
+          <article class="acred-card">
+            <span class="acred-code">COMM0042</span>
+            <div class="acred-badge"><span class="acred-badge-dot"></span>Acreditada</div>
+            <h3 class="acred-title">Personalización de la Experiencia del Cliente con Inteligencia Artificial</h3>
+            <div class="acred-modal"><strong>Modalidad:</strong> Presencial y teleformación</div>
+          </article>
+        </div>
+
+        <div class="verify-box">
+          <div class="verify-icon">🏛️</div>
+          <p>
+            Acreditaciones vinculadas a especialidades reconocidas y orientadas a formación para el empleo,
+            con referencias asociadas al <b>Servicio Canario de Empleo</b> y al <b>SEPE</b>.
+          </p>
+        </div>
+
+        <div class="acred-actions">
+          <a href="sobre-mi.html" class="btn btn-p">Ver trayectoria completa</a>
+          <a href="contacto.html" class="btn btn-g">Contactar</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider" aria-hidden="true"></div>
+
+    <section class="section section-cta-final" aria-labelledby="acred-cta-h">
+      <div class="container">
+        <div class="cta-final">
+          <span class="kicker">Siguiente paso</span>
+          <h2 id="acred-cta-h">Acreditaciones que respaldan una práctica profesional real</h2>
+          <p>
+            Si quieres ver cómo estas especialidades se traducen en proyectos, herramientas y experiencia aplicada,
+            puedes continuar desde aquí.
+          </p>
+
+          <div class="cta-final-actions">
+            <a href="proyectos.html" class="btn btn-p">Ver proyectos</a>
+            <a href="contacto.html" class="btn btn-g">Contactar</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container footer-container">
+      <div class="footer-top">
+        <a href="index.html" class="nav-logo footer-logo" aria-label="Ir a inicio">
+          <span class="nav-mark" aria-hidden="true">IC</span>
           <span class="nav-logo-text">Transformación IA</span>
         </a>
-        <p>Portfolio de Idayra Cabrera — Docente FPE, Administradora de Sistemas y especialista en transformación digital e IA.</p>
+
+        <div class="footer-social" aria-label="Redes sociales y contacto">
+          <a
+            href="https://wa.me/34620948523"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social-icon"
+            aria-label="WhatsApp"
+            title="WhatsApp"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M19.05 4.91A9.82 9.82 0 0 0 12.03 2C6.58 2 2.13 6.42 2.13 11.88c0 1.75.46 3.46 1.33 4.96L2 22l5.3-1.39a9.9 9.9 0 0 0 4.73 1.2h.01c5.45 0 9.9-4.42 9.9-9.88 0-2.64-1.03-5.12-2.89-7.02Zm-7.02 15.23h-.01a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-3.15.83.84-3.07-.2-.31a8.13 8.13 0 0 1-1.25-4.34c0-4.48 3.67-8.13 8.18-8.13 2.18 0 4.23.84 5.77 2.37a8.06 8.06 0 0 1 2.39 5.76c0 4.48-3.67 8.21-8.09 8.21Zm4.46-6.1c-.24-.12-1.4-.69-1.62-.77-.22-.08-.38-.12-.54.12-.16.24-.62.77-.76.93-.14.16-.28.18-.52.06-.24-.12-1.01-.37-1.92-1.19-.71-.63-1.19-1.41-1.33-1.65-.14-.24-.01-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.29-.74-1.77-.2-.47-.4-.41-.54-.42h-.46c-.16 0-.42.06-.64.3-.22.24-.84.81-.84 1.97s.86 2.28.98 2.44c.12.16 1.69 2.58 4.1 3.61.57.25 1.02.4 1.37.51.58.18 1.11.15 1.53.09.47-.07 1.4-.57 1.6-1.12.2-.55.2-1.02.14-1.12-.06-.1-.22-.16-.46-.28Z"/>
+            </svg>
+          </a>
+
+          <a
+            href="https://www.linkedin.com/in/luzidayrajorgecabrera"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social-icon"
+            aria-label="LinkedIn"
+            title="LinkedIn"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6.94 8.5A1.56 1.56 0 1 1 6.94 5.38a1.56 1.56 0 0 1 0 3.12ZM5.56 9.75h2.77V18H5.56V9.75Zm4.5 0h2.66v1.13h.04c.37-.7 1.28-1.43 2.63-1.43 2.82 0 3.34 1.85 3.34 4.26V18h-2.77v-3.79c0-.9-.02-2.06-1.26-2.06-1.26 0-1.45.98-1.45 1.99V18h-2.77V9.75Z"/>
+            </svg>
+          </a>
+        </div>
       </div>
-      <div class="fc"><h4>Páginas</h4><a href="sobre-mi.html">Sobre mí</a><a href="proyectos.html">Proyectos</a><a href="herramientas.html">Herramientas</a><a href="acreditaciones.html">Acreditaciones</a></div>
-      <div class="fc"><h4>Contacto</h4><a href="contacto.html">Formulario</a><a href="mailto:luzidayrajorgecabrera@gmail.com">Email</a><a href="https://wa.me/34620948523" target="_blank" rel="noopener">WhatsApp</a><a href="https://www.linkedin.com/in/luzidayrajorgecabrera" target="_blank" rel="noopener">LinkedIn</a></div>
-      <div class="fc"><h4>Legal</h4><a href="aviso-legal.html">Aviso legal</a><a href="privacidad.html">Privacidad</a></div>
+
+      <div class="footer-bottom">
+        <span>© <span id="currentYear"></span> Idayra Cabrera</span>
+
+        <div class="footer-legal">
+          <a href="aviso-legal.html">Aviso legal</a>
+          <a href="privacidad.html">Privacidad</a>
+        </div>
+      </div>
     </div>
-    <div class="footer-bot">
-      <span>© <span class="yr"></span> Idayra Cabrera · TransformacionIA</span>
-      <span>La Laguna, Tenerife</span>
-    </div>
-  </div>
-</footer>
-<script src="js/main.js"></script>
+  </footer>
+
+  <script>
+    const navToggle = document.getElementById("navTog");
+    const navLinks = document.getElementById("navLinks");
+    const currentYear = document.getElementById("currentYear");
+
+    if (currentYear) {
+      currentYear.textContent = new Date().getFullYear();
+    }
+
+    if (navToggle && navLinks) {
+      navToggle.addEventListener("click", () => {
+        const isOpen = navLinks.classList.toggle("open");
+        navToggle.setAttribute("aria-expanded", String(isOpen));
+      });
+
+      navLinks.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          navLinks.classList.remove("open");
+          navToggle.setAttribute("aria-expanded", "false");
+        });
+      });
+    }
+  </script>
 </body>
 </html>

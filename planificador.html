@@ -3,682 +3,1897 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Planificador FPE · Idayra Cabrera</title>
-  <meta name="description" content="Planificador de certificados de profesionalidad. Sube el PDF, extrae módulos con IA y genera el cronograma oficial con calendario visual." />
+
+  <title>Planificador FPE | Idayra Cabrera · Cronograma automático para certificados</title>
+  <meta
+    name="description"
+    content="Planificador de certificados de profesionalidad. Sube el PDF, extrae módulos con IA y genera el cronograma con calendario visual y exportación CSV."
+  />
+  <meta name="author" content="Idayra Cabrera" />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#07090f" />
   <link rel="canonical" href="https://transformacionia.es/planificador.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Planificador FPE | Idayra Cabrera · Cronograma automático para certificados" />
+  <meta
+    property="og:description"
+    content="Herramienta para extraer módulos desde PDF y generar automáticamente el cronograma oficial con calendario visual."
+  />
+  <meta property="og:url" content="https://transformacionia.es/planificador.html" />
+  <meta property="og:locale" content="es_ES" />
+
   <link rel="stylesheet" href="css/styles.css" />
+
   <style>
-.plan-page{padding:28px 0 100px}
-.step{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:24px;margin-bottom:14px;transition:border-color .3s}
-.step.active{border-color:var(--blue)}
-.step.done{border-color:rgba(34,197,94,.35)}
-.sh{display:flex;align-items:center;gap:10px;margin-bottom:16px}
-.sn{width:24px;height:24px;border-radius:6px;flex-shrink:0;background:var(--bg3);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:.72rem;font-weight:800;color:var(--muted)}
-.active .sn{background:var(--blue);border-color:var(--blue);color:#fff}
-.done .sn{background:rgba(34,197,94,.15);border-color:rgba(34,197,94,.3);color:#22c55e}
-.stit{font-family:var(--fd);font-size:.93rem;font-weight:700}
-.ssub{font-size:.8rem;color:var(--muted);margin-left:auto}
-.uzone{border:2px dashed var(--border2);border-radius:var(--r);padding:32px 16px;text-align:center;cursor:pointer;position:relative;transition:all .2s}
-.uzone:hover,.uzone.drag{border-color:var(--blue);background:rgba(59,130,246,.04)}
-.uzone input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
-.uzone .ui{font-size:2rem;margin-bottom:8px}
-.uzone strong{font-size:.93rem;color:var(--text)}
-.uzone p{font-size:.83rem;color:var(--muted);margin-top:5px}
-.ufname{margin-top:8px;font-size:.81rem;color:var(--cyan);font-weight:500}
-.aibar{display:none;align-items:center;gap:10px;margin-top:10px;padding:12px 14px;background:rgba(59,130,246,.06);border:1px solid rgba(59,130,246,.18);border-radius:var(--r-sm);font-size:.85rem;color:var(--muted)}
-.aibar.show{display:flex}
-.spin{width:16px;height:16px;border-radius:50%;border:2px solid rgba(59,130,246,.2);border-top-color:var(--blue);animation:sp .8s linear infinite;flex-shrink:0}
-@keyframes sp{to{transform:rotate(360deg)}}
-.crow{display:flex;align-items:center;gap:8px;padding:10px 14px;background:rgba(59,130,246,.06);border:1px solid rgba(59,130,246,.15);border-radius:var(--r-sm);margin-bottom:10px}
-.crow label{font-size:.76rem;color:var(--muted2);font-weight:500;white-space:nowrap}
-.crow input{flex:1;background:transparent;border:none;color:var(--text);font-family:var(--fd);font-size:.92rem;font-weight:700;outline:none}
-table.mt{width:100%;border-collapse:collapse;font-size:.86rem}
-table.mt th{padding:7px 10px;text-align:left;color:var(--cyan);font-size:.69rem;letter-spacing:.08em;text-transform:uppercase;border-bottom:1px solid var(--border)}
-table.mt td{padding:8px 10px;border-bottom:1px solid var(--border)}
-table.mt tr:last-child td{border-bottom:none}
-table.mt input{border:none;background:transparent;color:var(--text);font-family:var(--fb);font-size:.86rem;width:100%;outline:none;border-bottom:1px solid transparent;transition:border-color .2s}
-table.mt input:focus{border-bottom-color:var(--blue)}
-.thi input{color:var(--cyan);font-weight:700;text-align:right;width:64px}
-.bdel{width:26px;height:26px;border:1px solid var(--border);border-radius:5px;background:transparent;color:var(--muted2);cursor:pointer;font-size:.82rem;display:flex;align-items:center;justify-content:center;transition:all .2s}
-.bdel:hover{background:rgba(239,68,68,.1);border-color:#ef4444;color:#f87171}
-.badd{display:inline-flex;align-items:center;gap:5px;margin-top:8px;padding:6px 11px;border:1px dashed var(--border2);border-radius:7px;background:transparent;color:var(--muted);font-family:var(--fb);font-size:.81rem;cursor:pointer;transition:all .2s}
-.badd:hover{border-color:var(--cyan);color:var(--cyan)}
-.cfg{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:12px}
-.cf{display:flex;flex-direction:column;gap:4px}
-.cf label{font-size:.78rem;color:var(--muted);font-weight:500}
-.cf input{padding:10px 12px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r-sm);color:var(--text);font-family:var(--fb);font-size:.88rem;transition:border-color .2s}
-.cf input:focus{outline:none;border-color:var(--blue)}
-.drow{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:4px}
-.dbtn{padding:5px 12px;border:1px solid var(--border2);border-radius:7px;background:transparent;color:var(--muted);font-family:var(--fb);font-size:.82rem;cursor:pointer;transition:all .2s}
-.dbtn.on{background:rgba(59,130,246,.12);border-color:var(--blue);color:#93c5fd;font-weight:600}
-.acts{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}
-.bcalc{padding:11px 24px;background:var(--blue);border:none;border-radius:var(--r-sm);color:#fff;font-family:var(--fd);font-weight:700;font-size:.9rem;cursor:pointer;transition:all .2s;box-shadow:0 4px 16px rgba(59,130,246,.26)}
-.bcalc:hover{background:#2563eb;transform:translateY(-2px)}
-.bcalc:disabled{opacity:.4;cursor:not-allowed;transform:none}
-.bexp{padding:11px 16px;background:rgba(255,255,255,.05);border:1px solid var(--border2);border-radius:var(--r-sm);color:var(--text);font-family:var(--fb);font-size:.84rem;font-weight:600;cursor:pointer;transition:all .2s;display:none}
-.bexp.show{display:inline-flex;align-items:center;gap:6px}
-.bexp:hover{background:rgba(255,255,255,.09)}
-.perr{display:none;margin-top:10px;padding:9px 13px;background:rgba(239,68,68,.07);border:1px solid rgba(239,68,68,.2);border-radius:8px;font-size:.83rem;color:#fca5a5}
-.perr.show{display:block}
+    .planner-hero {
+      padding: 48px 0 42px;
+    }
 
-/* Resultados */
-.res{display:none}
-.res.show{display:block}
+    .planner-hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(280px, 0.92fr);
+      gap: 26px;
+      align-items: start;
+    }
 
-/* Tabs */
-.tabs{display:flex;gap:0;margin-bottom:0;border-bottom:1px solid var(--border)}
-.tab{padding:10px 20px;border:none;background:transparent;color:var(--muted);font-family:var(--fb);font-size:.85rem;font-weight:500;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .2s}
-.tab.on{color:var(--text);border-bottom-color:var(--blue)}
-.tab:hover{color:var(--text)}
-.tab-panel{display:none;padding:20px 0}
-.tab-panel.on{display:block}
+    .planner-hero-copy h1 {
+      margin: 0 0 18px;
+      font-family: var(--fd);
+      font-size: clamp(2.05rem, 4.1vw, 3.4rem);
+      line-height: 0.98;
+      text-transform: uppercase;
+      letter-spacing: -0.03em;
+      max-width: 11ch;
+    }
 
-/* Resumen stats */
-.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:20px}
-.stat{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r-sm);padding:12px;text-align:center}
-.stat strong{display:block;font-family:var(--fd);font-size:1.1rem;font-weight:800;background:linear-gradient(90deg,#60a5fa,#22d3ee);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.stat span{font-size:.71rem;color:var(--muted2);margin-top:2px;display:block}
+    .planner-hero-copy p {
+      margin: 0;
+      max-width: 62ch;
+      color: var(--muted);
+      font-size: 1rem;
+    }
 
-/* Tabla oficial */
-.info-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
-.badge{padding:4px 10px;border:1px solid var(--border2);border-radius:999px;font-size:.76rem;color:var(--muted);background:var(--bg3)}
-.badge b{color:var(--text);font-weight:600}
-.rtbl{width:100%;border-collapse:collapse;font-size:.86rem}
-.rtbl th{padding:9px 12px;text-align:left;color:var(--cyan);font-size:.69rem;letter-spacing:.08em;text-transform:uppercase;border-bottom:1px solid var(--border);white-space:nowrap}
-.rtbl td{padding:11px 12px;border-bottom:1px solid var(--border);color:var(--text)}
-.rtbl tr:last-child td{border-bottom:none}
-.rtbl tr:hover td{background:rgba(255,255,255,.018)}
-.rtbl .th{color:var(--cyan);font-weight:700}
-.rtbl .tm{color:var(--muted);font-size:.82rem}
-.twrap{overflow-x:auto}
+    .planner-hero-copy p + p {
+      margin-top: 14px;
+    }
 
-/* Calendario visual */
-.cal-legend{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
-.leg-item{display:flex;align-items:center;gap:6px;font-size:.78rem;color:var(--muted)}
-.leg-dot{width:12px;height:12px;border-radius:3px;flex-shrink:0}
-.cal-months{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
-.cal-mo h3{font-family:var(--fd);font-size:.84rem;font-weight:700;color:var(--cyan);margin-bottom:8px;text-transform:capitalize}
-.cal-g{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}
-.cal-hd{text-align:center;font-size:.65rem;font-weight:600;color:var(--muted2);padding:2px 0}
-.cd{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:4px;font-size:.7rem;position:relative;cursor:default;transition:transform .1s}
-.cd.wk{color:var(--muted2)}
-.cd.fe{background:rgba(239,68,68,.08);color:#fca5a5}
-.cd.hito{outline:2px solid #f59e0b;outline-offset:1px}
-.cd.hito::after{content:'★';position:absolute;bottom:-1px;right:0;font-size:7px;color:#f59e0b}
+    .planner-hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
 
-/* Colores por módulo */
-.mod-c0{background:rgba(59,130,246,.18);color:#93c5fd;border:1px solid rgba(59,130,246,.3)}
-.mod-c1{background:rgba(6,182,212,.18);color:#67e8f9;border:1px solid rgba(6,182,212,.3)}
-.mod-c2{background:rgba(168,85,247,.18);color:#d8b4fe;border:1px solid rgba(168,85,247,.3)}
-.mod-c3{background:rgba(34,197,94,.18);color:#86efac;border:1px solid rgba(34,197,94,.3)}
-.mod-c4{background:rgba(245,158,11,.18);color:#fcd34d;border:1px solid rgba(245,158,11,.3)}
-.mod-c5{background:rgba(239,68,68,.18);color:#fca5a5;border:1px solid rgba(239,68,68,.3)}
+    .planner-hero-side {
+      display: grid;
+      gap: 12px;
+      align-content: start;
+    }
 
-/* Actividades / hitos */
-.act-form{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r-sm);padding:16px;margin-bottom:16px}
-.act-form h4{font-family:var(--fd);font-size:.82rem;font-weight:700;color:var(--muted2);margin-bottom:12px;text-transform:uppercase;letter-spacing:.08em}
-.act-grid{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:10px;align-items:end}
-.act-field{display:flex;flex-direction:column;gap:4px}
-.act-field label{font-size:.76rem;color:var(--muted);font-weight:500}
-.act-field input,.act-field select{padding:9px 11px;background:var(--bg2);border:1px solid var(--border2);border-radius:var(--r-sm);color:var(--text);font-family:var(--fb);font-size:.85rem;transition:border-color .2s}
-.act-field input:focus,.act-field select:focus{outline:none;border-color:var(--blue)}
-.act-field select option{background:var(--bg2)}
-.badd-act{padding:9px 16px;background:var(--blue);border:none;border-radius:var(--r-sm);color:#fff;font-family:var(--fd);font-weight:700;font-size:.82rem;cursor:pointer;white-space:nowrap;transition:all .2s}
-.badd-act:hover{background:#2563eb}
+    .planner-summary-card,
+    .planner-stat-card {
+      background: var(--bg4);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
 
-.hitos-list{display:flex;flex-direction:column;gap:8px}
-.hito-item{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--r-sm)}
-.hito-star{color:#f59e0b;font-size:1rem}
-.hito-info{flex:1}
-.hito-nom{font-size:.86rem;font-weight:600;color:var(--text)}
-.hito-det{font-size:.77rem;color:var(--muted);margin-top:2px}
-.hito-tipo{padding:3px 8px;border-radius:999px;font-size:.7rem;font-weight:600;background:rgba(245,158,11,.12);color:#fcd34d;border:1px solid rgba(245,158,11,.2)}
-.bdel-hito{width:24px;height:24px;border:1px solid var(--border);border-radius:5px;background:transparent;color:var(--muted2);cursor:pointer;font-size:.75rem;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0}
-.bdel-hito:hover{background:rgba(239,68,68,.1);border-color:#ef4444;color:#f87171}
-.no-hitos{font-size:.84rem;color:var(--muted2);font-style:italic;padding:8px 0}
+    .planner-summary-card {
+      padding: 22px;
+      background:
+        radial-gradient(circle at top right, rgba(59, 130, 246, 0.12), transparent 28%),
+        linear-gradient(180deg, rgba(12, 16, 24, 0.98), rgba(9, 13, 20, 0.98));
+      border-color: rgba(59, 130, 246, 0.22);
+    }
 
-@media(max-width:768px){.cfg{grid-template-columns:1fr 1fr}.stats{grid-template-columns:repeat(3,1fr)}.act-grid{grid-template-columns:1fr 1fr}}
-@media(max-width:480px){.cfg{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}.act-grid{grid-template-columns:1fr}}
+    .planner-summary-card h2 {
+      margin: 0 0 10px;
+      font-family: var(--fd);
+      font-size: 1.35rem;
+      line-height: 1.04;
+    }
+
+    .planner-summary-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    .planner-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .planner-stat-card {
+      padding: 18px 14px;
+      text-align: center;
+    }
+
+    .planner-stat-number {
+      display: block;
+      font-family: var(--fd);
+      font-size: 1.65rem;
+      font-weight: 800;
+      line-height: 1;
+      background: linear-gradient(90deg, #60a5fa, #22d3ee);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 8px;
+    }
+
+    .planner-stat-label {
+      display: block;
+      color: var(--muted);
+      font-size: 0.83rem;
+      line-height: 1.35;
+    }
+
+    .plan-page {
+      padding: 24px 0 76px;
+    }
+
+    .planner-intro {
+      margin-bottom: 22px;
+      padding: 20px 22px;
+      border: 1px solid rgba(59, 130, 246, 0.16);
+      border-radius: 16px;
+      background: rgba(59, 130, 246, 0.05);
+    }
+
+    .planner-intro p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    .planner-intro b {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .step {
+      background: var(--bg4);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 16px;
+      transition: border-color .3s, transform .2s, box-shadow .2s;
+    }
+
+    .step.active {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.16);
+    }
+
+    .step.done {
+      border-color: rgba(34, 197, 94, 0.35);
+    }
+
+    .step:hover {
+      box-shadow: var(--shadow-soft);
+    }
+
+    .sh-step {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .sn {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      flex-shrink: 0;
+      background: var(--bg3);
+      border: 1px solid var(--border2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--fd);
+      font-size: .74rem;
+      font-weight: 800;
+      color: var(--muted);
+    }
+
+    .active .sn {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: #fff;
+    }
+
+    .done .sn {
+      background: rgba(34, 197, 94, .15);
+      border-color: rgba(34, 197, 94, .3);
+      color: #22c55e;
+    }
+
+    .stit {
+      font-family: var(--fd);
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .ssub {
+      font-size: .82rem;
+      color: var(--muted);
+      margin-left: auto;
+    }
+
+    .uzone {
+      border: 2px dashed var(--border2);
+      border-radius: var(--radius);
+      padding: 34px 18px;
+      text-align: center;
+      cursor: pointer;
+      position: relative;
+      transition: all .2s;
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .uzone:hover,
+    .uzone.drag {
+      border-color: var(--blue);
+      background: rgba(59, 130, 246, .04);
+    }
+
+    .uzone input {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+      width: 100%;
+      height: 100%;
+    }
+
+    .uzone .ui {
+      font-size: 2.2rem;
+      margin-bottom: 8px;
+    }
+
+    .uzone strong {
+      font-size: .96rem;
+      color: var(--text);
+    }
+
+    .uzone p {
+      font-size: .84rem;
+      color: var(--muted);
+      margin-top: 6px;
+      margin-bottom: 0;
+    }
+
+    .ufname {
+      margin-top: 10px;
+      font-size: .83rem;
+      color: var(--cyan);
+      font-weight: 500;
+    }
+
+    .aibar {
+      display: none;
+      align-items: center;
+      gap: 10px;
+      margin-top: 12px;
+      padding: 12px 14px;
+      background: rgba(59, 130, 246, .06);
+      border: 1px solid rgba(59, 130, 246, .18);
+      border-radius: var(--radius-sm);
+      font-size: .86rem;
+      color: var(--muted);
+    }
+
+    .aibar.show {
+      display: flex;
+    }
+
+    .spin {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 2px solid rgba(59, 130, 246, .2);
+      border-top-color: var(--blue);
+      animation: sp .8s linear infinite;
+      flex-shrink: 0;
+    }
+
+    @keyframes sp {
+      to { transform: rotate(360deg) }
+    }
+
+    .crow {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 14px;
+      background: rgba(59, 130, 246, .06);
+      border: 1px solid rgba(59, 130, 246, .15);
+      border-radius: var(--radius-sm);
+      margin-bottom: 12px;
+    }
+
+    .crow label {
+      font-size: .77rem;
+      color: var(--muted2);
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .crow input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: var(--text);
+      font-family: var(--fd);
+      font-size: .94rem;
+      font-weight: 700;
+      outline: none;
+    }
+
+    table.mt {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .87rem;
+    }
+
+    table.mt th {
+      padding: 8px 10px;
+      text-align: left;
+      color: var(--cyan);
+      font-size: .7rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+
+    table.mt td {
+      padding: 9px 10px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    table.mt tr:last-child td {
+      border-bottom: none;
+    }
+
+    table.mt input {
+      border: none;
+      background: transparent;
+      color: var(--text);
+      font-family: var(--fb);
+      font-size: .87rem;
+      width: 100%;
+      outline: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color .2s;
+    }
+
+    table.mt input:focus {
+      border-bottom-color: var(--blue);
+    }
+
+    .thi input {
+      color: var(--cyan);
+      font-weight: 700;
+      text-align: right;
+      width: 70px;
+    }
+
+    .bdel {
+      width: 28px;
+      height: 28px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: transparent;
+      color: var(--muted2);
+      cursor: pointer;
+      font-size: .84rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all .2s;
+    }
+
+    .bdel:hover {
+      background: rgba(239, 68, 68, .1);
+      border-color: #ef4444;
+      color: #f87171;
+    }
+
+    .badd {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: 10px;
+      padding: 7px 12px;
+      border: 1px dashed var(--border2);
+      border-radius: 8px;
+      background: transparent;
+      color: var(--muted);
+      font-family: var(--fb);
+      font-size: .82rem;
+      cursor: pointer;
+      transition: all .2s;
+    }
+
+    .badd:hover {
+      border-color: var(--cyan);
+      color: var(--cyan);
+    }
+
+    .cfg {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .cf {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .cf label {
+      font-size: .79rem;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .cf input,
+    .act-field input,
+    .act-field select {
+      padding: 10px 12px;
+      background: var(--bg3);
+      border: 1px solid var(--border2);
+      border-radius: var(--radius-sm);
+      color: var(--text);
+      font-family: var(--fb);
+      font-size: .89rem;
+      transition: border-color .2s;
+    }
+
+    .cf input:focus,
+    .act-field input:focus,
+    .act-field select:focus {
+      outline: none;
+      border-color: var(--blue);
+    }
+
+    .drow {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 6px;
+    }
+
+    .dbtn {
+      padding: 6px 12px;
+      border: 1px solid var(--border2);
+      border-radius: 7px;
+      background: transparent;
+      color: var(--muted);
+      font-family: var(--fb);
+      font-size: .82rem;
+      cursor: pointer;
+      transition: all .2s;
+    }
+
+    .dbtn.on {
+      background: rgba(59, 130, 246, .12);
+      border-color: var(--blue);
+      color: #93c5fd;
+      font-weight: 600;
+    }
+
+    .acts {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+
+    .bcalc {
+      padding: 11px 24px;
+      background: var(--blue);
+      border: none;
+      border-radius: var(--radius-sm);
+      color: #fff;
+      font-family: var(--fd);
+      font-weight: 700;
+      font-size: .92rem;
+      cursor: pointer;
+      transition: all .2s;
+      box-shadow: 0 4px 16px rgba(59, 130, 246, .26);
+    }
+
+    .bcalc:hover {
+      background: #2563eb;
+      transform: translateY(-2px);
+    }
+
+    .bcalc:disabled {
+      opacity: .4;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .bexp {
+      padding: 11px 16px;
+      background: rgba(255, 255, 255, .05);
+      border: 1px solid var(--border2);
+      border-radius: var(--radius-sm);
+      color: var(--text);
+      font-family: var(--fb);
+      font-size: .84rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .2s;
+      display: none;
+    }
+
+    .bexp.show {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .bexp:hover {
+      background: rgba(255, 255, 255, .09);
+    }
+
+    .perr {
+      display: none;
+      margin-top: 10px;
+      padding: 10px 13px;
+      background: rgba(239, 68, 68, .07);
+      border: 1px solid rgba(239, 68, 68, .2);
+      border-radius: 8px;
+      font-size: .84rem;
+      color: #fca5a5;
+    }
+
+    .perr.show {
+      display: block;
+    }
+
+    .res {
+      display: none;
+    }
+
+    .res.show {
+      display: block;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 0;
+      margin-bottom: 0;
+      border-bottom: 1px solid var(--border);
+      overflow-x: auto;
+    }
+
+    .tab {
+      padding: 11px 18px;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      font-family: var(--fb);
+      font-size: .86rem;
+      font-weight: 500;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+      transition: all .2s;
+      white-space: nowrap;
+    }
+
+    .tab.on {
+      color: var(--text);
+      border-bottom-color: var(--blue);
+    }
+
+    .tab:hover {
+      color: var(--text);
+    }
+
+    .tab-panel {
+      display: none;
+      padding: 20px 0 2px;
+    }
+
+    .tab-panel.on {
+      display: block;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .stat {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 12px;
+      text-align: center;
+    }
+
+    .stat strong {
+      display: block;
+      font-family: var(--fd);
+      font-size: 1.1rem;
+      font-weight: 800;
+      background: linear-gradient(90deg, #60a5fa, #22d3ee);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .stat span {
+      font-size: .72rem;
+      color: var(--muted2);
+      margin-top: 3px;
+      display: block;
+    }
+
+    .info-bar {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+
+    .badge {
+      padding: 5px 10px;
+      border: 1px solid var(--border2);
+      border-radius: 999px;
+      font-size: .77rem;
+      color: var(--muted);
+      background: var(--bg3);
+    }
+
+    .badge b {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .rtbl {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .87rem;
+    }
+
+    .rtbl th {
+      padding: 9px 12px;
+      text-align: left;
+      color: var(--cyan);
+      font-size: .7rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+
+    .rtbl td {
+      padding: 11px 12px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+      vertical-align: top;
+    }
+
+    .rtbl tr:last-child td {
+      border-bottom: none;
+    }
+
+    .rtbl tr:hover td {
+      background: rgba(255, 255, 255, .018);
+    }
+
+    .rtbl .th {
+      color: var(--cyan);
+      font-weight: 700;
+    }
+
+    .rtbl .tm {
+      color: var(--muted);
+      font-size: .83rem;
+    }
+
+    .twrap {
+      overflow-x: auto;
+    }
+
+    .module-name {
+      max-width: 580px;
+      white-space: normal;
+      word-break: break-word;
+      overflow-wrap: anywhere;
+      line-height: 1.45;
+    }
+
+    .cal-legend {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .leg-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: .79rem;
+      color: var(--muted);
+    }
+
+    .leg-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+
+    .cal-months {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .cal-mo h3 {
+      font-family: var(--fd);
+      font-size: .85rem;
+      font-weight: 700;
+      color: var(--cyan);
+      margin-bottom: 8px;
+      text-transform: capitalize;
+    }
+
+    .cal-g {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 2px;
+    }
+
+    .cal-hd {
+      text-align: center;
+      font-size: .66rem;
+      font-weight: 600;
+      color: var(--muted2);
+      padding: 2px 0;
+    }
+
+    .cd {
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+      font-size: .71rem;
+      position: relative;
+      cursor: default;
+      transition: transform .1s;
+    }
+
+    .cd.wk {
+      color: var(--muted2);
+    }
+
+    .cd.fe {
+      background: rgba(239, 68, 68, .08);
+      color: #fca5a5;
+    }
+
+    .cd.hito {
+      outline: 2px solid #f59e0b;
+      outline-offset: 1px;
+    }
+
+    .cd.hito::after {
+      content: '★';
+      position: absolute;
+      bottom: -1px;
+      right: 0;
+      font-size: 7px;
+      color: #f59e0b;
+    }
+
+    .mod-c0 { background: rgba(59, 130, 246, .18); color: #93c5fd; border: 1px solid rgba(59, 130, 246, .3) }
+    .mod-c1 { background: rgba(6, 182, 212, .18); color: #67e8f9; border: 1px solid rgba(6, 182, 212, .3) }
+    .mod-c2 { background: rgba(168, 85, 247, .18); color: #d8b4fe; border: 1px solid rgba(168, 85, 247, .3) }
+    .mod-c3 { background: rgba(34, 197, 94, .18); color: #86efac; border: 1px solid rgba(34, 197, 94, .3) }
+    .mod-c4 { background: rgba(245, 158, 11, .18); color: #fcd34d; border: 1px solid rgba(245, 158, 11, .3) }
+    .mod-c5 { background: rgba(239, 68, 68, .18); color: #fca5a5; border: 1px solid rgba(239, 68, 68, .3) }
+
+    .act-form {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+
+    .act-form h4 {
+      font-family: var(--fd);
+      font-size: .83rem;
+      font-weight: 700;
+      color: var(--muted2);
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .act-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr auto;
+      gap: 10px;
+      align-items: end;
+    }
+
+    .act-field {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .act-field label {
+      font-size: .77rem;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .act-field select option {
+      background: var(--bg2);
+    }
+
+    .badd-act {
+      padding: 10px 16px;
+      background: var(--blue);
+      border: none;
+      border-radius: var(--radius-sm);
+      color: #fff;
+      font-family: var(--fd);
+      font-weight: 700;
+      font-size: .83rem;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all .2s;
+    }
+
+    .badd-act:hover {
+      background: #2563eb;
+    }
+
+    .hitos-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .hito-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+    }
+
+    .hito-star {
+      color: #f59e0b;
+      font-size: 1rem;
+    }
+
+    .hito-info {
+      flex: 1;
+    }
+
+    .hito-nom {
+      font-size: .87rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .hito-det {
+      font-size: .78rem;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .hito-tipo {
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-size: .71rem;
+      font-weight: 600;
+      background: rgba(245, 158, 11, .12);
+      color: #fcd34d;
+      border: 1px solid rgba(245, 158, 11, .2);
+    }
+
+    .bdel-hito {
+      width: 24px;
+      height: 24px;
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      background: transparent;
+      color: var(--muted2);
+      cursor: pointer;
+      font-size: .75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all .2s;
+      flex-shrink: 0;
+    }
+
+    .bdel-hito:hover {
+      background: rgba(239, 68, 68, .1);
+      border-color: #ef4444;
+      color: #f87171;
+    }
+
+    .no-hitos {
+      font-size: .84rem;
+      color: var(--muted2);
+      font-style: italic;
+      padding: 8px 0;
+    }
+
+    @media (max-width: 1024px) {
+      .planner-hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .planner-stats-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 768px) {
+      .planner-hero {
+        padding: 34px 0 34px;
+      }
+
+      .planner-hero-actions,
+      .acts {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .planner-hero-actions .btn,
+      .acts .bcalc,
+      .acts .bexp {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .cfg {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .stats {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .act-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .planner-stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .ssub {
+        margin-left: 0;
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .planner-hero-copy h1 {
+        font-size: 1.95rem;
+        max-width: none;
+      }
+
+      .planner-hero-copy p,
+      .planner-summary-card p,
+      .planner-intro p {
+        font-size: 0.94rem;
+      }
+
+      .cfg {
+        grid-template-columns: 1fr;
+      }
+
+      .stats {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .act-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .step {
+        padding: 20px;
+      }
+    }
   </style>
 </head>
 <body>
-<div class="bg-glow"></div>
-<header class="navbar" role="banner">
-  <a href="index.html" class="nav-logo" aria-label="TransformacionIA inicio">
-    <img src="img/logo.png" alt="Logo TransformacionIA" />
-    <span class="nav-logo-text">Transformación IA</span>
-  </a>
-  <button class="nav-toggle" id="navTog" aria-label="Abrir menú" aria-expanded="false">
-    <span></span><span></span><span></span>
-  </button>
-  <nav class="nav-links" id="navLinks" aria-label="Menú principal">
-    <a href="sobre-mi.html">Sobre mí</a>
-    <a href="proyectos.html">Proyectos</a>
-    <a href="herramientas.html">Herramientas</a>
-    <a href="contacto.html" class="nav-cta">Contacto</a>
-  </nav>
-</header>
+  <a class="skip-link" href="#main">Saltar al contenido</a>
 
-<main id="main">
-<div class="container">
-  <div class="page-hero">
-    <span class="kicker">Herramienta · FPE</span>
-    <h1>Planificador de Certificados</h1>
-    <p>Sube el PDF de tu certificado o acción formativa. La IA extrae automáticamente los módulos y horas, y genera el cronograma oficial con calendario visual.</p>
-  </div>
-</div>
-<div class="divider"></div>
+  <div class="bg-glow" aria-hidden="true"></div>
 
-<div class="plan-page">
-<div class="container">
+  <header class="navbar" role="banner">
+    <a href="index.html" class="nav-logo" aria-label="Ir a inicio">
+      <span class="nav-mark" aria-hidden="true">IC</span>
+      <span class="nav-logo-text">Transformación IA</span>
+    </a>
 
-  <!-- PASO 1: PDF -->
-  <div class="step active" id="step1">
-    <div class="sh">
-      <div class="sn">1</div>
-      <span class="stit">Cargar documento del certificado</span>
-      <span class="ssub">PDF, Real Decreto, BOE o ficha formativa</span>
-    </div>
-    <div class="uzone" id="uzone">
-      <input type="file" id="pdfInput" accept=".pdf" />
-      <div class="ui">📄</div>
-      <strong>Arrastra el PDF aquí o haz clic para seleccionarlo</strong>
-      <p>Certificado de profesionalidad, Real Decreto o programa formativo</p>
-    </div>
-    <div id="ufname" class="ufname"></div>
-    <div class="aibar" id="aibar">
-      <div class="spin"></div>
-      <span id="aitxt">Analizando el documento con IA...</span>
-    </div>
-  </div>
+    <button class="nav-toggle" id="navTog" aria-label="Abrir menú" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
 
-  <!-- PASO 2: Módulos -->
-  <div class="step" id="step2">
-    <div class="sh">
-      <div class="sn">2</div>
-      <span class="stit">Módulos y horas extraídos</span>
-      <span class="ssub">Edita si es necesario</span>
-    </div>
-    <div id="modsArea" style="display:none">
-      <div class="crow">
-        <label>Certificado:</label>
-        <input type="text" id="certName" placeholder="Nombre del certificado" />
-      </div>
-      <div class="twrap">
-        <table class="mt">
-          <thead><tr><th>Módulo formativo</th><th style="text-align:right;width:80px">Horas</th><th style="width:36px"></th></tr></thead>
-          <tbody id="modsBody"></tbody>
-        </table>
-      </div>
-      <button class="badd" id="addMod" type="button">+ Añadir módulo</button>
-    </div>
-  </div>
+    <nav class="nav-links" id="navLinks" aria-label="Menú principal">
+      <a href="sobre-mi.html">Sobre mí</a>
+      <a href="proyectos.html">Proyectos</a>
+      <a href="herramientas.html">Herramientas</a>
+      <a href="acreditaciones.html">Acreditaciones</a>
+      <a href="contacto.html" class="nav-cta">Contacto</a>
+    </nav>
+  </header>
 
-  <!-- PASO 3: Config -->
-  <div class="step" id="step3">
-    <div class="sh">
-      <div class="sn">3</div>
-      <span class="stit">Configuración del cronograma</span>
-    </div>
-    <div class="cfg">
-      <div class="cf"><label>Fecha de inicio</label><input type="date" id="fIni" /></div>
-      <div class="cf"><label>Fecha límite</label><input type="date" id="fFin" /></div>
-      <div class="cf"><label>Horas lectivas por día</label><input type="number" id="hDia" value="5" min="1" max="12" /></div>
-    </div>
-    <div style="font-size:.78rem;color:var(--muted);font-weight:500;margin-bottom:8px">Días lectivos</div>
-    <div class="drow">
-      <button class="dbtn on" data-day="1">Lunes</button>
-      <button class="dbtn on" data-day="2">Martes</button>
-      <button class="dbtn on" data-day="3">Miércoles</button>
-      <button class="dbtn on" data-day="4">Jueves</button>
-      <button class="dbtn on" data-day="5">Viernes</button>
-      <button class="dbtn" data-day="6">Sábado</button>
-      <button class="dbtn" data-day="0">Domingo</button>
-    </div>
-    <div class="acts">
-      <button class="bcalc" id="btnCalc" disabled>Calcular cronograma</button>
-      <button class="bexp show" id="bexp" style="display:none">⬇ Exportar CSV</button>
-    </div>
-    <p class="perr" id="perr" role="alert"></p>
-  </div>
+  <main id="main">
+    <section class="planner-hero section-hero" aria-labelledby="planificador-h1">
+      <div class="container">
+        <div class="planner-hero-grid">
+          <div class="planner-hero-copy">
+            <span class="kicker">Herramienta · FPE</span>
+            <h1 id="planificador-h1">Planificador automático para certificados</h1>
+            <p>
+              Sube el PDF de un certificado de profesionalidad o acción formativa. La herramienta
+              extrae módulos y horas, y genera el cronograma con calendario visual.
+            </p>
+            <p>
+              Está pensada para ahorrar tiempo, estructurar mejor la planificación y facilitar
+              el trabajo docente desde una base práctica.
+            </p>
 
-  <!-- RESULTADOS -->
-  <div class="res" id="res">
-    <div class="step done">
-      <div class="sh"><div class="sn">✓</div><span class="stit" id="resTitulo">Cronograma generado</span></div>
+            <div class="planner-hero-actions">
+              <a href="#step1" class="btn btn-p">Empezar ahora</a>
+              <a href="herramientas.html" class="btn btn-g">Volver a herramientas</a>
+            </div>
+          </div>
 
-      <!-- Stats -->
-      <div class="stats">
-        <div class="stat"><strong id="rH">—</strong><span>Total horas</span></div>
-        <div class="stat"><strong id="rD">—</strong><span>Días lectivos</span></div>
-        <div class="stat"><strong id="rHd">—</strong><span>Horas/día</span></div>
-        <div class="stat"><strong id="rM">—</strong><span>Módulos</span></div>
-        <div class="stat"><strong id="rF">—</strong><span>Fecha fin real</span></div>
-      </div>
+          <aside class="planner-hero-side" aria-label="Resumen del planificador">
+            <div class="planner-summary-card">
+              <h2>De PDF a cronograma en pocos pasos</h2>
+              <p>
+                Una herramienta diseñada para transformar un documento fuente en una planificación clara,
+                editable y exportable, con apoyo de IA y visualización por calendario.
+              </p>
+            </div>
 
-      <!-- Info bar -->
-      <div class="info-bar" id="infoBar"></div>
-
-      <!-- Tabs -->
-      <div class="tabs">
-        <button class="tab on" data-tab="tabla">Vista Tabla (Oficial)</button>
-        <button class="tab" data-tab="calendario">Calendario Visual</button>
-        <button class="tab" data-tab="actividades">Programar Actividades</button>
-      </div>
-
-      <!-- Tab: Tabla -->
-      <div class="tab-panel on" id="tab-tabla">
-        <div class="twrap">
-          <table class="rtbl">
-            <thead>
-              <tr>
-                <th>Módulo formativo (MF)</th>
-                <th>Fecha inicio – fin</th>
-                <th>Horas</th>
-                <th>Días</th>
-              </tr>
-            </thead>
-            <tbody id="rtbody"></tbody>
-          </table>
+            <div class="planner-stats-grid">
+              <div class="planner-stat-card">
+                <span class="planner-stat-number">PDF</span>
+                <span class="planner-stat-label">Entrada principal</span>
+              </div>
+              <div class="planner-stat-card">
+                <span class="planner-stat-number">CSV</span>
+                <span class="planner-stat-label">Exportación</span>
+              </div>
+              <div class="planner-stat-card">
+                <span class="planner-stat-number">IA</span>
+                <span class="planner-stat-label">Apoyo en extracción</span>
+              </div>
+            </div>
+          </aside>
         </div>
       </div>
+    </section>
 
-      <!-- Tab: Calendario -->
-      <div class="tab-panel" id="tab-calendario">
-        <div class="cal-legend" id="calLegend"></div>
-        <div class="cal-months" id="calWrap"></div>
-      </div>
+    <div class="divider" aria-hidden="true"></div>
 
-      <!-- Tab: Actividades -->
-      <div class="tab-panel" id="tab-actividades">
-        <div class="act-form">
-          <h4>Añadir actividad / hito</h4>
-          <div class="act-grid">
-            <div class="act-field">
-              <label>Módulo</label>
-              <select id="actMod"></select>
-            </div>
-            <div class="act-field">
-              <label>Tipo de actividad</label>
-              <select id="actTipo">
-                <option>Prueba objetiva</option>
-                <option>Prueba práctica</option>
-                <option>Actividad / ejercicio</option>
-                <option>Examen parcial</option>
-                <option>Examen final</option>
-                <option>Otro</option>
-              </select>
-            </div>
-            <div class="act-field">
-              <label>Fecha</label>
-              <input type="date" id="actFecha" />
-            </div>
-            <button class="badd-act" id="btnAddAct" type="button">+ Añadir</button>
+    <div class="plan-page">
+      <div class="container">
+        <div class="planner-intro">
+          <p>
+            <b>Cómo funciona:</b> subes el documento, revisas los módulos detectados, defines fechas y días lectivos,
+            y el sistema genera automáticamente el cronograma y el calendario visual del curso.
+          </p>
+        </div>
+
+        <div class="step active" id="step1">
+          <div class="sh-step">
+            <div class="sn">1</div>
+            <span class="stit">Cargar documento del certificado</span>
+            <span class="ssub">PDF, Real Decreto, BOE o ficha formativa</span>
+          </div>
+
+          <div class="uzone" id="uzone">
+            <input type="file" id="pdfInput" accept=".pdf" />
+            <div class="ui">📄</div>
+            <strong>Arrastra el PDF aquí o haz clic para seleccionarlo</strong>
+            <p>Certificado de profesionalidad, Real Decreto o programa formativo</p>
+          </div>
+
+          <div id="ufname" class="ufname"></div>
+
+          <div class="aibar" id="aibar">
+            <div class="spin"></div>
+            <span id="aitxt">Analizando el documento con IA...</span>
           </div>
         </div>
-        <div class="hitos-list" id="hitosList">
-          <p class="no-hitos">Sin actividades añadidas. Usa el formulario de arriba para programar pruebas y exámenes.</p>
+
+        <div class="step" id="step2">
+          <div class="sh-step">
+            <div class="sn">2</div>
+            <span class="stit">Módulos y horas extraídos</span>
+            <span class="ssub">Edita si es necesario</span>
+          </div>
+
+          <div id="modsArea" style="display:none">
+            <div class="crow">
+              <label>Certificado:</label>
+              <input type="text" id="certName" placeholder="Nombre del certificado" />
+            </div>
+
+            <div class="twrap">
+              <table class="mt">
+                <thead>
+                  <tr>
+                    <th>Módulo formativo</th>
+                    <th style="text-align:right;width:80px">Horas</th>
+                    <th style="width:36px"></th>
+                  </tr>
+                </thead>
+                <tbody id="modsBody"></tbody>
+              </table>
+            </div>
+
+            <button class="badd" id="addMod" type="button">+ Añadir módulo</button>
+          </div>
+        </div>
+
+        <div class="step" id="step3">
+          <div class="sh-step">
+            <div class="sn">3</div>
+            <span class="stit">Configuración del cronograma</span>
+          </div>
+
+          <div class="cfg">
+            <div class="cf">
+              <label>Fecha de inicio</label>
+              <input type="date" id="fIni" />
+            </div>
+            <div class="cf">
+              <label>Fecha límite</label>
+              <input type="date" id="fFin" />
+            </div>
+            <div class="cf">
+              <label>Horas lectivas por día</label>
+              <input type="number" id="hDia" value="5" min="1" max="12" />
+            </div>
+          </div>
+
+          <div style="font-size:.79rem;color:var(--muted);font-weight:500;margin-bottom:8px">Días lectivos</div>
+
+          <div class="drow">
+            <button class="dbtn on" data-day="1">Lunes</button>
+            <button class="dbtn on" data-day="2">Martes</button>
+            <button class="dbtn on" data-day="3">Miércoles</button>
+            <button class="dbtn on" data-day="4">Jueves</button>
+            <button class="dbtn on" data-day="5">Viernes</button>
+            <button class="dbtn" data-day="6">Sábado</button>
+            <button class="dbtn" data-day="0">Domingo</button>
+          </div>
+
+          <div class="acts">
+            <button class="bcalc" id="btnCalc" disabled>Calcular cronograma</button>
+            <button class="bexp show" id="bexp" style="display:none">⬇ Exportar CSV</button>
+          </div>
+
+          <p class="perr" id="perr" role="alert"></p>
+        </div>
+
+        <div class="res" id="res">
+          <div class="step done">
+            <div class="sh-step">
+              <div class="sn">✓</div>
+              <span class="stit" id="resTitulo">Cronograma generado</span>
+            </div>
+
+            <div class="stats">
+              <div class="stat"><strong id="rH">—</strong><span>Total horas</span></div>
+              <div class="stat"><strong id="rD">—</strong><span>Días lectivos</span></div>
+              <div class="stat"><strong id="rHd">—</strong><span>Horas/día</span></div>
+              <div class="stat"><strong id="rM">—</strong><span>Módulos</span></div>
+              <div class="stat"><strong id="rF">—</strong><span>Fecha fin real</span></div>
+            </div>
+
+            <div class="info-bar" id="infoBar"></div>
+
+            <div class="tabs">
+              <button class="tab on" data-tab="tabla">Vista Tabla</button>
+              <button class="tab" data-tab="calendario">Calendario Visual</button>
+              <button class="tab" data-tab="actividades">Programar Actividades</button>
+            </div>
+
+            <div class="tab-panel on" id="tab-tabla">
+              <div class="twrap">
+                <table class="rtbl">
+                  <thead>
+                    <tr>
+                      <th>Módulo formativo (MF)</th>
+                      <th>Fecha inicio – fin</th>
+                      <th>Horas</th>
+                      <th>Días</th>
+                    </tr>
+                  </thead>
+                  <tbody id="rtbody"></tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="tab-panel" id="tab-calendario">
+              <div class="cal-legend" id="calLegend"></div>
+              <div class="cal-months" id="calWrap"></div>
+            </div>
+
+            <div class="tab-panel" id="tab-actividades">
+              <div class="act-form">
+                <h4>Añadir actividad / hito</h4>
+
+                <div class="act-grid">
+                  <div class="act-field">
+                    <label>Módulo</label>
+                    <select id="actMod"></select>
+                  </div>
+
+                  <div class="act-field">
+                    <label>Tipo de actividad</label>
+                    <select id="actTipo">
+                      <option>Prueba objetiva</option>
+                      <option>Prueba práctica</option>
+                      <option>Actividad / ejercicio</option>
+                      <option>Examen parcial</option>
+                      <option>Examen final</option>
+                      <option>Otro</option>
+                    </select>
+                  </div>
+
+                  <div class="act-field">
+                    <label>Fecha</label>
+                    <input type="date" id="actFecha" />
+                  </div>
+
+                  <button class="badd-act" id="btnAddAct" type="button">+ Añadir</button>
+                </div>
+              </div>
+
+              <div class="hitos-list" id="hitosList">
+                <p class="no-hitos">Sin actividades añadidas. Usa el formulario de arriba para programar pruebas y exámenes.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider" aria-hidden="true"></div>
+
+    <section class="section section-cta-final" aria-labelledby="plan-cta-h">
+      <div class="container">
+        <div class="cta-final">
+          <span class="kicker">Siguiente paso</span>
+          <h2 id="plan-cta-h">Una herramienta creada desde la práctica docente</h2>
+          <p>
+            Si quieres conocer más recursos o explorar otros proyectos relacionados con FPE, digitalización e IA aplicada, puedes continuar desde aquí.
+          </p>
+
+          <div class="cta-final-actions">
+            <a href="herramientas.html" class="btn btn-p">Volver a herramientas</a>
+            <a href="contacto.html" class="btn btn-g">Contactar</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container footer-container">
+      <div class="footer-top">
+        <a href="index.html" class="nav-logo footer-logo" aria-label="Ir a inicio">
+          <span class="nav-mark" aria-hidden="true">IC</span>
+          <span class="nav-logo-text">Transformación IA</span>
+        </a>
+
+        <div class="footer-social" aria-label="Redes sociales y contacto">
+          <a
+            href="https://wa.me/34620948523"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social-icon"
+            aria-label="WhatsApp"
+            title="WhatsApp"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M19.05 4.91A9.82 9.82 0 0 0 12.03 2C6.58 2 2.13 6.42 2.13 11.88c0 1.75.46 3.46 1.33 4.96L2 22l5.3-1.39a9.9 9.9 0 0 0 4.73 1.2h.01c5.45 0 9.9-4.42 9.9-9.88 0-2.64-1.03-5.12-2.89-7.02Zm-7.02 15.23h-.01a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-3.15.83.84-3.07-.2-.31a8.13 8.13 0 0 1-1.25-4.34c0-4.48 3.67-8.13 8.18-8.13 2.18 0 4.23.84 5.77 2.37a8.06 8.06 0 0 1 2.39 5.76c0 4.48-3.67 8.21-8.09 8.21Zm4.46-6.1c-.24-.12-1.4-.69-1.62-.77-.22-.08-.38-.12-.54.12-.16.24-.62.77-.76.93-.14.16-.28.18-.52.06-.24-.12-1.01-.37-1.92-1.19-.71-.63-1.19-1.41-1.33-1.65-.14-.24-.01-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.29-.74-1.77-.2-.47-.4-.41-.54-.42h-.46c-.16 0-.42.06-.64.3-.22.24-.84.81-.84 1.97s.86 2.28.98 2.44c.12.16 1.69 2.58 4.1 3.61.57.25 1.02.4 1.37.51.58.18 1.11.15 1.53.09.47-.07 1.4-.57 1.6-1.12.2-.55.2-1.02.14-1.12-.06-.1-.22-.16-.46-.28Z"/>
+            </svg>
+          </a>
+
+          <a
+            href="https://www.linkedin.com/in/luzidayrajorgecabrera"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social-icon"
+            aria-label="LinkedIn"
+            title="LinkedIn"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6.94 8.5A1.56 1.56 0 1 1 6.94 5.38a1.56 1.56 0 0 1 0 3.12ZM5.56 9.75h2.77V18H5.56V9.75Zm4.5 0h2.66v1.13h.04c.37-.7 1.28-1.43 2.63-1.43 2.82 0 3.34 1.85 3.34 4.26V18h-2.77v-3.79c0-.9-.02-2.06-1.26-2.06-1.26 0-1.45.98-1.45 1.99V18h-2.77V9.75Z"/>
+            </svg>
+          </a>
         </div>
       </div>
 
-    </div>
-  </div>
+      <div class="footer-bottom">
+        <span>© <span id="currentYear"></span> Idayra Cabrera</span>
 
-</div>
-</div>
-</main>
-
-<footer class="footer" role="contentinfo">
-  <div class="container">
-    <div class="footer-grid">
-      <div class="fb-brand">
-        <a href="index.html" class="nav-logo" aria-label="Inicio">
-          <img src="img/logo.png" alt="Logo TransformacionIA" />
-          <span class="nav-logo-text">Transformación IA</span>
-        </a>
-        <p>Portfolio de Idayra Cabrera — Docente FPE, Administradora de Sistemas y especialista en transformación digital e IA.</p>
+        <div class="footer-legal">
+          <a href="aviso-legal.html">Aviso legal</a>
+          <a href="privacidad.html">Privacidad</a>
+        </div>
       </div>
-      <div class="fc"><h4>Páginas</h4><a href="sobre-mi.html">Sobre mí</a><a href="proyectos.html">Proyectos</a><a href="herramientas.html">Herramientas</a><a href="planificador.html">Planificador</a></div>
-      <div class="fc"><h4>Contacto</h4><a href="contacto.html">Formulario</a><a href="mailto:luzidayrajorgecabrera@gmail.com">Email</a><a href="https://wa.me/34620948523" target="_blank" rel="noopener">WhatsApp</a><a href="https://www.linkedin.com/in/luzidayrajorgecabrera" target="_blank" rel="noopener">LinkedIn</a></div>
-      <div class="fc"><h4>Legal</h4><a href="aviso-legal.html">Aviso legal</a><a href="privacidad.html">Privacidad</a></div>
     </div>
-    <div class="footer-bot">
-      <span>© <span class="yr"></span> Idayra Cabrera · TransformacionIA</span>
-      <span>La Laguna, Tenerife</span>
-    </div>
-  </div>
-</footer>
+  </footer>
 
-<script src="js/main.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-<script>
-const GAS_URL = 'https://script.google.com/macros/s/AKfycbwWxLYtPaxAy57cxvvSJqtt4PvijKWpevN4XaS8269WduISjBqQhKA6aKZNN8GTq6-l/exec';
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script>
+    const navToggle = document.getElementById("navTog");
+    const navLinks = document.getElementById("navLinks");
+    const currentYear = document.getElementById("currentYear");
 
-pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-
-const COLORES = ['mod-c0','mod-c1','mod-c2','mod-c3','mod-c4','mod-c5'];
-const FESTIVOS = new Set(['2025-01-01','2025-01-06','2025-04-17','2025-04-18','2025-05-01','2025-08-15','2025-10-12','2025-11-01','2025-12-06','2025-12-08','2025-12-25','2025-02-28','2025-05-30','2026-01-01','2026-01-06','2026-04-02','2026-04-03','2026-05-01','2026-08-15','2026-10-12','2026-11-01','2026-12-06','2026-12-08','2026-12-25','2026-02-28','2026-05-30','2027-01-01','2027-01-06','2027-03-25','2027-03-26','2027-05-01','2027-08-15','2027-10-12','2027-11-01','2027-12-06','2027-12-08','2027-12-25','2027-02-28','2027-05-30']);
-
-const esFest = d => FESTIVOS.has(d.toISOString().slice(0,10));
-const fmt = d => d.toLocaleDateString('es-ES',{day:'2-digit',month:'2-digit',year:'numeric'});
-const fmtShort = d => d.toLocaleDateString('es-ES',{day:'2-digit',month:'2-digit',year:'numeric'});
-
-let scheduleGlobal = [];
-let hitosGlobal = [];
-
-// ── Upload ──────────────────────────────────────────
-const uzone = document.getElementById('uzone');
-const pdfInput = document.getElementById('pdfInput');
-
-uzone.addEventListener('dragover', e => { e.preventDefault(); uzone.classList.add('drag') });
-uzone.addEventListener('dragleave', () => uzone.classList.remove('drag'));
-uzone.addEventListener('drop', e => { e.preventDefault(); uzone.classList.remove('drag'); const f=e.dataTransfer.files[0]; if(f) processPDF(f) });
-pdfInput.addEventListener('change', () => { if(pdfInput.files[0]) processPDF(pdfInput.files[0]) });
-
-async function processPDF(file) {
-  document.getElementById('ufname').textContent = '📎 ' + file.name;
-  document.getElementById('aibar').classList.add('show');
-  document.getElementById('aitxt').textContent = 'Leyendo el PDF...';
-  document.getElementById('step1').classList.remove('active');
-  document.getElementById('step2').classList.add('active');
-
-  try {
-    const ab = await file.arrayBuffer();
-    const pdf = await pdfjsLib.getDocument({data: ab}).promise;
-    let texto = '';
-    document.getElementById('aitxt').textContent = 'Extrayendo texto del documento...';
-    for (let i=1; i<=Math.min(pdf.numPages,20); i++) {
-      const pg = await pdf.getPage(i);
-      const tc = await pg.getTextContent();
-      texto += tc.items.map(s=>s.str).join(' ') + '\n';
+    if (currentYear) {
+      currentYear.textContent = new Date().getFullYear();
     }
-    document.getElementById('aitxt').textContent = 'Analizando módulos con IA...';
 
-    // Intentar primero con Google Apps Script (funciona en producción/Hostinger)
-    let modulos = null;
-    let nombre = '';
-    try {
-      const res = await fetch(GAS_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ texto: texto.slice(0,7000) })
+    if (navToggle && navLinks) {
+      navToggle.addEventListener("click", () => {
+        const isOpen = navLinks.classList.toggle("open");
+        navToggle.setAttribute("aria-expanded", String(isOpen));
       });
-      const data = await res.json();
-      if (!data.error && data.data) {
-        modulos = data.data.modulos;
-        nombre  = data.data.nombre;
-      }
-    } catch(e) { /* fallback a regex */ }
 
-    // Fallback: extracción por regex (funciona en localhost y sin conexión)
-    if (!modulos || !modulos.length) {
-      nombre  = extractNombre(texto, file.name);
-      modulos = extractModulos(texto);
+      navLinks.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          navLinks.classList.remove("open");
+          navToggle.setAttribute("aria-expanded", "false");
+        });
+      });
     }
 
-    document.getElementById('certName').value = nombre || file.name.replace('.pdf','');
-    renderMods(modulos.length ? modulos : [{nombre:'',horas:0}]);
-    finishExtraction();
-    if (!modulos.length) showErr('No se encontraron módulos automáticamente. Introdúcelos manualmente.');
+    const GAS_URL = 'https://script.google.com/macros/s/AKfycbwWxLYtPaxAy57cxvvSJqtt4PvijKWpevN4XaS8269WduISjBqQhKA6aKZNN8GTq6-l/exec';
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
-  } catch(err) {
-    document.getElementById('certName').value = file.name.replace('.pdf','').replace(/-|_/g,' ');
-    renderMods([{nombre:'',horas:0}]);
-    finishExtraction();
-    showErr('Error leyendo el PDF. Introduce los módulos manualmente.');
-  }
-}
+    const COLORES = ['mod-c0','mod-c1','mod-c2','mod-c3','mod-c4','mod-c5'];
+    const FESTIVOS = new Set([
+      '2025-01-01','2025-01-06','2025-04-17','2025-04-18','2025-05-01','2025-08-15','2025-10-12','2025-11-01','2025-12-06','2025-12-08','2025-12-25','2025-02-28','2025-05-30',
+      '2026-01-01','2026-01-06','2026-04-02','2026-04-03','2026-05-01','2026-08-15','2026-10-12','2026-11-01','2026-12-06','2026-12-08','2026-12-25','2026-02-28','2026-05-30',
+      '2027-01-01','2027-01-06','2027-03-25','2027-03-26','2027-05-01','2027-08-15','2027-10-12','2027-11-01','2027-12-06','2027-12-08','2027-12-25','2027-02-28','2027-05-30'
+    ]);
 
-function fileToBase64(file) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = () => resolve(reader.result.split(',')[1]);
-    reader.onerror = () => reject(new Error('Error leyendo fichero'));
-    reader.readAsDataURL(file);
-  });
-}
+    const esFest = d => FESTIVOS.has(d.toISOString().slice(0,10));
+    const fmt = d => d.toLocaleDateString('es-ES',{day:'2-digit',month:'2-digit',year:'numeric'});
 
-function finishExtraction() {
-  document.getElementById('aibar').classList.remove('show');
-  document.getElementById('modsArea').style.display = 'block';
-  document.getElementById('step1').classList.add('done');
-  document.getElementById('step2').classList.add('done');
-  document.getElementById('step3').classList.add('active');
-  document.getElementById('btnCalc').disabled = false;
-}
+    let scheduleGlobal = [];
+    let hitosGlobal = [];
 
-function renderMods(mods) { document.getElementById('modsBody').innerHTML=''; mods.forEach(m=>addModRow(m.nombre,m.horas)) }
+    const uzone = document.getElementById('uzone');
+    const pdfInput = document.getElementById('pdfInput');
 
-function addModRow(nom='', h='') {
-  const tr = document.createElement('tr');
-  tr.innerHTML = `<td><input type="text" value="${nom}" placeholder="Nombre del módulo"/></td><td class="thi"><input type="number" value="${h}" min="0" placeholder="0"/></td><td><button class="bdel" type="button">✕</button></td>`;
-  tr.querySelector('.bdel').addEventListener('click', ()=>tr.remove());
-  document.getElementById('modsBody').appendChild(tr);
-}
+    uzone.addEventListener('dragover', e => {
+      e.preventDefault();
+      uzone.classList.add('drag');
+    });
 
-document.getElementById('addMod').addEventListener('click', ()=>addModRow());
-document.querySelectorAll('.dbtn').forEach(b=>b.addEventListener('click',()=>b.classList.toggle('on')));
+    uzone.addEventListener('dragleave', () => uzone.classList.remove('drag'));
 
-function showErr(m) { const e=document.getElementById('perr'); e.textContent=m; e.classList.add('show') }
-function hideErr() { document.getElementById('perr').classList.remove('show') }
+    uzone.addEventListener('drop', e => {
+      e.preventDefault();
+      uzone.classList.remove('drag');
+      const f = e.dataTransfer.files[0];
+      if (f) processPDF(f);
+    });
 
-// ── Calcular ────────────────────────────────────────
-document.getElementById('btnCalc').addEventListener('click', calcular);
+    pdfInput.addEventListener('change', () => {
+      if (pdfInput.files[0]) processPDF(pdfInput.files[0]);
+    });
 
-function calcular() {
-  hideErr();
-  const ini = document.getElementById('fIni').value;
-  const fin = document.getElementById('fFin').value;
-  const hd  = parseFloat(document.getElementById('hDia').value)||0;
-  const dias = [...document.querySelectorAll('.dbtn.on')].map(b=>parseInt(b.dataset.day));
-  const mods = [...document.getElementById('modsBody').querySelectorAll('tr')].map(r=>{
-    const i=r.querySelectorAll('input');
-    return {nom:i[0]?.value.trim(), h:parseFloat(i[1]?.value)||0};
-  }).filter(m=>m.nom&&m.h>0);
+    async function processPDF(file) {
+      document.getElementById('ufname').textContent = '📎 ' + file.name;
+      document.getElementById('aibar').classList.add('show');
+      document.getElementById('aitxt').textContent = 'Leyendo el PDF...';
+      document.getElementById('step1').classList.remove('active');
+      document.getElementById('step2').classList.add('active');
 
-  if (!ini||!fin||hd<=0||!dias.length||!mods.length) { showErr('Completa fechas, horas diarias, días lectivos y al menos un módulo.'); return }
-  const dI=new Date(ini), dF=new Date(fin);
-  if (dI>dF) { showErr('La fecha de inicio debe ser anterior a la fecha fin.'); return }
+      try {
+        const ab = await file.arrayBuffer();
+        const pdf = await pdfjsLib.getDocument({data: ab}).promise;
+        let texto = '';
+        document.getElementById('aitxt').textContent = 'Extrayendo texto del documento...';
 
-  const avail=[]; let d=new Date(dI);
-  while(d<=dF) { const w=d.getDay(); if(dias.includes(w)&&!esFest(d)) avail.push(new Date(d)); d.setDate(d.getDate()+1) }
-
-  const tH=mods.reduce((s,m)=>s+m.h,0), nec=Math.ceil(tH/hd);
-  if (avail.length<nec) { showErr(`Necesitas ${nec} días lectivos pero solo hay ${avail.length} en el rango. Amplía las fechas.`); return }
-
-  const sched=[]; let idx=0;
-  mods.forEach((m,mi)=>{
-    let r=m.h; const ds=[];
-    while(r>0&&idx<avail.length){const hh=Math.min(r,hd);ds.push({fecha:avail[idx],horas:hh});r-=hh;idx++}
-    sched.push({...m, ds, color:mi%COLORES.length});
-  });
-  scheduleGlobal = sched;
-
-  // Stats
-  const fReal=avail[idx-1];
-  document.getElementById('rH').textContent=tH+'h';
-  document.getElementById('rD').textContent=idx;
-  document.getElementById('rHd').textContent=hd+'h';
-  document.getElementById('rM').textContent=mods.length;
-  document.getElementById('rF').textContent=fmt(fReal);
-  document.getElementById('resTitulo').textContent = document.getElementById('certName').value || 'Cronograma generado';
-
-  // Info bar
-  const ib=document.getElementById('infoBar');
-  ib.innerHTML=`<span class="badge">Inicio: <b>${fmt(dI)}</b></span><span class="badge">Fin: <b>${fmt(fReal)}</b></span><span class="badge">Horas/día: <b>${hd}h</b></span><span class="badge">Días: <b>${dias.map(d=>['D','L','M','X','J','V','S'][d]).join(',')}</b></span><span class="badge">Módulos: <b>${mods.length}</b></span>`;
-
-  // Tabla oficial
-  const tbody=document.getElementById('rtbody'); tbody.innerHTML='';
-  sched.forEach(m=>{
-    const fIni=m.ds[0].fecha, fFin=m.ds[m.ds.length-1].fecha;
-    const tr=document.createElement('tr');
-    tr.innerHTML=`<td>${m.nom}</td><td class="tm">${fmt(fIni)} – ${fmt(fFin)}</td><td class="th">${m.h}h</td><td class="tm">${m.ds.length} días</td>`;
-    tbody.appendChild(tr);
-  });
-
-  // Calendario
-  buildCalendar(dI, fReal, sched, dias);
-
-  // Selector módulos actividades
-  const sel=document.getElementById('actMod'); sel.innerHTML='';
-  sched.forEach(m=>{ const o=document.createElement('option'); o.textContent=m.nom; sel.appendChild(o) });
-
-  document.getElementById('res').classList.add('show');
-  document.getElementById('bexp').style.display='inline-flex';
-  document.getElementById('res').scrollIntoView({behavior:'smooth',block:'start'});
-
-  // Export CSV
-  document.getElementById('bexp').onclick=()=>{
-    let csv='\uFEFFMódulo,Fecha inicio,Fecha fin,Horas,Días lectivos\n';
-    sched.forEach(m=>csv+=`"${m.nom}","${fmt(m.ds[0].fecha)}","${fmt(m.ds[m.ds.length-1].fecha)}",${m.h},${m.ds.length}\n`);
-    const a=document.createElement('a');
-    a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);
-    a.download=`cronograma_${(document.getElementById('certName').value||'curso').replace(/\s+/g,'-')}.csv`;
-    a.click();
-  };
-}
-
-// ── Tabs ──────────────────────────────────────────
-document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
-  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
-  document.querySelectorAll('.tab-panel').forEach(x=>x.classList.remove('on'));
-  t.classList.add('on');
-  document.getElementById('tab-'+t.dataset.tab).classList.add('on');
-}));
-
-// ── Calendario visual ──────────────────────────────
-function buildCalendar(ini, fin, sched, dias) {
-  // Map fechas → color módulo
-  const dateMap={};
-  sched.forEach(m=>m.ds.forEach(d=>{ dateMap[d.fecha.toISOString().slice(0,10)]=COLORES[m.color] }));
-
-  // Legend
-  const leg=document.getElementById('calLegend'); leg.innerHTML='';
-  sched.forEach((m,i)=>{
-    const div=document.createElement('div'); div.className='leg-item';
-    div.innerHTML=`<div class="leg-dot ${COLORES[m.color]}" style="border-radius:3px"></div><span>${m.nom}</span>`;
-    leg.appendChild(div);
-  });
-  const fDiv=document.createElement('div'); fDiv.className='leg-item';
-  fDiv.innerHTML=`<div class="leg-dot" style="background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.3)"></div><span>Festivo</span>`;
-  leg.appendChild(fDiv);
-
-  const wrap=document.getElementById('calWrap'); wrap.innerHTML='';
-  let cur=new Date(ini.getFullYear(),ini.getMonth(),1);
-  const last=new Date(fin.getFullYear(),fin.getMonth()+1,0);
-  while(cur<=last){
-    const y=cur.getFullYear(),m=cur.getMonth(),dim=new Date(y,m+1,0).getDate();
-    const adj=((new Date(y,m,1).getDay())||7)-1;
-    const mo=document.createElement('div'); mo.className='cal-mo';
-    let cells='';
-    for(let i=0;i<adj;i++) cells+='<div class="cd"></div>';
-    for(let i=1;i<=dim;i++){
-      const dd=new Date(y,m,i), s=dd.toISOString().slice(0,10), w=dd.getDay();
-      let cls='cd';
-      const hito=hitosGlobal.find(h=>h.fecha===s);
-      if(dateMap[s]) cls+=` ${dateMap[s]}`;
-      else if(esFest(dd)) cls+=' fe';
-      else if(w===0||w===6) cls+=' wk';
-      if(hito) cls+=' hito';
-      const title=hito?` title="${hito.tipo}: ${hito.nom}"`:'';
-      cells+=`<div class="${cls}"${title}>${i}</div>`;
-    }
-    mo.innerHTML=`<h3>${new Date(y,m,1).toLocaleDateString('es-ES',{month:'long',year:'numeric'})}</h3><div class="cal-g"><div class="cal-hd">L</div><div class="cal-hd">M</div><div class="cal-hd">X</div><div class="cal-hd">J</div><div class="cal-hd">V</div><div class="cal-hd">S</div><div class="cal-hd">D</div>${cells}</div>`;
-    wrap.appendChild(mo);
-    cur.setMonth(cur.getMonth()+1);
-  }
-}
-
-// ── Actividades / Hitos ────────────────────────────
-document.getElementById('btnAddAct').addEventListener('click',()=>{
-  const mod=document.getElementById('actMod').value;
-  const tipo=document.getElementById('actTipo').value;
-  const fecha=document.getElementById('actFecha').value;
-  if(!mod||!fecha){alert('Selecciona módulo y fecha.');return}
-
-  const hito={nom:mod, tipo, fecha};
-  hitosGlobal.push(hito);
-  renderHitos();
-
-  // Refrescar calendario con hitos
-  if(scheduleGlobal.length>0){
-    const dias=[...document.querySelectorAll('.dbtn.on')].map(b=>parseInt(b.dataset.day));
-    const dI=new Date(document.getElementById('fIni').value);
-    const dF=scheduleGlobal[scheduleGlobal.length-1].ds[scheduleGlobal[scheduleGlobal.length-1].ds.length-1].fecha;
-    buildCalendar(dI,dF,scheduleGlobal,dias);
-  }
-});
-
-function renderHitos(){
-  const list=document.getElementById('hitosList');
-  if(!hitosGlobal.length){list.innerHTML='<p class="no-hitos">Sin actividades añadidas.</p>';return}
-  list.innerHTML='';
-  hitosGlobal.forEach((h,i)=>{
-    const div=document.createElement('div'); div.className='hito-item';
-    div.innerHTML=`<span class="hito-star">★</span><div class="hito-info"><div class="hito-nom">${h.nom}</div><div class="hito-det">${h.tipo} · ${new Date(h.fecha+'T12:00:00').toLocaleDateString('es-ES',{weekday:'long',day:'numeric',month:'long',year:'numeric'})}</div></div><span class="hito-tipo">${h.tipo}</span><button class="bdel-hito" data-i="${i}" type="button">✕</button>`;
-    div.querySelector('.bdel-hito').addEventListener('click',()=>{hitosGlobal.splice(i,1);renderHitos()});
-    list.appendChild(div);
-  });
-}
-
-// ── Extracción por regex (fallback sin IA) ──────────────
-function extractNombre(texto, filename) {
-  // Buscar nombre del certificado
-  const patrones = [
-    /certificado de profesionalidad[:\s]+([^\n\r]{10,80})/i,
-    /denominaci[oó]n[:\s]+([^\n\r]{10,80})/i,
-    /programa formativo[:\s]+([^\n\r]{10,80})/i,
-    /IFCT\d+[^\n\r]*/i,
-    /ADGD\d+[^\n\r]*/i,
-    /SSCE\d+[^\n\r]*/i,
-    /COMT\d+[^\n\r]*/i,
-  ];
-  for (const p of patrones) {
-    const m = texto.match(p);
-    if (m) return m[0].trim().slice(0,80);
-  }
-  return filename.replace('.pdf','').replace(/[-_]/g,' ');
-}
-
-function extractModulos(texto) {
-  const mods = [];
-  const seen = new Set();
-
-  // Patrón 1: "MF XXXX_X: Nombre ... XXX horas"
-  const p1 = /MF\s*\d{4}[_\s]\d\s*[:\-–]?\s*([A-ZÁÉÍÓÚÑ][^\n\r]{5,60})(?:[^\n\r]*?(\d{2,3})\s*(?:horas|h\b))/gi;
-  let m;
-  while ((m=p1.exec(texto))!==null) {
-    const nom = m[1].trim();
-    const h   = parseInt(m[2]);
-    if (!seen.has(nom) && h>0 && h<=800) { mods.push({nombre:nom, horas:h}); seen.add(nom) }
-  }
-
-  // Patrón 2: "Módulo N: Nombre ... XX horas"
-  const p2 = /m[oó]dulo\s+(?:formativo\s+)?(?:n[oú]m\.?\s*)?([\dIVX]+)[:\-–\s]+([A-ZÁÉÍÓÚÑ][^\n\r]{5,60})(?:[^\n\r]*?(\d{2,3})\s*(?:horas|h\b))/gi;
-  while ((m=p2.exec(texto))!==null) {
-    const nom = m[2].trim();
-    const h   = parseInt(m[3]);
-    if (!seen.has(nom) && h>0 && h<=800) { mods.push({nombre:'Módulo '+m[1]+': '+nom, horas:h}); seen.add(nom) }
-  }
-
-  // Patrón 3: Líneas con horas al lado (XX h o XXX horas)
-  if (!mods.length) {
-    const lineas = texto.split(/\n/);
-    lineas.forEach(l => {
-      const pm = l.match(/^(.{10,60})\s+(\d{2,3})\s*(?:horas|h)\s*$/i);
-      if (pm) {
-        const nom = pm[1].trim();
-        const h   = parseInt(pm[2]);
-        if (!seen.has(nom) && h>0 && h<=800 && /[A-Z]{3}/.test(nom)) {
-          mods.push({nombre:nom, horas:h}); seen.add(nom);
+        for (let i = 1; i <= Math.min(pdf.numPages, 20); i++) {
+          const pg = await pdf.getPage(i);
+          const tc = await pg.getTextContent();
+          texto += pageTextFromItems(tc.items) + '\n\n';
         }
+
+        texto = normalizeExtractedText(texto);
+        document.getElementById('aitxt').textContent = 'Analizando módulos con IA...';
+
+        let modulos = null;
+        let nombre = '';
+
+        try {
+          const res = await fetch(GAS_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ texto: texto.slice(0, 7000) })
+          });
+
+          const data = await res.json();
+
+          if (!data.error && data.data) {
+            modulos = sanitizeModules(data.data.modulos || []);
+            nombre = cleanModuleText(data.data.nombre || '');
+          }
+        } catch(e) {}
+
+        if (!modulos || !modulos.length) {
+          nombre = extractNombre(texto, file.name);
+          modulos = extractModulos(texto);
+        }
+
+        document.getElementById('certName').value = nombre || file.name.replace('.pdf', '');
+        renderMods(modulos.length ? modulos : [{nombre:'', horas:0}]);
+        finishExtraction();
+
+        if (!modulos.length) {
+          showErr('No se encontraron módulos automáticamente. Introdúcelos manualmente.');
+        }
+      } catch(err) {
+        document.getElementById('certName').value = file.name.replace('.pdf','').replace(/-|_/g,' ');
+        renderMods([{nombre:'', horas:0}]);
+        finishExtraction();
+        showErr('Error leyendo el PDF. Introduce los módulos manualmente.');
+      }
+    }
+
+    function pageTextFromItems(items) {
+      if (!items || !items.length) return '';
+
+      const lines = [];
+      let currentLine = [];
+      let currentY = null;
+
+      items.forEach(item => {
+        const str = (item.str || '').trim();
+        if (!str) return;
+
+        const y = item.transform ? item.transform[5] : 0;
+
+        if (currentY === null) {
+          currentY = y;
+          currentLine.push(str);
+          return;
+        }
+
+        if (Math.abs(y - currentY) <= 3) {
+          currentLine.push(str);
+        } else {
+          if (currentLine.length) lines.push(currentLine.join(' '));
+          currentLine = [str];
+          currentY = y;
+        }
+      });
+
+      if (currentLine.length) lines.push(currentLine.join(' '));
+      return lines.join('\n');
+    }
+
+    function normalizeExtractedText(text) {
+      return text
+        .replace(/[ \t]+/g, ' ')
+        .replace(/\n{3,}/g, '\n\n')
+        .replace(/(\bMF\s*\d{4}_\d\b)\s*[:\-–]?\s*/gi, '\n$1: ')
+        .replace(/(\bM[oó]dulo(?: formativo)?\s+(?:n[oú]m\.?\s*)?[\dIVX]+\b)\s*[:\-–]?\s*/gi, '\n$1: ')
+        .replace(/(\d{2,3})\s*(horas|h\b)/gi, ' $1 horas ')
+        .replace(/[ ]+\n/g, '\n')
+        .trim();
+    }
+
+    function cleanModuleText(text) {
+      if (!text) return '';
+
+      return text
+        .replace(/\s+/g, ' ')
+        .replace(/denominaci[oó]n\s*:\s*/i, '')
+        .replace(/objetivo\s*:.*$/i, '')
+        .replace(/m[oó]dulo\s+\d+\s*:/gi, '')
+        .replace(/mf\s*\d{4}_\d\s*:/gi, '')
+        .replace(/\b\d{2,3}\s*horas?\b/gi, '')
+        .replace(/[;:,-]+\s*$/g, '')
+        .trim();
+    }
+
+    function sanitizeModules(mods) {
+      const out = [];
+      const seen = new Set();
+
+      (mods || []).forEach(m => {
+        const nombre = cleanModuleText(String(m.nombre || ''));
+        const horas = parseInt(m.horas, 10);
+
+        if (!nombre || !Number.isFinite(horas) || horas <= 0 || horas > 900) return;
+        if (nombre.length < 4) return;
+
+        const key = nombre.toLowerCase();
+        if (seen.has(key)) return;
+        seen.add(key);
+
+        out.push({ nombre, horas });
+      });
+
+      return out;
+    }
+
+    function finishExtraction() {
+      document.getElementById('aibar').classList.remove('show');
+      document.getElementById('modsArea').style.display = 'block';
+      document.getElementById('step1').classList.add('done');
+      document.getElementById('step2').classList.add('done');
+      document.getElementById('step3').classList.add('active');
+      document.getElementById('btnCalc').disabled = false;
+    }
+
+    function renderMods(mods) {
+      document.getElementById('modsBody').innerHTML = '';
+      mods.forEach(m => addModRow(m.nombre, m.horas));
+    }
+
+    function addModRow(nom = '', h = '') {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td><input type="text" value="${nom}" placeholder="Nombre del módulo"/></td><td class="thi"><input type="number" value="${h}" min="0" placeholder="0"/></td><td><button class="bdel" type="button">✕</button></td>`;
+      tr.querySelector('.bdel').addEventListener('click', () => tr.remove());
+      document.getElementById('modsBody').appendChild(tr);
+    }
+
+    document.getElementById('addMod').addEventListener('click', () => addModRow());
+    document.querySelectorAll('.dbtn').forEach(b => b.addEventListener('click', () => b.classList.toggle('on')));
+
+    function showErr(m) {
+      const e = document.getElementById('perr');
+      e.textContent = m;
+      e.classList.add('show');
+    }
+
+    function hideErr() {
+      document.getElementById('perr').classList.remove('show');
+    }
+
+    document.getElementById('btnCalc').addEventListener('click', calcular);
+
+    function calcular() {
+      hideErr();
+
+      const ini = document.getElementById('fIni').value;
+      const fin = document.getElementById('fFin').value;
+      const hd  = parseFloat(document.getElementById('hDia').value) || 0;
+      const dias = [...document.querySelectorAll('.dbtn.on')].map(b => parseInt(b.dataset.day));
+      const mods = [...document.getElementById('modsBody').querySelectorAll('tr')].map(r => {
+        const i = r.querySelectorAll('input');
+        return {
+          nom: cleanModuleText(i[0]?.value.trim()),
+          h: parseFloat(i[1]?.value) || 0
+        };
+      }).filter(m => m.nom && m.h > 0);
+
+      if (!ini || !fin || hd <= 0 || !dias.length || !mods.length) {
+        showErr('Completa fechas, horas diarias, días lectivos y al menos un módulo.');
+        return;
+      }
+
+      const dI = new Date(ini), dF = new Date(fin);
+      if (dI > dF) {
+        showErr('La fecha de inicio debe ser anterior a la fecha fin.');
+        return;
+      }
+
+      const avail = [];
+      let d = new Date(dI);
+
+      while (d <= dF) {
+        const w = d.getDay();
+        if (dias.includes(w) && !esFest(d)) avail.push(new Date(d));
+        d.setDate(d.getDate() + 1);
+      }
+
+      const tH = mods.reduce((s, m) => s + m.h, 0);
+      const nec = Math.ceil(tH / hd);
+
+      if (avail.length < nec) {
+        showErr(`Necesitas ${nec} días lectivos pero solo hay ${avail.length} en el rango. Amplía las fechas.`);
+        return;
+      }
+
+      const sched = [];
+      let idx = 0;
+
+      mods.forEach((m, mi) => {
+        let r = m.h;
+        const ds = [];
+
+        while (r > 0 && idx < avail.length) {
+          const hh = Math.min(r, hd);
+          ds.push({fecha: avail[idx], horas: hh});
+          r -= hh;
+          idx++;
+        }
+
+        sched.push({...m, ds, color: mi % COLORES.length});
+      });
+
+      scheduleGlobal = sched;
+
+      const fReal = avail[idx - 1];
+      document.getElementById('rH').textContent = tH + 'h';
+      document.getElementById('rD').textContent = idx;
+      document.getElementById('rHd').textContent = hd + 'h';
+      document.getElementById('rM').textContent = mods.length;
+      document.getElementById('rF').textContent = fmt(fReal);
+      document.getElementById('resTitulo').textContent = document.getElementById('certName').value || 'Cronograma generado';
+
+      const ib = document.getElementById('infoBar');
+      ib.innerHTML = `<span class="badge">Inicio: <b>${fmt(dI)}</b></span><span class="badge">Fin: <b>${fmt(fReal)}</b></span><span class="badge">Horas/día: <b>${hd}h</b></span><span class="badge">Días: <b>${dias.map(d=>['D','L','M','X','J','V','S'][d]).join(',')}</b></span><span class="badge">Módulos: <b>${mods.length}</b></span>`;
+
+      const tbody = document.getElementById('rtbody');
+      tbody.innerHTML = '';
+
+      sched.forEach(m => {
+        const fIni = m.ds[0].fecha;
+        const fFin = m.ds[m.ds.length - 1].fecha;
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td class="module-name">${m.nom}</td><td class="tm">${fmt(fIni)} – ${fmt(fFin)}</td><td class="th">${m.h}h</td><td class="tm">${m.ds.length} días</td>`;
+        tbody.appendChild(tr);
+      });
+
+      buildCalendar(dI, fReal, sched);
+
+      const sel = document.getElementById('actMod');
+      sel.innerHTML = '';
+      sched.forEach(m => {
+        const o = document.createElement('option');
+        o.textContent = m.nom;
+        sel.appendChild(o);
+      });
+
+      document.getElementById('res').classList.add('show');
+      document.getElementById('bexp').style.display = 'inline-flex';
+      document.getElementById('res').scrollIntoView({behavior:'smooth', block:'start'});
+
+      document.getElementById('bexp').onclick = () => {
+        let csv = '\uFEFFMódulo,Fecha inicio,Fecha fin,Horas,Días lectivos\n';
+        sched.forEach(m => {
+          csv += `"${m.nom}","${fmt(m.ds[0].fecha)}","${fmt(m.ds[m.ds.length - 1].fecha)}",${m.h},${m.ds.length}\n`;
+        });
+
+        const a = document.createElement('a');
+        a.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
+        a.download = `cronograma_${(document.getElementById('certName').value || 'curso').replace(/\s+/g,'-')}.csv`;
+        a.click();
+      };
+    }
+
+    document.querySelectorAll('.tab').forEach(t => t.addEventListener('click', () => {
+      document.querySelectorAll('.tab').forEach(x => x.classList.remove('on'));
+      document.querySelectorAll('.tab-panel').forEach(x => x.classList.remove('on'));
+      t.classList.add('on');
+      document.getElementById('tab-' + t.dataset.tab).classList.add('on');
+    }));
+
+    function buildCalendar(ini, fin, sched) {
+      const dateMap = {};
+      sched.forEach(m => m.ds.forEach(d => {
+        dateMap[d.fecha.toISOString().slice(0,10)] = COLORES[m.color];
+      }));
+
+      const leg = document.getElementById('calLegend');
+      leg.innerHTML = '';
+
+      sched.forEach(m => {
+        const div = document.createElement('div');
+        div.className = 'leg-item';
+        div.innerHTML = `<div class="leg-dot ${COLORES[m.color]}" style="border-radius:3px"></div><span>${m.nom}</span>`;
+        leg.appendChild(div);
+      });
+
+      const fDiv = document.createElement('div');
+      fDiv.className = 'leg-item';
+      fDiv.innerHTML = `<div class="leg-dot" style="background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.3)"></div><span>Festivo</span>`;
+      leg.appendChild(fDiv);
+
+      const wrap = document.getElementById('calWrap');
+      wrap.innerHTML = '';
+
+      let cur = new Date(ini.getFullYear(), ini.getMonth(), 1);
+      const last = new Date(fin.getFullYear(), fin.getMonth()+1, 0);
+
+      while (cur <= last) {
+        const y = cur.getFullYear();
+        const m = cur.getMonth();
+        const dim = new Date(y, m + 1, 0).getDate();
+        const adj = ((new Date(y, m, 1).getDay()) || 7) - 1;
+        const mo = document.createElement('div');
+        mo.className = 'cal-mo';
+
+        let cells = '';
+        for (let i = 0; i < adj; i++) cells += '<div class="cd"></div>';
+
+        for (let i = 1; i <= dim; i++) {
+          const dd = new Date(y, m, i);
+          const s = dd.toISOString().slice(0,10);
+          const w = dd.getDay();
+          let cls = 'cd';
+          const hito = hitosGlobal.find(h => h.fecha === s);
+
+          if (dateMap[s]) cls += ` ${dateMap[s]}`;
+          else if (esFest(dd)) cls += ' fe';
+          else if (w === 0 || w === 6) cls += ' wk';
+
+          if (hito) cls += ' hito';
+
+          const title = hito ? ` title="${hito.tipo}: ${hito.nom}"` : '';
+          cells += `<div class="${cls}"${title}>${i}</div>`;
+        }
+
+        mo.innerHTML = `<h3>${new Date(y, m, 1).toLocaleDateString('es-ES',{month:'long',year:'numeric'})}</h3><div class="cal-g"><div class="cal-hd">L</div><div class="cal-hd">M</div><div class="cal-hd">X</div><div class="cal-hd">J</div><div class="cal-hd">V</div><div class="cal-hd">S</div><div class="cal-hd">D</div>${cells}</div>`;
+        wrap.appendChild(mo);
+        cur.setMonth(cur.getMonth() + 1);
+      }
+    }
+
+    document.getElementById('btnAddAct').addEventListener('click', () => {
+      const mod = document.getElementById('actMod').value;
+      const tipo = document.getElementById('actTipo').value;
+      const fecha = document.getElementById('actFecha').value;
+
+      if (!mod || !fecha) {
+        alert('Selecciona módulo y fecha.');
+        return;
+      }
+
+      const hito = {nom: mod, tipo, fecha};
+      hitosGlobal.push(hito);
+      renderHitos();
+
+      if (scheduleGlobal.length > 0) {
+        const dI = new Date(document.getElementById('fIni').value);
+        const dF = scheduleGlobal[scheduleGlobal.length - 1].ds[scheduleGlobal[scheduleGlobal.length - 1].ds.length - 1].fecha;
+        buildCalendar(dI, dF, scheduleGlobal);
       }
     });
-  }
 
-  return mods;
-}
+    function renderHitos() {
+      const list = document.getElementById('hitosList');
 
-</script>
+      if (!hitosGlobal.length) {
+        list.innerHTML = '<p class="no-hitos">Sin actividades añadidas.</p>';
+        return;
+      }
+
+      list.innerHTML = '';
+      hitosGlobal.forEach((h, i) => {
+        const div = document.createElement('div');
+        div.className = 'hito-item';
+        div.innerHTML = `<span class="hito-star">★</span><div class="hito-info"><div class="hito-nom">${h.nom}</div><div class="hito-det">${h.tipo} · ${new Date(h.fecha+'T12:00:00').toLocaleDateString('es-ES',{weekday:'long',day:'numeric',month:'long',year:'numeric'})}</div></div><span class="hito-tipo">${h.tipo}</span><button class="bdel-hito" data-i="${i}" type="button">✕</button>`;
+        div.querySelector('.bdel-hito').addEventListener('click', () => {
+          hitosGlobal.splice(i, 1);
+          renderHitos();
+        });
+        list.appendChild(div);
+      });
+    }
+
+    function extractNombre(texto, filename) {
+      const patterns = [
+        /denominaci[oó]n\s*:\s*([^\n\r]{10,120})/i,
+        /certificado de profesionalidad[:\s]+([^\n\r]{10,120})/i,
+        /programa formativo[:\s]+([^\n\r]{10,120})/i
+      ];
+
+      for (const p of patterns) {
+        const m = texto.match(p);
+        if (m && m[1]) {
+          return cleanModuleText(m[1]).slice(0, 120);
+        }
+      }
+
+      return filename.replace('.pdf', '').replace(/[-_]/g, ' ');
+    }
+
+    function extractModulos(texto) {
+      const mods = [];
+      const seen = new Set();
+
+      const blocks = texto
+        .split(/\n(?=(?:MF\s*\d{4}_\d|M[oó]dulo(?: formativo)?\s+(?:n[oú]m\.?\s*)?[\dIVX]+))/i)
+        .map(b => b.trim())
+        .filter(Boolean);
+
+      blocks.forEach(block => {
+        const horasMatch = block.match(/(\d{2,3})\s*horas?\b/i);
+        if (!horasMatch) return;
+
+        const horas = parseInt(horasMatch[1], 10);
+        if (!Number.isFinite(horas) || horas <= 0 || horas > 900) return;
+
+        let nombre = '';
+
+        const mfMatch = block.match(/^MF\s*\d{4}_\d\s*:?\s*([^\n\r]+)/i);
+        const modMatch = block.match(/^M[oó]dulo(?: formativo)?\s+(?:n[oú]m\.?\s*)?[\dIVX]+\s*:?\s*([^\n\r]+)/i);
+
+        if (mfMatch && mfMatch[1]) nombre = mfMatch[1];
+        else if (modMatch && modMatch[1]) nombre = modMatch[1];
+        else {
+          const firstLine = block.split('\n')[0] || '';
+          nombre = firstLine
+            .replace(/^MF\s*\d{4}_\d\s*:?\s*/i, '')
+            .replace(/^M[oó]dulo(?: formativo)?\s+(?:n[oú]m\.?\s*)?[\dIVX]+\s*:?\s*/i, '');
+        }
+
+        nombre = cleanModuleText(nombre);
+
+        if (!nombre) return;
+        if (nombre.length < 4 || nombre.length > 140) return;
+
+        const key = nombre.toLowerCase();
+        if (seen.has(key)) return;
+        seen.add(key);
+
+        mods.push({ nombre, horas });
+      });
+
+      if (!mods.length) {
+        const lineas = texto.split(/\n/).map(l => l.trim()).filter(Boolean);
+
+        for (let i = 0; i < lineas.length; i++) {
+          const line = lineas[i];
+
+          const simple = line.match(/^(?:MF\s*\d{4}_\d\s*:?\s*|M[oó]dulo(?: formativo)?\s+(?:n[oú]m\.?\s*)?[\dIVX]+\s*:?\s*)(.{4,120}?)\s+(\d{2,3})\s*horas?\b/i);
+          if (simple) {
+            const nombre = cleanModuleText(simple[1]);
+            const horas = parseInt(simple[2], 10);
+            if (nombre && horas > 0 && horas <= 900) {
+              const key = nombre.toLowerCase();
+              if (!seen.has(key)) {
+                seen.add(key);
+                mods.push({ nombre, horas });
+              }
+            }
+          }
+        }
+      }
+
+      return mods;
+    }
+  </script>
 </body>
 </html>
