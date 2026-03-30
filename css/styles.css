@@ -400,10 +400,10 @@ button {
   margin: 0 0 16px;
   font-family: var(--fd);
   font-size: clamp(3rem, 6vw, 5.4rem);
-  line-height: 0.95;
+  line-height: 0.92;
   text-transform: uppercase;
-  letter-spacing: -0.04em;
-  max-width: 8ch;
+  letter-spacing: -0.03em;
+  max-width: 12ch;
 }
 
 .hero-title em {
