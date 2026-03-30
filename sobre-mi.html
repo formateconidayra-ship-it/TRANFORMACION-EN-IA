@@ -4,10 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Sobre mí | Idayra Cabrera · Docencia, Sistemas y Transformación Digital</title>
+  <title>Sobre mí | Docente FPE en Canarias, SEO e IA - Idayra Cabrera</title>
   <meta
     name="description"
-    content="Conoce la trayectoria profesional de Idayra Cabrera: docente FPE acreditada, administradora de sistemas y especialista en transformación digital, SEO e inteligencia artificial aplicada en Canarias."
+    content="Conoce a Idayra Cabrera, docente FPE en Canarias especializada en competencias digitales, SEO, transformación digital, Excel, Power BI e inteligencia artificial aplicada."
   />
   <meta name="author" content="Idayra Cabrera" />
   <meta name="robots" content="index,follow" />
@@ -15,57 +15,70 @@
   <link rel="canonical" href="https://transformacionia.es/sobre-mi.html" />
 
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Sobre mí | Idayra Cabrera · Docencia, Sistemas y Transformación Digital" />
+  <meta property="og:title" content="Sobre mí | Docente FPE en Canarias, SEO e IA - Idayra Cabrera" />
   <meta
     property="og:description"
-    content="Trayectoria profesional de Idayra Cabrera: docencia FPE, administración de sistemas, transformación digital, SEO e IA aplicada."
+    content="Trayectoria profesional de Idayra Cabrera: docencia FPE, sistemas, competencias digitales, SEO, transformación digital e inteligencia artificial aplicada en Canarias."
   />
   <meta property="og:url" content="https://transformacionia.es/sobre-mi.html" />
   <meta property="og:locale" content="es_ES" />
+  <meta property="og:site_name" content="Transformación IA" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Sobre mí | Docente FPE en Canarias, SEO e IA - Idayra Cabrera" />
+  <meta
+    name="twitter:description"
+    content="Docente FPE en Canarias con experiencia en formación tecnológica, SEO, transformación digital, Excel, Power BI e IA aplicada."
+  />
 
   <link rel="stylesheet" href="css/styles.css" />
 
   <style>
     .about-page-hero {
-      padding: 52px 0 44px;
+      padding: 56px 0 46px;
     }
 
     .about-hero-grid {
       display: grid;
-      grid-template-columns: minmax(0, 1.2fr) 240px;
-      gap: 34px;
+      grid-template-columns: minmax(0, 1.15fr) 260px;
+      gap: 44px;
       align-items: center;
     }
 
     .about-hero-copy h1 {
-      margin: 0 0 18px;
-      font-family: var(--fd);
-      font-size: clamp(2.2rem, 5vw, 4rem);
-      line-height: 0.98;
-      text-transform: uppercase;
-      letter-spacing: -0.03em;
+       margin: 0 0 18px;
+        font-family: var(--fd);
+        font-size: clamp(2.6rem, 5vw, 4.7rem);
+        line-height: 0.94;
+        text-transform: uppercase;
+        letter-spacing: -0.035em;
+        max-width: 18ch;
     }
+
+    .about-hero-subtitle {
+  max-width: 60ch;
+  margin: 0 0 22px;
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: var(--text);
+  font-weight: 500;
+}
 
     .about-hero-copy p {
       margin: 0;
       color: var(--muted);
-      max-width: 62ch;
+      max-width: 68ch;
     }
 
     .about-hero-copy p + p {
       margin-top: 14px;
     }
 
-    .about-hero-lead {
-      color: var(--text) !important;
-      font-size: 1.06rem;
-    }
-
     .about-hero-actions {
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
-      margin-top: 24px;
+      margin-top: 26px;
     }
 
     .about-photo-wrap {
@@ -73,15 +86,57 @@
       justify-content: center;
     }
 
+    .about-photo-card {
+      background: linear-gradient(180deg, rgba(12, 16, 24, 0.96), rgba(16, 21, 32, 0.96));
+      border: 1px solid var(--border2);
+      border-radius: 24px;
+      padding: 20px;
+      box-shadow: var(--shadow);
+      width: 100%;
+      max-width: 260px;
+      text-align: center;
+    }
+
     .about-photo {
-      width: 220px;
-      height: 220px;
+      width: 180px;
+      height: 180px;
       object-fit: cover;
       object-position: center top;
       border-radius: 50%;
       border: 3px solid rgba(59, 130, 246, 0.25);
       box-shadow: 0 0 40px rgba(59, 130, 246, 0.12);
       background: #0b1220;
+      margin: 0 auto 16px;
+    }
+
+    .about-photo-role {
+      font-family: var(--fd);
+      font-size: 1.02rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .about-photo-meta {
+      font-size: 0.92rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .about-highlights {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .about-highlight {
+      padding: 7px 12px;
+      border: 1px solid var(--border2);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--muted);
+      font-size: 0.83rem;
+      line-height: 1.2;
     }
 
     .about-block {
@@ -184,6 +239,51 @@
       margin-top: 26px;
     }
 
+    .about-proof-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .about-proof-card {
+      background: var(--bg4);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      transition: 0.22s ease;
+    }
+
+    .about-proof-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(59, 130, 246, 0.28);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .about-proof-label {
+      margin-bottom: 6px;
+      font-size: 0.76rem;
+      color: var(--muted2);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .about-proof-value {
+      font-family: var(--fd);
+      font-size: 1.85rem;
+      line-height: 1;
+      margin-bottom: 8px;
+      background: linear-gradient(90deg, #60a5fa, #22d3ee);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .about-proof-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
     @media (max-width: 1024px) {
       .about-hero-grid {
         grid-template-columns: 1fr;
@@ -196,11 +296,15 @@
       .skills-cloud {
         grid-template-columns: repeat(3, minmax(0, 1fr));
       }
+
+      .about-proof-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     @media (max-width: 768px) {
       .about-page-hero {
-        padding: 34px 0 34px;
+        padding: 36px 0 36px;
       }
 
       .about-block {
@@ -221,17 +325,24 @@
       .skills-cloud {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
+
+      .about-hero-copy h1 {
+  max-width: 100%;
+  font-size: 2.9rem;
+  line-height: 0.96;
+}
     }
 
     @media (max-width: 480px) {
       .about-photo {
-        width: 160px;
-        height: 160px;
+        width: 150px;
+        height: 150px;
       }
 
       .about-hero-copy h1 {
-        font-size: 2.1rem;
-      }
+  font-size: 2.3rem;
+  line-height: 0.98;
+}
 
       .skills-cloud {
         grid-template-columns: 1fr;
@@ -247,18 +358,44 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Idayra Cabrera",
-    "url": "https://transformacionia.es/sobre-mi.html",
-    "jobTitle": "Docente FPE y especialista en transformación digital e IA",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "La Laguna",
-      "addressRegion": "Santa Cruz de Tenerife",
-      "addressCountry": "ES"
-    },
-    "sameAs": [
-      "https://www.linkedin.com/in/luzidayrajorgecabrera"
+    "@graph": [
+      {
+        "@type": "Person",
+        "name": "Idayra Cabrera",
+        "url": "https://transformacionia.es/sobre-mi.html",
+        "jobTitle": "Docente FPE y especialista en competencias digitales, SEO, transformación digital e inteligencia artificial aplicada",
+        "description": "Docente FPE en Canarias con experiencia en formación tecnológica, administración de sistemas, transformación digital, Excel, Power BI, SEO e inteligencia artificial aplicada.",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "La Laguna",
+          "addressRegion": "Santa Cruz de Tenerife",
+          "addressCountry": "ES"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/in/luzidayrajorgecabrera"
+        ],
+        "knowsAbout": [
+          "Docencia FPE",
+          "Competencias digitales",
+          "Excel avanzado",
+          "Power BI",
+          "Microsoft 365",
+          "SEO",
+          "Transformación digital",
+          "Inteligencia artificial aplicada",
+          "Administración de sistemas"
+        ]
+      },
+      {
+        "@type": "ProfilePage",
+        "name": "Sobre mí | Idayra Cabrera",
+        "url": "https://transformacionia.es/sobre-mi.html",
+        "inLanguage": "es-ES",
+        "mainEntity": {
+          "@type": "Person",
+          "name": "Idayra Cabrera"
+        }
+      }
     ]
   }
   </script>
@@ -300,30 +437,86 @@
         <div class="about-hero-grid">
           <div class="about-hero-copy">
             <span class="kicker">Trayectoria profesional</span>
-            <h1 id="sobre-mi-h1">Tecnología, docencia e innovación digital</h1>
-            <p class="about-hero-lead">
-              Más de 15 años combinando administración de sistemas, formación tecnológica
-              y transformación digital en Canarias.
+          <h1 id="sobre-mi-h1">Tecnología, docencia e innovación digital <span class="seo-hidden">en Canarias</span>
+          </h1>
+
+            <p class="about-hero-subtitle">
+            Más de 15 años combinando administración de sistemas, formación tecnológica y transformación digital en Canarias.
             </p>
+
             <p>
-              Mi trayectoria une una base técnica sólida con experiencia real en docencia,
-              digitalización empresarial y aplicación práctica de herramientas digitales,
-              SEO e inteligencia artificial.
+              Mi trayectoria combina una base técnica sólida con experiencia real en
+              <strong>docencia para el empleo</strong>, digitalización empresarial,
+              <strong>Excel avanzado</strong>, <strong>Power BI</strong>,
+              <strong>SEO</strong> y uso práctico de herramientas de
+              <strong>inteligencia artificial</strong>.
+            </p>
+
+            <p>
+              Trabajo para que la tecnología no se quede en teoría: la convierto en aprendizaje útil,
+              procesos aplicables y soluciones reales para personas, empresas y proyectos formativos.
             </p>
 
             <div class="about-hero-actions">
               <a href="proyectos.html" class="btn btn-p">Ver mis proyectos</a>
               <a href="contacto.html" class="btn btn-g">Contactar</a>
             </div>
+
+            <div class="about-highlights" aria-label="Puntos destacados del perfil">
+              <span class="about-highlight">+15 años de experiencia</span>
+              <span class="about-highlight">+1.770 horas de docencia</span>
+              <span class="about-highlight">Sistemas, SEO e IA aplicada</span>
+              <span class="about-highlight">Canarias</span>
+            </div>
           </div>
 
           <div class="about-photo-wrap">
-            <img
-              src="img/personal.png"
-              alt="Idayra Cabrera"
-              class="about-photo"
-            />
+            <div class="about-photo-card">
+              <img
+                src="img/personal.png"
+                alt="Foto profesional de Idayra Cabrera"
+                class="about-photo"
+              />
+              <div class="about-photo-role">Idayra Cabrera</div>
+              <div class="about-photo-meta">
+                Docente FPE · Sistemas · SEO · IA aplicada
+              </div>
+            </div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider" aria-hidden="true"></div>
+
+    <section class="about-block section-soft" aria-labelledby="proof-h">
+      <div class="container">
+        <div class="sh">
+          <span class="kicker">Perfil en cifras</span>
+          <h2 class="section-title" id="proof-h">Experiencia aplicada a formación y digitalización</h2>
+          <p class="section-sub">
+            Una trayectoria que une docencia, tecnología y acompañamiento real a procesos de mejora digital.
+          </p>
+        </div>
+
+        <div class="about-proof-grid">
+          <article class="about-proof-card">
+            <div class="about-proof-label">Docencia acreditada</div>
+            <div class="about-proof-value">+1.770h</div>
+            <p>Horas certificadas impartiendo formación tecnológica, competencias digitales y contenidos FPE.</p>
+          </article>
+
+          <article class="about-proof-card">
+            <div class="about-proof-label">Experiencia profesional</div>
+            <div class="about-proof-value">+15</div>
+            <p>Años combinando administración de sistemas, docencia, SEO y transformación digital.</p>
+          </article>
+
+          <article class="about-proof-card">
+            <div class="about-proof-label">Entidades colaboradoras</div>
+            <div class="about-proof-value">8</div>
+            <p>Experiencia con centros de formación, empresas y organizaciones vinculadas a innovación y empleo.</p>
+          </article>
         </div>
       </div>
     </section>
@@ -334,9 +527,9 @@
       <div class="container">
         <div class="sh">
           <span class="kicker">Experiencia</span>
-          <h2 class="section-title" id="exp-h">Recorrido profesional</h2>
+          <h2 class="section-title" id="exp-h">Recorrido profesional en docencia, sistemas y transformación digital</h2>
           <p class="section-sub">
-            Formación tecnológica, sistemas y acompañamiento a procesos de transformación digital.
+            Formación tecnológica, sistemas y acompañamiento a procesos de transformación digital en Canarias.
           </p>
         </div>
 
@@ -344,12 +537,12 @@
           <article class="timeline-item">
             <div class="timeline-line" aria-hidden="true"></div>
             <div class="timeline-card">
-              <h3>Docente FPE</h3>
+              <h3>Docente FPE y formación tecnológica</h3>
               <div class="timeline-org">Focan · Aprende · Generación 21 · Formacionline · Juan Pablo Cabrera Borges S.L.</div>
               <p>
                 Impartición de certificados de profesionalidad y cursos especializados en Excel Avanzado,
-                Power BI, Microsoft 365 con IA, posicionamiento web, marketing digital, competencias
-                digitales, Ofimática y herramientas Web 2.0, con más de 1.770 horas certificadas.
+                Power BI, Microsoft 365 con IA, posicionamiento web, marketing digital, competencias digitales,
+                Ofimática y herramientas Web 2.0.
               </p>
             </div>
           </article>
@@ -360,8 +553,8 @@
               <h3>Docente en formación privada</h3>
               <div class="timeline-org">Proyecto +45 · Cámara de Comercio de Santa Cruz de Tenerife</div>
               <p>
-                Formación tecnológica orientada a la mejora profesional y actualización de competencias:
-                Excel con Power BI, Microsoft Office 365 con IA y contabilidad y gestión laboral con A3.
+                Formación tecnológica orientada a la mejora profesional y actualización de competencias
+                en Excel con Power BI, Microsoft Office 365 con IA y contabilidad y gestión laboral con A3.
               </p>
             </div>
           </article>
@@ -399,7 +592,7 @@
       <div class="container">
         <div class="sh">
           <span class="kicker">Formación</span>
-          <h2 class="section-title" id="form-h">Base técnica y especialización digital</h2>
+          <h2 class="section-title" id="form-h">Base técnica y especialización en SEO, sistemas e innovación digital</h2>
           <p class="section-sub">
             Un recorrido de aprendizaje continuo para conectar tecnología, docencia e innovación.
           </p>
@@ -412,8 +605,7 @@
               <h3>CFGS Administración de Sistemas Informáticos en Red</h3>
               <div class="timeline-org">CIFP César Manrique · La Laguna</div>
               <p>
-                Formación técnica en sistemas, redes, administración de servidores
-                y servicios informáticos.
+                Formación técnica en sistemas, redes, administración de servidores y servicios informáticos.
               </p>
             </div>
           </article>
@@ -424,8 +616,8 @@
               <h3>Máster en SEO</h3>
               <div class="timeline-org">Gade Business School · Madrid</div>
               <p>
-                Posicionamiento en buscadores, estrategia de contenidos, analítica web,
-                SEM y marketing digital.
+                Especialización en posicionamiento en buscadores, estrategia de contenidos,
+                analítica web, SEM y marketing digital.
               </p>
             </div>
           </article>
@@ -437,7 +629,7 @@
               <div class="timeline-org">Universidad de La Laguna · Tenerife</div>
               <p>
                 Especialización en digitalización empresarial, tecnologías emergentes,
-                IA aplicada y estrategias de cambio organizacional.
+                inteligencia artificial aplicada y estrategias de cambio organizacional.
               </p>
             </div>
           </article>
@@ -451,7 +643,7 @@
       <div class="container">
         <div class="sh">
           <span class="kicker">Áreas de trabajo</span>
-          <h2 class="section-title" id="skills-h">Competencias y herramientas</h2>
+          <h2 class="section-title" id="skills-h">Competencias y herramientas con las que trabajo</h2>
           <p class="section-sub">
             Un perfil que conecta lo técnico con lo docente y lo estratégico.
           </p>
@@ -485,10 +677,10 @@
       <div class="container">
         <div class="cta-final">
           <span class="kicker">Siguiente paso</span>
-          <h2 id="sobre-cta-h">Una trayectoria orientada a aplicar la tecnología con sentido</h2>
+          <h2 id="sobre-cta-h">Una trayectoria orientada a aplicar la tecnología con sentido y resultados</h2>
           <p>
             Si quieres ver cómo aterrizo esta experiencia en proyectos, herramientas y formación,
-            puedes continuar desde aquí.
+            o si quieres hablar sobre una colaboración, puedes continuar desde aquí.
           </p>
 
           <div class="cta-final-actions">
@@ -547,6 +739,22 @@
       </div>
     </div>
   </footer>
+
+  <a
+    href="https://wa.me/34620948523?text=Hola%20Idayra,%20he%20visto%20tu%20perfil%20y%20me%20interesa%20hablar%20contigo%20sobre%20formaci%C3%B3n,%20digitalizaci%C3%B3n%20o%20IA%20aplicada."
+    class="floating-whatsapp"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Abrir conversación en WhatsApp"
+    title="Hablar por WhatsApp"
+  >
+    <span class="floating-whatsapp-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24">
+        <path d="M19.05 4.91A9.82 9.82 0 0 0 12.03 2C6.58 2 2.13 6.42 2.13 11.88c0 1.75.46 3.46 1.33 4.96L2 22l5.3-1.39a9.9 9.9 0 0 0 4.73 1.2h.01c5.45 0 9.9-4.42 9.9-9.88 0-2.64-1.03-5.12-2.89-7.02Zm-7.02 15.23h-.01a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-3.15.83.84-3.07-.2-.31a8.13 8.13 0 0 1-1.25-4.34c0-4.48 3.67-8.13 8.18-8.13 2.18 0 4.23.84 5.77 2.37a8.06 8.06 0 0 1 2.39 5.76c0 4.48-3.67 8.21-8.09 8.21Zm4.46-6.1c-.24-.12-1.4-.69-1.62-.77-.22-.08-.38-.12-.54.12-.16.24-.62.77-.76.93-.14.16-.28.18-.52.06-.24-.12-1.01-.37-1.92-1.19-.71-.63-1.19-1.41-1.33-1.65-.14-.24-.01-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.29-.74-1.77-.2-.47-.4-.41-.54-.42h-.46c-.16 0-.42.06-.64.3-.22.24-.84.81-.84 1.97s.86 2.28.98 2.44c.12.16 1.69 2.58 4.1 3.61.57.25 1.02.4 1.37.51.58.18 1.11.15 1.53.09.47-.07 1.4-.57 1.6-1.12.2-.55.2-1.02.14-1.12-.06-.1-.22-.16-.46-.28Z"/>
+      </svg>
+    </span>
+    <span class="floating-whatsapp-text">Hablemos</span>
+  </a>
 
   <script>
     const navToggle = document.getElementById("navTog");

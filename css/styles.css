@@ -1103,3 +1103,9 @@ button {
   justify-content: center;
   flex-wrap: wrap;
 }
+
+/* ===== SEO UTILIDADES ===== */
+.seo-hidden {
+  position: absolute;
+  left: -9999px;
+}
