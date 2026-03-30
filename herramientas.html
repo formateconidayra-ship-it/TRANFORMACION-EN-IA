@@ -4,10 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Herramientas | Idayra Cabrera · Recursos digitales para formación y productividad</title>
+  <title>Herramientas digitales para formación, productividad e IA | Idayra Cabrera</title>
   <meta
     name="description"
-    content="Herramientas digitales desarrolladas por Idayra Cabrera para formación FPE, productividad docente, automatización e innovación aplicada."
+    content="Herramientas digitales creadas por Idayra Cabrera para formación FPE, productividad docente, automatización, planificación y uso práctico de inteligencia artificial."
   />
   <meta name="author" content="Idayra Cabrera" />
   <meta name="robots" content="index,follow" />
@@ -15,19 +15,27 @@
   <link rel="canonical" href="https://transformacionia.es/herramientas.html" />
 
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Herramientas | Idayra Cabrera · Recursos digitales para formación y productividad" />
+  <meta property="og:title" content="Herramientas digitales para formación, productividad e IA | Idayra Cabrera" />
   <meta
     property="og:description"
-    content="Herramientas digitales para formación FPE, productividad docente, automatización e innovación aplicada."
+    content="Recursos y herramientas digitales para formación FPE, productividad docente, automatización y aplicación práctica de IA."
   />
   <meta property="og:url" content="https://transformacionia.es/herramientas.html" />
   <meta property="og:locale" content="es_ES" />
+  <meta property="og:site_name" content="Transformación IA" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Herramientas digitales para formación, productividad e IA | Idayra Cabrera" />
+  <meta
+    name="twitter:description"
+    content="Herramientas prácticas para formación, planificación, productividad e inteligencia artificial aplicada."
+  />
 
   <link rel="stylesheet" href="css/styles.css" />
 
   <style>
     .tools-hero {
-      padding: 48px 0 42px;
+      padding: 52px 0 44px;
     }
 
     .tools-hero-grid {
@@ -40,16 +48,24 @@
     .tools-hero-copy h1 {
       margin: 0 0 18px;
       font-family: var(--fd);
-      font-size: clamp(2.05rem, 4.1vw, 3.4rem);
+      font-size: clamp(2.25rem, 4.4vw, 3.9rem);
       line-height: 0.98;
       text-transform: uppercase;
       letter-spacing: -0.03em;
-      max-width: 11ch;
+      max-width: 13ch;
+    }
+
+    .tools-hero-lead {
+      margin: 0 0 16px;
+      max-width: 64ch;
+      color: var(--text);
+      font-size: 1.06rem;
+      line-height: 1.65;
     }
 
     .tools-hero-copy p {
       margin: 0;
-      max-width: 62ch;
+      max-width: 64ch;
       color: var(--muted);
       font-size: 1rem;
     }
@@ -63,6 +79,23 @@
       flex-wrap: wrap;
       gap: 12px;
       margin-top: 24px;
+    }
+
+    .tools-hero-highlights {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .tools-highlight {
+      padding: 7px 12px;
+      border: 1px solid var(--border2);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--muted);
+      font-size: 0.83rem;
+      line-height: 1.2;
     }
 
     .tools-hero-side {
@@ -99,6 +132,10 @@
       margin: 0;
       color: var(--muted);
       font-size: 0.98rem;
+    }
+
+    .tool-summary-card p + p {
+      margin-top: 10px;
     }
 
     .tool-stats-grid {
@@ -245,9 +282,9 @@
       margin-top: 24px;
     }
 
-    .tools-grid {
+    .tool-mini-grid {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 20px;
     }
 
@@ -258,16 +295,17 @@
 
     @media (max-width: 1024px) {
       .tools-hero-grid,
-      .tool-featured-layout {
-        grid-template-columns: 1fr;
-      }
-
-      .tools-grid {
+      .tool-featured-layout,
+      .tool-mini-grid {
         grid-template-columns: 1fr;
       }
 
       .tool-stats-grid {
         grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .tools-hero-copy h1 {
+        max-width: none;
       }
     }
 
@@ -306,11 +344,12 @@
 
     @media (max-width: 480px) {
       .tools-hero-copy h1 {
-        font-size: 1.95rem;
+        font-size: 2.05rem;
         max-width: none;
       }
 
       .tools-hero-copy p,
+      .tools-hero-lead,
       .tool-featured-card p,
       .tool-mini-card p,
       .tool-box p {
@@ -318,6 +357,41 @@
       }
     }
   </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "CollectionPage",
+        "name": "Herramientas | Idayra Cabrera",
+        "url": "https://transformacionia.es/herramientas.html",
+        "inLanguage": "es-ES",
+        "about": {
+          "@type": "Person",
+          "name": "Idayra Cabrera"
+        }
+      },
+      {
+        "@type": "Person",
+        "name": "Idayra Cabrera",
+        "url": "https://transformacionia.es/",
+        "jobTitle": "Docente FPE y especialista en transformación digital, SEO e inteligencia artificial aplicada"
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "Planificador de Certificados FPE",
+        "applicationCategory": "EducationalApplication",
+        "operatingSystem": "Web",
+        "url": "https://transformacionia.es/planificador.html",
+        "creator": {
+          "@type": "Person",
+          "name": "Idayra Cabrera"
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
   <a class="skip-link" href="#main">Saltar al contenido</a>
@@ -356,19 +430,28 @@
         <div class="tools-hero-grid">
           <div class="tools-hero-copy">
             <span class="kicker">Herramientas</span>
-            <h1 id="herramientas-h1">Recursos digitales pensados para uso real</h1>
-            <p>
-              Esta página reúne herramientas nacidas de necesidades prácticas en formación,
-              productividad docente y organización de procesos.
+            <h1 id="herramientas-h1">Herramientas digitales para formación, productividad e IA aplicada</h1>
+
+            <p class="tools-hero-lead">
+              Recursos creados desde necesidades reales en docencia, planificación,
+              organización de procesos y mejora del trabajo diario.
             </p>
+
             <p>
-              No son solo recursos teóricos: están pensadas para ahorrar tiempo, mejorar el trabajo
-              diario y facilitar tareas concretas.
+              Esta página reúne herramientas pensadas para ahorrar tiempo, reducir tareas repetitivas
+              y facilitar procesos concretos en formación FPE, productividad docente y digitalización.
             </p>
 
             <div class="tools-hero-actions">
               <a href="planificador.html" class="btn btn-p">Abrir planificador</a>
               <a href="contacto.html" class="btn btn-g">Sugerir una herramienta</a>
+            </div>
+
+            <div class="tools-hero-highlights" aria-label="Puntos destacados">
+              <span class="tools-highlight">Formación FPE</span>
+              <span class="tools-highlight">Productividad docente</span>
+              <span class="tools-highlight">Automatización</span>
+              <span class="tools-highlight">IA aplicada</span>
             </div>
           </div>
 
@@ -376,8 +459,9 @@
             <div class="tool-summary-card">
               <h2>Herramientas creadas desde la práctica</h2>
               <p>
-                Desde el planificador FPE hasta futuras utilidades para programación didáctica
-                y recursos con IA, esta sección recoge herramientas orientadas a utilidad real.
+                Desde el planificador FPE hasta futuras utilidades para programación didáctica,
+                automatización y recursos con IA, esta sección recoge herramientas orientadas
+                a utilidad real.
               </p>
             </div>
 
@@ -387,12 +471,12 @@
                 <span class="tool-stat-label">Herramienta activa</span>
               </div>
               <div class="tool-stat-card">
-                <span class="tool-stat-number">3</span>
-                <span class="tool-stat-label">Líneas en desarrollo</span>
+                <span class="tool-stat-number">FPE</span>
+                <span class="tool-stat-label">Enfoque formativo</span>
               </div>
               <div class="tool-stat-card">
-                <span class="tool-stat-number">FPE</span>
-                <span class="tool-stat-label">Enfoque principal</span>
+                <span class="tool-stat-number">Real</span>
+                <span class="tool-stat-label">Uso práctico</span>
               </div>
             </div>
           </aside>
@@ -402,57 +486,60 @@
 
     <div class="divider" aria-hidden="true"></div>
 
-    <section class="tools-section section-deep" aria-labelledby="destacada-h">
+    <section class="tools-section section-deep" aria-labelledby="tool-featured-h">
       <div class="container">
         <div class="sh">
           <span class="kicker">Herramienta destacada</span>
-          <h2 class="section-title" id="destacada-h">Planificador de Certificados FPE</h2>
+          <h2 class="section-title" id="tool-featured-h">Planificador de Certificados FPE</h2>
           <p class="section-sub">
-            Una solución pensada para automatizar una tarea repetitiva y crítica dentro del trabajo docente.
+            Una herramienta desarrollada para resolver una necesidad recurrente en la planificación docente.
           </p>
         </div>
 
         <article class="tool-featured-card">
           <div class="tool-featured-layout">
             <div>
-              <span class="tool-meta">Herramienta principal · Disponible</span>
-              <h2>Planificación horaria automática para certificados de profesionalidad</h2>
+              <span class="tool-meta">Herramienta propia · En activo</span>
+              <h2>Planificación automática de módulos, horas y calendario</h2>
               <p>
-                Esta herramienta permite generar automáticamente la planificación horaria completa
-                de un certificado de profesionalidad, configurando fechas, días lectivos, horas diarias
-                y módulos formativos.
+                El planificador nace de una necesidad real del trabajo docente:
+                generar de forma más rápida y ordenada la planificación de un certificado
+                de profesionalidad sin depender de cálculos manuales repetitivos.
               </p>
               <p>
-                Calcula el calendario descontando festivos nacionales y canarios, estructura la distribución
-                horaria y facilita una salida clara para trabajar directamente con la información generada.
+                Permite definir fechas, días lectivos, horas diarias, módulos y festivos,
+                y genera una estructura clara para trabajar con más seguridad, menos errores
+                y mejor organización.
               </p>
 
               <div class="tool-tags">
-                <span class="tool-tag">Planificación FPE</span>
-                <span class="tool-tag">Calendario</span>
-                <span class="tool-tag">Festivos</span>
-                <span class="tool-tag">CSV</span>
+                <span class="tool-tag">Docencia FPE</span>
+                <span class="tool-tag">Planificación</span>
                 <span class="tool-tag">Automatización</span>
+                <span class="tool-tag">Productividad</span>
+                <span class="tool-tag">Uso real</span>
               </div>
 
               <div class="tool-actions">
-                <a href="planificador.html" class="btn btn-p">Abrir planificador</a>
-                <a href="proyectos.html" class="btn btn-g">Ver proyectos</a>
+                <a href="planificador.html" class="btn btn-p">Usar herramienta</a>
+                <a href="contacto.html" class="btn btn-g">Quiero una similar</a>
               </div>
             </div>
 
-            <aside class="tool-side" aria-label="Características de la herramienta">
+            <aside class="tool-side" aria-label="Resumen de la herramienta">
               <div class="tool-box">
-                <h4>Tipo</h4>
-                <p>Herramienta web, de uso directo y sin registro.</p>
+                <h4>Problema</h4>
+                <p>La planificación manual consume tiempo y puede generar errores en horas, módulos y calendario.</p>
               </div>
+
               <div class="tool-box">
-                <h4>Cobertura</h4>
-                <p>Festivos nacionales y festivos de Canarias para planificación ajustada.</p>
+                <h4>Solución</h4>
+                <p>Automatizar la estructura básica del certificado para ahorrar tiempo y mejorar la organización docente.</p>
               </div>
+
               <div class="tool-box">
-                <h4>Salida</h4>
-                <p>Visualización clara y exportación preparada para trabajar con Excel.</p>
+                <h4>Valor</h4>
+                <p>Más claridad, menos carga operativa y una herramienta pensada desde la experiencia real de aula.</p>
               </div>
             </aside>
           </div>
@@ -462,65 +549,91 @@
 
     <div class="divider" aria-hidden="true"></div>
 
-    <section class="tools-section section-soft" aria-labelledby="desarrollo-h">
+    <section class="tools-section section-soft" aria-labelledby="other-tools-h">
       <div class="container">
         <div class="sh">
-          <span class="kicker">En desarrollo</span>
-          <h2 class="section-title" id="desarrollo-h">Próximas herramientas</h2>
+          <span class="kicker">Líneas futuras</span>
+          <h2 class="section-title" id="other-tools-h">Herramientas orientadas a formación, organización y mejora digital</h2>
           <p class="section-sub">
-            Recursos pensados para seguir mejorando la práctica docente y la productividad digital.
+            Espacio para recursos pensados desde necesidades concretas de docencia, empresa y productividad.
           </p>
         </div>
 
-        <div class="tools-grid">
+        <div class="tool-mini-grid">
+          <article class="tool-mini-card">
+            <span class="tool-meta">Productividad docente</span>
+            <h3>Programación didáctica y organización de sesiones</h3>
+            <p>
+              Recursos orientados a facilitar la estructuración de contenidos,
+              planificación de sesiones y organización del trabajo formativo.
+            </p>
+            <p>
+              El objetivo es reducir tareas repetitivas y mejorar la claridad operativa del día a día.
+            </p>
+
+            <div class="tool-tags">
+              <span class="tool-tag">Docencia</span>
+              <span class="tool-tag">Planificación</span>
+              <span class="tool-tag">Organización</span>
+            </div>
+          </article>
+
+          <article class="tool-mini-card">
+            <span class="tool-meta">Automatización</span>
+            <h3>Recursos para procesos repetitivos y tareas administrativas</h3>
+            <p>
+              Utilidades enfocadas a automatizar pequeñas tareas que consumen tiempo y reducen eficiencia.
+            </p>
+            <p>
+              Pensadas para formación, gestión y mejora de flujos de trabajo sencillos pero frecuentes.
+            </p>
+
+            <div class="tool-tags">
+              <span class="tool-tag">Automatización</span>
+              <span class="tool-tag">Ahorro de tiempo</span>
+              <span class="tool-tag">Procesos</span>
+            </div>
+          </article>
+
           <article class="tool-mini-card">
             <span class="tool-meta">IA aplicada</span>
-            <h3>Generador de programaciones didácticas</h3>
+            <h3>Herramientas apoyadas en inteligencia artificial</h3>
             <p>
-              Asistente para crear programaciones didácticas completas para certificados de profesionalidad,
-              apoyado en inteligencia artificial y adaptado a normativa vigente.
+              Recursos para generar materiales, organizar ideas, mejorar productividad
+              y aprovechar la IA con un enfoque práctico y útil.
+            </p>
+            <p>
+              No se trata de usar IA por tendencia, sino de aplicarla donde realmente aporta valor.
             </p>
 
             <div class="tool-tags">
-              <span class="tool-tag">Programación</span>
               <span class="tool-tag">IA</span>
-              <span class="tool-tag">Docencia</span>
-            </div>
-          </article>
-
-          <article class="tool-mini-card">
-            <span class="tool-meta">Recursos docentes</span>
-            <h3>Banco de actividades con IA</h3>
-            <p>
-              Repositorio de actividades, ejercicios y materiales generados y curados para módulos FPE
-              relacionados con tecnología y competencias digitales.
-            </p>
-
-            <div class="tool-tags">
-              <span class="tool-tag">Actividades</span>
-              <span class="tool-tag">FPE</span>
               <span class="tool-tag">Materiales</span>
+              <span class="tool-tag">Productividad</span>
             </div>
           </article>
 
           <article class="tool-mini-card">
-            <span class="tool-meta">Experiencia del alumno</span>
-            <h3>Kit de onboarding digital</h3>
+            <span class="tool-meta">Digitalización</span>
+            <h3>Recursos para centros, pymes y profesionales</h3>
             <p>
-              Recursos de bienvenida digital para facilitar la incorporación del alumnado a plataformas,
-              herramientas y dinámicas de formación desde el primer día.
+              Herramientas pensadas para apoyar procesos de digitalización,
+              claridad operativa y mejora del entorno de trabajo.
+            </p>
+            <p>
+              Orientadas a personas y organizaciones que buscan soluciones prácticas, no complejidad innecesaria.
             </p>
 
             <div class="tool-tags">
-              <span class="tool-tag">Onboarding</span>
-              <span class="tool-tag">Guías</span>
-              <span class="tool-tag">Soporte</span>
+              <span class="tool-tag">Pymes</span>
+              <span class="tool-tag">Centros</span>
+              <span class="tool-tag">Mejora digital</span>
             </div>
           </article>
         </div>
 
         <div class="tools-final-actions">
-          <a href="contacto.html" class="btn btn-p">Sugerir una herramienta</a>
+          <a href="contacto.html" class="btn btn-p">Proponer una necesidad</a>
           <a href="proyectos.html" class="btn btn-g">Ver proyectos</a>
         </div>
       </div>
@@ -528,17 +641,18 @@
 
     <div class="divider" aria-hidden="true"></div>
 
-    <section class="section section-cta-final" aria-labelledby="herramientas-cta-h">
+    <section class="section section-cta-final" aria-labelledby="tools-cta-h">
       <div class="container">
         <div class="cta-final">
           <span class="kicker">Siguiente paso</span>
-          <h2 id="herramientas-cta-h">Herramientas creadas para ahorrar tiempo y aportar claridad</h2>
+          <h2 id="tools-cta-h">Herramientas pensadas para ahorrar tiempo y aportar utilidad real</h2>
           <p>
-            Si quieres probar el planificador o proponer una nueva necesidad, puedes continuar desde aquí.
+            Si quieres probar el planificador o desarrollar una herramienta adaptada
+            a una necesidad concreta, puedes continuar desde aquí.
           </p>
 
           <div class="cta-final-actions">
-            <a href="planificador.html" class="btn btn-p">Probar planificador</a>
+            <a href="planificador.html" class="btn btn-p">Abrir planificador</a>
             <a href="contacto.html" class="btn btn-g">Contactar</a>
           </div>
         </div>
@@ -593,6 +707,22 @@
       </div>
     </div>
   </footer>
+
+  <a
+    href="https://wa.me/34620948523?text=Hola%20Idayra,%20he%20visto%20tus%20herramientas%20y%20me%20interesa%20hablar%20contigo%20sobre%20una%20soluci%C3%B3n%20similar."
+    class="floating-whatsapp"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Abrir conversación en WhatsApp"
+    title="Hablar por WhatsApp"
+  >
+    <span class="floating-whatsapp-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24">
+        <path d="M19.05 4.91A9.82 9.82 0 0 0 12.03 2C6.58 2 2.13 6.42 2.13 11.88c0 1.75.46 3.46 1.33 4.96L2 22l5.3-1.39a9.9 9.9 0 0 0 4.73 1.2h.01c5.45 0 9.9-4.42 9.9-9.88 0-2.64-1.03-5.12-2.89-7.02Zm-7.02 15.23h-.01a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-3.15.83.84-3.07-.2-.31a8.13 8.13 0 0 1-1.25-4.34c0-4.48 3.67-8.13 8.18-8.13 2.18 0 4.23.84 5.77 2.37a8.06 8.06 0 0 1 2.39 5.76c0 4.48-3.67 8.21-8.09 8.21Zm4.46-6.1c-.24-.12-1.4-.69-1.62-.77-.22-.08-.38-.12-.54.12-.16.24-.62.77-.76.93-.14.16-.28.18-.52.06-.24-.12-1.01-.37-1.92-1.19-.71-.63-1.19-1.41-1.33-1.65-.14-.24-.01-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.29-.74-1.77-.2-.47-.4-.41-.54-.42h-.46c-.16 0-.42.06-.64.3-.22.24-.84.81-.84 1.97s.86 2.28.98 2.44c.12.16 1.69 2.58 4.1 3.61.57.25 1.02.4 1.37.51.58.18 1.11.15 1.53.09.47-.07 1.4-.57 1.6-1.12.2-.55.2-1.02.14-1.12-.06-.1-.22-.16-.46-.28Z"/>
+      </svg>
+    </span>
+    <span class="floating-whatsapp-text">Hablemos</span>
+  </a>
 
   <script>
     const navToggle = document.getElementById("navTog");
