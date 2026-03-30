@@ -4,10 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Proyectos | Idayra Cabrera · Transformación Digital, FPE e IA</title>
+  <title>Proyectos de transformación digital, SEO e IA en Canarias | Idayra Cabrera</title>
   <meta
     name="description"
-    content="Proyectos de Idayra Cabrera en transformación digital, formación FPE, inteligencia artificial aplicada y herramientas para empresa y docencia."
+    content="Proyectos de Idayra Cabrera en transformación digital, formación FPE, SEO, inteligencia artificial aplicada y herramientas para empresa, docencia y productividad en Canarias."
   />
   <meta name="author" content="Idayra Cabrera" />
   <meta name="robots" content="index,follow" />
@@ -15,19 +15,27 @@
   <link rel="canonical" href="https://transformacionia.es/proyectos.html" />
 
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Proyectos | Idayra Cabrera · Transformación Digital, FPE e IA" />
+  <meta property="og:title" content="Proyectos de transformación digital, SEO e IA en Canarias | Idayra Cabrera" />
   <meta
     property="og:description"
-    content="Proyectos de transformación digital, formación FPE, consultoría e inteligencia artificial aplicada."
+    content="Casos y proyectos aplicados a formación, digitalización, SEO e inteligencia artificial para empresa y docencia."
   />
   <meta property="og:url" content="https://transformacionia.es/proyectos.html" />
   <meta property="og:locale" content="es_ES" />
+  <meta property="og:site_name" content="Transformación IA" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Proyectos de transformación digital, SEO e IA en Canarias | Idayra Cabrera" />
+  <meta
+    name="twitter:description"
+    content="Proyectos aplicados a formación, digitalización, SEO e inteligencia artificial en Canarias."
+  />
 
   <link rel="stylesheet" href="css/styles.css" />
 
   <style>
     .projects-hero {
-      padding: 48px 0 42px;
+      padding: 52px 0 44px;
     }
 
     .projects-hero-grid {
@@ -40,16 +48,24 @@
     .projects-hero-copy h1 {
       margin: 0 0 18px;
       font-family: var(--fd);
-      font-size: clamp(2.05rem, 4.1vw, 3.45rem);
+      font-size: clamp(2.25rem, 4.4vw, 3.95rem);
       line-height: 0.98;
       text-transform: uppercase;
       letter-spacing: -0.03em;
-      max-width: 11ch;
+      max-width: 13ch;
+    }
+
+    .projects-hero-lead {
+      margin: 0 0 16px;
+      max-width: 64ch;
+      color: var(--text);
+      font-size: 1.06rem;
+      line-height: 1.65;
     }
 
     .projects-hero-copy p {
       margin: 0;
-      max-width: 62ch;
+      max-width: 64ch;
       color: var(--muted);
       font-size: 1rem;
     }
@@ -63,6 +79,23 @@
       flex-wrap: wrap;
       gap: 12px;
       margin-top: 24px;
+    }
+
+    .projects-hero-highlights {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .projects-highlight {
+      padding: 7px 12px;
+      border: 1px solid var(--border2);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--muted);
+      font-size: 0.83rem;
+      line-height: 1.2;
     }
 
     .projects-hero-side {
@@ -276,6 +309,10 @@
       .hero-stats-grid {
         grid-template-columns: repeat(3, minmax(0, 1fr));
       }
+
+      .projects-hero-copy h1 {
+        max-width: none;
+      }
     }
 
     @media (max-width: 768px) {
@@ -313,11 +350,12 @@
 
     @media (max-width: 480px) {
       .projects-hero-copy h1 {
-        font-size: 1.95rem;
+        font-size: 2.05rem;
         max-width: none;
       }
 
       .projects-hero-copy p,
+      .projects-hero-lead,
       .project-card p,
       .mini-project-card p,
       .project-box p {
@@ -325,6 +363,30 @@
       }
     }
   </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "CollectionPage",
+        "name": "Proyectos | Idayra Cabrera",
+        "url": "https://transformacionia.es/proyectos.html",
+        "inLanguage": "es-ES",
+        "about": {
+          "@type": "Person",
+          "name": "Idayra Cabrera"
+        }
+      },
+      {
+        "@type": "Person",
+        "name": "Idayra Cabrera",
+        "url": "https://transformacionia.es/",
+        "jobTitle": "Docente FPE y especialista en transformación digital, SEO e inteligencia artificial aplicada"
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
   <a class="skip-link" href="#main">Saltar al contenido</a>
@@ -363,19 +425,29 @@
         <div class="projects-hero-grid">
           <div class="projects-hero-copy">
             <span class="kicker">Proyectos</span>
-            <h1 id="proyectos-h1">Proyectos aplicados a formación y digitalización</h1>
-            <p>
-              Aquí reúno iniciativas donde combino tecnología, docencia y transformación digital
-              para resolver necesidades reales en empresa, formación y productividad.
+            <h1 id="proyectos-h1">Proyectos de transformación digital, SEO e IA aplicada</h1>
+
+            <p class="projects-hero-lead">
+              Casos, herramientas e iniciativas donde combino formación, tecnología y estrategia
+              para resolver necesidades reales en empresa, docencia y productividad.
             </p>
+
             <p>
-              No son solo ideas: son herramientas, consultoría y proyectos pensados para aportar
-              utilidad concreta y resultados prácticos.
+              Aquí reúno proyectos orientados a la digitalización, la mejora de procesos,
+              la capacitación tecnológica y la aplicación práctica de soluciones útiles,
+              no solo conceptuales.
             </p>
 
             <div class="projects-hero-actions">
-              <a href="herramientas.html" class="btn btn-p">Ver herramientas</a>
-              <a href="contacto.html" class="btn btn-g">Hablar de un proyecto</a>
+              <a href="contacto.html" class="btn btn-p">Hablar de un proyecto</a>
+              <a href="herramientas.html" class="btn btn-g">Ver herramientas</a>
+            </div>
+
+            <div class="projects-hero-highlights" aria-label="Puntos destacados">
+              <span class="projects-highlight">Formación FPE</span>
+              <span class="projects-highlight">Transformación digital</span>
+              <span class="projects-highlight">SEO aplicado</span>
+              <span class="projects-highlight">IA útil y práctica</span>
             </div>
           </div>
 
@@ -383,15 +455,18 @@
             <div class="hero-summary-card">
               <h2>Experiencia aplicada a casos reales</h2>
               <p>
-                Desde el planificador FPE hasta proyectos de consultoría y digitalización,
-                esta página muestra cómo convierto conocimiento técnico en soluciones útiles.
+                Desde herramientas propias para docencia FPE hasta proyectos de digitalización,
+                consultoría y uso aplicado de inteligencia artificial.
+              </p>
+              <p>
+                El foco siempre es el mismo: aportar utilidad, claridad y mejora real.
               </p>
             </div>
 
             <div class="hero-stats-grid">
               <div class="hero-stat-card">
                 <span class="hero-stat-number">4</span>
-                <span class="hero-stat-label">Líneas principales</span>
+                <span class="hero-stat-label">Líneas de proyecto</span>
               </div>
               <div class="hero-stat-card">
                 <span class="hero-stat-number">+1.770h</span>
@@ -415,7 +490,7 @@
           <span class="kicker">Proyecto destacado</span>
           <h2 class="section-title" id="destacado-h">Planificador de Certificados FPE</h2>
           <p class="section-sub">
-            Una herramienta propia creada desde una necesidad real del trabajo docente.
+            Una herramienta propia desarrollada para resolver una necesidad real del trabajo docente.
           </p>
         </div>
 
@@ -423,14 +498,15 @@
           <div class="project-layout">
             <div>
               <span class="project-meta">Herramienta propia · En activo</span>
-              <h3>Planificación automática de certificados de profesionalidad</h3>
+              <h3>Automatización de la planificación horaria en certificados de profesionalidad</h3>
               <p>
-                Este proyecto nace de una necesidad real como docente FPE: generar de forma rápida,
-                clara y reutilizable la planificación horaria de un certificado de profesionalidad.
+                Este proyecto nace de una necesidad real como docente FPE: crear una forma más rápida,
+                clara y reutilizable de generar la planificación horaria de un certificado de profesionalidad.
               </p>
               <p>
                 La herramienta permite configurar fechas, días lectivos, horas diarias y módulos.
-                Calcula automáticamente sesiones, descuenta festivos y genera una tabla lista para trabajar.
+                Calcula automáticamente sesiones, descuenta festivos y genera una tabla lista para trabajar,
+                reduciendo errores manuales y ahorrando tiempo operativo.
               </p>
 
               <div class="project-tags">
@@ -443,7 +519,7 @@
 
               <div class="project-actions">
                 <a href="planificador.html" class="btn btn-p">Probar herramienta</a>
-                <a href="herramientas.html" class="btn btn-g">Ver más herramientas</a>
+                <a href="contacto.html" class="btn btn-g">Quiero algo similar</a>
               </div>
             </div>
 
@@ -457,8 +533,8 @@
                 <p>Automatización del cálculo de sesiones, distribución horaria y estructura reutilizable para certificados.</p>
               </div>
               <div class="project-box">
-                <h4>Valor</h4>
-                <p>Menos tiempo operativo, más claridad y una herramienta útil creada desde la práctica real.</p>
+                <h4>Resultado</h4>
+                <p>Menos carga operativa, más claridad y una herramienta útil creada desde la experiencia real.</p>
               </div>
             </aside>
           </div>
@@ -472,7 +548,7 @@
       <div class="container">
         <div class="sh">
           <span class="kicker">Otras líneas de trabajo</span>
-          <h2 class="section-title" id="otros-proyectos-h">Consultoría, digitalización e innovación</h2>
+          <h2 class="section-title" id="otros-proyectos-h">Consultoría, digitalización e innovación aplicada</h2>
           <p class="section-sub">
             Proyectos donde la tecnología se aterriza en acompañamiento, estrategia y mejora real.
           </p>
@@ -503,7 +579,7 @@
               Diagnóstico digital, hoja de ruta y acompañamiento estratégico para empresas que necesitan evolucionar con criterio.
             </p>
             <p>
-              Un proyecto más enfocado a análisis, decisión y mejora sostenible de procesos.
+              Un enfoque orientado a análisis, decisión y mejora sostenible de procesos y herramientas.
             </p>
 
             <div class="project-tags">
@@ -537,7 +613,7 @@
               Creación de materiales, automatización de tareas y uso de IA para enriquecer formación, productividad y recursos.
             </p>
             <p>
-              Un enfoque muy práctico, orientado a utilidad real y no solo a experimentar por experimentar.
+              Un enfoque muy práctico, orientado a utilidad real y mejora concreta en procesos.
             </p>
 
             <div class="project-tags">
@@ -563,13 +639,13 @@
           <span class="kicker">Siguiente paso</span>
           <h2 id="proyectos-cta-h">Proyectos pensados para resolver y aportar valor real</h2>
           <p>
-            Si quieres explorar mis herramientas o hablar sobre una colaboración concreta,
-            puedes continuar desde aquí.
+            Si quieres aplicar una solución parecida en tu empresa, formación o proyecto,
+            podemos hablar y ver cómo aterrizarla.
           </p>
 
           <div class="cta-final-actions">
-            <a href="herramientas.html" class="btn btn-p">Ver herramientas</a>
-            <a href="contacto.html" class="btn btn-g">Contactar</a>
+            <a href="contacto.html" class="btn btn-p">Quiero hablar de un proyecto</a>
+            <a href="herramientas.html" class="btn btn-g">Ver herramientas</a>
           </div>
         </div>
       </div>
@@ -623,6 +699,22 @@
       </div>
     </div>
   </footer>
+
+  <a
+    href="https://wa.me/34620948523?text=Hola%20Idayra,%20he%20visto%20tus%20proyectos%20y%20me%20interesa%20hablar%20contigo%20sobre%20una%20colaboraci%C3%B3n."
+    class="floating-whatsapp"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Abrir conversación en WhatsApp"
+    title="Hablar por WhatsApp"
+  >
+    <span class="floating-whatsapp-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24">
+        <path d="M19.05 4.91A9.82 9.82 0 0 0 12.03 2C6.58 2 2.13 6.42 2.13 11.88c0 1.75.46 3.46 1.33 4.96L2 22l5.3-1.39a9.9 9.9 0 0 0 4.73 1.2h.01c5.45 0 9.9-4.42 9.9-9.88 0-2.64-1.03-5.12-2.89-7.02Zm-7.02 15.23h-.01a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-3.15.83.84-3.07-.2-.31a8.13 8.13 0 0 1-1.25-4.34c0-4.48 3.67-8.13 8.18-8.13 2.18 0 4.23.84 5.77 2.37a8.06 8.06 0 0 1 2.39 5.76c0 4.48-3.67 8.21-8.09 8.21Zm4.46-6.1c-.24-.12-1.4-.69-1.62-.77-.22-.08-.38-.12-.54.12-.16.24-.62.77-.76.93-.14.16-.28.18-.52.06-.24-.12-1.01-.37-1.92-1.19-.71-.63-1.19-1.41-1.33-1.65-.14-.24-.01-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.29-.74-1.77-.2-.47-.4-.41-.54-.42h-.46c-.16 0-.42.06-.64.3-.22.24-.84.81-.84 1.97s.86 2.28.98 2.44c.12.16 1.69 2.58 4.1 3.61.57.25 1.02.4 1.37.51.58.18 1.11.15 1.53.09.47-.07 1.4-.57 1.6-1.12.2-.55.2-1.02.14-1.12-.06-.1-.22-.16-.46-.28Z"/>
+      </svg>
+    </span>
+    <span class="floating-whatsapp-text">Hablemos</span>
+  </a>
 
   <script>
     const navToggle = document.getElementById("navTog");
