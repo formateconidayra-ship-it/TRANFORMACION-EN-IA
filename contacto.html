@@ -4,48 +4,197 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Contacto | Idayra Cabrera · Transformación Digital, FPE e IA</title>
+  <title>Contacto | Formación, transformación digital, SEO e IA en Canarias - Idayra Cabrera</title>
   <meta
     name="description"
-    content="Contacta con Idayra Cabrera para proyectos de transformación digital, formación FPE, inteligencia artificial o colaboraciones."
+    content="Contacta con Idayra Cabrera para formación FPE, transformación digital, SEO, Excel, Power BI e inteligencia artificial aplicada en Canarias."
+  />
+  <meta name="author" content="Idayra Cabrera" />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#07090f" />
+  <link rel="canonical" href="https://transformacionia.es/contacto.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Contacto | Formación, transformación digital, SEO e IA en Canarias - Idayra Cabrera" />
+  <meta
+    property="og:description"
+    content="Escríbeme para colaboraciones, formación, digitalización, SEO, Excel, Power BI o inteligencia artificial aplicada."
+  />
+  <meta property="og:url" content="https://transformacionia.es/contacto.html" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:site_name" content="Transformación IA" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Contacto | Formación, transformación digital, SEO e IA en Canarias - Idayra Cabrera" />
+  <meta
+    name="twitter:description"
+    content="Contacta con Idayra Cabrera para formación, proyectos y colaboraciones en Canarias."
   />
 
   <link rel="stylesheet" href="css/styles.css" />
 
   <style>
     .contact-hero {
-      padding: 48px 0 42px;
+      padding: 52px 0 44px;
+    }
+
+    .contact-hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(280px, 0.92fr);
+      gap: 26px;
+      align-items: start;
+    }
+
+    .contact-hero-copy h1 {
+      margin: 0 0 18px;
+      font-family: var(--fd);
+      font-size: clamp(2.25rem, 4.4vw, 4rem);
+      line-height: 0.98;
+      text-transform: uppercase;
+      letter-spacing: -0.03em;
+      max-width: 13ch;
+    }
+
+    .contact-hero-lead {
+      margin: 0 0 16px;
+      max-width: 64ch;
+      color: var(--text);
+      font-size: 1.06rem;
+      line-height: 1.65;
+    }
+
+    .contact-hero-copy p {
+      margin: 0;
+      max-width: 64ch;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .contact-hero-copy p + p {
+      margin-top: 14px;
+    }
+
+    .contact-hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .contact-hero-highlights {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .contact-highlight {
+      padding: 7px 12px;
+      border: 1px solid var(--border2);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--muted);
+      font-size: 0.83rem;
+      line-height: 1.2;
+    }
+
+    .contact-hero-side {
+      display: grid;
+      gap: 12px;
+      align-content: start;
+    }
+
+    .contact-summary-card,
+    .contact-stat-card,
+    .contact-card,
+    .contact-method,
+    .faq-card {
+      background: var(--bg4);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+
+    .contact-summary-card {
+      padding: 22px;
+      background:
+        radial-gradient(circle at top right, rgba(59, 130, 246, 0.12), transparent 28%),
+        linear-gradient(180deg, rgba(12, 16, 24, 0.98), rgba(9, 13, 20, 0.98));
+      border-color: rgba(59, 130, 246, 0.22);
+    }
+
+    .contact-summary-card h2 {
+      margin: 0 0 10px;
+      font-family: var(--fd);
+      font-size: 1.35rem;
+      line-height: 1.04;
+    }
+
+    .contact-summary-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    .contact-summary-card p + p {
+      margin-top: 10px;
+    }
+
+    .contact-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .contact-stat-card {
+      padding: 18px 14px;
       text-align: center;
     }
 
-    .contact-hero h1 {
-      font-size: clamp(2rem, 4vw, 3rem);
-      margin-bottom: 12px;
+    .contact-stat-number {
+      display: block;
+      font-family: var(--fd);
+      font-size: 1.4rem;
+      font-weight: 800;
+      line-height: 1;
+      background: linear-gradient(90deg, #60a5fa, #22d3ee);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 8px;
     }
 
-    .contact-hero p {
+    .contact-stat-label {
+      display: block;
       color: var(--muted);
-      max-width: 600px;
-      margin: 0 auto;
+      font-size: 0.83rem;
+      line-height: 1.35;
+    }
+
+    .contact-section {
+      padding: 72px 0;
     }
 
     .contact-grid {
       display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
+      grid-template-columns: minmax(0, 1.08fr) minmax(280px, 0.92fr);
       gap: 28px;
-      margin-top: 40px;
+      align-items: start;
     }
 
     .contact-card {
-      background: var(--bg4);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
       padding: 26px;
     }
 
     .contact-card h2 {
-      margin-bottom: 18px;
-      font-size: 1.3rem;
+      margin: 0 0 10px;
+      font-family: var(--fd);
+      font-size: 1.45rem;
+      line-height: 1.05;
+    }
+
+    .contact-card-intro {
+      margin: 0 0 22px;
+      color: var(--muted);
     }
 
     .form-row {
@@ -57,23 +206,51 @@
     .fg {
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 7px;
       margin-bottom: 14px;
     }
 
+    .fg label {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
     .fg input,
-    .fg textarea {
-      padding: 12px;
-      border-radius: 10px;
+    .fg textarea,
+    .fg select {
+      width: 100%;
+      padding: 13px 14px;
+      border-radius: 12px;
       border: 1px solid var(--border);
       background: var(--bg3);
       color: var(--text);
       font-size: 0.95rem;
+      transition: 0.2s ease;
     }
 
-    textarea {
-      min-height: 120px;
+    .fg input:focus,
+    .fg textarea:focus,
+    .fg select:focus {
+      outline: none;
+      border-color: rgba(59, 130, 246, 0.42);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.12);
+    }
+
+    .fg textarea {
+      min-height: 150px;
       resize: vertical;
+    }
+
+    .form-note {
+      margin: 2px 0 18px;
+      color: var(--muted2);
+      font-size: 0.84rem;
+      line-height: 1.5;
+    }
+
+    .contact-submit {
+      width: 100%;
     }
 
     .contact-methods {
@@ -85,198 +262,505 @@
       display: flex;
       align-items: center;
       gap: 14px;
-      padding: 16px;
-      border-radius: 14px;
-      border: 1px solid var(--border);
-      background: var(--bg4);
-      text-decoration: none;
+      padding: 18px;
       color: var(--text);
-      transition: 0.2s;
+      transition: 0.22s ease;
     }
 
     .contact-method:hover {
       transform: translateY(-2px);
-      border-color: rgba(59,130,246,0.3);
+      border-color: rgba(59, 130, 246, 0.28);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .contact-method.static {
+      cursor: default;
+    }
+
+    .contact-method.static:hover {
+      transform: none;
+      box-shadow: none;
     }
 
     .cm-icon {
-      width: 42px;
-      height: 42px;
+      width: 44px;
+      height: 44px;
+      flex-shrink: 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      border-radius: 10px;
-      background: rgba(59,130,246,0.1);
-      font-size: 1.2rem;
+      border-radius: 12px;
+      background: rgba(59, 130, 246, 0.10);
+      font-size: 1.12rem;
     }
 
     .cm-label {
       font-size: 0.8rem;
-      color: var(--muted);
+      color: var(--muted2);
+      margin-bottom: 3px;
     }
 
     .cm-value {
-      font-size: 0.95rem;
+      font-size: 0.96rem;
+      color: var(--text);
+      line-height: 1.45;
     }
 
-    @media (max-width: 900px) {
-      .contact-grid {
+    .faq-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .faq-card {
+      padding: 22px;
+      transition: 0.22s ease;
+    }
+
+    .faq-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(59, 130, 246, 0.28);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .faq-card h3 {
+      margin: 0 0 10px;
+      font-family: var(--fd);
+      font-size: 1.16rem;
+      line-height: 1.12;
+    }
+
+    .faq-card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    @media (max-width: 1024px) {
+      .contact-hero-grid,
+      .contact-grid,
+      .faq-grid {
         grid-template-columns: 1fr;
+      }
+
+      .contact-hero-copy h1 {
+        max-width: none;
+      }
+
+      .contact-stats-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 768px) {
+      .contact-hero {
+        padding: 34px 0 34px;
+      }
+
+      .contact-section {
+        padding: 58px 0;
+      }
+
+      .contact-card,
+      .contact-summary-card,
+      .faq-card {
+        padding: 22px;
       }
 
       .form-row {
         grid-template-columns: 1fr;
       }
+
+      .contact-hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .contact-hero-actions .btn {
+        width: 100%;
+      }
+
+      .contact-stats-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .contact-hero-copy h1 {
+        font-size: 2.05rem;
+      }
+
+      .contact-hero-copy p,
+      .contact-hero-lead,
+      .contact-card-intro,
+      .faq-card p,
+      .cm-value {
+        font-size: 0.94rem;
+      }
     }
   </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "ContactPage",
+        "name": "Contacto | Idayra Cabrera",
+        "url": "https://transformacionia.es/contacto.html",
+        "inLanguage": "es-ES"
+      },
+      {
+        "@type": "Person",
+        "name": "Idayra Cabrera",
+        "url": "https://transformacionia.es/",
+        "email": "mailto:formacion@transformacionia.es",
+        "telephone": "+34620948523",
+        "address": {
+          "@type": "PostalAddress",
+          "addressRegion": "Canarias",
+          "addressCountry": "ES"
+        },
+        "jobTitle": "Docente FPE y especialista en transformación digital, SEO e inteligencia artificial aplicada"
+      }
+    ]
+  }
+  </script>
 </head>
 
 <body>
+  <a class="skip-link" href="#main">Saltar al contenido</a>
 
-<div class="bg-glow"></div>
+  <div class="bg-glow" aria-hidden="true"></div>
 
-<header class="navbar">
-  <a href="index.html" class="nav-logo">
-    <span class="nav-mark">IC</span>
-    <span class="nav-logo-text">Transformación IA</span>
-  </a>
+  <header class="navbar" role="banner">
+    <a href="index.html" class="nav-logo" aria-label="Ir a inicio">
+      <span class="nav-mark" aria-hidden="true">IC</span>
+      <span class="nav-logo-text">Transformación IA</span>
+    </a>
 
-  <button class="nav-toggle" id="navTog">
-    <span></span><span></span><span></span>
-  </button>
+    <button
+      class="nav-toggle"
+      id="navTog"
+      type="button"
+      aria-label="Abrir menú"
+      aria-controls="navLinks"
+      aria-expanded="false"
+    >
+      <span></span><span></span><span></span>
+    </button>
 
-  <nav class="nav-links" id="navLinks">
-    <a href="sobre-mi.html">Sobre mí</a>
-    <a href="proyectos.html">Proyectos</a>
-    <a href="herramientas.html">Herramientas</a>
-    <a href="acreditaciones.html">Acreditaciones</a>
-    <a href="contacto.html" class="nav-cta">Contacto</a>
-  </nav>
-</header>
+    <nav class="nav-links" id="navLinks" aria-label="Menú principal">
+      <a href="sobre-mi.html">Sobre mí</a>
+      <a href="proyectos.html">Proyectos</a>
+      <a href="herramientas.html">Herramientas</a>
+      <a href="acreditaciones.html">Acreditaciones</a>
+      <a href="contacto.html" class="nav-cta" aria-current="page">Contacto</a>
+    </nav>
+  </header>
 
-<main>
+  <main id="main">
+    <section class="contact-hero section-hero" aria-labelledby="contacto-h1">
+      <div class="container">
+        <div class="contact-hero-grid">
+          <div class="contact-hero-copy">
+            <span class="kicker">Contacto</span>
+            <h1 id="contacto-h1">Hablemos de formación, digitalización o una colaboración</h1>
 
-<section class="contact-hero">
-  <div class="container">
-    <span class="kicker">Contacto</span>
-    <h1>¿Hablamos?</h1>
-    <p>
-      Si tienes un proyecto, necesitas formación o quieres colaborar,
-      puedes escribirme directamente o usar el formulario.
-    </p>
-  </div>
-</section>
+            <p class="contact-hero-lead">
+              Si tienes un proyecto, necesitas formación especializada o quieres explorar
+              una colaboración, puedes escribirme directamente desde aquí.
+            </p>
 
-<div class="divider"></div>
+            <p>
+              Trabajo en torno a docencia FPE, competencias digitales, Excel avanzado,
+              Power BI, SEO, transformación digital e inteligencia artificial aplicada
+              con enfoque práctico y orientado a resultados.
+            </p>
 
-<section class="section">
-  <div class="container">
-
-    <div class="contact-grid">
-
-      <!-- FORMULARIO -->
-      <div class="contact-card">
-        <h2>Enviar mensaje</h2>
-
-        <form action="https://formspree.io/f/xnjgvaja" method="POST">
-          
-          <div class="form-row">
-            <div class="fg">
-              <label>Nombre</label>
-              <input type="text" name="nombre" required />
+            <div class="contact-hero-actions">
+              <a href="https://wa.me/34620948523" target="_blank" rel="noopener noreferrer" class="btn btn-p">Escribir por WhatsApp</a>
+              <a href="#formulario-contacto" class="btn btn-g">Ir al formulario</a>
             </div>
 
-            <div class="fg">
-              <label>Email</label>
-              <input type="email" name="email" required />
+            <div class="contact-hero-highlights" aria-label="Áreas de contacto">
+              <span class="contact-highlight">Formación FPE</span>
+              <span class="contact-highlight">Transformación digital</span>
+              <span class="contact-highlight">SEO e IA aplicada</span>
+              <span class="contact-highlight">Canarias</span>
             </div>
           </div>
 
-          <div class="fg">
-            <label>Mensaje</label>
-            <textarea name="mensaje" required></textarea>
-          </div>
+          <aside class="contact-hero-side" aria-label="Resumen de contacto">
+            <div class="contact-summary-card">
+              <h2>Respuesta clara y contacto directo</h2>
+              <p>
+                Puedes escribirme por formulario, WhatsApp, correo o LinkedIn.
+                La idea es hacerlo fácil, directo y útil desde el primer mensaje.
+              </p>
+            </div>
 
-          <input type="hidden" name="_next" value="https://transformacionia.es/gracias.html" />
-
-          <button class="btn btn-p" style="width:100%">Enviar mensaje</button>
-        </form>
+            <div class="contact-stats-grid">
+              <div class="contact-stat-card">
+                <span class="contact-stat-number">Directo</span>
+                <span class="contact-stat-label">Sin intermediarios</span>
+              </div>
+              <div class="contact-stat-card">
+                <span class="contact-stat-number">Canarias</span>
+                <span class="contact-stat-label">Base de trabajo</span>
+              </div>
+              <div class="contact-stat-card">
+                <span class="contact-stat-number">Online</span>
+                <span class="contact-stat-label">Colaboración flexible</span>
+              </div>
+            </div>
+          </aside>
+        </div>
       </div>
+    </section>
 
-      <!-- CONTACTO DIRECTO -->
-      <div class="contact-methods">
+    <div class="divider" aria-hidden="true"></div>
 
-        <a href="https://wa.me/34620948523" target="_blank" class="contact-method">
-          <div class="cm-icon">💬</div>
-          <div>
-            <div class="cm-label">WhatsApp</div>
-            <div class="cm-value">+34 620 948 523</div>
+    <section class="contact-section section-deep" aria-labelledby="form-h">
+      <div class="container">
+        <div class="contact-grid">
+          <div class="contact-card" id="formulario-contacto">
+            <h2 id="form-h">Cuéntame qué necesitas</h2>
+            <p class="contact-card-intro">
+              Puedes escribirme para formación, proyectos, colaboraciones o consultas sobre herramientas,
+              digitalización, SEO o inteligencia artificial aplicada.
+            </p>
+
+            <form action="https://formspree.io/f/xnjgvaja" method="POST">
+              <div class="form-row">
+                <div class="fg">
+                  <label for="nombre">Nombre</label>
+                  <input id="nombre" type="text" name="nombre" required />
+                </div>
+
+                <div class="fg">
+                  <label for="email">Email</label>
+                  <input id="email" type="email" name="email" required />
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="fg">
+                  <label for="empresa">Empresa o entidad</label>
+                  <input id="empresa" type="text" name="empresa" />
+                </div>
+
+                <div class="fg">
+                  <label for="motivo">Motivo de contacto</label>
+                  <select id="motivo" name="motivo">
+                    <option value="formacion">Formación</option>
+                    <option value="proyecto">Proyecto</option>
+                    <option value="colaboracion">Colaboración</option>
+                    <option value="consultoria">Consultoría</option>
+                    <option value="otro">Otro</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="fg">
+                <label for="mensaje">Mensaje</label>
+                <textarea id="mensaje" name="mensaje" required placeholder="Cuéntame brevemente qué necesitas, el tipo de proyecto o la formación que te interesa."></textarea>
+              </div>
+
+              <p class="form-note">
+                Al enviar este formulario, recibiré tu mensaje por correo para responderte directamente.
+              </p>
+
+              <input type="hidden" name="_next" value="https://transformacionia.es/gracias.html" />
+              <input type="hidden" name="_subject" value="Nuevo mensaje desde transformacionia.es" />
+
+              <button class="btn btn-p contact-submit" type="submit">Enviar mensaje</button>
+            </form>
           </div>
-        </a>
 
-        <a href="mailto:formacion@transformacionia.es" class="contact-method">
-          <div class="cm-icon">✉️</div>
-          <div>
-            <div class="cm-label">Email</div>
-            <div class="cm-value">formacion@transformacionia.es</div>
-          </div>
-        </a>
+          <div class="contact-methods" aria-label="Canales de contacto">
+            <a href="https://wa.me/34620948523" target="_blank" rel="noopener noreferrer" class="contact-method">
+              <div class="cm-icon">💬</div>
+              <div>
+                <div class="cm-label">WhatsApp</div>
+                <div class="cm-value">+34 620 948 523</div>
+              </div>
+            </a>
 
-        <a href="https://www.linkedin.com/in/luzidayrajorgecabrera" target="_blank" class="contact-method">
-          <div class="cm-icon">🔗</div>
-          <div>
-            <div class="cm-label">LinkedIn</div>
-            <div class="cm-value">Idayra Cabrera</div>
-          </div>
-        </a>
+            <a href="mailto:formacion@transformacionia.es" class="contact-method">
+              <div class="cm-icon">✉️</div>
+              <div>
+                <div class="cm-label">Correo electrónico</div>
+                <div class="cm-value">formacion@transformacionia.es</div>
+              </div>
+            </a>
 
-        <div class="contact-method" style="cursor:default">
-          <div class="cm-icon">📍</div>
-          <div>
-            <div class="cm-label">Ubicación</div>
-            <div class="cm-value">Canarias</div>
+            <a href="https://www.linkedin.com/in/luzidayrajorgecabrera" target="_blank" rel="noopener noreferrer" class="contact-method">
+              <div class="cm-icon">🔗</div>
+              <div>
+                <div class="cm-label">LinkedIn</div>
+                <div class="cm-value">Perfil profesional de Idayra Cabrera</div>
+              </div>
+            </a>
+
+            <div class="contact-method static">
+              <div class="cm-icon">📍</div>
+              <div>
+                <div class="cm-label">Ubicación</div>
+                <div class="cm-value">Canarias · Colaboraciones presenciales y online</div>
+              </div>
+            </div>
           </div>
         </div>
+      </div>
+    </section>
 
+    <div class="divider" aria-hidden="true"></div>
+
+    <section class="contact-section section-soft" aria-labelledby="faq-h">
+      <div class="container">
+        <div class="sh">
+          <span class="kicker">Antes de escribir</span>
+          <h2 class="section-title" id="faq-h">Preguntas frecuentes</h2>
+          <p class="section-sub">
+            Algunas respuestas rápidas para ayudarte a orientar mejor tu mensaje.
+          </p>
+        </div>
+
+        <div class="faq-grid">
+          <article class="faq-card">
+            <h3>¿Qué tipo de colaboraciones realizo?</h3>
+            <p>
+              Formación, acompañamiento en digitalización, proyectos vinculados a herramientas,
+              SEO, Excel, Power BI e inteligencia artificial aplicada.
+            </p>
+          </article>
+
+          <article class="faq-card">
+            <h3>¿Trabajo solo en Canarias?</h3>
+            <p>
+              Mi base está en Canarias, pero también puedo colaborar en formato online
+              según el tipo de proyecto o formación.
+            </p>
+          </article>
+
+          <article class="faq-card">
+            <h3>¿Puedo escribir por WhatsApp directamente?</h3>
+            <p>
+              Sí. Si te resulta más cómodo, puedes contactarme por WhatsApp y explicarme
+              brevemente tu necesidad desde ahí.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider" aria-hidden="true"></div>
+
+    <section class="section section-cta-final" aria-labelledby="contacto-cta-h">
+      <div class="container">
+        <div class="cta-final">
+          <span class="kicker">Siguiente paso</span>
+          <h2 id="contacto-cta-h">Un primer mensaje puede abrir una buena colaboración</h2>
+          <p>
+            Si has llegado hasta aquí, probablemente ya tienes una idea, necesidad o proyecto en mente.
+            Escríbeme y lo vemos.
+          </p>
+
+          <div class="cta-final-actions">
+            <a href="https://wa.me/34620948523" target="_blank" rel="noopener noreferrer" class="btn btn-p">Hablar por WhatsApp</a>
+            <a href="mailto:formacion@transformacionia.es" class="btn btn-g">Escribir por email</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container footer-container">
+      <div class="footer-top">
+        <a href="index.html" class="nav-logo footer-logo" aria-label="Ir a inicio">
+          <span class="nav-mark" aria-hidden="true">IC</span>
+          <span class="nav-logo-text">Transformación IA</span>
+        </a>
+
+        <div class="footer-social" aria-label="Redes sociales y contacto">
+          <a
+            href="https://wa.me/34620948523"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social-icon"
+            aria-label="WhatsApp"
+            title="WhatsApp"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M19.05 4.91A9.82 9.82 0 0 0 12.03 2C6.58 2 2.13 6.42 2.13 11.88c0 1.75.46 3.46 1.33 4.96L2 22l5.3-1.39a9.9 9.9 0 0 0 4.73 1.2h.01c5.45 0 9.9-4.42 9.9-9.88 0-2.64-1.03-5.12-2.89-7.02Zm-7.02 15.23h-.01a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-3.15.83.84-3.07-.2-.31a8.13 8.13 0 0 1-1.25-4.34c0-4.48 3.67-8.13 8.18-8.13 2.18 0 4.23.84 5.77 2.37a8.06 8.06 0 0 1 2.39 5.76c0 4.48-3.67 8.21-8.09 8.21Zm4.46-6.1c-.24-.12-1.4-.69-1.62-.77-.22-.08-.38-.12-.54.12-.16.24-.62.77-.76.93-.14.16-.28.18-.52.06-.24-.12-1.01-.37-1.92-1.19-.71-.63-1.19-1.41-1.33-1.65-.14-.24-.01-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.29-.74-1.77-.2-.47-.4-.41-.54-.42h-.46c-.16 0-.42.06-.64.3-.22.24-.84.81-.84 1.97s.86 2.28.98 2.44c.12.16 1.69 2.58 4.1 3.61.57.25 1.02.4 1.37.51.58.18 1.11.15 1.53.09.47-.07 1.4-.57 1.6-1.12.2-.55.2-1.02.14-1.12-.06-.1-.22-.16-.46-.28Z"/>
+            </svg>
+          </a>
+
+          <a
+            href="https://www.linkedin.com/in/luzidayrajorgecabrera"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social-icon"
+            aria-label="LinkedIn"
+            title="LinkedIn"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6.94 8.5A1.56 1.56 0 1 1 6.94 5.38a1.56 1.56 0 0 1 0 3.12ZM5.56 9.75h2.77V18H5.56V9.75Zm4.5 0h2.66v1.13h.04c.37-.7 1.28-1.43 2.63-1.43 2.82 0 3.34 1.85 3.34 4.26V18h-2.77v-3.79c0-.9-.02-2.06-1.26-2.06-1.26 0-1.45.98-1.45 1.99V18h-2.77V9.75Z"/>
+            </svg>
+          </a>
+        </div>
       </div>
 
-    </div>
+      <div class="footer-bottom">
+        <span>© <span id="currentYear"></span> Idayra Cabrera</span>
 
-  </div>
-</section>
-
-</main>
-
-<footer class="footer">
-  <div class="container footer-container">
-
-    <div class="footer-top">
-      <a href="index.html" class="nav-logo footer-logo">
-        <span class="nav-mark">IC</span>
-        <span class="nav-logo-text">Transformación IA</span>
-      </a>
-
-      <div class="footer-social">
-        <a href="https://wa.me/34620948523" target="_blank">💬</a>
-        <a href="https://www.linkedin.com/in/luzidayrajorgecabrera" target="_blank">in</a>
+        <div class="footer-legal">
+          <a href="aviso-legal.html">Aviso legal</a>
+          <a href="privacidad.html">Privacidad</a>
+        </div>
       </div>
     </div>
+  </footer>
 
-    <div class="footer-bottom">
-      <span>© <span id="currentYear"></span> Idayra Cabrera</span>
+  <a
+    href="https://wa.me/34620948523?text=Hola%20Idayra,%20he%20visto%20tu%20web%20y%20me%20interesa%20hablar%20contigo%20sobre%20una%20colaboraci%C3%B3n."
+    class="floating-whatsapp"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Abrir conversación en WhatsApp"
+    title="Hablar por WhatsApp"
+  >
+    <span class="floating-whatsapp-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24">
+        <path d="M19.05 4.91A9.82 9.82 0 0 0 12.03 2C6.58 2 2.13 6.42 2.13 11.88c0 1.75.46 3.46 1.33 4.96L2 22l5.3-1.39a9.9 9.9 0 0 0 4.73 1.2h.01c5.45 0 9.9-4.42 9.9-9.88 0-2.64-1.03-5.12-2.89-7.02Zm-7.02 15.23h-.01a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-3.15.83.84-3.07-.2-.31a8.13 8.13 0 0 1-1.25-4.34c0-4.48 3.67-8.13 8.18-8.13 2.18 0 4.23.84 5.77 2.37a8.06 8.06 0 0 1 2.39 5.76c0 4.48-3.67 8.21-8.09 8.21Zm4.46-6.1c-.24-.12-1.4-.69-1.62-.77-.22-.08-.38-.12-.54.12-.16.24-.62.77-.76.93-.14.16-.28.18-.52.06-.24-.12-1.01-.37-1.92-1.19-.71-.63-1.19-1.41-1.33-1.65-.14-.24-.01-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.29-.74-1.77-.2-.47-.4-.41-.54-.42h-.46c-.16 0-.42.06-.64.3-.22.24-.84.81-.84 1.97s.86 2.28.98 2.44c.12.16 1.69 2.58 4.1 3.61.57.25 1.02.4 1.37.51.58.18 1.11.15 1.53.09.47-.07 1.4-.57 1.6-1.12.2-.55.2-1.02.14-1.12-.06-.1-.22-.16-.46-.28Z"/>
+      </svg>
+    </span>
+    <span class="floating-whatsapp-text">Hablemos</span>
+  </a>
 
-      <div class="footer-legal">
-        <a href="aviso-legal.html">Aviso legal</a>
-        <a href="privacidad.html">Privacidad</a>
-      </div>
-    </div>
+  <script>
+    const navToggle = document.getElementById("navTog");
+    const navLinks = document.getElementById("navLinks");
+    const currentYear = document.getElementById("currentYear");
 
-  </div>
-</footer>
+    if (currentYear) {
+      currentYear.textContent = new Date().getFullYear();
+    }
 
-<script>
-document.getElementById("currentYear").textContent = new Date().getFullYear();
-</script>
+    if (navToggle && navLinks) {
+      navToggle.addEventListener("click", () => {
+        const isOpen = navLinks.classList.toggle("open");
+        navToggle.setAttribute("aria-expanded", String(isOpen));
+      });
 
+      navLinks.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          navLinks.classList.remove("open");
+          navToggle.setAttribute("aria-expanded", "false");
+        });
+      });
+    }
+  </script>
 </body>
 </html>
