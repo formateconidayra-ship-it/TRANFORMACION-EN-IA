@@ -233,6 +233,13 @@ button {
   align-items: center;
   text-decoration: none;
   flex-shrink: 0;
+  cursor: pointer;
+  transition: transform 0.25s ease, filter 0.25s ease;
+}
+
+.nav-logo:hover {
+  transform: scale(1.08);
+  filter: drop-shadow(0 0 6px rgba(59, 130, 246, 0.6));
 }
 
 .nav-logo-img {
