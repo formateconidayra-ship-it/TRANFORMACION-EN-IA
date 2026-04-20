@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;600;700;800&family=Roboto:wght@300;400;500;700&display=swap');
+/* Google Fonts se cargan en el <head> de cada HTML con preconnect para mejor rendimiento */
 
 :root {
   --bg: #07090f;

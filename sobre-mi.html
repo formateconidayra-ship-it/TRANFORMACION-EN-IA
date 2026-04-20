@@ -31,6 +31,9 @@
     content="Docente FPE en Canarias con experiencia en formación tecnológica, SEO, transformación digital, Excel, Power BI e IA aplicada."
   />
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;600;700;800&family=Roboto:wght@300;400;500;700&display=swap">
   <link rel="stylesheet" href="css/styles.css" />
 
   <style>
@@ -472,11 +475,17 @@
 
           <div class="about-photo-wrap">
             <div class="about-photo-card">
-              <img
-                src="img/personal.png"
-                alt="Foto profesional de Idayra Cabrera"
-                class="about-photo"
-              />
+              <picture>
+                <source srcset="img/personal.webp" type="image/webp">
+                <img
+                  src="img/personal.jpg"
+                  alt="Foto profesional de Idayra Cabrera"
+                  class="about-photo"
+                  width="180"
+                  height="180"
+                  loading="lazy"
+                />
+              </picture>
               <div class="about-photo-role">Idayra Cabrera</div>
               <div class="about-photo-meta">
                 Docente FPE · Sistemas · SEO · IA aplicada
