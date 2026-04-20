@@ -236,12 +236,16 @@ button {
   text-decoration: none;
 }
 
-/* Logo imagen: se activa cuando se añade img/logo.svg */
 .nav-logo-img {
   display: block;
-  height: 34px;
+  height: 38px;
   width: auto;
   object-fit: contain;
+  flex-shrink: 0;
+}
+
+.footer-logo .nav-logo-img {
+  height: 32px;
 }
 
 /* Wordmark textual: reemplazar por .nav-logo-img cuando esté disponible el logo */
