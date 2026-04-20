@@ -237,13 +237,15 @@ button {
 
 .nav-logo-img {
   display: block;
-  height: 56px;
+  height: 64px;
   width: auto;
   flex-shrink: 0;
+  mix-blend-mode: screen;
 }
 
 .footer-logo .nav-logo-img {
-  height: 40px;
+  height: 44px;
+  mix-blend-mode: screen;
 }
 
 /* Wordmark textual: reemplazar por .nav-logo-img cuando esté disponible el logo */
