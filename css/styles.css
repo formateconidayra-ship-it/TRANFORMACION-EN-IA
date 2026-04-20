@@ -235,7 +235,9 @@ button {
   flex-shrink: 0;
   cursor: pointer;
   background: transparent;
+  border: none;
   box-shadow: none;
+  mix-blend-mode: lighten;
   transition: transform 0.2s ease, filter 0.2s ease;
 }
 
@@ -250,12 +252,10 @@ button {
   width: auto;
   flex-shrink: 0;
   background: transparent;
-  mix-blend-mode: screen;
 }
 
 .footer-logo .nav-logo-img {
   height: 36px;
-  mix-blend-mode: screen;
 }
 
 /* Wordmark textual: reemplazar por .nav-logo-img cuando esté disponible el logo */
