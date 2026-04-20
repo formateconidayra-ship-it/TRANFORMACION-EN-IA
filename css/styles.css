@@ -234,12 +234,12 @@ button {
   text-decoration: none;
   flex-shrink: 0;
   cursor: pointer;
-  transition: transform 0.25s ease, filter 0.25s ease;
+  transition: transform 0.2s ease, filter 0.2s ease;
 }
 
 .nav-logo:hover {
-  transform: scale(1.08);
-  filter: drop-shadow(0 0 6px rgba(59, 130, 246, 0.6));
+  transform: scale(1.06);
+  filter: drop-shadow(0 0 4px rgba(59, 130, 246, 0.4));
 }
 
 .nav-logo-img {
