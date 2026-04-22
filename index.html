@@ -294,18 +294,58 @@
         <div class="sh center">
           <span class="kicker">Colaboraciones</span>
           <h2 class="section-title" id="autoridad-h">Entidades que confían en mi formación</h2>
+          <p class="section-sub">
+            Una trayectoria construida junto a instituciones, centros y organizaciones comprometidas
+            con la formación y el empleo en Canarias.
+          </p>
         </div>
 
-        <div class="autoridad-logos" aria-label="Entidades colaboradoras">
-          <span class="autoridad-logo">Cámara de Comercio de Santa Cruz de Tenerife</span>
-          <span class="autoridad-logo">Programas de Formación +45</span>
-          <span class="autoridad-logo">Formación Profesional para el Empleo (FPE)</span>
-        </div>
+        <div class="entidades-grid">
 
-        <p class="autoridad-texto">
-          He participado en programas de formación orientados a la empleabilidad real, colaborando con entidades
-          que impulsan el desarrollo profesional y digital en Canarias.
-        </p>
+          <div class="entidad fade-in-up">
+            <div class="entidad-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 21h18M3 10h18M5 6l7-3 7 3M4 10v11M20 10v11M8 10v11M16 10v11M12 10v11"/>
+              </svg>
+            </div>
+            <h3>Formación institucional</h3>
+            <ul>
+              <li>Cámara de Comercio de Santa Cruz de Tenerife</li>
+              <li>FOCAN</li>
+            </ul>
+          </div>
+
+          <div class="entidad fade-in-up">
+            <div class="entidad-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+            </div>
+            <h3>Formación para el Empleo (FPE)</h3>
+            <p>Programas dirigidos a personas desempleadas y ocupadas en el marco del Servicio Canario de Empleo (SCE).</p>
+          </div>
+
+          <div class="entidad fade-in-up">
+            <div class="entidad-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            </div>
+            <h3>Formación privada y entidades colaboradoras</h3>
+            <ul>
+              <li>AFS Formación</li>
+              <li>Formaciónline SL</li>
+              <li>Escuela Superior de Estudios Técnicos</li>
+              <li>Asociación para la Formación Ocupacional y Promoción Educativa Aprende</li>
+              <li>Generación 21</li>
+              <li>Asociación Canaria de Centros de Formación Profesional</li>
+              <li>Asociación Canaria para la Potenciación</li>
+              <li>Integralis</li>
+              <li>Juan Pablo Cabrera Borges</li>
+            </ul>
+          </div>
+
+        </div>
       </div>
     </section>
 
@@ -626,6 +666,21 @@
 
     const statsBlock = document.querySelector(".stats");
     if (statsBlock) statsObserver.observe(statsBlock);
+
+    /* ── Fade-in-up on scroll ── */
+    const fadeObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            fadeObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    document.querySelectorAll(".fade-in-up").forEach((el) => fadeObserver.observe(el));
 
     /* ── Nav ── */
     const navToggle = document.getElementById("navTog");
