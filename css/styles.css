@@ -1250,13 +1250,51 @@ button {
   background: linear-gradient(180deg, var(--bg4) 0%, var(--bg5) 100%);
 }
 
-.colab-block {
+.colab-main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
   margin-bottom: 40px;
+}
+
+.colab-main-item {
+  padding: 14px 28px;
+  border: 1px solid var(--border2);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.03);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text);
+  text-align: center;
+  transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+  cursor: default;
+}
+
+.colab-main-item:hover {
+  border-color: rgba(59, 130, 246, 0.4);
+  background: rgba(59, 130, 246, 0.05);
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.08);
+}
+
+.colab-autoridad {
+  max-width: 680px;
+  margin: 0 auto 40px;
+  text-align: center;
+  font-size: 1rem;
+  color: var(--muted);
+  line-height: 1.72;
+}
+
+.colab-secundario {
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+  text-align: center;
 }
 
 .colab-label {
   display: block;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.12em;
@@ -1264,63 +1302,11 @@ button {
   color: var(--muted2);
 }
 
-.colab-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.colab-chip {
-  padding: 11px 20px;
-  border: 1px solid var(--border2);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.03);
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: var(--text);
-  transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
-  cursor: default;
-}
-
-.colab-chip:hover {
-  border-color: rgba(59, 130, 246, 0.45);
-  background: rgba(59, 130, 246, 0.06);
-  box-shadow: 0 0 16px rgba(59, 130, 246, 0.1);
-}
-
-.colab-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.colab-tag {
-  padding: 7px 14px;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.02);
-  font-size: 0.84rem;
-  color: var(--muted);
-  transition: color 0.2s ease, border-color 0.2s ease;
-  cursor: default;
-}
-
-.colab-tag:hover {
-  color: var(--text);
-  border-color: var(--border2);
-}
-
-.colab-autoridad {
-  margin: 8px 0 0;
-  padding-top: 32px;
-  border-top: 1px solid var(--border);
-  text-align: center;
-  font-size: 1.05rem;
-  font-style: italic;
-  color: var(--muted);
-  line-height: 1.72;
-  max-width: 720px;
-  margin-inline: auto;
+.colab-names {
+  margin: 0;
+  font-size: 0.87rem;
+  color: var(--muted2);
+  line-height: 2;
 }
 
 /* Fade-in-up on scroll */
