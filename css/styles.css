@@ -1250,82 +1250,83 @@ button {
   background: linear-gradient(180deg, var(--bg4) 0%, var(--bg5) 100%);
 }
 
-.entidades-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 20px;
-  align-items: start;
+.colab-block {
+  margin-bottom: 40px;
 }
 
-.entidad {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  padding: 32px 28px;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid var(--border2);
-  border-radius: var(--radius);
-  transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
-}
-
-.entidad:hover {
-  transform: translateY(-3px);
-  border-color: rgba(59, 130, 246, 0.3);
-  box-shadow: 0 8px 32px rgba(59, 130, 246, 0.07);
-}
-
-.entidad h3 {
-  margin: 0;
-  padding-bottom: 16px;
-  border-bottom: 1px solid var(--border);
-  font-family: var(--fd);
-  font-size: 0.8rem;
+.colab-label {
+  display: block;
+  margin-bottom: 16px;
+  font-size: 0.72rem;
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--cyan);
+  color: var(--muted2);
 }
 
-.entidad p {
-  margin: 0;
-  font-size: 0.94rem;
-  color: var(--muted);
-  line-height: 1.7;
-}
-
-.entidad ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
+.colab-chips {
   display: flex;
-  flex-direction: column;
-  gap: 11px;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
-.entidad ul li {
-  font-size: 0.93rem;
+.colab-chip {
+  padding: 11px 20px;
+  border: 1px solid var(--border2);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.03);
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text);
+  transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+  cursor: default;
+}
+
+.colab-chip:hover {
+  border-color: rgba(59, 130, 246, 0.45);
+  background: rgba(59, 130, 246, 0.06);
+  box-shadow: 0 0 16px rgba(59, 130, 246, 0.1);
+}
+
+.colab-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.colab-tag {
+  padding: 7px 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.02);
+  font-size: 0.84rem;
   color: var(--muted);
-  line-height: 1.5;
-  padding-left: 14px;
-  position: relative;
+  transition: color 0.2s ease, border-color 0.2s ease;
+  cursor: default;
 }
 
-.entidad ul li::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0.58em;
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: var(--blue);
-  opacity: 0.7;
+.colab-tag:hover {
+  color: var(--text);
+  border-color: var(--border2);
+}
+
+.colab-autoridad {
+  margin: 8px 0 0;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  font-size: 1.05rem;
+  font-style: italic;
+  color: var(--muted);
+  line-height: 1.72;
+  max-width: 720px;
+  margin-inline: auto;
 }
 
 /* Fade-in-up on scroll */
 .fade-in-up {
   opacity: 0;
-  transform: translateY(20px);
+  transform: translateY(18px);
   transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
@@ -1334,8 +1335,8 @@ button {
   transform: translateY(0);
 }
 
-.fade-in-up:nth-child(2) { transition-delay: 0.08s; }
-.fade-in-up:nth-child(3) { transition-delay: 0.16s; }
+.fade-in-up:nth-child(2) { transition-delay: 0.1s; }
+.fade-in-up:nth-child(3) { transition-delay: 0.2s; }
 
 /* ===== BENEFICIOS ===== */
 
@@ -1402,17 +1403,7 @@ button {
   }
 }
 
-@media (max-width: 900px) {
-  .entidades-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
 @media (max-width: 600px) {
-  .entidades-grid {
-    grid-template-columns: 1fr;
-  }
-
   .beneficios-grid {
     grid-template-columns: 1fr;
   }
