@@ -1250,63 +1250,147 @@ button {
   background: linear-gradient(180deg, var(--bg4) 0%, var(--bg5) 100%);
 }
 
-.colab-main {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 14px;
-  margin-bottom: 40px;
+/* Flash cards grid */
+.flash-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+  margin-bottom: 44px;
 }
 
-.colab-main-item {
-  padding: 14px 28px;
+.flash-card {
+  position: relative;
+  min-height: 220px;
+  padding: 32px 28px;
+  background: rgba(255, 255, 255, 0.02);
   border: 1px solid var(--border2);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.03);
-  font-size: 1rem;
-  font-weight: 500;
-  color: var(--text);
-  text-align: center;
-  transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+  border-radius: var(--radius);
   cursor: default;
+  transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+  overflow: hidden;
 }
 
-.colab-main-item:hover {
-  border-color: rgba(59, 130, 246, 0.4);
-  background: rgba(59, 130, 246, 0.05);
-  box-shadow: 0 0 20px rgba(59, 130, 246, 0.08);
+.flash-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(59, 130, 246, 0.38);
+  box-shadow: 0 0 36px rgba(59, 130, 246, 0.12), 0 18px 44px rgba(0, 0, 0, 0.28);
 }
 
+.flash-front {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: opacity 0.3s ease;
+}
+
+.flash-card:hover .flash-front {
+  opacity: 0.15;
+}
+
+.flash-num {
+  font-family: var(--fd);
+  font-size: 2.2rem;
+  font-weight: 800;
+  line-height: 1;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.35), rgba(6, 182, 212, 0.35));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.flash-title {
+  margin: 0;
+  font-family: var(--fd);
+  font-size: 1.22rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.25;
+}
+
+.flash-hint {
+  font-size: 0.76rem;
+  color: var(--muted2);
+  letter-spacing: 0.05em;
+}
+
+/* Hidden content — revealed on hover */
+.flash-content {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  padding: 32px 28px;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 11px;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+
+.flash-card:hover .flash-content {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.flash-content li {
+  font-size: 0.93rem;
+  color: var(--text);
+  line-height: 1.5;
+  padding-left: 14px;
+  position: relative;
+}
+
+.flash-content li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.58em;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--cyan);
+}
+
+/* Authority quote */
 .colab-autoridad {
-  max-width: 680px;
-  margin: 0 auto 40px;
+  max-width: 660px;
+  margin: 0 auto;
   text-align: center;
   font-size: 1rem;
   color: var(--muted);
   line-height: 1.72;
 }
 
-.colab-secundario {
-  padding-top: 28px;
-  border-top: 1px solid var(--border);
-  text-align: center;
-}
+/* Touch / mobile: always show content */
+@media (hover: none), (max-width: 768px) {
+  .flash-card {
+    min-height: auto;
+  }
 
-.colab-label {
-  display: block;
-  margin-bottom: 14px;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--muted2);
-}
+  .flash-card:hover {
+    transform: none;
+  }
 
-.colab-names {
-  margin: 0;
-  font-size: 0.87rem;
-  color: var(--muted2);
-  line-height: 2;
+  .flash-front {
+    opacity: 1 !important;
+  }
+
+  .flash-hint {
+    display: none;
+  }
+
+  .flash-content {
+    position: static;
+    padding: 16px 0 0;
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .flash-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* Fade-in-up on scroll */
