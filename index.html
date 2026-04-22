@@ -227,18 +227,18 @@
           </p>
         </div>
 
-        <div class="testimonios-metricas" aria-label="Métricas de satisfacción">
-          <div class="tmetrica">
-            <span class="tmetrica-num">+95%</span>
+        <div class="stats" aria-label="Métricas de satisfacción">
+          <div class="stat">
+            <span class="counter" data-target="1700" data-prefix="+" data-suffix="h">0</span>
+            <p>Horas de docencia</p>
+          </div>
+          <div class="stat">
+            <span class="counter" data-target="95" data-suffix="%">0</span>
             <p>Satisfacción del alumnado</p>
           </div>
-          <div class="tmetrica">
-            <span class="tmetrica-num">+90%</span>
-            <p>Mejora real en competencias</p>
-          </div>
-          <div class="tmetrica">
-            <span class="tmetrica-num">100%</span>
-            <p>Recomendarían la formación</p>
+          <div class="stat">
+            <span class="counter" data-target="100" data-suffix="%">0</span>
+            <p>Recomiendan la formación</p>
           </div>
         </div>
 
@@ -589,6 +589,45 @@
   </a>
 
   <script>
+    /* ── Counter animation ── */
+    function animateCounter(el) {
+      const target = parseInt(el.dataset.target, 10);
+      const prefix = el.dataset.prefix || "";
+      const suffix = el.dataset.suffix || "";
+      const duration = target >= 1000 ? 2000 : 1600;
+      const startTime = performance.now();
+
+      function easeOutQuart(t) {
+        return 1 - Math.pow(1 - t, 4);
+      }
+
+      function step(now) {
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const value = Math.round(easeOutQuart(progress) * target);
+        el.textContent = prefix + value.toLocaleString("es-ES") + suffix;
+        if (progress < 1) requestAnimationFrame(step);
+      }
+
+      requestAnimationFrame(step);
+    }
+
+    const statsObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.querySelectorAll(".counter").forEach(animateCounter);
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    const statsBlock = document.querySelector(".stats");
+    if (statsBlock) statsObserver.observe(statsBlock);
+
+    /* ── Nav ── */
     const navToggle = document.getElementById("navTog");
     const navLinks = document.getElementById("navLinks");
     const currentYear = document.getElementById("currentYear");
