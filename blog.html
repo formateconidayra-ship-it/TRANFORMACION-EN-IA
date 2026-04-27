@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Blog de IA, SEO y formación digital en Canarias | Idayra Cabrera</title>
+  <meta
+    name="description"
+    content="Artículos prácticos sobre inteligencia artificial aplicada, SEO, Excel, Power BI y formación digital. Recursos útiles para profesionales, docentes y empresas en Canarias."
+  />
+  <meta name="author" content="Idayra Cabrera" />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#07090f" />
+  <link rel="canonical" href="https://transformacionia.es/blog.html" />
+
+  <link rel="icon" href="img/favicon.ico" sizes="any">
+  <link rel="icon" href="img/favicon-32x32.png" type="image/png">
+  <link rel="icon" href="img/favicon-16x16.png" type="image/png">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Blog de IA, SEO y formación digital en Canarias | Idayra Cabrera" />
+  <meta
+    property="og:description"
+    content="Artículos prácticos sobre inteligencia artificial, SEO, Excel, Power BI y transformación digital para profesionales y empresas."
+  />
+  <meta property="og:url" content="https://transformacionia.es/blog.html" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:site_name" content="Transformación IA" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Blog de IA, SEO y formación digital en Canarias | Idayra Cabrera" />
+  <meta
+    name="twitter:description"
+    content="Artículos prácticos sobre IA aplicada, SEO, Excel, Power BI y formación digital para profesionales y empresas."
+  />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;600;700;800&family=Roboto:wght@300;400;500;700&display=swap">
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <style>
+    .blog-hero {
+      padding: 52px 0 44px;
+    }
+
+    .blog-hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(280px, 0.92fr);
+      gap: 26px;
+      align-items: start;
+    }
+
+    .blog-hero-copy h1 {
+      margin: 0 0 18px;
+      font-family: var(--fd);
+      font-size: clamp(2.25rem, 4.4vw, 3.9rem);
+      line-height: 0.98;
+      text-transform: uppercase;
+      letter-spacing: -0.03em;
+      max-width: 14ch;
+    }
+
+    .blog-hero-lead {
+      margin: 0 0 16px;
+      max-width: 64ch;
+      color: var(--text);
+      font-size: 1.06rem;
+      line-height: 1.65;
+    }
+
+    .blog-hero-copy p {
+      margin: 0;
+      max-width: 64ch;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .blog-hero-copy p + p {
+      margin-top: 14px;
+    }
+
+    .blog-hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .blog-hero-highlights {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .blog-highlight {
+      padding: 7px 12px;
+      border: 1px solid var(--border2);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--muted);
+      font-size: 0.83rem;
+      line-height: 1.2;
+    }
+
+    .blog-hero-side {
+      display: grid;
+      gap: 12px;
+      align-content: start;
+    }
+
+    .blog-summary-card {
+      padding: 22px;
+      background:
+        radial-gradient(circle at top right, rgba(59, 130, 246, 0.12), transparent 28%),
+        linear-gradient(180deg, rgba(12, 16, 24, 0.98), rgba(9, 13, 20, 0.98));
+      border: 1px solid rgba(59, 130, 246, 0.22);
+      border-radius: var(--radius);
+    }
+
+    .blog-summary-card h2 {
+      margin: 0 0 10px;
+      font-family: var(--fd);
+      font-size: 1.35rem;
+      line-height: 1.04;
+    }
+
+    .blog-summary-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    .blog-summary-card p + p {
+      margin-top: 10px;
+    }
+
+    .blog-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .blog-stat-card {
+      padding: 18px 14px;
+      text-align: center;
+      background: var(--bg4);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+
+    .blog-stat-number {
+      display: block;
+      font-family: var(--fd);
+      font-size: 1.55rem;
+      font-weight: 800;
+      line-height: 1;
+      background: linear-gradient(90deg, #60a5fa, #22d3ee);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 8px;
+    }
+
+    .blog-stat-label {
+      display: block;
+      color: var(--muted);
+      font-size: 0.83rem;
+      line-height: 1.35;
+    }
+
+    .blog-section {
+      padding: 72px 0;
+    }
+
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .blog-card {
+      display: flex;
+      flex-direction: column;
+      padding: 28px;
+      background: var(--bg4);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+    }
+
+    .blog-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(59, 130, 246, 0.3);
+      box-shadow: 0 10px 32px rgba(59, 130, 246, 0.09);
+    }
+
+    .blog-card-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .blog-card-cat {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--cyan);
+    }
+
+    .blog-card-time {
+      font-size: 0.78rem;
+      color: var(--muted2);
+      white-space: nowrap;
+    }
+
+    .blog-card h2 {
+      margin: 0 0 12px;
+      font-family: var(--fd);
+      font-size: 1.28rem;
+      font-weight: 700;
+      line-height: 1.18;
+      color: var(--text);
+    }
+
+    .blog-card p {
+      margin: 0;
+      font-size: 0.94rem;
+      color: var(--muted);
+      line-height: 1.65;
+      flex: 1;
+    }
+
+    .blog-card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: 20px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--cyan);
+      transition: color 0.2s ease, gap 0.2s ease;
+    }
+
+    .blog-card:hover .blog-card-link {
+      gap: 9px;
+      color: #67e8f9;
+    }
+
+    .blog-final-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 40px;
+    }
+
+    @media (max-width: 1024px) {
+      .blog-hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .blog-hero-copy h1 {
+        max-width: none;
+      }
+
+      .blog-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 768px) {
+      .blog-hero {
+        padding: 34px 0 34px;
+      }
+
+      .blog-section {
+        padding: 58px 0;
+      }
+
+      .blog-hero-actions,
+      .blog-final-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .blog-hero-actions .btn,
+      .blog-final-actions .btn {
+        width: 100%;
+      }
+
+      .blog-stats-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .blog-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .blog-hero-copy h1 {
+        font-size: 2.05rem;
+        max-width: none;
+      }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Blog",
+        "name": "Blog de IA, SEO y formación digital | Idayra Cabrera",
+        "url": "https://transformacionia.es/blog.html",
+        "inLanguage": "es-ES",
+        "description": "Artículos prácticos sobre inteligencia artificial aplicada, SEO, Excel, Power BI y formación digital para profesionales y empresas.",
+        "author": {
+          "@type": "Person",
+          "name": "Idayra Cabrera",
+          "url": "https://transformacionia.es/"
+        }
+      },
+      {
+        "@type": "ItemList",
+        "name": "Artículos del blog",
+        "url": "https://transformacionia.es/blog.html",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "url": "https://transformacionia.es/formacion-inteligencia-artificial-canarias.html",
+            "name": "Formación en inteligencia artificial en Canarias: qué aprender y por dónde empezar"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "url": "https://transformacionia.es/chatgpt-en-el-trabajo.html",
+            "name": "ChatGPT en el trabajo: usos reales para profesionales y empresas"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "url": "https://transformacionia.es/excel-power-bi-empresas.html",
+            "name": "Excel y Power BI para empresas: cómo mejorar el análisis de datos sin ser experto"
+          }
+        ]
+      },
+      {
+        "@type": "Person",
+        "name": "Idayra Cabrera",
+        "url": "https://transformacionia.es/",
+        "jobTitle": "Docente FPE y especialista en transformación digital, SEO e inteligencia artificial aplicada"
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+
+  <div class="bg-glow" aria-hidden="true"></div>
+
+  <header class="navbar" role="banner">
+    <a href="index.html" class="nav-logo" aria-label="Transformación IA – Inicio">
+      <img src="img/logo.png" alt="Transformación IA" class="nav-logo-img">
+    </a>
+
+    <button
+      class="nav-toggle"
+      id="navTog"
+      type="button"
+      aria-label="Abrir menú"
+      aria-controls="navLinks"
+      aria-expanded="false"
+    >
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="nav-links" id="navLinks" aria-label="Menú principal">
+      <a href="sobre-mi.html">Sobre mí</a>
+      <a href="proyectos.html">Proyectos</a>
+      <a href="herramientas.html">Herramientas</a>
+      <a href="acreditaciones.html">Acreditaciones</a>
+      <a href="blog.html" aria-current="page">Blog</a>
+      <a href="contacto.html" class="nav-cta">Contacto</a>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <section class="blog-hero section-hero" aria-labelledby="blog-h1">
+      <div class="container">
+        <div class="blog-hero-grid">
+          <div class="blog-hero-copy">
+            <span class="kicker">Blog</span>
+            <h1 id="blog-h1">Blog de IA, SEO y formación digital</h1>
+
+            <p class="blog-hero-lead">
+              Artículos prácticos sobre inteligencia artificial aplicada, herramientas digitales,
+              SEO y formación para profesionales, docentes y empresas.
+            </p>
+
+            <p>
+              Contenidos pensados para que puedas aplicar lo que lees desde el primer día,
+              sin tecnicismos innecesarios y con ejemplos reales del entorno profesional.
+            </p>
+
+            <div class="blog-hero-actions">
+              <a href="#articulos" class="btn btn-p">Ver artículos</a>
+              <a href="contacto.html" class="btn btn-g">Solicitar formación</a>
+            </div>
+
+            <div class="blog-hero-highlights" aria-label="Temáticas del blog">
+              <span class="blog-highlight">Inteligencia artificial</span>
+              <span class="blog-highlight">SEO práctico</span>
+              <span class="blog-highlight">Excel y Power BI</span>
+              <span class="blog-highlight">Formación digital</span>
+            </div>
+          </div>
+
+          <aside class="blog-hero-side" aria-label="Sobre el blog">
+            <div class="blog-summary-card">
+              <h2>Formación que puedes aplicar hoy</h2>
+              <p>
+                Cada artículo aborda una necesidad real: entender la IA sin jerga técnica,
+                mejorar con Excel en el trabajo, o posicionar mejor tu negocio en Google.
+              </p>
+              <p>
+                Contenido escrito desde la experiencia docente y el trabajo real con empresas
+                y profesionales en Canarias.
+              </p>
+            </div>
+
+            <div class="blog-stats-grid">
+              <div class="blog-stat-card">
+                <span class="blog-stat-number">3</span>
+                <span class="blog-stat-label">Artículos publicados</span>
+              </div>
+              <div class="blog-stat-card">
+                <span class="blog-stat-number">IA</span>
+                <span class="blog-stat-label">Temática principal</span>
+              </div>
+              <div class="blog-stat-card">
+                <span class="blog-stat-number">100%</span>
+                <span class="blog-stat-label">Contenido aplicable</span>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider" aria-hidden="true"></div>
+
+    <section class="blog-section section-deep" aria-labelledby="articulos-h" id="articulos">
+      <div class="container">
+        <div class="sh">
+          <span class="kicker">Artículos</span>
+          <h2 class="section-title" id="articulos-h">Últimos artículos publicados</h2>
+          <p class="section-sub">
+            Recursos prácticos para mejorar tus competencias digitales y aplicar
+            tecnología con sentido en tu trabajo o negocio.
+          </p>
+        </div>
+
+        <div class="blog-grid">
+
+          <a class="blog-card" href="formacion-inteligencia-artificial-canarias.html">
+            <div class="blog-card-meta">
+              <span class="blog-card-cat">Inteligencia artificial</span>
+              <span class="blog-card-time">8 min de lectura</span>
+            </div>
+            <h2>Formación en inteligencia artificial en Canarias: qué aprender y por dónde empezar</h2>
+            <p>
+              Guía práctica para entender qué habilidades en IA son más demandadas,
+              qué formación está disponible en Canarias y cómo empezar sin necesidad
+              de conocimientos técnicos previos.
+            </p>
+            <span class="blog-card-link" aria-hidden="true">Leer artículo →</span>
+          </a>
+
+          <a class="blog-card" href="chatgpt-en-el-trabajo.html">
+            <div class="blog-card-meta">
+              <span class="blog-card-cat">IA aplicada</span>
+              <span class="blog-card-time">6 min de lectura</span>
+            </div>
+            <h2>ChatGPT en el trabajo: usos reales para profesionales y empresas</h2>
+            <p>
+              Cómo usar ChatGPT para mejorar la productividad diaria: redacción,
+              organización de información, generación de ideas y automatización
+              de tareas repetitivas sin conocimientos de programación.
+            </p>
+            <span class="blog-card-link" aria-hidden="true">Leer artículo →</span>
+          </a>
+
+          <a class="blog-card" href="excel-power-bi-empresas.html">
+            <div class="blog-card-meta">
+              <span class="blog-card-cat">Excel y Power BI</span>
+              <span class="blog-card-time">7 min de lectura</span>
+            </div>
+            <h2>Excel y Power BI para empresas: cómo mejorar el análisis de datos sin ser experto</h2>
+            <p>
+              Aprende a sacar partido real a Excel y Power BI en tu empresa:
+              dashboards claros, informes automáticos y decisiones basadas en datos,
+              con ejemplos concretos para pymes y profesionales.
+            </p>
+            <span class="blog-card-link" aria-hidden="true">Leer artículo →</span>
+          </a>
+
+        </div>
+
+        <div class="blog-final-actions">
+          <a href="contacto.html" class="btn btn-p">Solicitar formación personalizada</a>
+          <a href="sobre-mi.html" class="btn btn-g">Conocer a la autora</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider" aria-hidden="true"></div>
+
+    <section class="section section-cta-final" aria-labelledby="blog-cta-h">
+      <div class="container">
+        <div class="cta-final">
+          <span class="kicker">Siguiente paso</span>
+          <h2 id="blog-cta-h">¿Quieres aprender a aplicar estas herramientas en tu trabajo?</h2>
+          <p>
+            Ofrezco formación práctica y personalizada en inteligencia artificial, Excel,
+            Power BI, SEO y transformación digital para profesionales y empresas en Canarias.
+          </p>
+
+          <div class="cta-final-actions">
+            <a href="contacto.html" class="btn btn-p">Solicitar formación</a>
+            <a href="proyectos.html" class="btn btn-g">Ver proyectos</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container footer-container">
+      <div class="footer-top">
+        <a href="index.html" class="nav-logo footer-logo" aria-label="Transformación IA – Inicio">
+          <img src="img/logo.png" alt="Transformación IA" class="nav-logo-img">
+        </a>
+
+        <div class="footer-social" aria-label="Redes sociales y contacto">
+          <a
+            href="https://wa.me/34620948523"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social-icon"
+            aria-label="WhatsApp"
+            title="WhatsApp"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M19.05 4.91A9.82 9.82 0 0 0 12.03 2C6.58 2 2.13 6.42 2.13 11.88c0 1.75.46 3.46 1.33 4.96L2 22l5.3-1.39a9.9 9.9 0 0 0 4.73 1.2h.01c5.45 0 9.9-4.42 9.9-9.88 0-2.64-1.03-5.12-2.89-7.02Zm-7.02 15.23h-.01a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-3.15.83.84-3.07-.2-.31a8.13 8.13 0 0 1-1.25-4.34c0-4.48 3.67-8.13 8.18-8.13 2.18 0 4.23.84 5.77 2.37a8.06 8.06 0 0 1 2.39 5.76c0 4.48-3.67 8.21-8.09 8.21Zm4.46-6.1c-.24-.12-1.4-.69-1.62-.77-.22-.08-.38-.12-.54.12-.16.24-.62.77-.76.93-.14.16-.28.18-.52.06-.24-.12-1.01-.37-1.92-1.19-.71-.63-1.19-1.41-1.33-1.65-.14-.24-.01-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.29-.74-1.77-.2-.47-.4-.41-.54-.42h-.46c-.16 0-.42.06-.64.3-.22.24-.84.81-.84 1.97s.86 2.28.98 2.44c.12.16 1.69 2.58 4.1 3.61.57.25 1.02.4 1.37.51.58.18 1.11.15 1.53.09.47-.07 1.4-.57 1.6-1.12.2-.55.2-1.02.14-1.12-.06-.1-.22-.16-.46-.28Z"/>
+            </svg>
+          </a>
+
+          <a
+            href="https://www.linkedin.com/in/luzidayrajorgecabrera"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social-icon"
+            aria-label="LinkedIn"
+            title="LinkedIn"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6.94 8.5A1.56 1.56 0 1 1 6.94 5.38a1.56 1.56 0 0 1 0 3.12ZM5.56 9.75h2.77V18H5.56V9.75Zm4.5 0h2.66v1.13h.04c.37-.7 1.28-1.43 2.63-1.43 2.82 0 3.34 1.85 3.34 4.26V18h-2.77v-3.79c0-.9-.02-2.06-1.26-2.06-1.26 0-1.45.98-1.45 1.99V18h-2.77V9.75Z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© <span id="currentYear"></span> Idayra Cabrera</span>
+
+        <div class="footer-legal">
+          <a href="aviso-legal.html">Aviso legal</a>
+          <a href="privacidad.html">Privacidad</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <a
+    href="https://wa.me/34620948523?text=Hola%20Idayra,%20he%20visto%20tu%20blog%20y%20me%20interesa%20hablar%20contigo%20sobre%20formaci%C3%B3n%20en%20IA%20o%20digitalizaci%C3%B3n."
+    class="floating-whatsapp"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Abrir conversación en WhatsApp"
+    title="Hablar por WhatsApp"
+  >
+    <span class="floating-whatsapp-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24">
+        <path d="M19.05 4.91A9.82 9.82 0 0 0 12.03 2C6.58 2 2.13 6.42 2.13 11.88c0 1.75.46 3.46 1.33 4.96L2 22l5.3-1.39a9.9 9.9 0 0 0 4.73 1.2h.01c5.45 0 9.9-4.42 9.9-9.88 0-2.64-1.03-5.12-2.89-7.02Zm-7.02 15.23h-.01a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-3.15.83.84-3.07-.2-.31a8.13 8.13 0 0 1-1.25-4.34c0-4.48 3.67-8.13 8.18-8.13 2.18 0 4.23.84 5.77 2.37a8.06 8.06 0 0 1 2.39 5.76c0 4.48-3.67 8.21-8.09 8.21Zm4.46-6.1c-.24-.12-1.4-.69-1.62-.77-.22-.08-.38-.12-.54.12-.16.24-.62.77-.76.93-.14.16-.28.18-.52.06-.24-.12-1.01-.37-1.92-1.19-.71-.63-1.19-1.41-1.33-1.65-.14-.24-.01-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.29-.74-1.77-.2-.47-.4-.41-.54-.42h-.46c-.16 0-.42.06-.64.3-.22.24-.84.81-.84 1.97s.86 2.28.98 2.44c.12.16 1.69 2.58 4.1 3.61.57.25 1.02.4 1.37.51.58.18 1.11.15 1.53.09.47-.07 1.4-.57 1.6-1.12.2-.55.2-1.02.14-1.12-.06-.1-.22-.16-.46-.28Z"/>
+      </svg>
+    </span>
+    <span class="floating-whatsapp-text">Hablemos</span>
+  </a>
+
+  <script>
+    const navToggle = document.getElementById("navTog");
+    const navLinks = document.getElementById("navLinks");
+    const currentYear = document.getElementById("currentYear");
+
+    if (currentYear) {
+      currentYear.textContent = new Date().getFullYear();
+    }
+
+    if (navToggle && navLinks) {
+      navToggle.addEventListener("click", () => {
+        const isOpen = navLinks.classList.toggle("open");
+        navToggle.setAttribute("aria-expanded", String(isOpen));
+      });
+
+      navLinks.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          navLinks.classList.remove("open");
+          navToggle.setAttribute("aria-expanded", "false");
+        });
+      });
+    }
+  </script>
+</body>
+</html>
