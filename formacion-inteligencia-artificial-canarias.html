@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Formación en IA en Canarias: guía práctica para empezar sin ser técnico | Idayra Cabrera</title>
+  <meta
+    name="description"
+    content="He impartido más de 40 programas de IA en Canarias para empresas, FPE y entidades. Aquí te explico qué habilidades aprender primero, qué formación existe y cómo empezar sin base técnica."
+  />
+  <meta name="author" content="Idayra Cabrera" />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#07090f" />
+  <link rel="canonical" href="https://transformacionia.es/formacion-inteligencia-artificial-canarias.html" />
+
+  <link rel="icon" href="img/favicon.ico" sizes="any">
+  <link rel="icon" href="img/favicon-32x32.png" type="image/png">
+  <link rel="icon" href="img/favicon-16x16.png" type="image/png">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Formación en IA en Canarias: guía práctica para empezar sin ser técnico" />
+  <meta
+    property="og:description"
+    content="He impartido más de 40 programas de IA en Canarias. Aquí te explico qué habilidades aprender primero, qué programas FPE y SCE existen y cómo empezar sin base técnica."
+  />
+  <meta property="og:url" content="https://transformacionia.es/formacion-inteligencia-artificial-canarias.html" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:site_name" content="Transformación IA" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Formación en IA en Canarias: guía práctica para empezar sin ser técnico" />
+  <meta name="twitter:description" content="He impartido más de 40 programas de IA en Canarias. Qué aprender, qué formación existe y cómo empezar sin base técnica." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;600;700;800&family=Roboto:wght@300;400;500;700&display=swap">
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <style>
+    .art-page { padding: 48px 0 72px; }
+
+    .art-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 28px;
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: var(--muted);
+      transition: color 0.2s ease;
+    }
+    .art-back:hover { color: var(--cyan); }
+
+    .art-header {
+      margin-bottom: 40px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--border);
+    }
+    .art-header .kicker { margin-bottom: 16px; }
+    .art-header h1 {
+      margin: 0 0 20px;
+      font-family: var(--fd);
+      font-size: clamp(1.9rem, 4vw, 3rem);
+      line-height: 1.06;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+    }
+    .art-header-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 16px;
+      font-size: 0.84rem;
+      color: var(--muted2);
+    }
+    .art-header-meta span { display: flex; align-items: center; gap: 5px; }
+
+    .art-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 280px;
+      gap: 48px;
+      align-items: start;
+    }
+
+    /* Article body */
+    .art-body { min-width: 0; }
+    .art-body h2 {
+      margin: 40px 0 14px;
+      font-family: var(--fd);
+      font-size: clamp(1.35rem, 2.5vw, 1.75rem);
+      line-height: 1.12;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      color: var(--text);
+    }
+    .art-body h2:first-child { margin-top: 0; }
+    .art-body h3 {
+      margin: 28px 0 10px;
+      font-family: var(--fd);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .art-body p {
+      margin: 0 0 16px;
+      font-size: 1rem;
+      color: var(--muted);
+      line-height: 1.78;
+    }
+    .art-body p:last-child { margin-bottom: 0; }
+    .art-body strong { color: var(--text); font-weight: 600; }
+    .art-body ul, .art-body ol {
+      margin: 0 0 18px;
+      padding-left: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+    .art-body ul li, .art-body ol li {
+      position: relative;
+      padding-left: 18px;
+      font-size: 0.97rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+    .art-body ul li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.58em;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--cyan);
+    }
+    .art-body ol { counter-reset: ol-counter; }
+    .art-body ol li { counter-increment: ol-counter; }
+    .art-body ol li::before {
+      content: counter(ol-counter);
+      position: absolute;
+      left: 0;
+      top: 0.1em;
+      font-family: var(--fd);
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--cyan);
+    }
+    .art-highlight {
+      margin: 28px 0;
+      padding: 20px 24px;
+      background: rgba(59, 130, 246, 0.06);
+      border-left: 3px solid var(--blue);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      font-size: 0.97rem;
+      color: var(--text);
+      line-height: 1.68;
+    }
+
+    /* Sidebar */
+    .art-sidebar {
+      display: grid;
+      gap: 16px;
+      position: sticky;
+      top: 80px;
+    }
+    .art-sidebar-card {
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.025);
+      border: 1px solid var(--border2);
+      border-radius: var(--radius);
+    }
+    .art-sidebar-card h4 {
+      margin: 0 0 12px;
+      font-family: var(--fd);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted2);
+    }
+    .art-author-name {
+      font-family: var(--fd);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+    .art-author-bio {
+      margin: 0;
+      font-size: 0.87rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .art-related-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .art-related-list li a {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.45;
+      transition: color 0.2s ease;
+    }
+    .art-related-list li a:hover { color: var(--cyan); }
+
+    @media (max-width: 900px) {
+      .art-grid { grid-template-columns: 1fr; }
+      .art-sidebar { position: static; }
+    }
+    @media (max-width: 600px) {
+      .art-page { padding: 32px 0 56px; }
+      .art-header h1 { font-size: 1.75rem; }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Formación en IA en Canarias: guía práctica para empezar sin ser técnico",
+    "description": "He impartido más de 40 programas de IA en Canarias para empresas, FPE y entidades. Qué habilidades aprender primero, qué formación existe y cómo empezar sin base técnica.",
+    "url": "https://transformacionia.es/formacion-inteligencia-artificial-canarias.html",
+    "inLanguage": "es-ES",
+    "author": {
+      "@type": "Person",
+      "name": "Idayra Cabrera",
+      "url": "https://transformacionia.es/"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Idayra Cabrera",
+      "url": "https://transformacionia.es/"
+    },
+    "datePublished": "2026-04-27",
+    "dateModified": "2026-04-27",
+    "mainEntityOfPage": "https://transformacionia.es/formacion-inteligencia-artificial-canarias.html"
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+  <div class="bg-glow" aria-hidden="true"></div>
+
+  <header class="navbar" role="banner">
+    <a href="index.html" class="nav-logo" aria-label="Transformación IA – Inicio">
+      <img src="img/logo.png" alt="Transformación IA" class="nav-logo-img">
+    </a>
+    <button class="nav-toggle" id="navTog" type="button" aria-label="Abrir menú" aria-controls="navLinks" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav-links" id="navLinks" aria-label="Menú principal">
+      <a href="sobre-mi.html">Sobre mí</a>
+      <a href="proyectos.html">Proyectos</a>
+      <a href="herramientas.html">Herramientas</a>
+      <a href="acreditaciones.html">Acreditaciones</a>
+      <a href="blog.html" aria-current="page">Blog</a>
+      <a href="contacto.html" class="nav-cta">Contacto</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="art-page">
+      <div class="container">
+
+        <a href="blog.html" class="art-back">← Volver al blog</a>
+
+        <header class="art-header">
+          <span class="kicker">Inteligencia artificial · Formación en Canarias</span>
+          <h1>Formación en inteligencia artificial en Canarias: guía práctica para profesionales sin base técnica</h1>
+          <div class="art-header-meta">
+            <span>Idayra Cabrera</span>
+            <span>9 min de lectura</span>
+            <span>Abril 2026</span>
+          </div>
+        </header>
+
+        <div class="art-grid">
+
+          <article class="art-body">
+
+            <p>
+              En los últimos dos años he impartido más de cuarenta programas formativos sobre inteligencia artificial
+              en Canarias: en empresas del sector turístico, en organismos de la administración pública, en programas
+              FPE del Servicio Canario de Empleo y en talleres de la Cámara de Comercio de Santa Cruz de Tenerife.
+            </p>
+            <p>
+              La pregunta que más se repite, casi sin excepción, es siempre la misma: <strong>"¿Por dónde empiezo
+              si no soy técnico?"</strong>
+            </p>
+            <p>
+              Esta guía es la respuesta directa a esa pregunta. Está escrita para el profesional del comercio,
+              la administración, la hostelería, la docencia o los servicios que sabe que la IA ya forma parte de su
+              entorno laboral y necesita un punto de partida real, sin tecnicismos y sin invertir meses en formación.
+            </p>
+
+            <h2>La IA en Canarias ya no es una tendencia: es una competencia profesional</h2>
+            <p>
+              Canarias no está al margen de la transformación digital. El sector turístico —motor económico del
+              archipiélago— lleva años incorporando herramientas digitales, y la inteligencia artificial no es
+              una excepción. Lo que ha cambiado en los últimos dos años no es solo la tecnología: es la velocidad
+              a la que está llegando a sectores que antes parecían alejados de la digitalización.
+            </p>
+            <p>
+              En los programas FPE que diseño e imparto, el perfil mayoritario del alumnado son trabajadores
+              en activo —muchos en pymes de servicios, comercio o administración— que perciben que sus herramientas
+              se están quedando atrás. No quieren convertirse en expertos. Quieren aprender a usar lo que ya existe
+              para trabajar mejor y con menos esfuerzo. Eso es exactamente para lo que está diseñada la IA actual.
+            </p>
+
+            <div class="art-highlight">
+              No necesitas saber programar para aprovechar la IA en tu trabajo. Las herramientas actuales están
+              diseñadas para usuarios sin perfil técnico, y la curva de aprendizaje es mucho más corta de lo que parece.
+            </div>
+
+            <h2>Qué habilidades en IA tienen más demanda real (y cuáles no)</h2>
+            <p>
+              No todas las competencias en IA tienen el mismo valor en el mercado laboral. Basándome en los perfiles
+              que formo y en las necesidades que me trasladan las empresas en Canarias, estas son las que generan
+              más impacto inmediato en perfiles no técnicos:
+            </p>
+            <ul>
+              <li><strong>Uso productivo de IA generativa</strong> (ChatGPT, Microsoft Copilot, Gemini): redactar, resumir, organizar información y preparar presentaciones.</li>
+              <li><strong>Automatización de tareas repetitivas</strong> en entornos de oficina: correos, informes, actualizaciones de documentos sin programar.</li>
+              <li><strong>Análisis de datos con Excel y Power BI</strong> potenciados con IA: tomar mejores decisiones sin necesidad de ser analista.</li>
+              <li><strong>Comprensión crítica</strong>: saber qué resultados de la IA son fiables, qué necesita verificación y cuándo no usarla.</li>
+              <li><strong>Uso ético y responsable</strong>: privacidad de datos, propiedad intelectual y riesgos del uso inadecuado en entornos profesionales.</li>
+            </ul>
+            <p>
+              Para perfiles docentes y formativos —área en la que tengo acreditación específica—, se añade el diseño
+              instruccional asistido por IA: generación de materiales adaptados, evaluación formativa y personalización
+              del aprendizaje.
+            </p>
+
+            <h2>Qué formación en IA existe en Canarias ahora mismo</h2>
+            <p>
+              Hay más opciones de las que la mayoría conoce. Las principales vías de acceso a formación en IA en
+              las islas:
+            </p>
+            <h3>Formación Profesional para el Empleo (FPE) a través del SCE</h3>
+            <p>
+              El Servicio Canario de Empleo financia cada año programas con módulos sobre competencias digitales
+              e inteligencia artificial. Están disponibles tanto para personas desempleadas como para trabajadores
+              en activo cuyas empresas quieran actualizar competencias de su plantilla. Son gratuitos o de coste
+              muy reducido y se imparten en distintos municipios de las islas.
+            </p>
+            <h3>FOCAN</h3>
+            <p>
+              La Fundación para la Cualificación canaliza parte de la formación subvencionada y suele tener
+              convocatorias abiertas a lo largo del año. Si buscas formación gratuita o bonificada en competencias
+              digitales, es una de las primeras referencias en Canarias.
+            </p>
+            <h3>Cámara de Comercio de Santa Cruz de Tenerife</h3>
+            <p>
+              Ofrece programas orientados a autónomos y empresas con contenidos sobre digitalización e IA aplicada
+              a la gestión. He colaborado con ellos en el diseño e impartición de formación en esta área, con
+              especial foco en pymes del sector servicios.
+            </p>
+            <h3>Formación in company o personalizada</h3>
+            <p>
+              Para empresas que necesitan formación adaptada a su sector, sus herramientas concretas y su nivel
+              de partida real. Puedo diseñar un programa específico para tu equipo. Puedes ver cómo trabajo
+              esto en mi <a href="proyectos.html">página de proyectos</a>.
+            </p>
+
+            <div style="margin:36px 0;padding:24px 28px;background:rgba(59,130,246,0.06);border:1px solid rgba(59,130,246,0.22);border-radius:12px;display:flex;flex-direction:column;gap:12px;">
+              <p style="margin:0;font-family:var(--fd);font-size:1rem;font-weight:700;color:var(--text);letter-spacing:-0.01em;">¿Buscas formación en IA adaptada a tu empresa en Canarias?</p>
+              <p style="margin:0;font-size:0.92rem;color:var(--muted);line-height:1.6;">Diseño programas específicos para entidades, pymes y equipos profesionales. Cuéntame qué necesitas y te propongo algo concreto.</p>
+              <div><a href="contacto.html" class="btn btn-p" style="min-height:40px;padding:10px 22px;font-size:0.88rem">Contactar ahora</a></div>
+            </div>
+
+            <h2>Cómo empezar con la IA si partes de cero (sin frustrarse en el intento)</h2>
+            <p>
+              Después de ver a cientos de personas empezar con la IA, he observado un patrón claro: quienes lo
+              hacen bien no son los que buscan el mejor curso antes de empezar. Son los que eligen una herramienta
+              y la usan en algo real desde el primer día.
+            </p>
+            <ol>
+              <li><strong>Elige una sola herramienta y empieza por ella.</strong> No intentes aprender ChatGPT, Copilot y Gemini a la vez. Elige la que más se parezca a las herramientas que ya usas y úsala durante una semana en tareas reales.</li>
+              <li><strong>Aplícala a un problema concreto que ya tienes.</strong> La IA es más útil cuando resuelve algo que ya te cuesta tiempo: redactar correos, preparar resúmenes de reuniones, estructurar informes.</li>
+              <li><strong>Aprende a escribir buenas instrucciones.</strong> La diferencia entre un resultado mediocre y uno excelente casi siempre está en cómo formulas la petición. Invertir una hora en esto vale más que cualquier tutorial de diez.</li>
+              <li><strong>Busca formación estructurada cuando lo necesites.</strong> Los programas FPE o los talleres especializados ayudan a ordenar lo que ya sabes y llenar los huecos que la práctica sola no cubre.</li>
+              <li><strong>Mantén el hábito.</strong> Treinta minutos semanales siguiendo novedades marca una diferencia real a lo largo del año. La herramienta evoluciona, y quien se detiene se queda atrás.</li>
+            </ol>
+
+            <h2>Herramientas de IA para empezar hoy sin instalaciones</h2>
+            <p>
+              Estas son las que recomiendo para perfiles no técnicos que empiezan. Todas tienen versión gratuita
+              y funcionan desde el navegador:
+            </p>
+            <h3>ChatGPT y Microsoft Copilot</h3>
+            <p>
+              Para redacción, análisis de texto y automatización dentro de Microsoft 365. Copilot es especialmente
+              útil si tu empresa ya trabaja con Word, Excel, PowerPoint o Outlook.
+            </p>
+            <h3>Gemini de Google</h3>
+            <p>
+              Integrado en Google Workspace (Gmail, Drive, Docs). Si tu empresa trabaja con Google, es el primer
+              sitio donde empezar.
+            </p>
+            <h3>Canva con IA</h3>
+            <p>
+              Para materiales visuales, presentaciones y recursos formativos sin conocimientos de diseño. La curva
+              de aprendizaje es prácticamente nula y la versión gratuita cubre la mayoría de los casos de uso.
+            </p>
+            <h3>Notion AI</h3>
+            <p>
+              Para organizar proyectos y gestionar documentación con apoyo de IA. Muy útil para coordinadores,
+              formadores y perfiles con mucha gestión de contenidos.
+            </p>
+            <p>
+              Tengo más herramientas clasificadas por categoría y caso de uso en
+              <a href="herramientas.html">mi sección de herramientas</a>, donde actualizo las recomendaciones
+              periódicamente.
+            </p>
+
+            <h2>Errores frecuentes al empezar con IA (los veo en casi todos los grupos)</h2>
+            <p>
+              Después de más de cuarenta programas formativos, estos son los patrones de error que se repiten:
+            </p>
+            <ul>
+              <li><strong>Buscar el curso perfecto antes de practicar.</strong> La IA se aprende usándola, no leyendo sobre ella. El 80% del aprendizaje real viene del uso directo.</li>
+              <li><strong>Esperar resultados perfectos desde el primer intento.</strong> La IA genera borradores, no entregables finales. Quien asume esto desde el principio progresa mucho más rápido.</li>
+              <li><strong>No dar contexto en las instrucciones.</strong> Si le preguntas a ChatGPT algo sin explicar quién eres y cuál es el objetivo, los resultados son genéricos y poco útiles. El contexto lo es todo.</li>
+              <li><strong>Intentar aprender varias herramientas a la vez.</strong> Una herramienta bien dominada vale más que cinco exploradas superficialmente.</li>
+              <li><strong>Creer que "esto no es para mi sector".</strong> He formado a profesionales de hostelería, sanidad, logística, comercio y administración pública. Todos encuentran aplicación directa. El problema nunca es el sector.</li>
+            </ul>
+
+            <h2>Conclusión: la formación en IA es una inversión, no un gasto de tiempo</h2>
+            <p>
+              La inteligencia artificial no es una herramienta del futuro. Está aquí, es accesible y ya está
+              presente en los entornos donde trabajas, aunque todavía no la uses tú. Aprender a utilizarla bien
+              —con criterio, sin excesos y con aplicación real— es una de las decisiones profesionales más
+              rentables que puedes tomar ahora.
+            </p>
+            <p>
+              En Canarias, la formación en IA existe, es accesible y, en muchos casos, subvencionada. Lo que
+              marca la diferencia no es el acceso a la formación: es empezar.
+            </p>
+            <p>
+              Si quieres dar ese paso con acompañamiento real, puedo diseñar un programa adaptado a tu perfil,
+              tu sector y tus objetivos. Puedes conocer más sobre cómo trabajo en
+              <a href="sobre-mi.html">mi página de presentación</a>. O, si ya tienes claro lo que necesitas,
+              <a href="contacto.html">escríbeme directamente</a>. Respondo en menos de 24 horas.
+            </p>
+
+          </article>
+
+          <aside class="art-sidebar">
+            <div class="art-sidebar-card">
+              <h4>Autora</h4>
+              <p class="art-author-name">Idayra Cabrera</p>
+              <p class="art-author-bio">
+                Docente FPE acreditada en Canarias, especializada en competencias digitales,
+                inteligencia artificial aplicada y transformación digital.
+                Más de 1.700 horas de docencia certificadas.
+              </p>
+              <div style="margin-top:14px">
+                <a href="sobre-mi.html" class="btn btn-g" style="min-height:38px;padding:8px 14px;font-size:0.84rem">Ver perfil completo</a>
+              </div>
+            </div>
+
+            <div class="art-sidebar-card">
+              <h4>Artículo</h4>
+              <p style="margin:0 0 6px;font-size:0.86rem;color:var(--muted)"><strong style="color:var(--text)">Categoría:</strong> Formación en IA</p>
+              <p style="margin:0 0 6px;font-size:0.86rem;color:var(--muted)"><strong style="color:var(--text)">Lectura:</strong> 9 minutos</p>
+              <p style="margin:0;font-size:0.86rem;color:var(--muted)"><strong style="color:var(--text)">Nivel:</strong> Sin requisitos previos</p>
+            </div>
+
+            <div class="art-sidebar-card">
+              <h4>Más artículos</h4>
+              <ul class="art-related-list">
+                <li><a href="chatgpt-en-el-trabajo.html">ChatGPT en el trabajo: usos reales con ejemplos que puedes aplicar desde hoy</a></li>
+                <li><a href="excel-power-bi-empresas.html">Excel y Power BI: qué aprender primero y cómo transformar datos en decisiones</a></li>
+              </ul>
+            </div>
+
+            <div class="art-sidebar-card" style="background:rgba(59,130,246,0.06);border-color:rgba(59,130,246,0.25)">
+              <h4>¿Te interesa esta formación?</h4>
+              <p style="margin:0 0 14px;font-size:0.87rem;color:var(--muted);line-height:1.55">
+                Puedo diseñar un programa formativo en IA adaptado a tu empresa, equipo o perfil profesional en Canarias.
+              </p>
+              <a href="contacto.html" class="btn btn-p" style="width:100%;min-height:40px;padding:10px 14px;font-size:0.88rem">Solicitar información</a>
+            </div>
+          </aside>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="divider" aria-hidden="true"></div>
+
+    <section class="section section-cta-final" aria-labelledby="art1-cta-h">
+      <div class="container">
+        <div class="cta-final">
+          <span class="kicker">Siguiente paso</span>
+          <h2 id="art1-cta-h">¿Quieres formación en IA adaptada a tu empresa o perfil en Canarias?</h2>
+          <p>
+            Diseño programas formativos en inteligencia artificial aplicada para profesionales, pymes y entidades
+            en Canarias. Sin tecnicismos, con resultados reales desde el primer día.
+          </p>
+          <div class="cta-final-actions">
+            <a href="contacto.html" class="btn btn-p">Solicitar formación</a>
+            <a href="blog.html" class="btn btn-g">Volver al blog</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container footer-container">
+      <div class="footer-top">
+        <a href="index.html" class="nav-logo footer-logo" aria-label="Transformación IA – Inicio">
+          <img src="img/logo.png" alt="Transformación IA" class="nav-logo-img">
+        </a>
+        <div class="footer-social" aria-label="Redes sociales y contacto">
+          <a href="https://wa.me/34620948523" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="WhatsApp" title="WhatsApp">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.05 4.91A9.82 9.82 0 0 0 12.03 2C6.58 2 2.13 6.42 2.13 11.88c0 1.75.46 3.46 1.33 4.96L2 22l5.3-1.39a9.9 9.9 0 0 0 4.73 1.2h.01c5.45 0 9.9-4.42 9.9-9.88 0-2.64-1.03-5.12-2.89-7.02Zm-7.02 15.23h-.01a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-3.15.83.84-3.07-.2-.31a8.13 8.13 0 0 1-1.25-4.34c0-4.48 3.67-8.13 8.18-8.13 2.18 0 4.23.84 5.77 2.37a8.06 8.06 0 0 1 2.39 5.76c0 4.48-3.67 8.21-8.09 8.21Zm4.46-6.1c-.24-.12-1.4-.69-1.62-.77-.22-.08-.38-.12-.54.12-.16.24-.62.77-.76.93-.14.16-.28.18-.52.06-.24-.12-1.01-.37-1.92-1.19-.71-.63-1.19-1.41-1.33-1.65-.14-.24-.01-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.29-.74-1.77-.2-.47-.4-.41-.54-.42h-.46c-.16 0-.42.06-.64.3-.22.24-.84.81-.84 1.97s.86 2.28.98 2.44c.12.16 1.69 2.58 4.1 3.61.57.25 1.02.4 1.37.51.58.18 1.11.15 1.53.09.47-.07 1.4-.57 1.6-1.12.2-.55.2-1.02.14-1.12-.06-.1-.22-.16-.46-.28Z"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/in/luzidayrajorgecabrera" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="LinkedIn" title="LinkedIn">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.94 8.5A1.56 1.56 0 1 1 6.94 5.38a1.56 1.56 0 0 1 0 3.12ZM5.56 9.75h2.77V18H5.56V9.75Zm4.5 0h2.66v1.13h.04c.37-.7 1.28-1.43 2.63-1.43 2.82 0 3.34 1.85 3.34 4.26V18h-2.77v-3.79c0-.9-.02-2.06-1.26-2.06-1.26 0-1.45.98-1.45 1.99V18h-2.77V9.75Z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="currentYear"></span> Idayra Cabrera</span>
+        <div class="footer-legal">
+          <a href="aviso-legal.html">Aviso legal</a>
+          <a href="privacidad.html">Privacidad</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/34620948523?text=Hola%20Idayra,%20he%20le%C3%ADdo%20tu%20art%C3%ADculo%20sobre%20formaci%C3%B3n%20en%20IA%20en%20Canarias%20y%20me%20interesa%20m%C3%A1s%20informaci%C3%B3n."
+    class="floating-whatsapp" target="_blank" rel="noopener noreferrer"
+    aria-label="Abrir conversación en WhatsApp" title="Hablar por WhatsApp">
+    <span class="floating-whatsapp-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M19.05 4.91A9.82 9.82 0 0 0 12.03 2C6.58 2 2.13 6.42 2.13 11.88c0 1.75.46 3.46 1.33 4.96L2 22l5.3-1.39a9.9 9.9 0 0 0 4.73 1.2h.01c5.45 0 9.9-4.42 9.9-9.88 0-2.64-1.03-5.12-2.89-7.02Zm-7.02 15.23h-.01a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-3.15.83.84-3.07-.2-.31a8.13 8.13 0 0 1-1.25-4.34c0-4.48 3.67-8.13 8.18-8.13 2.18 0 4.23.84 5.77 2.37a8.06 8.06 0 0 1 2.39 5.76c0 4.48-3.67 8.21-8.09 8.21Zm4.46-6.1c-.24-.12-1.4-.69-1.62-.77-.22-.08-.38-.12-.54.12-.16.24-.62.77-.76.93-.14.16-.28.18-.52.06-.24-.12-1.01-.37-1.92-1.19-.71-.63-1.19-1.41-1.33-1.65-.14-.24-.01-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.29-.74-1.77-.2-.47-.4-.41-.54-.42h-.46c-.16 0-.42.06-.64.3-.22.24-.84.81-.84 1.97s.86 2.28.98 2.44c.12.16 1.69 2.58 4.1 3.61.57.25 1.02.4 1.37.51.58.18 1.11.15 1.53.09.47-.07 1.4-.57 1.6-1.12.2-.55.2-1.02.14-1.12-.06-.1-.22-.16-.46-.28Z"/></svg>
+    </span>
+    <span class="floating-whatsapp-text">Hablemos</span>
+  </a>
+
+  <script>
+    const navToggle = document.getElementById("navTog");
+    const navLinks = document.getElementById("navLinks");
+    const currentYear = document.getElementById("currentYear");
+    if (currentYear) currentYear.textContent = new Date().getFullYear();
+    if (navToggle && navLinks) {
+      navToggle.addEventListener("click", () => {
+        const isOpen = navLinks.classList.toggle("open");
+        navToggle.setAttribute("aria-expanded", String(isOpen));
+      });
+      navLinks.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          navLinks.classList.remove("open");
+          navToggle.setAttribute("aria-expanded", "false");
+        });
+      });
+    }
+  </script>
+</body>
+</html>

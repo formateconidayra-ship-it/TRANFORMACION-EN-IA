@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>ChatGPT en el trabajo: usos reales con ejemplos que puedes aplicar desde hoy | Idayra Cabrera</title>
+  <meta
+    name="description"
+    content="En mis talleres de ChatGPT para empresas, estos son los usos que generan más impacto. Casos concretos, ejemplos de prompts reales y los errores más comunes que frenan a los profesionales."
+  />
+  <meta name="author" content="Idayra Cabrera" />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#07090f" />
+  <link rel="canonical" href="https://transformacionia.es/chatgpt-en-el-trabajo.html" />
+
+  <link rel="icon" href="img/favicon.ico" sizes="any">
+  <link rel="icon" href="img/favicon-32x32.png" type="image/png">
+  <link rel="icon" href="img/favicon-16x16.png" type="image/png">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="ChatGPT en el trabajo: usos reales con ejemplos que puedes aplicar desde hoy" />
+  <meta
+    property="og:description"
+    content="Casos concretos de uso de ChatGPT en el trabajo, ejemplos de prompts reales y los errores más comunes que frenan a los profesionales. Sin tecnicismos."
+  />
+  <meta property="og:url" content="https://transformacionia.es/chatgpt-en-el-trabajo.html" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:site_name" content="Transformación IA" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="ChatGPT en el trabajo: usos reales con ejemplos que puedes aplicar desde hoy" />
+  <meta name="twitter:description" content="Casos concretos, prompts reales y errores comunes. Lo que aprenden los profesionales en mis talleres de ChatGPT." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;600;700;800&family=Roboto:wght@300;400;500;700&display=swap">
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <style>
+    .art-page { padding: 48px 0 72px; }
+
+    .art-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 28px;
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: var(--muted);
+      transition: color 0.2s ease;
+    }
+    .art-back:hover { color: var(--cyan); }
+
+    .art-header {
+      margin-bottom: 40px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--border);
+    }
+    .art-header .kicker { margin-bottom: 16px; }
+    .art-header h1 {
+      margin: 0 0 20px;
+      font-family: var(--fd);
+      font-size: clamp(1.9rem, 4vw, 3rem);
+      line-height: 1.06;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+    }
+    .art-header-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 16px;
+      font-size: 0.84rem;
+      color: var(--muted2);
+    }
+    .art-header-meta span { display: flex; align-items: center; gap: 5px; }
+
+    .art-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 280px;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .art-body { min-width: 0; }
+    .art-body h2 {
+      margin: 40px 0 14px;
+      font-family: var(--fd);
+      font-size: clamp(1.35rem, 2.5vw, 1.75rem);
+      line-height: 1.12;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      color: var(--text);
+    }
+    .art-body h2:first-child { margin-top: 0; }
+    .art-body h3 {
+      margin: 28px 0 10px;
+      font-family: var(--fd);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .art-body p {
+      margin: 0 0 16px;
+      font-size: 1rem;
+      color: var(--muted);
+      line-height: 1.78;
+    }
+    .art-body p:last-child { margin-bottom: 0; }
+    .art-body strong { color: var(--text); font-weight: 600; }
+    .art-body ul, .art-body ol {
+      margin: 0 0 18px;
+      padding-left: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+    .art-body ul li, .art-body ol li {
+      position: relative;
+      padding-left: 18px;
+      font-size: 0.97rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+    .art-body ul li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.58em;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--cyan);
+    }
+    .art-body ol { counter-reset: ol-counter; }
+    .art-body ol li { counter-increment: ol-counter; }
+    .art-body ol li::before {
+      content: counter(ol-counter);
+      position: absolute;
+      left: 0;
+      top: 0.1em;
+      font-family: var(--fd);
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--cyan);
+    }
+    .art-highlight {
+      margin: 28px 0;
+      padding: 20px 24px;
+      background: rgba(59, 130, 246, 0.06);
+      border-left: 3px solid var(--blue);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      font-size: 0.97rem;
+      color: var(--text);
+      line-height: 1.68;
+    }
+
+    .art-sidebar {
+      display: grid;
+      gap: 16px;
+      position: sticky;
+      top: 80px;
+    }
+    .art-sidebar-card {
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.025);
+      border: 1px solid var(--border2);
+      border-radius: var(--radius);
+    }
+    .art-sidebar-card h4 {
+      margin: 0 0 12px;
+      font-family: var(--fd);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted2);
+    }
+    .art-author-name {
+      font-family: var(--fd);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+    .art-author-bio {
+      margin: 0;
+      font-size: 0.87rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .art-related-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .art-related-list li a {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.45;
+      transition: color 0.2s ease;
+    }
+    .art-related-list li a:hover { color: var(--cyan); }
+
+    @media (max-width: 900px) {
+      .art-grid { grid-template-columns: 1fr; }
+      .art-sidebar { position: static; }
+    }
+    @media (max-width: 600px) {
+      .art-page { padding: 32px 0 56px; }
+      .art-header h1 { font-size: 1.75rem; }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "ChatGPT en el trabajo: usos reales con ejemplos que puedes aplicar desde hoy",
+    "description": "Casos concretos de uso de ChatGPT en el trabajo, ejemplos de prompts reales y los errores más comunes que frenan a los profesionales.",
+    "url": "https://transformacionia.es/chatgpt-en-el-trabajo.html",
+    "inLanguage": "es-ES",
+    "author": {
+      "@type": "Person",
+      "name": "Idayra Cabrera",
+      "url": "https://transformacionia.es/"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Idayra Cabrera",
+      "url": "https://transformacionia.es/"
+    },
+    "datePublished": "2026-04-27",
+    "dateModified": "2026-04-27",
+    "mainEntityOfPage": "https://transformacionia.es/chatgpt-en-el-trabajo.html"
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+  <div class="bg-glow" aria-hidden="true"></div>
+
+  <header class="navbar" role="banner">
+    <a href="index.html" class="nav-logo" aria-label="Transformación IA – Inicio">
+      <img src="img/logo.png" alt="Transformación IA" class="nav-logo-img">
+    </a>
+    <button class="nav-toggle" id="navTog" type="button" aria-label="Abrir menú" aria-controls="navLinks" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav-links" id="navLinks" aria-label="Menú principal">
+      <a href="sobre-mi.html">Sobre mí</a>
+      <a href="proyectos.html">Proyectos</a>
+      <a href="herramientas.html">Herramientas</a>
+      <a href="acreditaciones.html">Acreditaciones</a>
+      <a href="blog.html" aria-current="page">Blog</a>
+      <a href="contacto.html" class="nav-cta">Contacto</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="art-page">
+      <div class="container">
+
+        <a href="blog.html" class="art-back">← Volver al blog</a>
+
+        <header class="art-header">
+          <span class="kicker">Inteligencia artificial · Productividad profesional</span>
+          <h1>ChatGPT en el trabajo: usos reales con ejemplos que puedes aplicar desde hoy</h1>
+          <div class="art-header-meta">
+            <span>Idayra Cabrera</span>
+            <span>8 min de lectura</span>
+            <span>Abril 2026</span>
+          </div>
+        </header>
+
+        <div class="art-grid">
+
+          <article class="art-body">
+
+            <p>
+              En mis talleres de ChatGPT para equipos profesionales, la primera media hora siempre revela lo mismo:
+              casi todos los participantes tienen cuenta, casi todos lo han probado alguna vez, y casi todos lo usan
+              mucho menos de lo que podrían. La causa es invariablemente la misma: no saben qué pedirle para que
+              sea útil en su trabajo concreto.
+            </p>
+            <p>
+              ChatGPT no falla por ser una mala herramienta. Falla cuando se usa como si fuera un buscador o
+              una enciclopedia. Entender qué tipo de herramienta es realmente —y qué tareas resuelve mejor—
+              es el primer paso para sacarle partido de verdad.
+            </p>
+            <p>
+              En este artículo te cuento cómo lo uso yo, cómo lo usan los equipos con los que trabajo en Canarias
+              y en qué errores cae la mayoría al empezar.
+            </p>
+
+            <h2>Qué es realmente ChatGPT y para qué sirve en el trabajo</h2>
+            <p>
+              ChatGPT es un modelo de lenguaje. Su función es procesar texto y generar texto. Lo que hace
+              excepcionalmente bien es <strong>redactar, resumir, transformar, estructurar y responder preguntas</strong>
+              a partir de información que le proporcionas.
+            </p>
+            <p>
+              No es un buscador: no tiene acceso a internet en tiempo real. No es una base de datos fiable:
+              puede cometer errores con confianza. No toma decisiones por ti: analiza opciones, pero el juicio
+              es tuyo.
+            </p>
+            <p>
+              Lo que sí es: el asistente de redacción y organización de información más eficiente que existe hoy.
+              Para tareas de comunicación, análisis de texto y gestión de contenidos, el ahorro de tiempo es real
+              y medible desde la primera semana de uso sistemático.
+            </p>
+
+            <h2>Usos reales en comunicación y redacción (con ejemplos de prompt)</h2>
+            <p>
+              Esta es el área donde más impacto inmediato veo en los equipos con los que trabajo. Casos concretos:
+            </p>
+            <h3>Correos difíciles</h3>
+            <p>
+              Cuando hay que comunicar algo incómodo —un retraso, una negativa, una reclamación— ChatGPT
+              ayuda a encontrar el tono correcto cuando uno no lo encuentra solo. Le explico la situación,
+              el tono que necesito y el público, y obtengo un borrador sólido en segundos.
+            </p>
+            <h3>Adaptar el mismo mensaje a distintos públicos</h3>
+            <p>
+              El mismo contenido explicado de forma técnica para el equipo interno, de forma ejecutiva para
+              dirección y de forma cercana para el cliente. Lo que antes llevaba una hora son tres versiones
+              en diez minutos.
+            </p>
+            <h3>Mejorar textos propios</h3>
+            <p>
+              Pego el borrador y le pido que mejore la coherencia, elimine redundancias y ajuste el tono.
+              La revisión estilística es casi instantánea, y el resultado siempre supera al punto de partida.
+            </p>
+            <h3>Plantillas reutilizables</h3>
+            <p>
+              Presupuestos, propuestas, comunicados internos, protocolos. Con un contexto bien definido
+              genera plantillas que luego solo necesitan ajuste puntual.
+            </p>
+
+            <div class="art-highlight">
+              <strong>Prompt que funciona:</strong> "Eres responsable de atención al cliente de una empresa de
+              logística en Canarias. Escribe un correo para un cliente que ha recibido su pedido con cinco días de
+              retraso. Tono empático y profesional. Incluye disculpa, explicación breve y propuesta de compensación.
+              Máximo 150 palabras."<br><br>
+              La diferencia respecto a pedirle simplemente "escribe un correo de disculpa" es enorme.
+            </div>
+
+            <h2>Usos en análisis y gestión de información</h2>
+            <p>
+              Uno de los usos menos explotados y más potentes. Puedes pegar directamente en el chat texto de
+              documentos, actas, correos o informes, y pedirle que:
+            </p>
+            <ul>
+              <li>Resuma los puntos clave en cinco líneas.</li>
+              <li>Extraiga todas las tareas pendientes con responsable y fecha.</li>
+              <li>Clasifique la información por categorías o prioridad.</li>
+              <li>Identifique contradicciones o ambigüedades en el texto.</li>
+              <li>Compare dos versiones de un documento y señale las diferencias relevantes.</li>
+            </ul>
+            <p>
+              Lo uso con frecuencia en el análisis de convocatorias de formación y normativa técnica: pego el
+              texto completo y pregunto directamente qué me obliga a hacer, qué plazos tengo y qué condiciones
+              debo cumplir. El tiempo de comprensión se reduce a una fracción.
+            </p>
+
+            <div class="art-highlight">
+              <strong>Aviso importante:</strong> no pegues datos personales de clientes ni información
+              confidencial en ChatGPT, especialmente en la versión gratuita. Para uso empresarial con datos
+              internos, existe ChatGPT Enterprise y Microsoft Copilot con políticas de privacidad adaptadas
+              a entornos corporativos.
+            </div>
+
+            <div style="margin:36px 0;padding:24px 28px;background:rgba(59,130,246,0.06);border:1px solid rgba(59,130,246,0.22);border-radius:12px;display:flex;flex-direction:column;gap:12px;">
+              <p style="margin:0;font-family:var(--fd);font-size:1rem;font-weight:700;color:var(--text);letter-spacing:-0.01em;">¿Quieres que tu equipo aprenda a usar ChatGPT de forma productiva?</p>
+              <p style="margin:0;font-size:0.92rem;color:var(--muted);line-height:1.6;">Diseño talleres prácticos con ejemplos del sector y las tareas reales de tu empresa. Sin tecnicismos, con resultados desde el primer día.</p>
+              <div><a href="contacto.html" class="btn btn-p" style="min-height:40px;padding:10px 22px;font-size:0.88rem">Solicitar taller</a></div>
+            </div>
+
+            <h2>Usos en formación y diseño de contenidos</h2>
+            <p>
+              Para docentes y formadores, ChatGPT es uno de los asistentes más potentes que existen para diseño
+              instruccional. En mi propia práctica docente lo uso para:
+            </p>
+            <ul>
+              <li>Generar ejercicios y casos prácticos a partir de objetivos de aprendizaje concretos.</li>
+              <li>Adaptar el mismo contenido a distintos niveles: básico, intermedio y avanzado.</li>
+              <li>Preparar guiones de sesión y esquemas de presentación.</li>
+              <li>Crear rúbricas de evaluación a partir de las competencias que quiero trabajar.</li>
+              <li>Explicar conceptos complejos con analogías del sector del alumnado.</li>
+            </ul>
+            <p>
+              Un ejemplo real: cuando detecto durante una sesión que un grupo necesita otro enfoque para entender
+              un concepto, en menos de dos minutos tengo un nuevo ejemplo adaptado a su contexto profesional.
+              Antes de ChatGPT, eso requería pausa, búsqueda y adaptación manual.
+            </p>
+            <p>
+              Si te dedicas a la formación o al diseño de contenidos, es donde más retorno obtendrás desde el
+              primer día. Puedes ver más herramientas de IA útiles para docentes y formadores en
+              <a href="herramientas.html">mi sección de herramientas</a>.
+            </p>
+
+            <h2>Cómo escribir instrucciones que realmente funcionan</h2>
+            <p>
+              La calidad de los resultados de ChatGPT depende directamente de la calidad de las instrucciones.
+              No hace falta aprender "prompt engineering" como disciplina formal. Solo hace falta incluir tres
+              elementos en cada petición:
+            </p>
+            <ol>
+              <li><strong>Contexto:</strong> quién eres, en qué sector trabajas, cuál es el objetivo de lo que pides.</li>
+              <li><strong>Tarea específica:</strong> qué quieres exactamente: redactar, resumir, clasificar, comparar, traducir.</li>
+              <li><strong>Formato:</strong> longitud aproximada, tono deseado, estructura (lista, párrafos, tabla).</li>
+            </ol>
+            <p>
+              La iteración también importa: si el primer resultado no es exactamente lo que necesitas, no empieces
+              de cero. Pide un ajuste concreto —"hazlo más corto", "cambia el tono a más cercano", "añade un ejemplo"—.
+              El segundo intento casi siempre es mucho mejor que el primero.
+            </p>
+
+            <h2>Errores comunes que frenan a los profesionales</h2>
+            <p>
+              Los veo en casi todos los talleres que imparto:
+            </p>
+            <ul>
+              <li><strong>Usarlo como Google.</strong> Es la causa más frecuente de resultados decepcionantes. Para buscar información actualizada y verificada, los buscadores siguen siendo la herramienta correcta.</li>
+              <li><strong>Aceptar el primer resultado como definitivo.</strong> El resultado de ChatGPT es siempre un borrador. Requiere revisión antes de enviar o publicar. Quien lo entiende así multiplica su productividad.</li>
+              <li><strong>No dar contexto.</strong> Sin contexto, las respuestas son genéricas. El contexto transforma a ChatGPT de herramienta mediocre en asistente realmente útil.</li>
+              <li><strong>Confiar en los datos numéricos sin verificar.</strong> Si pides estadísticas o referencias concretas, comprueba siempre la fuente. ChatGPT puede generar datos que parecen reales y no lo son.</li>
+              <li><strong>Rendirse después de dos intentos malos.</strong> La curva de aprendizaje para escribir buenas instrucciones es corta pero existe. Los primeros resultados no siempre son buenos; quien persiste una semana nota la diferencia.</li>
+            </ul>
+
+            <h2>Lo que ChatGPT no puede hacer (y conviene recordar)</h2>
+            <p>
+              Usarlo bien también implica conocer sus límites:
+            </p>
+            <ul>
+              <li>No tiene acceso a internet en tiempo real, salvo en versiones específicas con búsqueda activada.</li>
+              <li>No conoce el contexto de tu empresa ni de tu sector si no se lo proporcionas explícitamente.</li>
+              <li>No sustituye el juicio profesional. Analiza y propone, pero la decisión es siempre tuya.</li>
+              <li>Puede presentar errores con total confianza. El criterio de revisión humana no es opcional.</li>
+            </ul>
+            <p>
+              Tratarlo como un borrador inteligente que necesita supervisión es el enfoque más productivo.
+              Con ese enfoque, el valor que aporta es considerable y sostenible.
+            </p>
+
+            <h2>Por dónde empezar esta semana</h2>
+            <p>
+              No necesitas un curso para empezar. Necesitas un problema real.
+            </p>
+            <p>
+              Elige la tarea de redacción o análisis que más tiempo te consume y delégala en ChatGPT durante
+              cinco días. No para usar el resultado directamente, sino para tener un borrador que mejores tú.
+              Al final de la semana, calcula el tiempo que te ha ahorrado.
+            </p>
+            <p>
+              Ese número te dirá todo lo que necesitas saber sobre si vale la pena incorporarlo a tu flujo habitual.
+            </p>
+            <p>
+              Si quieres empezar con acompañamiento o implantar el uso de ChatGPT en tu equipo de forma
+              estructurada, <a href="contacto.html">escríbeme</a>. Puedo diseñar un programa adaptado a vuestro
+              sector, vuestras herramientas y el nivel real de partida.
+            </p>
+
+          </article>
+
+          <aside class="art-sidebar">
+            <div class="art-sidebar-card">
+              <h4>Autora</h4>
+              <p class="art-author-name">Idayra Cabrera</p>
+              <p class="art-author-bio">
+                Docente FPE acreditada en Canarias, especializada en competencias digitales,
+                inteligencia artificial aplicada y transformación digital.
+                Más de 1.700 horas de docencia certificadas.
+              </p>
+              <div style="margin-top:14px">
+                <a href="sobre-mi.html" class="btn btn-g" style="min-height:38px;padding:8px 14px;font-size:0.84rem">Ver perfil completo</a>
+              </div>
+            </div>
+
+            <div class="art-sidebar-card">
+              <h4>Artículo</h4>
+              <p style="margin:0 0 6px;font-size:0.86rem;color:var(--muted)"><strong style="color:var(--text)">Categoría:</strong> IA aplicada</p>
+              <p style="margin:0 0 6px;font-size:0.86rem;color:var(--muted)"><strong style="color:var(--text)">Lectura:</strong> 8 minutos</p>
+              <p style="margin:0;font-size:0.86rem;color:var(--muted)"><strong style="color:var(--text)">Nivel:</strong> Sin requisitos previos</p>
+            </div>
+
+            <div class="art-sidebar-card">
+              <h4>Más artículos</h4>
+              <ul class="art-related-list">
+                <li><a href="formacion-inteligencia-artificial-canarias.html">Formación en IA en Canarias: guía práctica para empezar sin ser técnico</a></li>
+                <li><a href="excel-power-bi-empresas.html">Excel y Power BI: qué aprender primero y cómo transformar datos en decisiones</a></li>
+              </ul>
+            </div>
+
+            <div class="art-sidebar-card" style="background:rgba(59,130,246,0.06);border-color:rgba(59,130,246,0.25)">
+              <h4>¿Quieres este taller para tu empresa?</h4>
+              <p style="margin:0 0 14px;font-size:0.87rem;color:var(--muted);line-height:1.55">
+                Diseño talleres prácticos de ChatGPT adaptados al sector y las necesidades reales de tu equipo.
+              </p>
+              <a href="contacto.html" class="btn btn-p" style="width:100%;min-height:40px;padding:10px 14px;font-size:0.88rem">Solicitar información</a>
+            </div>
+          </aside>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="divider" aria-hidden="true"></div>
+
+    <section class="section section-cta-final" aria-labelledby="art2-cta-h">
+      <div class="container">
+        <div class="cta-final">
+          <span class="kicker">Siguiente paso</span>
+          <h2 id="art2-cta-h">¿Quieres implantar ChatGPT en tu equipo con resultados reales?</h2>
+          <p>
+            Diseño talleres y programas formativos sobre IA aplicada para equipos, pymes y profesionales
+            en Canarias. Trabajamos con ejemplos de vuestro propio sector desde el primer día.
+          </p>
+          <div class="cta-final-actions">
+            <a href="contacto.html" class="btn btn-p">Solicitar taller</a>
+            <a href="blog.html" class="btn btn-g">Volver al blog</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container footer-container">
+      <div class="footer-top">
+        <a href="index.html" class="nav-logo footer-logo" aria-label="Transformación IA – Inicio">
+          <img src="img/logo.png" alt="Transformación IA" class="nav-logo-img">
+        </a>
+        <div class="footer-social" aria-label="Redes sociales y contacto">
+          <a href="https://wa.me/34620948523" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="WhatsApp" title="WhatsApp">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.05 4.91A9.82 9.82 0 0 0 12.03 2C6.58 2 2.13 6.42 2.13 11.88c0 1.75.46 3.46 1.33 4.96L2 22l5.3-1.39a9.9 9.9 0 0 0 4.73 1.2h.01c5.45 0 9.9-4.42 9.9-9.88 0-2.64-1.03-5.12-2.89-7.02Zm-7.02 15.23h-.01a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-3.15.83.84-3.07-.2-.31a8.13 8.13 0 0 1-1.25-4.34c0-4.48 3.67-8.13 8.18-8.13 2.18 0 4.23.84 5.77 2.37a8.06 8.06 0 0 1 2.39 5.76c0 4.48-3.67 8.21-8.09 8.21Zm4.46-6.1c-.24-.12-1.4-.69-1.62-.77-.22-.08-.38-.12-.54.12-.16.24-.62.77-.76.93-.14.16-.28.18-.52.06-.24-.12-1.01-.37-1.92-1.19-.71-.63-1.19-1.41-1.33-1.65-.14-.24-.01-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.29-.74-1.77-.2-.47-.4-.41-.54-.42h-.46c-.16 0-.42.06-.64.3-.22.24-.84.81-.84 1.97s.86 2.28.98 2.44c.12.16 1.69 2.58 4.1 3.61.57.25 1.02.4 1.37.51.58.18 1.11.15 1.53.09.47-.07 1.4-.57 1.6-1.12.2-.55.2-1.02.14-1.12-.06-.1-.22-.16-.46-.28Z"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/in/luzidayrajorgecabrera" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="LinkedIn" title="LinkedIn">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.94 8.5A1.56 1.56 0 1 1 6.94 5.38a1.56 1.56 0 0 1 0 3.12ZM5.56 9.75h2.77V18H5.56V9.75Zm4.5 0h2.66v1.13h.04c.37-.7 1.28-1.43 2.63-1.43 2.82 0 3.34 1.85 3.34 4.26V18h-2.77v-3.79c0-.9-.02-2.06-1.26-2.06-1.26 0-1.45.98-1.45 1.99V18h-2.77V9.75Z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="currentYear"></span> Idayra Cabrera</span>
+        <div class="footer-legal">
+          <a href="aviso-legal.html">Aviso legal</a>
+          <a href="privacidad.html">Privacidad</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/34620948523?text=Hola%20Idayra,%20he%20le%C3%ADdo%20tu%20art%C3%ADculo%20sobre%20ChatGPT%20en%20el%20trabajo%20y%20me%20interesa%20m%C3%A1s%20informaci%C3%B3n."
+    class="floating-whatsapp" target="_blank" rel="noopener noreferrer"
+    aria-label="Abrir conversación en WhatsApp" title="Hablar por WhatsApp">
+    <span class="floating-whatsapp-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M19.05 4.91A9.82 9.82 0 0 0 12.03 2C6.58 2 2.13 6.42 2.13 11.88c0 1.75.46 3.46 1.33 4.96L2 22l5.3-1.39a9.9 9.9 0 0 0 4.73 1.2h.01c5.45 0 9.9-4.42 9.9-9.88 0-2.64-1.03-5.12-2.89-7.02Zm-7.02 15.23h-.01a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-3.15.83.84-3.07-.2-.31a8.13 8.13 0 0 1-1.25-4.34c0-4.48 3.67-8.13 8.18-8.13 2.18 0 4.23.84 5.77 2.37a8.06 8.06 0 0 1 2.39 5.76c0 4.48-3.67 8.21-8.09 8.21Zm4.46-6.1c-.24-.12-1.4-.69-1.62-.77-.22-.08-.38-.12-.54.12-.16.24-.62.77-.76.93-.14.16-.28.18-.52.06-.24-.12-1.01-.37-1.92-1.19-.71-.63-1.19-1.41-1.33-1.65-.14-.24-.01-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.29-.74-1.77-.2-.47-.4-.41-.54-.42h-.46c-.16 0-.42.06-.64.3-.22.24-.84.81-.84 1.97s.86 2.28.98 2.44c.12.16 1.69 2.58 4.1 3.61.57.25 1.02.4 1.37.51.58.18 1.11.15 1.53.09.47-.07 1.4-.57 1.6-1.12.2-.55.2-1.02.14-1.12-.06-.1-.22-.16-.46-.28Z"/></svg>
+    </span>
+    <span class="floating-whatsapp-text">Hablemos</span>
+  </a>
+
+  <script>
+    const navToggle = document.getElementById("navTog");
+    const navLinks = document.getElementById("navLinks");
+    const currentYear = document.getElementById("currentYear");
+    if (currentYear) currentYear.textContent = new Date().getFullYear();
+    if (navToggle && navLinks) {
+      navToggle.addEventListener("click", () => {
+        const isOpen = navLinks.classList.toggle("open");
+        navToggle.setAttribute("aria-expanded", String(isOpen));
+      });
+      navLinks.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          navLinks.classList.remove("open");
+          navToggle.setAttribute("aria-expanded", "false");
+        });
+      });
+    }
+  </script>
+</body>
+</html>
