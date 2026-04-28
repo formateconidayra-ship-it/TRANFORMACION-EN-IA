@@ -1277,9 +1277,9 @@ button {
 }
 
 .ec-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(59, 130, 246, 0.22);
-  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
+  border-color: rgba(59, 130, 246, 0.36);
+  box-shadow: 0 10px 36px rgba(0, 0, 0, 0.26), 0 0 0 1px rgba(59, 130, 246, 0.08);
 }
 
 .ec-accent {
@@ -1288,14 +1288,15 @@ button {
   left: 22px;
   right: 22px;
   height: 2px;
-  border-radius: 0 0 2px 2px;
+  border-radius: 0 0 3px 3px;
   background: linear-gradient(90deg, var(--blue) 0%, var(--cyan) 100%);
-  opacity: 0.45;
-  transition: opacity 0.26s ease;
+  opacity: 0.42;
+  transition: opacity 0.26s ease, filter 0.26s ease;
 }
 
 .ec-card:hover .ec-accent {
-  opacity: 0.9;
+  opacity: 1;
+  filter: drop-shadow(0 0 4px rgba(6, 182, 212, 0.5));
 }
 
 .ec-num {
@@ -1331,7 +1332,7 @@ button {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 9px;
+  gap: 12px;
 }
 
 .ec-list li {
@@ -1339,7 +1340,7 @@ button {
   color: var(--muted);
   padding-left: 14px;
   position: relative;
-  line-height: 1.5;
+  line-height: 1.7;
 }
 
 .ec-list li::before {
