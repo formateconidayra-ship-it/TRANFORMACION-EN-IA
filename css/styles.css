@@ -248,14 +248,17 @@ button {
 
 .nav-logo-img {
   display: block;
-  height: 50px;
-  width: auto;
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
   flex-shrink: 0;
   background: transparent;
+  filter: drop-shadow(0 0 8px rgba(34, 211, 238, 0.25));
 }
 
 .footer-logo .nav-logo-img {
-  height: 36px;
+  width: 44px;
+  height: 44px;
 }
 
 /* Wordmark textual: reemplazar por .nav-logo-img cuando esté disponible el logo */
