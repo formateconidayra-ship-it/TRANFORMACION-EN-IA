@@ -216,7 +216,7 @@ button {
   z-index: 1200;
   width: min(var(--container), calc(100% - 32px));
   margin: 8px auto 0;
-  padding: 5px 18px 5px 14px;
+  padding: 2px 18px 2px 12px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -248,7 +248,7 @@ button {
 
 .nav-logo-img {
   display: block;
-  width: 80px;
+  width: 68px;
   height: auto;
   object-fit: contain;
   flex-shrink: 0;
@@ -956,7 +956,7 @@ button {
   }
 
   .navbar {
-    padding: 7px 14px;
+    padding: 2px 12px;
   }
 
   .nav-toggle {
