@@ -1053,41 +1053,44 @@ button {
   gap: 8px;
 }
 
-/* ── Footer nav ── */
-.footer-nav {
+/* ── Footer links row ── */
+.footer-links-row {
   display: flex;
-  gap: 32px;
+  align-items: center;
   flex-wrap: wrap;
-  padding: 14px 0 12px;
+  gap: 6px 12px;
+  padding: 12px 0;
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
   margin-bottom: 10px;
 }
 
-.footer-nav-col {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.footer-nav-title {
+.footer-links-label {
   font-family: var(--fd);
-  font-size: 0.72rem;
+  font-size: 0.71rem;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--muted2);
-  margin-bottom: 2px;
+  margin-right: 6px;
 }
 
-.footer-nav-col a {
-  font-size: 0.84rem;
+.footer-links-sep {
   color: var(--muted2);
+  font-size: 0.8rem;
+  opacity: 0.45;
+  user-select: none;
+}
+
+.footer-links-row a {
+  font-size: 0.84rem;
+  color: var(--muted);
   transition: color 0.18s ease;
 }
 
-.footer-nav-col a:hover {
-  color: var(--text);
+.footer-links-row a:hover,
+.footer-links-row a:focus-visible {
+  color: var(--cyan);
 }
 
 @media (max-width: 768px) {
