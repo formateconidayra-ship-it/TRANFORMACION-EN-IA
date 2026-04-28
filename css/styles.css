@@ -346,6 +346,79 @@ button {
   background: var(--text);
 }
 
+/* ── Navbar dropdown ── */
+.nav-dropdown {
+  position: relative;
+}
+
+.nav-dropdown-btn {
+  padding: 7px 11px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--muted);
+  border-radius: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--fb);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: color 0.18s ease, background 0.18s ease;
+}
+
+.nav-dropdown-btn:hover,
+.nav-dropdown:focus-within .nav-dropdown-btn {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.nav-dropdown-btn .dd-arrow {
+  font-size: 0.6rem;
+  opacity: 0.6;
+  transition: transform 0.2s ease;
+}
+
+.nav-dropdown:hover .dd-arrow,
+.nav-dropdown:focus-within .dd-arrow {
+  transform: rotate(180deg);
+}
+
+.nav-dropdown-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  min-width: 234px;
+  padding: 6px;
+  background: rgba(11, 18, 32, 0.97);
+  border: 1px solid var(--border2);
+  border-radius: 12px;
+  backdrop-filter: blur(24px);
+  z-index: 1300;
+  flex-direction: column;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.32);
+}
+
+.nav-dropdown:hover .nav-dropdown-menu,
+.nav-dropdown:focus-within .nav-dropdown-menu {
+  display: flex;
+}
+
+.nav-dropdown-menu a {
+  padding: 9px 12px;
+  font-size: 0.86rem;
+  color: var(--muted);
+  border-radius: 8px;
+  transition: color 0.15s, background 0.15s;
+  white-space: nowrap;
+}
+
+.nav-dropdown-menu a:hover {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.06);
+}
+
 .btn {
   display: inline-flex;
   align-items: center;
@@ -893,6 +966,161 @@ button {
 .footer-legal a:hover,
 .footer-legal a:focus-visible {
   color: var(--text);
+}
+
+/* ── Áreas de formación ── */
+.af-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.af-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 30px 26px 26px;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.26s ease, border-color 0.26s ease, box-shadow 0.26s ease;
+}
+
+.af-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--blue), var(--cyan));
+  opacity: 0.4;
+  transition: opacity 0.26s ease;
+}
+
+.af-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(59, 130, 246, 0.28);
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.22);
+}
+
+.af-card:hover::before {
+  opacity: 1;
+}
+
+.af-label {
+  font-family: var(--fd);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  opacity: 0.75;
+}
+
+.af-card h3 {
+  margin: 0;
+  font-family: var(--fd);
+  font-size: 1.12rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.28;
+}
+
+.af-card p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.7;
+  flex: 1;
+}
+
+.af-card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--blue);
+  transition: color 0.18s ease, gap 0.18s ease;
+  margin-top: auto;
+}
+
+.af-card-link:hover {
+  color: var(--cyan);
+  gap: 8px;
+}
+
+/* ── Footer nav ── */
+.footer-nav {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+  padding: 14px 0 12px;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 10px;
+}
+
+.footer-nav-col {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.footer-nav-title {
+  font-family: var(--fd);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted2);
+  margin-bottom: 2px;
+}
+
+.footer-nav-col a {
+  font-size: 0.84rem;
+  color: var(--muted2);
+  transition: color 0.18s ease;
+}
+
+.footer-nav-col a:hover {
+  color: var(--text);
+}
+
+@media (max-width: 768px) {
+  .af-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .nav-dropdown-menu {
+    position: static;
+    display: flex;
+    background: none;
+    border: none;
+    backdrop-filter: none;
+    box-shadow: none;
+    padding: 0 0 0 12px;
+    min-width: auto;
+    border-radius: 0;
+  }
+
+  .nav-dropdown-btn {
+    width: 100%;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+    border-radius: 0;
+    justify-content: space-between;
+  }
+
+  .nav-dropdown-menu a {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    border-radius: 0;
+    font-size: 0.92rem;
+  }
 }
 
 /* BOTÓN FLOTANTE WHATSAPP */
