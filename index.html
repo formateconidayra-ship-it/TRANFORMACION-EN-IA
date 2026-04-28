@@ -79,11 +79,74 @@
     "@context": "https://schema.org",
     "@graph": [
       {
+        "@type": "Organization",
+        "name": "Transformación IA",
+        "url": "https://transformacionia.es/",
+        "logo": "https://transformacionia.es/img/logo-idayra-header.png",
+        "description": "Academia de Formación en Inteligencia Artificial, Transformación Digital y Competencias Digitales en Canarias. Dirigida por Idayra Cabrera, docente FPE con más de 1.700 horas certificadas.",
+        "areaServed": "Canarias",
+        "founder": {
+          "@type": "Person",
+          "name": "Idayra Cabrera"
+        },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+34-620-948-523",
+          "contactType": "customer service",
+          "availableLanguage": "Spanish"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/in/luzidayrajorgecabrera"
+        ]
+      },
+      {
+        "@type": "Course",
+        "name": "Formación en Inteligencia Artificial Aplicada",
+        "description": "Curso práctico de inteligencia artificial aplicada al entorno laboral. Aprende a usar herramientas de IA para mejorar tu productividad y empleabilidad en Canarias. Sin conocimientos previos de programación.",
+        "provider": {
+          "@type": "Organization",
+          "name": "Transformación IA",
+          "url": "https://transformacionia.es/"
+        },
+        "educationalLevel": "Beginner to Intermediate",
+        "inLanguage": "es-ES",
+        "url": "https://transformacionia.es/",
+        "teaches": ["Inteligencia artificial aplicada", "Automatización con IA", "Productividad digital", "Herramientas de IA"]
+      },
+      {
+        "@type": "Course",
+        "name": "Formación en Excel Avanzado y Power BI",
+        "description": "Curso de Excel avanzado y Power BI orientado al análisis de datos, automatización y visualización para la toma de decisiones en el entorno profesional.",
+        "provider": {
+          "@type": "Organization",
+          "name": "Transformación IA",
+          "url": "https://transformacionia.es/"
+        },
+        "educationalLevel": "Beginner to Advanced",
+        "inLanguage": "es-ES",
+        "url": "https://transformacionia.es/",
+        "teaches": ["Excel avanzado", "Power BI", "Análisis de datos", "Visualización de datos"]
+      },
+      {
+        "@type": "Course",
+        "name": "Transformación Digital y Competencias Digitales",
+        "description": "Formación en competencias digitales para la empleabilidad y la transformación digital de profesionales y equipos en Canarias. Orientada al empleo real.",
+        "provider": {
+          "@type": "Organization",
+          "name": "Transformación IA",
+          "url": "https://transformacionia.es/"
+        },
+        "educationalLevel": "Beginner",
+        "inLanguage": "es-ES",
+        "url": "https://transformacionia.es/",
+        "teaches": ["Competencias digitales", "Transformación digital", "Digitalización empresarial"]
+      },
+      {
         "@type": "Person",
         "name": "Idayra Cabrera",
         "url": "https://transformacionia.es/",
-        "jobTitle": "Docente FPE especializada en competencias digitales, IA, Excel y Power BI en Canarias",
-        "description": "Docente FPE en Canarias especializada en inteligencia artificial, Excel, Power BI y competencias digitales. Formación práctica orientada al empleo y la digitalización.",
+        "jobTitle": "Docente FPE especializada en Formación en Inteligencia Artificial, Transformación Digital y Competencias Digitales en Canarias",
+        "description": "Docente FPE en Canarias con más de 1.700 horas de formación certificada en inteligencia artificial, Excel, Power BI y competencias digitales.",
         "address": {
           "@type": "PostalAddress",
           "addressLocality": "La Laguna",
@@ -107,23 +170,63 @@
         "name": "Transformación IA",
         "url": "https://transformacionia.es/",
         "inLanguage": "es-ES"
+      }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "¿Necesito conocimientos previos para aprender Inteligencia Artificial?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. La formación en inteligencia artificial está diseñada para todos los niveles, desde personas sin experiencia técnica hasta profesionales que quieren profundizar. El enfoque es práctico y aplicado al entorno laboral, por lo que no se requieren conocimientos de programación."
+        }
       },
       {
-        "@type": "ProfessionalService",
-        "name": "Transformación IA",
-        "url": "https://transformacionia.es/",
-        "areaServed": "Canarias",
-        "founder": {
-          "@type": "Person",
-          "name": "Idayra Cabrera"
-        },
-        "serviceType": [
-          "Docencia FPE",
-          "Formación en competencias digitales",
-          "Inteligencia artificial aplicada",
-          "Excel y Power BI",
-          "Transformación digital"
-        ]
+        "@type": "Question",
+        "name": "¿Para qué sirve la formación en IA en el trabajo?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "La inteligencia artificial permite automatizar tareas repetitivas, redactar y revisar documentos más rápido, analizar datos de forma eficiente y mejorar la toma de decisiones. Con la formación adecuada puedes usar herramientas de IA desde el primer día en tu puesto de trabajo."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Cuánto tiempo lleva aprender a usar herramientas de IA?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Depende del nivel y el objetivo. En un curso introductorio de entre 20 y 40 horas, la mayoría de los alumnos adquieren autonomía suficiente para incorporar la IA en su trabajo diario. Los programas más avanzados de análisis de datos o automatización pueden extenderse más."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿La formación es presencial o puede ser online?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "La formación se adapta a las necesidades de cada entidad o alumno. Se puede impartir de forma presencial en Canarias o en modalidad online, siempre con un enfoque práctico y orientado a resultados reales."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Qué diferencia hay entre la formación en IA y un curso de Excel o Power BI?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Son complementarias. Excel y Power BI permiten gestionar y visualizar datos de forma avanzada. La formación en IA añade automatización, generación de contenido e interpretación de lenguaje natural. Juntas, forman un perfil digital muy completo y demandado en el mercado laboral."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Cómo puedo solicitar formación en IA para mi empresa o equipo?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Puedes contactar a través del formulario de contacto o por WhatsApp. Se valorarán las necesidades específicas de tu equipo y se diseñará un programa adaptado, incluyendo temario, duración y modalidad. La respuesta es en menos de 24 horas."
+        }
       }
     ]
   }
@@ -173,18 +276,18 @@
             <p class="hero-pretitle">Docencia · IA · Competencias digitales</p>
 
             <h1 class="hero-title">
-              Docente FPE en Canarias especializada en
-              <em>competencias digitales e inteligencia artificial</em>
+              Formación en Inteligencia Artificial y Transformación Digital en Canarias ·
+              <em>Idayra Cabrera, Docente FPE</em>
             </h1>
 
             <p class="hero-autoridad">+1.700 horas de docencia · +15 años de experiencia · Formación certificada</p>
 
             <p class="hero-subtitle">
-              Ayudo a profesionales y entidades en Canarias a mejorar su empleabilidad y productividad mediante formación práctica en herramientas digitales, inteligencia artificial y análisis de datos.
+              La <strong>formación en Inteligencia Artificial y Transformación Digital</strong> que imparto está diseñada para profesionales y entidades en Canarias que necesitan adaptarse al nuevo entorno digital. La inteligencia artificial está transformando todos los sectores: automatiza tareas repetitivas, mejora la toma de decisiones y abre nuevas oportunidades laborales. Saber utilizar herramientas de IA, manejar datos con Excel y Power BI, y desarrollar competencias digitales sólidas son hoy habilidades esenciales para la empleabilidad y la productividad.
             </p>
 
             <p class="hero-desc">
-              Cuento con más de 1.700 horas de experiencia en formación real orientada al empleo, trabajando con entidades, centros formativos y profesionales que necesitan adaptarse a la transformación digital.
+              Como docente FPE especializada en Canarias, ofrezco programas prácticos y orientados al empleo donde cada alumno aprende a aplicar estas herramientas desde el primer día, sin tecnicismos innecesarios y adaptado a todos los niveles. Con más de 1.700 horas de docencia certificada, más de 15 años de experiencia y colaboraciones con entidades como la Cámara de Comercio, AFS Formación y Generación 21, mi metodología combina rigor técnico con un enfoque didáctico cercano y eficaz. El resultado: profesionales que mejoran su empleabilidad y equipos que se adaptan con éxito a la transformación digital.
             </p>
 
             <div class="hero-actions">
