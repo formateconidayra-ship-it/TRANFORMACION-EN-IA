@@ -1758,3 +1758,229 @@ button {
   position: absolute;
   left: -9999px;
 }
+
+/* ===== SERVICE PAGE — MÓDULOS VISUALES ===== */
+
+.sp-section { margin-top: 64px; }
+
+.sp-section-header { margin-bottom: 32px; }
+.sp-section-header h2 {
+  margin: 0 0 8px;
+  font-family: var(--fd);
+  font-size: clamp(1.3rem, 2.5vw, 1.7rem);
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  color: var(--text);
+  line-height: 1.1;
+}
+.sp-section-header p {
+  margin: 0;
+  font-size: 0.97rem;
+  color: var(--muted);
+  max-width: 56ch;
+  line-height: 1.65;
+}
+
+/* Grid "Qué incluye" — 4 columnas */
+.sp-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+.sp-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 24px 20px;
+  background: rgba(255,255,255,0.025);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.22s ease, box-shadow 0.22s ease, transform 0.22s ease;
+}
+.sp-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--blue), var(--cyan));
+  opacity: 0;
+  transition: opacity 0.22s ease;
+}
+.sp-card:hover {
+  border-color: rgba(59,130,246,0.28);
+  box-shadow: 0 8px 28px rgba(59,130,246,0.08);
+  transform: translateY(-3px);
+}
+.sp-card:hover::before { opacity: 1; }
+.sp-card-icon { font-size: 1.4rem; line-height: 1; }
+.sp-card-title {
+  font-family: var(--fd);
+  font-size: 0.97rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+}
+.sp-card-desc {
+  font-size: 0.875rem;
+  color: var(--muted);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Grid "Qué vas a conseguir" — 2×2 */
+.sp-benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+.sp-benefit {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 22px 20px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+.sp-benefit:hover {
+  border-color: rgba(59,130,246,0.22);
+  background: rgba(59,130,246,0.04);
+}
+.sp-benefit-icon {
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  background: rgba(59,130,246,0.1);
+  border: 1px solid rgba(59,130,246,0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+.sp-benefit-body { flex: 1; }
+.sp-benefit-title {
+  margin: 0 0 4px;
+  font-family: var(--fd);
+  font-size: 0.97rem;
+  font-weight: 700;
+  color: var(--text);
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+}
+.sp-benefit-desc {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* Steps "Cómo trabajo" — 3 pasos */
+.sp-steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  position: relative;
+}
+.sp-steps::before {
+  content: "";
+  position: absolute;
+  top: 21px;
+  left: calc(16.67% + 20px);
+  right: calc(16.67% + 20px);
+  height: 1px;
+  background: linear-gradient(90deg, rgba(59,130,246,0.4), rgba(6,182,212,0.4), rgba(59,130,246,0.4));
+  z-index: 0;
+}
+.sp-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 14px;
+  padding: 0 24px;
+  position: relative;
+  z-index: 1;
+}
+.sp-step-num {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(59,130,246,0.1);
+  border: 1px solid rgba(59,130,246,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--fd);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--blue);
+  flex-shrink: 0;
+}
+.sp-step-title {
+  margin: 0 0 6px;
+  font-family: var(--fd);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+}
+.sp-step-desc {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--muted);
+  line-height: 1.62;
+}
+
+/* CTA final */
+.sp-cta {
+  margin-top: 64px;
+  padding: 48px 40px;
+  background: linear-gradient(135deg, rgba(59,130,246,0.07) 0%, rgba(6,182,212,0.04) 100%);
+  border: 1px solid rgba(59,130,246,0.18);
+  border-radius: var(--radius);
+  text-align: center;
+}
+.sp-cta h2 {
+  margin: 0 0 10px;
+  font-family: var(--fd);
+  font-size: clamp(1.35rem, 2.5vw, 1.85rem);
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+}
+.sp-cta p {
+  margin: 0 auto 28px;
+  color: var(--muted);
+  font-size: 1rem;
+  max-width: 52ch;
+  line-height: 1.65;
+}
+.sp-cta-actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+.sp-cta-micro { font-size: 0.84rem; color: var(--muted2); }
+
+/* Responsive service page modules */
+@media (max-width: 900px) {
+  .sp-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 600px) {
+  .sp-section { margin-top: 48px; }
+  .sp-grid { grid-template-columns: 1fr; }
+  .sp-benefits-grid { grid-template-columns: 1fr; }
+  .sp-steps { grid-template-columns: 1fr; gap: 24px; }
+  .sp-steps::before { display: none; }
+  .sp-step { align-items: flex-start; text-align: left; flex-direction: row; }
+  .sp-cta { padding: 32px 20px; }
+}
