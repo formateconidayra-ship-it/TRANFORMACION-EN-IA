@@ -43,18 +43,33 @@
 
   <style>
     /* ── Imagen en tarjeta de testimonio ── */
-    .testimonio-card { overflow: hidden; }
-    .tc-img {
-      width: calc(100% + 52px);
-      height: 130px;
-      object-fit: cover;
-      display: block;
-      margin: -26px -26px 0;
-      flex-shrink: 0;
+    .tc-img-wrap {
+      margin: -26px -26px 14px;
+      height: 200px;
+      overflow: hidden;
       border-radius: var(--radius) var(--radius) 0 0;
+      position: relative;
+      flex-shrink: 0;
+    }
+    .tc-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+      display: block;
+      transition: transform 0.45s ease;
+    }
+    .tc-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 45%, rgba(7, 9, 15, 0.65) 100%);
+      pointer-events: none;
+    }
+    .testimonio-card:hover .tc-img {
+      transform: scale(1.05);
     }
     @media (max-width: 600px) {
-      .tc-img { height: 110px; }
+      .tc-img-wrap { height: 150px; }
     }
   </style>
 
@@ -263,7 +278,10 @@
         <div class="testimonios-grid">
 
           <article class="testimonio-card">
-            <img src="img/formacion-excel-canarias.jpeg" alt="Formación en Excel en Canarias con alumnos en aula" class="tc-img" loading="lazy" />
+            <div class="tc-img-wrap">
+              <img src="img/formacion-excel-canarias.jpeg" alt="Formación en Excel en Canarias con alumnos en aula" class="tc-img" loading="lazy" />
+              <div class="tc-overlay" aria-hidden="true"></div>
+            </div>
             <div class="stars" aria-label="5 estrellas">★★★★★</div>
             <blockquote>
               <p>"Docente cercana, profesional y con una gran capacidad para explicar. Consigue que aprendas sin darte cuenta."</p>
@@ -274,7 +292,10 @@
           </article>
 
           <article class="testimonio-card">
-            <img src="img/aula-formacion-profesional-canarias.jpeg" alt="Clase de formación profesional para el empleo en Canarias" class="tc-img" loading="lazy" />
+            <div class="tc-img-wrap">
+              <img src="img/aula-formacion-profesional-canarias.jpeg" alt="Clase de formación profesional para el empleo en Canarias" class="tc-img" loading="lazy" />
+              <div class="tc-overlay" aria-hidden="true"></div>
+            </div>
             <div class="stars" aria-label="5 estrellas">★★★★★</div>
             <blockquote>
               <p>"Formación práctica, clara y muy bien estructurada. Se nota la experiencia y el dominio de los contenidos."</p>
@@ -285,7 +306,10 @@
           </article>
 
           <article class="testimonio-card">
-            <img src="img/alumnos-formacion-digital-canarias.jpeg" alt="Alumnos en formación digital en Canarias aplicando herramientas" class="tc-img" loading="lazy" />
+            <div class="tc-img-wrap">
+              <img src="img/alumnos-formacion-digital-canarias.jpeg" alt="Alumnos en formación digital en Canarias aplicando herramientas" class="tc-img" loading="lazy" />
+              <div class="tc-overlay" aria-hidden="true"></div>
+            </div>
             <div class="stars" aria-label="5 estrellas">★★★★★</div>
             <blockquote>
               <p>"Destaco su paciencia, cercanía y capacidad de adaptación a cada alumno. Una docente excelente."</p>
