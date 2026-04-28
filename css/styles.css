@@ -212,20 +212,20 @@ button {
 
 .navbar {
   position: sticky;
-  top: 10px;
+  top: 8px;
   z-index: 1200;
   width: min(var(--container), calc(100% - 32px));
-  margin: 10px auto 0;
-  padding: 12px 18px;
+  margin: 8px auto 0;
+  padding: 7px 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
-  background: rgba(7, 9, 15, 0.84);
-  border: 1px solid var(--border2);
-  border-radius: 14px;
-  backdrop-filter: blur(18px);
-  box-shadow: var(--shadow-soft);
+  gap: 12px;
+  background: rgba(7, 9, 15, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 12px;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.28), 0 1px 0 rgba(255,255,255,0.04) inset;
 }
 
 .nav-logo {
@@ -248,17 +248,17 @@ button {
 
 .nav-logo-img {
   display: block;
-  width: 64px;
-  height: 64px;
+  width: 46px;
+  height: 46px;
   object-fit: contain;
   flex-shrink: 0;
   background: transparent;
-  filter: drop-shadow(0 0 8px rgba(34, 211, 238, 0.25));
+  filter: drop-shadow(0 0 7px rgba(34, 211, 238, 0.28));
 }
 
 .footer-logo .nav-logo-img {
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
 }
 
 /* Wordmark textual: reemplazar por .nav-logo-img cuando esté disponible el logo */
@@ -283,16 +283,17 @@ button {
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 2px;
 }
 
 .nav-links a {
-  padding: 9px 12px;
-  font-size: 0.94rem;
+  padding: 7px 11px;
+  font-size: 0.875rem;
   font-weight: 500;
   color: var(--muted);
   border-radius: 8px;
-  transition: 0.2s ease;
+  transition: color 0.18s ease, background 0.18s ease;
+  white-space: nowrap;
 }
 
 .nav-links a:hover,
@@ -305,11 +306,15 @@ button {
   background: var(--blue);
   color: #ffffff !important;
   font-weight: 700 !important;
+  padding: 7px 16px !important;
+  border-radius: 8px;
+  letter-spacing: 0.01em;
 }
 
 .nav-cta:hover,
 .nav-cta:focus-visible {
   background: var(--blue-strong);
+  color: #fff !important;
 }
 
 .nav-toggle {
@@ -951,7 +956,7 @@ button {
   }
 
   .navbar {
-    padding: 12px 14px;
+    padding: 7px 14px;
   }
 
   .nav-toggle {
