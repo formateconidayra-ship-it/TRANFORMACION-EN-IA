@@ -216,16 +216,16 @@ button {
   z-index: 1200;
   width: min(var(--container), calc(100% - 32px));
   margin: 8px auto 0;
-  padding: 7px 20px;
+  padding: 5px 18px 5px 14px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
-  background: rgba(7, 9, 15, 0.88);
-  border: 1px solid rgba(255, 255, 255, 0.09);
-  border-radius: 12px;
-  backdrop-filter: blur(20px);
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.28), 0 1px 0 rgba(255,255,255,0.04) inset;
+  gap: 8px;
+  background: rgba(7, 9, 15, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
+  backdrop-filter: blur(22px);
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.22), 0 1px 0 rgba(255,255,255,0.03) inset;
 }
 
 .nav-logo {
@@ -248,12 +248,12 @@ button {
 
 .nav-logo-img {
   display: block;
-  width: 46px;
-  height: 46px;
+  width: 80px;
+  height: auto;
   object-fit: contain;
   flex-shrink: 0;
   background: transparent;
-  filter: drop-shadow(0 0 7px rgba(34, 211, 238, 0.28));
+  filter: drop-shadow(0 0 10px rgba(34, 211, 238, 0.30));
 }
 
 .footer-logo .nav-logo-img {
