@@ -57,15 +57,19 @@
       object-fit: cover;
       object-position: center center;
       display: block;
+      filter: brightness(0.95) contrast(1.02);
       transition: transform 0.3s ease;
     }
     .tc-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.4));
+      background: linear-gradient(to bottom, rgba(0,0,0,0.12), rgba(0,0,0,0.42));
+      opacity: 1;
+      transition: opacity 0.3s ease;
       pointer-events: none;
     }
     .testimonio-card:hover .tc-img { transform: scale(1.03); }
+    .testimonio-card:hover .tc-overlay { opacity: 0.55; }
     @media (max-width: 600px) {
       .tc-img-wrap { height: 130px; }
     }
@@ -277,7 +281,7 @@
 
           <article class="testimonio-card">
             <div class="tc-img-wrap">
-              <img src="img/formacion-excel-canarias.jpeg" alt="Formación en Excel en Canarias con alumnos en aula" class="tc-img" loading="lazy" style="object-position:center center" />
+              <img src="img/formacion-excel-canarias.jpeg" alt="Formación en Excel en Canarias con alumnos en aula" class="tc-img" loading="lazy" style="object-position:62% center" />
               <div class="tc-overlay" aria-hidden="true"></div>
             </div>
             <div class="stars" aria-label="5 estrellas">★★★★★</div>
@@ -305,8 +309,8 @@
 
           <article class="testimonio-card">
             <div class="tc-img-wrap">
-              <img src="img/alumnos-formacion-digital-canarias.jpeg" alt="Alumnos en formación digital en Canarias aplicando herramientas" class="tc-img" loading="lazy" style="object-position:center top;filter:brightness(0.9) contrast(1.05)" />
-              <div class="tc-overlay" aria-hidden="true"></div>
+              <img src="img/alumnos-formacion-digital-canarias.jpeg" alt="Alumnos en formación digital en Canarias aplicando herramientas" class="tc-img" loading="lazy" style="object-position:center top;filter:brightness(0.8) contrast(1.1)" />
+              <div class="tc-overlay" aria-hidden="true" style="background:linear-gradient(to bottom, rgba(0,0,0,0.22), rgba(0,0,0,0.58))"></div>
             </div>
             <div class="stars" aria-label="5 estrellas">★★★★★</div>
             <blockquote>
