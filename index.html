@@ -42,34 +42,19 @@
   <link rel="stylesheet" href="css/styles.css" />
 
   <style>
-    /* ── Galería de formación en aula ── */
-    .galeria-aula-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-    .galeria-aula-item {
-      overflow: hidden;
-      border-radius: var(--radius);
-      border: 1px solid var(--border2);
-      line-height: 0;
-    }
-    .galeria-aula-img {
-      width: 100%;
-      aspect-ratio: 4 / 3;
+    /* ── Imagen en tarjeta de testimonio ── */
+    .testimonio-card { overflow: hidden; }
+    .tc-img {
+      width: calc(100% + 52px);
+      height: 130px;
       object-fit: cover;
       display: block;
-      transition: transform 0.35s ease, box-shadow 0.35s ease;
+      margin: -26px -26px 0;
+      flex-shrink: 0;
+      border-radius: var(--radius) var(--radius) 0 0;
     }
-    .galeria-aula-item:hover {
-      border-color: rgba(59, 130, 246, 0.32);
-      box-shadow: 0 8px 36px rgba(0, 0, 0, 0.38), 0 0 0 1px rgba(59, 130, 246, 0.12);
-    }
-    .galeria-aula-item:hover .galeria-aula-img {
-      transform: scale(1.04);
-    }
-    @media (max-width: 768px) {
-      .galeria-aula-grid { grid-template-columns: 1fr; }
+    @media (max-width: 600px) {
+      .tc-img { height: 110px; }
     }
   </style>
 
@@ -278,6 +263,7 @@
         <div class="testimonios-grid">
 
           <article class="testimonio-card">
+            <img src="img/formacion-excel-canarias.jpeg" alt="Formación en Excel en Canarias con alumnos en aula" class="tc-img" loading="lazy" />
             <div class="stars" aria-label="5 estrellas">★★★★★</div>
             <blockquote>
               <p>"Docente cercana, profesional y con una gran capacidad para explicar. Consigue que aprendas sin darte cuenta."</p>
@@ -288,6 +274,7 @@
           </article>
 
           <article class="testimonio-card">
+            <img src="img/aula-formacion-profesional-canarias.jpeg" alt="Clase de formación profesional para el empleo en Canarias" class="tc-img" loading="lazy" />
             <div class="stars" aria-label="5 estrellas">★★★★★</div>
             <blockquote>
               <p>"Formación práctica, clara y muy bien estructurada. Se nota la experiencia y el dominio de los contenidos."</p>
@@ -298,6 +285,7 @@
           </article>
 
           <article class="testimonio-card">
+            <img src="img/alumnos-formacion-digital-canarias.jpeg" alt="Alumnos en formación digital en Canarias aplicando herramientas" class="tc-img" loading="lazy" />
             <div class="stars" aria-label="5 estrellas">★★★★★</div>
             <blockquote>
               <p>"Destaco su paciencia, cercanía y capacidad de adaptación a cada alumno. Una docente excelente."</p>
@@ -316,53 +304,6 @@
             rel="noopener noreferrer"
             class="btn btn-g"
           >Ver más recomendaciones en LinkedIn</a>
-        </div>
-      </div>
-    </section>
-
-    <div class="divider" aria-hidden="true"></div>
-
-    <section class="section section-galeria-aula" aria-labelledby="galeria-h">
-      <div class="container">
-        <div class="sh center">
-          <span class="kicker">Formación en aula</span>
-          <h2 class="section-title" id="galeria-h">Formación real en aula</h2>
-          <p class="section-sub">
-            Estas son algunas de las formaciones reales donde aplico lo que mis alumnos destacan en sus testimonios.
-          </p>
-        </div>
-
-        <div class="galeria-aula-grid">
-          <div class="galeria-aula-item fade-in-up">
-            <img
-              src="img/formacion-excel-canarias.jpeg"
-              alt="Formación en Excel en Canarias con alumnos en aula"
-              class="galeria-aula-img"
-              loading="lazy"
-              width="600"
-              height="450"
-            />
-          </div>
-          <div class="galeria-aula-item fade-in-up">
-            <img
-              src="img/aula-formacion-profesional-canarias.jpeg"
-              alt="Clase de formación profesional para el empleo en Canarias"
-              class="galeria-aula-img"
-              loading="lazy"
-              width="600"
-              height="450"
-            />
-          </div>
-          <div class="galeria-aula-item fade-in-up">
-            <img
-              src="img/alumnos-formacion-digital-canarias.jpeg"
-              alt="Alumnos en formación digital en Canarias aplicando herramientas"
-              class="galeria-aula-img"
-              loading="lazy"
-              width="600"
-              height="450"
-            />
-          </div>
         </div>
       </div>
     </section>
