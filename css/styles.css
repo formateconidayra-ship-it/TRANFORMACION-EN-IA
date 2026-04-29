@@ -1,27 +1,34 @@
 /* Google Fonts se cargan en el <head> de cada HTML con preconnect para mejor rendimiento */
 
 :root {
-  --bg: #07090f;
-  --bg2: #0b1220;
+  /* Dark Premium */
+  --bg: #0b0f19;
+  --bg2: #111827;
   --bg3: #0f172a;
-  --bg4: #0c1018;
-  --bg5: #08111f;
+  --bg4: #1a2235;
+  --bg5: #0d1526;
 
-  --surface: rgba(255, 255, 255, 0.03);
-  --surface-2: rgba(255, 255, 255, 0.045);
+  --surface: rgba(255, 255, 255, 0.04);
+  --surface-2: rgba(255, 255, 255, 0.065);
 
-  --border: rgba(255, 255, 255, 0.06);
-  --border2: rgba(255, 255, 255, 0.12);
+  --border: rgba(255, 255, 255, 0.08);
+  --border2: rgba(255, 255, 255, 0.14);
 
-  --text: #e8edf5;
-  --muted: #a2aec0;
-  --muted2: #6f7d91;
+  /* Texto */
+  --text: #f1f5f9;
+  --muted: #94a3b8;
+  --muted2: #64748b;
 
+  /* Marca */
   --blue: #3b82f6;
   --blue-strong: #2563eb;
   --cyan: #06b6d4;
   --green: #22c55e;
   --green-strong: #16a34a;
+
+  /* Glow */
+  --glow-blue: rgba(59, 130, 246, 0.20);
+  --glow-cyan: rgba(6, 182, 212, 0.20);
 
   --radius: 18px;
   --radius-sm: 10px;
@@ -29,8 +36,8 @@
   --fd: 'Roboto Condensed', sans-serif;
   --fb: 'Roboto', sans-serif;
 
-  --shadow: 0 10px 30px rgba(0, 0, 0, 0.22);
-  --shadow-soft: 0 8px 24px rgba(0, 0, 0, 0.18);
+  --shadow: 0 10px 32px rgba(0, 0, 0, 0.32);
+  --shadow-soft: 0 6px 20px rgba(0, 0, 0, 0.24);
 
   --container: 1120px;
 }
@@ -48,7 +55,12 @@ html {
 body {
   margin: 0;
   font-family: var(--fb);
-  background: var(--bg);
+  background:
+    radial-gradient(circle at 80% 15%, rgba(56, 189, 248, 0.07) 0%, transparent 40%),
+    radial-gradient(circle at 15% 60%, rgba(99, 102, 241, 0.05) 0%, transparent 38%),
+    radial-gradient(circle at 55% 90%, rgba(6, 182, 212, 0.05) 0%, transparent 35%),
+    #0b0f19;
+  background-attachment: fixed;
   color: var(--text);
   line-height: 1.65;
   overflow-x: hidden;
@@ -78,7 +90,7 @@ button {
 }
 
 ::selection {
-  background: rgba(59, 130, 246, 0.28);
+  background: rgba(6, 182, 212, 0.30);
   color: #fff;
 }
 
@@ -109,23 +121,23 @@ button {
 .bg-glow::before {
   content: "";
   position: absolute;
-  width: 720px;
-  height: 720px;
+  width: 780px;
+  height: 780px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(59, 130, 246, 0.09) 0%, transparent 70%);
-  top: -240px;
-  left: -180px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.13) 0%, transparent 68%);
+  top: -260px;
+  left: -200px;
 }
 
 .bg-glow::after {
   content: "";
   position: absolute;
-  width: 560px;
-  height: 560px;
+  width: 600px;
+  height: 600px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(6, 182, 212, 0.07) 0%, transparent 70%);
-  right: -140px;
-  bottom: -140px;
+  background: radial-gradient(circle, rgba(6, 182, 212, 0.10) 0%, transparent 68%);
+  right: -150px;
+  bottom: -150px;
 }
 
 .container {
@@ -147,27 +159,31 @@ button {
 }
 
 .section-deep {
-  background: linear-gradient(180deg, var(--bg2) 0%, var(--bg3) 100%);
+  background: linear-gradient(180deg, #111827 0%, #0c1220 50%, #0b0f19 100%);
+  overflow: hidden;
 }
 
 .section-soft {
-  background: var(--bg4);
+  background: linear-gradient(180deg, #0b0f19 0%, #0f1829 50%, #111827 100%);
+  overflow: hidden;
 }
 
 .section-dark {
-  background: linear-gradient(180deg, var(--bg5) 0%, var(--bg) 100%);
+  background: linear-gradient(180deg, #111827 0%, #0d1424 50%, #0b0f19 100%);
+  overflow: hidden;
 }
 
 .section-cta-final {
   background:
-    radial-gradient(circle at top right, rgba(59, 130, 246, 0.10), transparent 30%),
-    linear-gradient(180deg, #08111f 0%, #06090f 100%);
+    radial-gradient(ellipse at top right, rgba(6, 182, 212, 0.10) 0%, transparent 55%),
+    radial-gradient(ellipse at bottom left, rgba(59, 130, 246, 0.08) 0%, transparent 55%),
+    linear-gradient(180deg, #0b0f19 0%, #0d1526 50%, #0b0f19 100%);
   padding: 72px 0 68px;
 }
 
 .divider {
   height: 1px;
-  background: var(--border);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06) 30%, rgba(6,182,212,0.12) 50%, rgba(255,255,255,0.06) 70%, transparent);
   position: relative;
   z-index: 1;
 }
@@ -180,6 +196,7 @@ button {
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--cyan);
+  text-shadow: 0 0 18px rgba(6, 182, 212, 0.35);
 }
 
 .section-title {
@@ -189,6 +206,7 @@ button {
   line-height: 1.05;
   text-transform: uppercase;
   letter-spacing: -0.01em;
+  color: var(--text);
 }
 
 .section-sub {
@@ -196,6 +214,7 @@ button {
   margin: 0;
   color: var(--muted);
   font-size: 1rem;
+  line-height: 1.7;
 }
 
 .sh {
@@ -221,11 +240,11 @@ button {
   align-items: center;
   justify-content: space-between;
   gap: 8px;
-  background: rgba(7, 9, 15, 0.68);
-  border: 1px solid rgba(255, 255, 255, 0.025);
+  background: rgba(7, 10, 18, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.07);
   border-radius: 14px;
-  backdrop-filter: blur(24px);
-  box-shadow: 0 1px 12px rgba(0, 0, 0, 0.18);
+  backdrop-filter: blur(28px);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.28), 0 0 0 0.5px rgba(6, 182, 212, 0.06);
 }
 
 .nav-logo {
@@ -251,10 +270,15 @@ button {
   font-family: var(--fd);
   font-size: 0.95rem;
   font-weight: 500;
-  color: #9aa4b2;
+  color: var(--muted2);
   letter-spacing: 0.04em;
   white-space: nowrap;
   line-height: 1;
+  transition: color 0.2s ease;
+}
+
+.nav-logo:hover .nav-logo-text {
+  color: var(--muted);
 }
 
 .nav-logo-img {
@@ -310,8 +334,8 @@ button {
 
 .nav-links a:hover,
 .nav-links a:focus-visible {
-  color: var(--text);
-  background: rgba(255, 255, 255, 0.05);
+  color: var(--cyan);
+  background: rgba(6, 182, 212, 0.08);
 }
 
 .nav-cta {
@@ -321,12 +345,14 @@ button {
   padding: 7px 16px !important;
   border-radius: 8px;
   letter-spacing: 0.01em;
+  box-shadow: 0 2px 10px rgba(59, 130, 246, 0.28);
 }
 
 .nav-cta:hover,
 .nav-cta:focus-visible {
   background: var(--blue-strong);
   color: #fff !important;
+  box-shadow: 0 4px 16px rgba(59, 130, 246, 0.42);
 }
 
 .nav-toggle {
@@ -370,7 +396,7 @@ button {
 .nav-dropdown-btn:hover,
 .nav-dropdown:focus-within .nav-dropdown-btn {
   color: var(--text);
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.06);
 }
 
 .nav-dropdown-btn .dd-arrow {
@@ -391,13 +417,13 @@ button {
   left: 0;
   min-width: 234px;
   padding: 6px;
-  background: rgba(11, 18, 32, 0.97);
+  background: rgba(11, 16, 28, 0.97);
   border: 1px solid var(--border2);
   border-radius: 12px;
   backdrop-filter: blur(24px);
   z-index: 1300;
   flex-direction: column;
-  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.32);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.36);
 }
 
 .nav-dropdown:hover .nav-dropdown-menu,
@@ -415,8 +441,8 @@ button {
 }
 
 .nav-dropdown-menu a:hover {
-  color: var(--text);
-  background: rgba(255, 255, 255, 0.06);
+  color: var(--cyan);
+  background: rgba(6, 182, 212, 0.08);
 }
 
 .btn {
@@ -436,29 +462,29 @@ button {
 .btn-p {
   background: var(--blue);
   color: #ffffff;
-  box-shadow: 0 4px 18px rgba(59, 130, 246, 0.25);
+  box-shadow: 0 4px 18px rgba(59, 130, 246, 0.3);
 }
 
 .btn-p:hover,
 .btn-p:focus-visible {
   background: var(--blue-strong);
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 6px 24px rgba(59, 130, 246, 0.42);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 32px rgba(59, 130, 246, 0.55), 0 0 0 1px rgba(59, 130, 246, 0.25);
 }
 
 .btn-g {
   background: transparent;
-  color: #cbd5e1;
-  border-color: rgba(255, 255, 255, 0.2);
+  color: var(--muted);
+  border-color: rgba(255, 255, 255, 0.16);
 }
 
 .btn-g:hover,
 .btn-g:focus-visible {
-  background: transparent;
-  color: var(--blue);
-  border-color: var(--blue);
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: none;
+  background: rgba(6, 182, 212, 0.07);
+  color: var(--cyan);
+  border-color: rgba(6, 182, 212, 0.55);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 0 24px rgba(6, 182, 212, 0.18), 0 0 0 1px rgba(6, 182, 212, 0.12);
 }
 
 .btn-card {
@@ -512,8 +538,8 @@ button {
   gap: 8px;
   margin-bottom: 14px;
   padding: 7px 14px;
-  background: rgba(255, 255, 255, 0.035);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(6, 182, 212, 0.07);
+  border: 1px solid rgba(6, 182, 212, 0.20);
   border-radius: 999px;
   color: var(--muted);
   font-size: 0.82rem;
@@ -550,7 +576,7 @@ button {
   font-size: 0.83rem;
   font-weight: 700;
   letter-spacing: 0.04em;
-  color: var(--muted2);
+  color: var(--muted);
   text-transform: uppercase;
 }
 
@@ -581,7 +607,7 @@ button {
   font-weight: 400;
   line-height: 1.68;
   text-transform: none;
-  color: #c8d3e2;
+  color: var(--muted);
 }
 
 .hero-desc {
@@ -620,11 +646,11 @@ button {
 }
 
 .hero-card {
-  background: linear-gradient(180deg, rgba(12, 16, 24, 0.96), rgba(16, 21, 32, 0.96));
+  background: linear-gradient(180deg, #1a2235 0%, #16203a 100%);
   border: 1px solid var(--border2);
   border-radius: 20px;
   padding: 22px;
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow), 0 0 40px rgba(59, 130, 246, 0.07);
   margin-top: 0;
 }
 
@@ -702,15 +728,15 @@ button {
 .svc-card,
 .pcard {
   padding: 24px;
-  transition: 0.22s ease;
+  transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
 }
 
 .svc-card:hover,
 .pcard:hover,
 .acard:hover {
-  transform: translateY(-2px);
-  border-color: rgba(59, 130, 246, 0.28);
-  box-shadow: var(--shadow-soft);
+  transform: translateY(-3px);
+  border-color: rgba(59, 130, 246, 0.32);
+  box-shadow: var(--shadow-soft), 0 0 24px rgba(6, 182, 212, 0.07);
 }
 
 .svc-num {
@@ -719,7 +745,7 @@ button {
   font-size: 2rem;
   font-weight: 800;
   line-height: 1;
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.45), rgba(6, 182, 212, 0.45));
+  background: linear-gradient(135deg, rgba(96, 165, 250, 0.55), rgba(34, 211, 238, 0.55));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -859,7 +885,7 @@ button {
   padding: 34px;
   text-align: center;
   background:
-    linear-gradient(180deg, rgba(12, 16, 24, 0.96), rgba(9, 13, 20, 0.96));
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(248, 250, 255, 0.96));
   box-shadow: var(--shadow-soft);
 }
 
@@ -889,7 +915,7 @@ button {
   z-index: 1;
   padding: 28px 0 20px;
   border-top: 1px solid var(--border);
-  background: linear-gradient(180deg, #05070c 0%, #07101a 100%);
+  background: linear-gradient(180deg, #070b14 0%, #0b0f19 100%);
 }
 
 .footer-container {
@@ -924,7 +950,7 @@ button {
   width: 40px;
   height: 40px;
   border-radius: 10px;
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(255, 255, 255, 0.04);
   border: 1px solid var(--border2);
   color: var(--muted);
   transition: 0.22s ease;
@@ -963,7 +989,7 @@ button {
 
 .footer-bottom a:hover,
 .footer-bottom a:focus-visible {
-  color: var(--text);
+  color: var(--cyan);
 }
 
 .footer-bottom-sep {
@@ -984,7 +1010,7 @@ button {
   flex-direction: column;
   gap: 14px;
   padding: 30px 26px 26px;
-  background: rgba(255, 255, 255, 0.025);
+  background: var(--bg4);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   overflow: hidden;
@@ -1000,14 +1026,14 @@ button {
   right: 0;
   height: 2px;
   background: linear-gradient(90deg, var(--blue), var(--cyan));
-  opacity: 0.4;
+  opacity: 0.35;
   transition: opacity 0.26s ease;
 }
 
 .af-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(59, 130, 246, 0.28);
-  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.22);
+  border-color: rgba(8, 145, 178, 0.35);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.10), 0 0 28px rgba(8, 145, 178, 0.10);
 }
 
 .af-card:hover::before {
@@ -1393,19 +1419,19 @@ button {
   align-items: center;
   gap: 10px;
   padding: 32px 20px;
-  background: rgba(255, 255, 255, 0.025);
+  background: var(--bg4);
   border: 1px solid var(--border2);
   border-radius: var(--radius);
   text-align: center;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255,255,255,0.04);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.24);
   transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
   cursor: default;
 }
 
 .stat:hover {
   transform: scale(1.03);
-  border-color: rgba(59, 130, 246, 0.45);
-  box-shadow: 0 0 32px rgba(59, 130, 246, 0.18), 0 8px 28px rgba(0, 0, 0, 0.22), inset 0 1px 0 rgba(255,255,255,0.05);
+  border-color: rgba(6, 182, 212, 0.45);
+  box-shadow: 0 0 32px rgba(6, 182, 212, 0.18), 0 8px 28px rgba(0, 0, 0, 0.28);
 }
 
 .counter {
@@ -1413,13 +1439,15 @@ button {
   font-size: clamp(2.4rem, 5vw, 3.4rem);
   font-weight: 800;
   line-height: 1;
-  color: #60a5fa;
-  text-shadow: 0 0 24px rgba(59, 130, 246, 0.55), 0 0 48px rgba(59, 130, 246, 0.22);
-  transition: text-shadow 0.25s ease;
+  background: linear-gradient(90deg, #60a5fa, #22d3ee);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: filter 0.25s ease;
 }
 
 .stat:hover .counter {
-  text-shadow: 0 0 32px rgba(59, 130, 246, 0.75), 0 0 64px rgba(59, 130, 246, 0.35);
+  filter: brightness(1.15);
 }
 
 .stat p {
@@ -1444,8 +1472,8 @@ button {
   flex-direction: column;
   gap: 14px;
   padding: 26px;
-  background: rgba(255, 255, 255, 0.025);
-  border: 1px solid var(--border2);
+  background: var(--bg4);
+  border: 1px solid var(--border);
   border-radius: var(--radius);
   box-shadow: var(--shadow-soft);
   transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
@@ -1453,8 +1481,12 @@ button {
 
 .testimonio-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(59, 130, 246, 0.35);
-  box-shadow: 0 12px 36px rgba(59, 130, 246, 0.1);
+  border-color: rgba(8, 145, 178, 0.35);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.09), 0 0 20px rgba(8, 145, 178, 0.10);
+}
+
+.testimonio-card blockquote p {
+  color: var(--muted);
 }
 
 .stars {
@@ -1473,7 +1505,7 @@ button {
   margin: 0;
   font-size: 0.97rem;
   line-height: 1.72;
-  color: #c8d3e2;
+  color: #b8c5d6;
   font-style: italic;
 }
 
@@ -1526,7 +1558,7 @@ button {
 .ec-card {
   position: relative;
   padding: 30px 26px 28px;
-  background: rgba(255, 255, 255, 0.025);
+  background: var(--bg4);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   overflow: hidden;
@@ -1534,9 +1566,9 @@ button {
 }
 
 .ec-card:hover {
-  transform: translateY(-5px);
-  border-color: rgba(59, 130, 246, 0.36);
-  box-shadow: 0 10px 36px rgba(0, 0, 0, 0.26), 0 0 0 1px rgba(59, 130, 246, 0.08);
+  transform: translateY(-4px);
+  border-color: rgba(8, 145, 178, 0.35);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.09), 0 0 20px rgba(8, 145, 178, 0.10);
 }
 
 .ec-accent {
@@ -1660,8 +1692,8 @@ button {
   flex-direction: column;
   gap: 10px;
   padding: 28px 24px;
-  background: rgba(255, 255, 255, 0.025);
-  border: 1px solid var(--border2);
+  background: var(--bg4);
+  border: 1px solid var(--border);
   border-radius: var(--radius);
   box-shadow: var(--shadow-soft);
   transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
@@ -1669,22 +1701,23 @@ button {
 
 .beneficio-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(59, 130, 246, 0.35);
-  box-shadow: 0 12px 36px rgba(59, 130, 246, 0.1);
+  border-color: rgba(8, 145, 178, 0.35);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.09), 0 0 20px rgba(8, 145, 178, 0.10);
 }
 
 .beneficio-icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 38px;
-  height: 38px;
+  width: 40px;
+  height: 40px;
   border-radius: 10px;
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.18), rgba(6, 182, 212, 0.18));
-  border: 1px solid rgba(59, 130, 246, 0.22);
-  font-size: 1rem;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(6, 182, 212, 0.2));
+  border: 1px solid rgba(6, 182, 212, 0.28);
+  font-size: 1.05rem;
   color: var(--cyan);
   flex-shrink: 0;
+  box-shadow: 0 0 12px rgba(6, 182, 212, 0.12);
 }
 
 .beneficio-card h3 {
@@ -1802,7 +1835,7 @@ button {
   flex-direction: column;
   gap: 10px;
   padding: 24px 20px;
-  background: rgba(255,255,255,0.025);
+  background: var(--bg4);
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   position: relative;
@@ -1819,8 +1852,8 @@ button {
   transition: opacity 0.22s ease;
 }
 .sp-card:hover {
-  border-color: rgba(59,130,246,0.28);
-  box-shadow: 0 8px 28px rgba(59,130,246,0.08);
+  border-color: rgba(8,145,178,0.35);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.09), 0 0 16px rgba(8,145,178,0.10);
   transform: translateY(-3px);
 }
 .sp-card:hover::before { opacity: 1; }
@@ -1852,14 +1885,14 @@ button {
   gap: 16px;
   align-items: flex-start;
   padding: 22px 20px;
-  background: rgba(255,255,255,0.02);
+  background: var(--bg4);
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   transition: border-color 0.2s ease, background 0.2s ease;
 }
 .sp-benefit:hover {
-  border-color: rgba(59,130,246,0.22);
-  background: rgba(59,130,246,0.04);
+  border-color: rgba(6,182,212,0.24);
+  background: rgba(6,182,212,0.04);
 }
 .sp-benefit-icon {
   width: 38px;
@@ -1952,10 +1985,11 @@ button {
 .sp-cta {
   margin-top: 64px;
   padding: 48px 40px;
-  background: linear-gradient(135deg, rgba(59,130,246,0.07) 0%, rgba(6,182,212,0.04) 100%);
-  border: 1px solid rgba(59,130,246,0.18);
+  background: linear-gradient(135deg, rgba(59,130,246,0.08) 0%, rgba(6,182,212,0.05) 100%);
+  border: 1px solid rgba(6,182,212,0.2);
   border-radius: var(--radius);
   text-align: center;
+  box-shadow: 0 0 40px rgba(6,182,212,0.05);
 }
 .sp-cta h2 {
   margin: 0 0 10px;
@@ -1993,4 +2027,509 @@ button {
   .sp-steps::before { display: none; }
   .sp-step { align-items: flex-start; text-align: left; flex-direction: row; }
   .sp-cta { padding: 32px 20px; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   MEJORAS VISUALES — Ritmo · Contraste · Acento Cian · Jerarquía
+═══════════════════════════════════════════════════════════════ */
+
+/* ── 1. Alternación real de fondos entre secciones ─────────── */
+/* Flujo continuo: degradados que conectan entre secciones */
+
+.section-testimonios {
+  background: linear-gradient(180deg, #0b0f19 0%, #0f1829 40%, #111827 100%);
+  overflow: hidden;
+}
+
+.section-autoridad {
+  background: linear-gradient(180deg, #111827 0%, #0d1322 50%, #0b0f19 100%);
+  overflow: hidden;
+}
+
+.section-beneficios {
+  background: linear-gradient(180deg, #0b0f19 0%, #0f1d32 45%, #111827 100%);
+  overflow: hidden;
+}
+
+.section-deep {
+  background:
+    radial-gradient(ellipse at 70% 0%, rgba(6, 182, 212, 0.07) 0%, transparent 60%),
+    linear-gradient(180deg, #111827 0%, #0c1220 50%, #0b0f19 100%);
+  overflow: hidden;
+}
+
+.section-soft {
+  background: linear-gradient(180deg, #0b0f19 0%, #0f1829 40%, #111827 100%);
+  overflow: hidden;
+}
+
+.section-dark {
+  background: linear-gradient(180deg, #111827 0%, #0d1424 50%, #0b0f19 100%);
+  overflow: hidden;
+}
+
+/* ── 2. Glows decorativos radiales — sin líneas duras ────────── */
+
+.section-testimonios::before {
+  content: "";
+  position: absolute;
+  top: -80px;
+  right: -80px;
+  width: 480px;
+  height: 480px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(6, 182, 212, 0.06) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.section-beneficios::before {
+  content: "";
+  position: absolute;
+  bottom: -80px;
+  left: -80px;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.07) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.section-soft::before {
+  content: "";
+  position: absolute;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 500px;
+  height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(6, 182, 212, 0.05) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── 3. Accent line bajo títulos de sección ─────────────────── */
+
+.section-title {
+  position: relative;
+}
+
+.section-title::after {
+  content: "";
+  display: block;
+  width: 44px;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--cyan), var(--blue));
+  margin: 10px auto 0;
+  opacity: 0.7;
+}
+
+/* ── 4. Accent line en títulos de páginas de servicio ───────── */
+
+.sp-section-header h2 {
+  position: relative;
+  padding-bottom: 14px;
+}
+
+.sp-section-header h2::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 36px;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--cyan), transparent);
+  opacity: 0.7;
+}
+
+/* ── 5. Glow en etiquetas y kickers cian ────────────────────── */
+
+.kicker,
+.af-label,
+.ec-num,
+.tag {
+  text-shadow: 0 0 18px rgba(6, 182, 212, 0.38);
+}
+
+/* ── 6. Chips interactivos ──────────────────────────────────── */
+
+.chip {
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+
+.chip:hover {
+  border-color: rgba(6, 182, 212, 0.35);
+  color: var(--cyan);
+  background: rgba(6, 182, 212, 0.05);
+}
+
+/* ── 7. plink (proyectos) más vivo ──────────────────────────── */
+
+.plink:hover,
+.plink:focus-visible {
+  color: #67e8f9;
+  text-shadow: 0 0 12px rgba(6, 182, 212, 0.3);
+}
+
+/* ── 8. ec-list bullet con glow ─────────────────────────────── */
+
+.ec-list li::before {
+  box-shadow: 0 0 5px rgba(6, 182, 212, 0.55);
+  opacity: 0.85;
+}
+
+/* ── 9. hero-pretitle line con glow ─────────────────────────── */
+
+.hero-pretitle::before {
+  box-shadow: 0 0 8px rgba(6, 182, 212, 0.45);
+}
+
+/* ── 10. sp-step número con hover ───────────────────────────── */
+
+.sp-step:hover .sp-step-num {
+  border-color: rgba(6, 182, 212, 0.5);
+  box-shadow: 0 0 16px rgba(6, 182, 212, 0.22);
+  color: var(--cyan);
+  transition: all 0.2s ease;
+}
+
+/* ── 11. CTA final: sin borde duro, flujo continuo ──────────── */
+
+.section-cta-final {
+  border-top: none;
+}
+
+.cta-final {
+  border: 1px solid rgba(6, 182, 212, 0.18);
+  background:
+    radial-gradient(ellipse at top right, rgba(6, 182, 212, 0.07), transparent 55%),
+    linear-gradient(180deg, rgba(22, 32, 58, 0.97), rgba(12, 17, 30, 0.98));
+}
+
+/* ── 12. Footer hover con glow cian ─────────────────────────── */
+
+.footer-links-row a:hover,
+.footer-bottom a:hover {
+  text-shadow: 0 0 10px rgba(6, 182, 212, 0.28);
+}
+
+/* ── 13. Svc-page hero accent line ──────────────────────────── */
+
+.svc-hero h1 {
+  position: relative;
+}
+
+/* ── 14. hstat-r (perfil card): texto principal ─────────────── */
+
+.hstat-r { color: var(--text); }
+.hstat-l { color: var(--muted2); }
+
+/* ═══════════════════════════════════════════════════════════════
+   15. PASS 3 — Aire, vida en cards, acentos y legibilidad
+   ═══════════════════════════════════════════════════════════════ */
+
+/* 15a. Más aire entre secciones */
+.section {
+  padding: 108px 0;
+}
+
+/* 15b. Separación de párrafos y legibilidad */
+.section p,
+.sp-section p,
+.svc-body p {
+  line-height: 1.8;
+  margin-bottom: 1.2em;
+}
+
+/* 15c. Hover unificado — translateY(-6px) + glow cian en todas las cards */
+.af-card:hover,
+.ec-card:hover,
+.beneficio-card:hover,
+.testimonio-card:hover,
+.herramienta-card:hover,
+.acreditacion-card:hover,
+.proyecto-card:hover,
+.sp-card:hover,
+.sp-benefit:hover {
+  transform: translateY(-6px);
+  border-color: rgba(6, 182, 212, 0.55);
+  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.36), 0 0 28px rgba(6, 182, 212, 0.16);
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* 15d. Base transition en todas las cards para que el hover sea suave */
+.af-card,
+.ec-card,
+.beneficio-card,
+.testimonio-card,
+.herramienta-card,
+.acreditacion-card,
+.proyecto-card,
+.sp-card,
+.sp-benefit {
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* 15e. Flujo continuo dark premium — sin cortes, sin border-top */
+.section-testimonios {
+  background: linear-gradient(180deg, #0b0f19 0%, #0f1829 40%, #111827 100%);
+  overflow: hidden;
+}
+.section-autoridad {
+  background: linear-gradient(180deg, #111827 0%, #0d1322 50%, #0b0f19 100%);
+  overflow: hidden;
+}
+.section-beneficios {
+  background: linear-gradient(180deg, #0b0f19 0%, #0f1d32 45%, #111827 100%);
+  overflow: hidden;
+}
+.section-deep {
+  background:
+    radial-gradient(ellipse at 70% 0%, rgba(6,182,212,0.07) 0%, transparent 60%),
+    linear-gradient(180deg, #111827 0%, #0c1220 50%, #0b0f19 100%);
+  overflow: hidden;
+}
+.section-soft {
+  background: linear-gradient(180deg, #0b0f19 0%, #0f1829 40%, #111827 100%);
+  overflow: hidden;
+}
+.section-dark {
+  background: linear-gradient(180deg, #111827 0%, #0d1424 50%, #0b0f19 100%);
+  overflow: hidden;
+}
+
+/* 15f. Glows radiales — sin líneas horizontales */
+.section-testimonios::before {
+  background: radial-gradient(circle, rgba(6, 182, 212, 0.06) 0%, transparent 70%);
+  height: auto;
+  width: 480px;
+  height: 480px;
+  top: -80px;
+  right: -80px;
+  left: auto;
+  transform: none;
+  border-radius: 50%;
+}
+.section-beneficios::before {
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.07) 0%, transparent 70%);
+  height: auto;
+  width: 420px;
+  height: 420px;
+  top: auto;
+  bottom: -80px;
+  left: -80px;
+  transform: none;
+  border-radius: 50%;
+}
+.section-soft::before {
+  background: radial-gradient(ellipse, rgba(6, 182, 212, 0.05) 0%, transparent 70%);
+  width: 500px;
+  height: 300px;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 50%;
+}
+
+/* 15g. Acento cian bajo títulos de sección — más visible */
+.section-title::after {
+  width: 52px;
+  height: 3px;
+  opacity: 0.85;
+  margin-top: 12px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SCROLL REVEAL
+═══════════════════════════════════════════════════════════════ */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+  will-change: opacity, transform;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-delay-1 { transition-delay: 0.10s; }
+.reveal-delay-2 { transition-delay: 0.20s; }
+.reveal-delay-3 { transition-delay: 0.30s; }
+.reveal-delay-4 { transition-delay: 0.40s; }
+
+/* Nunca animar si el usuario prefiere movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   DARK PREMIUM — Profundidad · Movimiento · Flotación
+═══════════════════════════════════════════════════════════════ */
+
+/* Secciones transparentes: el gradiente del body fluye por debajo */
+.section-hero,
+.section-testimonios,
+.section-autoridad,
+.section-beneficios,
+.section-deep,
+.section-soft,
+.section-dark {
+  background: transparent;
+}
+
+/* Pseudo-overlay muy suave para dar variación tonal por sección */
+.section-testimonios { background: rgba(15, 24, 41, 0.55); }
+.section-autoridad   { background: rgba(11, 15, 25, 0.35); }
+.section-beneficios  { background: rgba(15, 29, 50, 0.50); }
+.section-deep        { background: rgba(12, 18, 32, 0.45); }
+.section-soft        { background: rgba(15, 24, 41, 0.40); }
+.section-dark        { background: rgba(13, 20, 36, 0.50); }
+
+/* Pseudo-elemento de transición suave arriba/abajo de cada sección */
+.section-testimonios::after,
+.section-autoridad::after,
+.section-beneficios::after,
+.section-deep::after,
+.section-soft::after,
+.section-dark::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: linear-gradient(180deg, transparent, rgba(11, 15, 25, 0.18));
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Cards glassmorphism flotantes ── */
+.svc-card,
+.pcard,
+.af-card,
+.ec-card,
+.beneficio-card,
+.testimonio-card,
+.herramienta-card,
+.acreditacion-card,
+.proyecto-card,
+.sp-card,
+.sp-benefit,
+.stat,
+.acard {
+  background: rgba(17, 24, 39, 0.65) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.07) !important;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.30), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.svc-card:hover,
+.pcard:hover,
+.af-card:hover,
+.ec-card:hover,
+.beneficio-card:hover,
+.testimonio-card:hover,
+.herramienta-card:hover,
+.acreditacion-card:hover,
+.proyecto-card:hover,
+.sp-card:hover,
+.sp-benefit:hover,
+.stat:hover,
+.acard:hover {
+  transform: translateY(-6px);
+  border-color: rgba(6, 182, 212, 0.35) !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.40), 0 0 28px rgba(56, 189, 248, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+/* Hero card también flotante */
+.hero-card {
+  background: rgba(22, 30, 52, 0.75) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.09) !important;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.36), 0 0 40px rgba(59, 130, 246, 0.06);
+}
+
+/* ── Botón primario mejorado ── */
+.btn-p {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  box-shadow: 0 4px 18px rgba(59, 130, 246, 0.32), inset 0 1px 0 rgba(255,255,255,0.10);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.btn-p:hover,
+.btn-p:focus-visible {
+  background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 32px rgba(56, 189, 248, 0.45), 0 0 0 1px rgba(56, 189, 248, 0.20);
+}
+
+/* ── Glow en títulos gradiente ── */
+.hero-title em,
+.nav-wordmark-ia {
+  filter: drop-shadow(0 0 18px rgba(56, 189, 248, 0.30));
+}
+
+/* ── Nav CTA con glow ── */
+.nav-cta {
+  box-shadow: 0 2px 14px rgba(59, 130, 246, 0.35), inset 0 1px 0 rgba(255,255,255,0.10) !important;
+}
+
+.nav-cta:hover,
+.nav-cta:focus-visible {
+  box-shadow: 0 6px 24px rgba(56, 189, 248, 0.50) !important;
+}
+
+/* ── Divider decorativo entre secciones ── */
+.section-divider {
+  height: 100px;
+  background: linear-gradient(180deg, transparent 0%, rgba(56, 189, 248, 0.04) 50%, transparent 100%);
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Imagen de logo con glow cian ── */
+.nav-logo-img {
+  filter: drop-shadow(0 0 10px rgba(6, 182, 212, 0.28));
+}
+
+/* ── kicker/tag con glow más vivo ── */
+.kicker,
+.af-label,
+.tag {
+  text-shadow: 0 0 20px rgba(6, 182, 212, 0.50);
+}
+
+/* ── Contadores con glow ── */
+.counter {
+  filter: drop-shadow(0 0 16px rgba(56, 189, 248, 0.35));
+}
+
+/* ── badge disponible ── */
+.hero-badge {
+  box-shadow: 0 0 20px rgba(6, 182, 212, 0.10);
+}
+
+/* ── Floating WhatsApp con glow ── */
+.floating-whatsapp {
+  box-shadow: 0 8px 28px rgba(34, 197, 94, 0.35), 0 0 0 1px rgba(34, 197, 94, 0.15);
+}
+
+@media (max-width: 768px) {
+  .hero-title em,
+  .nav-wordmark-ia {
+    filter: drop-shadow(0 0 12px rgba(56, 189, 248, 0.25));
+  }
 }
