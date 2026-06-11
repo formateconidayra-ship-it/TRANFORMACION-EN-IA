@@ -15,7 +15,10 @@
   <link rel="canonical" href="https://transformacionia.es/formacion-transformacion-digital-canarias.html" />
 
   <link rel="icon" href="img/favicon.ico" sizes="any">
-  <link rel="icon" href="img/favicon-idayra-64.png" type="image/png">  <link rel="apple-touch-icon" href="img/apple-touch-icon-idayra.png">
+  <link rel="icon" href="img/favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="img/favicon-16x16.png" type="image/png" sizes="16x16">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
 
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Formación en Transformación Digital en Canarias | Idayra Cabrera" />
@@ -131,6 +134,13 @@
       color: var(--text);
       line-height: 1.7;
     }
+    .svc-highlight a {
+      color: var(--cyan);
+      text-decoration: underline;
+      text-decoration-color: rgba(6, 182, 212, 0.4);
+      text-underline-offset: 3px;
+    }
+    .svc-highlight a:hover { text-decoration-color: var(--cyan); }
     .svc-cta-block {
       margin-top: 56px;
       padding: 36px 32px;
@@ -180,7 +190,7 @@
 
   <header class="navbar" role="banner">
     <a href="index.html" class="nav-logo" aria-label="Transformación IA – Inicio">
-      <img src="img/logo-idayra-header.png" alt="Idayra Cabrera" class="nav-logo-img"><span class="nav-logo-text">Idayra Cabrera</span>
+      <img src="img/logo-idayra-header.png" alt="Transformación IA" class="nav-logo-img">
     </a>
     <button class="nav-toggle" id="navTog" type="button" aria-label="Abrir menú" aria-controls="navLinks" aria-expanded="false">
       <span></span><span></span><span></span>
@@ -313,6 +323,21 @@
           </div>
         </section>
 
+        <!-- QUIÉN IMPARTE -->
+        <div class="svc-highlight">
+          Formación impartida por <a href="sobre-mi.html">Idayra Cabrera</a>, docente
+          <a href="acreditaciones.html">acreditada FPE por el Servicio Canario de Empleo (SCE) y el SEPE</a>,
+          con <a href="proyectos.html" style="color: var(--cyan);">proyectos aplicados de transformación digital</a>, desarrollo de competencias digitales
+          e inteligencia artificial aplicada en empresas, asociaciones y entidades de Canarias.
+        </div>
+
+        <!-- LECTURA RECOMENDADA -->
+        <p style="margin: -16px 0 24px; font-size: 0.9rem; color: var(--muted); line-height: 1.6;">
+          Lectura relacionada:
+          <a href="chatgpt-en-el-trabajo.html" style="color: var(--cyan);">ChatGPT en el trabajo: usos reales para profesionales y empresas</a>
+          · <a href="formacion-inteligencia-artificial-canarias.html" style="color: var(--cyan);">Formación en IA en Canarias: qué aprender y por dónde empezar</a>
+        </p>
+
         <!-- CTA FINAL -->
         <div class="sp-cta">
           <h2>¿Necesitas formación en transformación digital para tu equipo?</h2>
@@ -332,7 +357,7 @@
     <div class="container footer-container">
       <div class="footer-top">
         <a href="index.html" class="nav-logo footer-logo" aria-label="Transformación IA – Inicio">
-          <img src="img/logo-idayra-header.png" alt="Transformación IA" class="nav-logo-img"><span class="nav-logo-text">Idayra Cabrera</span>
+          <img src="img/logo-idayra-header.png" alt="Transformación IA" class="nav-logo-img">
         </a>
         <div class="footer-social" aria-label="Redes sociales y contacto">
           <a href="https://wa.me/34620948523" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="WhatsApp" title="WhatsApp">
@@ -369,18 +394,6 @@
   </a>
 
   <script src="js/reveal.js" defer></script>
-
-  <script>
-    document.getElementById('currentYear').textContent = new Date().getFullYear();
-    const tog = document.getElementById('navTog');
-    const nav = document.getElementById('navLinks');
-    if (tog && nav) {
-      tog.addEventListener('click', () => {
-        const open = nav.classList.toggle('open');
-        tog.setAttribute('aria-expanded', open);
-        tog.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
-      });
-    }
-  </script>
+  <script src="main.js" defer></script>
 </body>
 </html>

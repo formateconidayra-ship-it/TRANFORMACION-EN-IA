@@ -15,7 +15,10 @@
   <link rel="canonical" href="https://transformacionia.es/proyectos.html" />
 
   <link rel="icon" href="img/favicon.ico" sizes="any">
-  <link rel="icon" href="img/favicon-idayra-64.png" type="image/png">  <link rel="apple-touch-icon" href="img/apple-touch-icon-idayra.png">
+  <link rel="icon" href="img/favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="img/favicon-16x16.png" type="image/png" sizes="16x16">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
 
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Proyectos de transformación digital, SEO e IA en Canarias | Idayra Cabrera" />
@@ -382,13 +385,66 @@
         "about": {
           "@type": "Person",
           "name": "Idayra Cabrera"
-        }
+        },
+        "hasPart": [
+          {"@id": "https://transformacionia.es/planificador.html"},
+          {"@id": "https://transformacionia.es/proyectos.html#kit-digital"},
+          {"@id": "https://transformacionia.es/proyectos.html#agente-td"},
+          {"@id": "https://transformacionia.es/proyectos.html#ia-docencia"},
+          {"@id": "https://transformacionia.es/proyectos.html#power-bi"}
+        ]
       },
       {
         "@type": "Person",
+        "@id": "https://transformacionia.es/",
         "name": "Idayra Cabrera",
         "url": "https://transformacionia.es/",
         "jobTitle": "Docente FPE y especialista en transformación digital, SEO e inteligencia artificial aplicada"
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://transformacionia.es/planificador.html",
+        "name": "Planificador de Certificados FPE",
+        "url": "https://transformacionia.es/planificador.html",
+        "applicationCategory": "EducationalApplication",
+        "operatingSystem": "Web browser",
+        "description": "Herramienta web para automatizar la planificación horaria de certificados de profesionalidad del catálogo SEPE. Configura módulos, fechas, días lectivos y festivos autonómicos; calcula sesiones automáticamente y genera exportación CSV.",
+        "author": {
+          "@type": "Person",
+          "@id": "https://transformacionia.es/"
+        },
+        "featureList": [
+          "Cálculo automático de sesiones por módulo",
+          "Descuento de festivos autonómicos configurables",
+          "Distribución horaria personalizable",
+          "Exportación a CSV"
+        ],
+        "isAccessibleForFree": true,
+        "inLanguage": "es-ES"
+      },
+      {
+        "@type": "Service",
+        "@id": "https://transformacionia.es/proyectos.html#kit-digital",
+        "name": "Asesoría Kit Digital para pymes y autónomos",
+        "description": "Orientación a pymes y autónomos en el acceso a soluciones digitales subvencionadas: presencia online, comercio electrónico, CRM y herramientas de productividad.",
+        "provider": {
+          "@type": "Person",
+          "@id": "https://transformacionia.es/"
+        },
+        "areaServed": "Canarias",
+        "serviceType": "Consultoría de digitalización"
+      },
+      {
+        "@type": "Service",
+        "@id": "https://transformacionia.es/proyectos.html#agente-td",
+        "name": "Agente de Transformación Digital",
+        "description": "Acompañamiento a organizaciones en procesos de digitalización, adopción tecnológica y desarrollo de competencias digitales avanzadas.",
+        "provider": {
+          "@type": "Person",
+          "@id": "https://transformacionia.es/"
+        },
+        "areaServed": "Canarias",
+        "serviceType": "Transformación digital y consultoría estratégica"
       }
     ]
   }
@@ -401,7 +457,7 @@
 
   <header class="navbar" role="banner">
     <a href="index.html" class="nav-logo" aria-label="Transformación IA – Inicio">
-      <img src="img/logo-idayra-header.png" alt="Idayra Cabrera" class="nav-logo-img"><span class="nav-logo-text">Idayra Cabrera</span>
+      <img src="img/logo-idayra-header.png" alt="Transformación IA" class="nav-logo-img">
     </a>
 
     <button
@@ -532,15 +588,19 @@
             <aside class="project-side" aria-label="Resumen del proyecto">
               <div class="project-box">
                 <h4>Problema</h4>
-                <p>La planificación manual consume tiempo y aumenta el riesgo de errores en calendario, módulos y horas.</p>
+                <p>Distribuir módulos, horas y festivos en una planificación FPE a mano multiplica los errores y retrasa la entrega de documentación al centro.</p>
               </div>
               <div class="project-box">
                 <h4>Solución</h4>
-                <p>Automatización del cálculo de sesiones, distribución horaria y estructura reutilizable para certificados.</p>
+                <p>Herramienta JavaScript: configuras módulos, horas diarias, festivos autonómicos y días lectivos. Genera la tabla y exporta a CSV en segundos.</p>
               </div>
               <div class="project-box">
                 <h4>Resultado</h4>
-                <p>Menos carga operativa, más claridad y una herramienta útil creada desde la experiencia real.</p>
+                <p>Planificación completa sin errores de cálculo, reutilizable para cualquier certificado del catálogo SEPE, disponible en <a href="planificador.html" style="color: var(--cyan);">planificador.html</a>.</p>
+              </div>
+              <div class="project-box">
+                <h4>Origen</h4>
+                <p>Desarrollada desde +1.770h de docencia FPE real. Las <a href="acreditaciones.html" style="color: var(--cyan);">acreditaciones</a> que respaldan este trabajo están disponibles.</p>
               </div>
             </aside>
           </div>
@@ -561,14 +621,14 @@
         </div>
 
         <div class="mini-projects-grid">
-          <article class="mini-project-card">
+          <article class="mini-project-card" id="kit-digital">
             <span class="project-meta">Consultoría</span>
             <h3>Kit Digital</h3>
             <p>
               Asesoría a pymes y autónomos para acceder a soluciones digitales y orientar mejor la implantación.
             </p>
             <p>
-              Presencia online, comercio electrónico, CRM, herramientas de productividad y mejora del entorno digital.
+              Presencia online, comercio electrónico, CRM, herramientas de productividad y mejora del entorno digital. Una línea de consultoría conectada con la formación en <a href="formacion-transformacion-digital-canarias.html" style="color: var(--cyan);">transformación digital en Canarias</a>.
             </p>
 
             <div class="project-tags">
@@ -595,14 +655,14 @@
             </div>
           </article>
 
-          <article class="mini-project-card">
+          <article class="mini-project-card" id="agente-td">
             <span class="project-meta">Transformación Digital</span>
             <h3>Agente de Transformación Digital</h3>
             <p>
               Acompañamiento a organizaciones en procesos de digitalización, formación y adopción tecnológica.
             </p>
             <p>
-              Una línea de trabajo conectada con competencias digitales avanzadas y mejora organizacional.
+              Una línea de trabajo conectada con <a href="formacion-competencias-digitales-empleo.html" style="color: var(--cyan);">competencias digitales para el empleo</a> y los programas de <a href="formacion-transformacion-digital-canarias.html" style="color: var(--cyan);">transformación digital en Canarias</a>.
             </p>
 
             <div class="project-tags">
@@ -612,20 +672,40 @@
             </div>
           </article>
 
-          <article class="mini-project-card">
+          <article class="mini-project-card" id="ia-docencia">
             <span class="project-meta">Innovación</span>
             <h3>IA aplicada a docencia y empresa</h3>
             <p>
-              Creación de materiales, automatización de tareas y uso de IA para enriquecer formación, productividad y recursos.
+              Creación de materiales docentes para FPE con IA generativa, automatización de tareas
+              administrativas y uso aplicado de herramientas como ChatGPT en formación y productividad.
             </p>
             <p>
-              Un enfoque muy práctico, orientado a utilidad real y mejora concreta en procesos.
+              Documentado en el artículo <a href="chatgpt-en-el-trabajo.html" style="color: var(--cyan);">ChatGPT en el trabajo</a>
+              y en el programa de <a href="formacion-inteligencia-artificial-canarias.html" style="color: var(--cyan);">formación en IA en Canarias</a>.
             </p>
-
             <div class="project-tags">
               <span class="project-tag">IA</span>
               <span class="project-tag">Automatización</span>
-              <span class="project-tag">Formación</span>
+              <span class="project-tag">Formación FPE</span>
+            </div>
+          </article>
+
+          <article class="mini-project-card" id="power-bi">
+            <span class="project-meta">Análisis de datos</span>
+            <h3>Power BI y Excel aplicado a empresas</h3>
+            <p>
+              Diseño de dashboards en Power BI para empresas en Canarias: seguimiento de ventas,
+              control de KPIs e informes conectados a datos reales. Sin programación.
+            </p>
+            <p>
+              Casos documentados en el artículo <a href="excel-power-bi-empresas.html" style="color: var(--cyan);">Excel y Power BI para empresas</a>.
+              Formación disponible en <a href="formacion-herramientas-digitales-analisis-datos.html" style="color: var(--cyan);">herramientas digitales y análisis de datos</a>.
+            </p>
+            <div class="project-tags">
+              <span class="project-tag">Power BI</span>
+              <span class="project-tag">Excel</span>
+              <span class="project-tag">Dashboards</span>
+              <span class="project-tag">Canarias</span>
             </div>
           </article>
         </div>
@@ -662,7 +742,7 @@
     <div class="container footer-container">
       <div class="footer-top">
         <a href="index.html" class="nav-logo footer-logo" aria-label="Transformación IA – Inicio">
-          <img src="img/logo-idayra-header.png" alt="Idayra Cabrera" class="nav-logo-img"><span class="nav-logo-text">Idayra Cabrera</span>
+          <img src="img/logo-idayra-header.png" alt="Transformación IA" class="nav-logo-img">
         </a>
 
         <div class="footer-social" aria-label="Redes sociales y contacto">
@@ -729,29 +809,6 @@
   </a>
 
   <script src="js/reveal.js" defer></script>
-
-  <script>
-    const navToggle = document.getElementById("navTog");
-    const navLinks = document.getElementById("navLinks");
-    const currentYear = document.getElementById("currentYear");
-
-    if (currentYear) {
-      currentYear.textContent = new Date().getFullYear();
-    }
-
-    if (navToggle && navLinks) {
-      navToggle.addEventListener("click", () => {
-        const isOpen = navLinks.classList.toggle("open");
-        navToggle.setAttribute("aria-expanded", String(isOpen));
-      });
-
-      navLinks.querySelectorAll("a").forEach((link) => {
-        link.addEventListener("click", () => {
-          navLinks.classList.remove("open");
-          navToggle.setAttribute("aria-expanded", "false");
-        });
-      });
-    }
-  </script>
+  <script src="main.js" defer></script>
 </body>
 </html>

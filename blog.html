@@ -15,7 +15,10 @@
   <link rel="canonical" href="https://transformacionia.es/blog.html" />
 
   <link rel="icon" href="img/favicon.ico" sizes="any">
-  <link rel="icon" href="img/favicon-idayra-64.png" type="image/png">  <link rel="apple-touch-icon" href="img/apple-touch-icon-idayra.png">
+  <link rel="icon" href="img/favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="img/favicon-16x16.png" type="image/png" sizes="16x16">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
 
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Blog de IA, SEO y formación digital en Canarias | Idayra Cabrera" />
@@ -369,7 +372,7 @@
 
   <header class="navbar" role="banner">
     <a href="index.html" class="nav-logo" aria-label="Transformación IA – Inicio">
-      <img src="img/logo-idayra-header.png" alt="Idayra Cabrera" class="nav-logo-img"><span class="nav-logo-text">Idayra Cabrera</span>
+      <img src="img/logo-idayra-header.png" alt="Transformación IA" class="nav-logo-img">
     </a>
 
     <button
@@ -434,7 +437,10 @@
               </p>
               <p>
                 Contenido escrito desde la experiencia docente y el trabajo real con empresas
-                y profesionales en Canarias.
+                y profesionales en Canarias. Programas disponibles:
+                <a href="formacion-transformacion-digital-canarias.html" style="color: var(--cyan);">Transformación digital</a>,
+                <a href="formacion-competencias-digitales-empleo.html" style="color: var(--cyan);">Competencias digitales</a>
+                y <a href="formacion-herramientas-digitales-analisis-datos.html" style="color: var(--cyan);">Herramientas y análisis de datos</a>.
               </p>
             </div>
 
@@ -549,7 +555,7 @@
     <div class="container footer-container">
       <div class="footer-top">
         <a href="index.html" class="nav-logo footer-logo" aria-label="Transformación IA – Inicio">
-          <img src="img/logo-idayra-header.png" alt="Idayra Cabrera" class="nav-logo-img"><span class="nav-logo-text">Idayra Cabrera</span>
+          <img src="img/logo-idayra-header.png" alt="Transformación IA" class="nav-logo-img">
         </a>
 
         <div class="footer-social" aria-label="Redes sociales y contacto">
@@ -616,29 +622,6 @@
   </a>
 
   <script src="js/reveal.js" defer></script>
-
-  <script>
-    const navToggle = document.getElementById("navTog");
-    const navLinks = document.getElementById("navLinks");
-    const currentYear = document.getElementById("currentYear");
-
-    if (currentYear) {
-      currentYear.textContent = new Date().getFullYear();
-    }
-
-    if (navToggle && navLinks) {
-      navToggle.addEventListener("click", () => {
-        const isOpen = navLinks.classList.toggle("open");
-        navToggle.setAttribute("aria-expanded", String(isOpen));
-      });
-
-      navLinks.querySelectorAll("a").forEach((link) => {
-        link.addEventListener("click", () => {
-          navLinks.classList.remove("open");
-          navToggle.setAttribute("aria-expanded", "false");
-        });
-      });
-    }
-  </script>
+  <script src="main.js" defer></script>
 </body>
 </html>

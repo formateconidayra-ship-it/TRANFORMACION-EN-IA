@@ -15,7 +15,10 @@
   <link rel="canonical" href="https://transformacionia.es/excel-power-bi-empresas.html" />
 
   <link rel="icon" href="img/favicon.ico" sizes="any">
-  <link rel="icon" href="img/favicon-idayra-64.png" type="image/png">  <link rel="apple-touch-icon" href="img/apple-touch-icon-idayra.png">
+  <link rel="icon" href="img/favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="img/favicon-16x16.png" type="image/png" sizes="16x16">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
 
   <meta property="og:type" content="article" />
   <meta property="og:title" content="Excel y Power BI para empresas: qué aprender primero y cómo transformar datos en decisiones" />
@@ -214,6 +217,23 @@
       .art-page { padding: 32px 0 56px; }
       .art-header h1 { font-size: 1.75rem; }
     }
+    .svc-highlight {
+      margin: 32px 0;
+      padding: 22px 26px;
+      background: rgba(59, 130, 246, 0.06);
+      border-left: 3px solid var(--blue);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      font-size: 0.97rem;
+      color: var(--text);
+      line-height: 1.7;
+    }
+    .svc-highlight a {
+      color: var(--cyan);
+      text-decoration: underline;
+      text-decoration-color: rgba(6, 182, 212, 0.4);
+      text-underline-offset: 3px;
+    }
+    .svc-highlight a:hover { text-decoration-color: var(--cyan); }
   </style>
 
   <script type="application/ld+json">
@@ -246,7 +266,7 @@
 
   <header class="navbar" role="banner">
     <a href="index.html" class="nav-logo" aria-label="Transformación IA – Inicio">
-      <img src="img/logo-idayra-header.png" alt="Idayra Cabrera" class="nav-logo-img"><span class="nav-logo-text">Idayra Cabrera</span>
+      <img src="img/logo-idayra-header.png" alt="Transformación IA" class="nav-logo-img">
     </a>
     <button class="nav-toggle" id="navTog" type="button" aria-label="Abrir menú" aria-controls="navLinks" aria-expanded="false">
       <span></span><span></span><span></span>
@@ -387,7 +407,7 @@
 
             <h2>Casos reales: dashboards que he ayudado a implementar</h2>
             <p>
-              Estos son proyectos concretos de Power BI que he diseñado junto a empresas en Canarias.
+              Estos son <a href="proyectos.html#power-bi" style="color: var(--cyan);">proyectos concretos de Power BI</a> que he diseñado junto a empresas en Canarias.
               Ninguno requirió programación:
             </p>
             <h3>Panel de ventas mensual</h3>
@@ -463,6 +483,14 @@
               <a href="sobre-mi.html">mi página de presentación</a>.
             </p>
 
+            <!-- FORMACIÓN RELACIONADA -->
+            <div class="svc-highlight">
+              Si necesitas que tu equipo domine Excel y Power BI aplicados a datos reales de tu empresa,
+              el programa de <a href="formacion-herramientas-digitales-analisis-datos.html">herramientas
+              digitales y análisis de datos</a> está diseñado exactamente para eso: formación práctica,
+              acreditada FPE por el SEPE y el Servicio Canario de Empleo (SCE), impartida en Canarias.
+            </div>
+
           </article>
 
           <aside class="art-sidebar">
@@ -532,7 +560,7 @@
     <div class="container footer-container">
       <div class="footer-top">
         <a href="index.html" class="nav-logo footer-logo" aria-label="Transformación IA – Inicio">
-          <img src="img/logo-idayra-header.png" alt="Idayra Cabrera" class="nav-logo-img"><span class="nav-logo-text">Idayra Cabrera</span>
+          <img src="img/logo-idayra-header.png" alt="Transformación IA" class="nav-logo-img">
         </a>
         <div class="footer-social" aria-label="Redes sociales y contacto">
           <a href="https://wa.me/34620948523" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="WhatsApp" title="WhatsApp">
@@ -571,24 +599,6 @@
   </a>
 
   <script src="js/reveal.js" defer></script>
-
-  <script>
-    const navToggle = document.getElementById("navTog");
-    const navLinks = document.getElementById("navLinks");
-    const currentYear = document.getElementById("currentYear");
-    if (currentYear) currentYear.textContent = new Date().getFullYear();
-    if (navToggle && navLinks) {
-      navToggle.addEventListener("click", () => {
-        const isOpen = navLinks.classList.toggle("open");
-        navToggle.setAttribute("aria-expanded", String(isOpen));
-      });
-      navLinks.querySelectorAll("a").forEach((link) => {
-        link.addEventListener("click", () => {
-          navLinks.classList.remove("open");
-          navToggle.setAttribute("aria-expanded", "false");
-        });
-      });
-    }
-  </script>
+  <script src="main.js" defer></script>
 </body>
 </html>

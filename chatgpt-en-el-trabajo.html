@@ -15,7 +15,10 @@
   <link rel="canonical" href="https://transformacionia.es/chatgpt-en-el-trabajo.html" />
 
   <link rel="icon" href="img/favicon.ico" sizes="any">
-  <link rel="icon" href="img/favicon-idayra-64.png" type="image/png">  <link rel="apple-touch-icon" href="img/apple-touch-icon-idayra.png">
+  <link rel="icon" href="img/favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="img/favicon-16x16.png" type="image/png" sizes="16x16">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
 
   <meta property="og:type" content="article" />
   <meta property="og:title" content="ChatGPT en el trabajo: usos reales con ejemplos que puedes aplicar desde hoy" />
@@ -214,6 +217,23 @@
       .art-page { padding: 32px 0 56px; }
       .art-header h1 { font-size: 1.75rem; }
     }
+    .svc-highlight {
+      margin: 32px 0;
+      padding: 22px 26px;
+      background: rgba(59, 130, 246, 0.06);
+      border-left: 3px solid var(--blue);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      font-size: 0.97rem;
+      color: var(--text);
+      line-height: 1.7;
+    }
+    .svc-highlight a {
+      color: var(--cyan);
+      text-decoration: underline;
+      text-decoration-color: rgba(6, 182, 212, 0.4);
+      text-underline-offset: 3px;
+    }
+    .svc-highlight a:hover { text-decoration-color: var(--cyan); }
   </style>
 
   <script type="application/ld+json">
@@ -246,7 +266,7 @@
 
   <header class="navbar" role="banner">
     <a href="index.html" class="nav-logo" aria-label="Transformación IA – Inicio">
-      <img src="img/logo-idayra-header.png" alt="Idayra Cabrera" class="nav-logo-img"><span class="nav-logo-text">Idayra Cabrera</span>
+      <img src="img/logo-idayra-header.png" alt="Transformación IA" class="nav-logo-img">
     </a>
     <button class="nav-toggle" id="navTog" type="button" aria-label="Abrir menú" aria-controls="navLinks" aria-expanded="false">
       <span></span><span></span><span></span>
@@ -465,6 +485,16 @@
               sector, vuestras herramientas y el nivel real de partida.
             </p>
 
+            <!-- FORMACIÓN RELACIONADA -->
+            <div class="svc-highlight">
+              Si quieres llevar ChatGPT a tu equipo con un programa estructurado y acreditado,
+              los cursos de <a href="formacion-transformacion-digital-canarias.html">transformación digital en Canarias</a>
+              y <a href="formacion-competencias-digitales-empleo.html">competencias digitales para el empleo</a>
+              incluyen módulos prácticos de inteligencia artificial aplicada, reconocidos FPE por el
+              Servicio Canario de Empleo (SCE) y el SEPE. Puedes ver los
+              <a href="proyectos.html#ia-docencia">proyectos aplicados de IA en docencia y empresa</a> para más contexto.
+            </div>
+
           </article>
 
           <aside class="art-sidebar">
@@ -533,7 +563,7 @@
     <div class="container footer-container">
       <div class="footer-top">
         <a href="index.html" class="nav-logo footer-logo" aria-label="Transformación IA – Inicio">
-          <img src="img/logo-idayra-header.png" alt="Idayra Cabrera" class="nav-logo-img"><span class="nav-logo-text">Idayra Cabrera</span>
+          <img src="img/logo-idayra-header.png" alt="Transformación IA" class="nav-logo-img">
         </a>
         <div class="footer-social" aria-label="Redes sociales y contacto">
           <a href="https://wa.me/34620948523" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="WhatsApp" title="WhatsApp">
@@ -572,24 +602,6 @@
   </a>
 
   <script src="js/reveal.js" defer></script>
-
-  <script>
-    const navToggle = document.getElementById("navTog");
-    const navLinks = document.getElementById("navLinks");
-    const currentYear = document.getElementById("currentYear");
-    if (currentYear) currentYear.textContent = new Date().getFullYear();
-    if (navToggle && navLinks) {
-      navToggle.addEventListener("click", () => {
-        const isOpen = navLinks.classList.toggle("open");
-        navToggle.setAttribute("aria-expanded", String(isOpen));
-      });
-      navLinks.querySelectorAll("a").forEach((link) => {
-        link.addEventListener("click", () => {
-          navLinks.classList.remove("open");
-          navToggle.setAttribute("aria-expanded", "false");
-        });
-      });
-    }
-  </script>
+  <script src="main.js" defer></script>
 </body>
 </html>

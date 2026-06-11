@@ -15,7 +15,10 @@
   <link rel="canonical" href="https://transformacionia.es/planificador.html" />
 
   <link rel="icon" href="img/favicon.ico" sizes="any">
-  <link rel="icon" href="img/favicon-idayra-64.png" type="image/png">  <link rel="apple-touch-icon" href="img/apple-touch-icon-idayra.png">
+  <link rel="icon" href="img/favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="img/favicon-16x16.png" type="image/png" sizes="16x16">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
 
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Planificador FPE | Idayra Cabrera · Cronograma automático para certificados" />
@@ -1039,7 +1042,7 @@
 
   <header class="navbar" role="banner">
     <a href="index.html" class="nav-logo" aria-label="Transformación IA – Inicio">
-      <img src="img/logo-idayra-header.png" alt="Idayra Cabrera" class="nav-logo-img"><span class="nav-logo-text">Idayra Cabrera</span>
+      <img src="img/logo-idayra-header.png" alt="Transformación IA" class="nav-logo-img">
     </a>
 
     <button class="nav-toggle" id="navTog" aria-label="Abrir menú" aria-expanded="false">
@@ -1318,7 +1321,7 @@
     <div class="container footer-container">
       <div class="footer-top">
         <a href="index.html" class="nav-logo footer-logo" aria-label="Transformación IA – Inicio">
-          <img src="img/logo-idayra-header.png" alt="Idayra Cabrera" class="nav-logo-img"><span class="nav-logo-text">Idayra Cabrera</span>
+          <img src="img/logo-idayra-header.png" alt="Transformación IA" class="nav-logo-img">
         </a>
 
         <div class="footer-social" aria-label="Redes sociales y contacto">
@@ -1370,30 +1373,9 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <script src="js/reveal.js" defer></script>
+  <script src="main.js" defer></script>
 
   <script>
-    const navToggle = document.getElementById("navTog");
-    const navLinks = document.getElementById("navLinks");
-    const currentYear = document.getElementById("currentYear");
-
-    if (currentYear) {
-      currentYear.textContent = new Date().getFullYear();
-    }
-
-    if (navToggle && navLinks) {
-      navToggle.addEventListener("click", () => {
-        const isOpen = navLinks.classList.toggle("open");
-        navToggle.setAttribute("aria-expanded", String(isOpen));
-      });
-
-      navLinks.querySelectorAll("a").forEach((link) => {
-        link.addEventListener("click", () => {
-          navLinks.classList.remove("open");
-          navToggle.setAttribute("aria-expanded", "false");
-        });
-      });
-    }
-
     const GAS_URL = 'https://script.google.com/macros/s/AKfycbwWxLYtPaxAy57cxvvSJqtt4PvijKWpevN4XaS8269WduISjBqQhKA6aKZNN8GTq6-l/exec';
     pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 

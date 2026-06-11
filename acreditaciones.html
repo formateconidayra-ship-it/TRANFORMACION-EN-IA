@@ -15,7 +15,10 @@
   <link rel="canonical" href="https://transformacionia.es/acreditaciones.html" />
 
   <link rel="icon" href="img/favicon.ico" sizes="any">
-  <link rel="icon" href="img/favicon-idayra-64.png" type="image/png">  <link rel="apple-touch-icon" href="img/apple-touch-icon-idayra.png">
+  <link rel="icon" href="img/favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="img/favicon-16x16.png" type="image/png" sizes="16x16">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
 
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Acreditaciones | Idayra Cabrera · Especialidades FPE acreditadas" />
@@ -247,6 +250,14 @@
       font-weight: 600;
     }
 
+    .verify-box a {
+      color: var(--cyan);
+      text-decoration: underline;
+      text-decoration-color: rgba(6, 182, 212, 0.4);
+      text-underline-offset: 3px;
+    }
+    .verify-box a:hover { text-decoration-color: var(--cyan); }
+
     .acred-actions {
       display: flex;
       flex-wrap: wrap;
@@ -320,7 +331,7 @@
 
   <header class="navbar" role="banner">
     <a href="index.html" class="nav-logo" aria-label="Transformación IA – Inicio">
-      <img src="img/logo-idayra-header.png" alt="Idayra Cabrera" class="nav-logo-img"><span class="nav-logo-text">Idayra Cabrera</span>
+      <img src="img/logo-idayra-header.png" alt="Transformación IA" class="nav-logo-img">
     </a>
 
     <button
@@ -494,10 +505,19 @@
 
         <div class="verify-box">
           <div class="verify-icon">🏛️</div>
-          <p>
-            Acreditaciones vinculadas a especialidades reconocidas y orientadas a formación para el empleo,
-            con referencias asociadas al <b>Servicio Canario de Empleo</b> y al <b>SEPE</b>.
-          </p>
+          <div>
+            <p>
+              Acreditaciones vinculadas a especialidades reconocidas y orientadas a formación para el empleo,
+              con referencias asociadas al <b>Servicio Canario de Empleo</b> y al <b>SEPE</b>.
+            </p>
+            <p style="margin-top: 10px;">
+              Estas acreditaciones respaldan los programas de
+              <a href="formacion-transformacion-digital-canarias.html">transformación digital</a>,
+              <a href="formacion-competencias-digitales-empleo.html">competencias digitales para el empleo</a>
+              y <a href="formacion-herramientas-digitales-analisis-datos.html">herramientas y análisis de datos</a>
+              que imparto en Canarias.
+            </p>
+          </div>
         </div>
 
         <div class="acred-actions">
@@ -532,7 +552,7 @@
     <div class="container footer-container">
       <div class="footer-top">
         <a href="index.html" class="nav-logo footer-logo" aria-label="Transformación IA – Inicio">
-          <img src="img/logo-idayra-header.png" alt="Idayra Cabrera" class="nav-logo-img"><span class="nav-logo-text">Idayra Cabrera</span>
+          <img src="img/logo-idayra-header.png" alt="Transformación IA" class="nav-logo-img">
         </a>
 
         <div class="footer-social" aria-label="Redes sociales y contacto">
@@ -583,29 +603,6 @@
   </footer>
 
   <script src="js/reveal.js" defer></script>
-
-  <script>
-    const navToggle = document.getElementById("navTog");
-    const navLinks = document.getElementById("navLinks");
-    const currentYear = document.getElementById("currentYear");
-
-    if (currentYear) {
-      currentYear.textContent = new Date().getFullYear();
-    }
-
-    if (navToggle && navLinks) {
-      navToggle.addEventListener("click", () => {
-        const isOpen = navLinks.classList.toggle("open");
-        navToggle.setAttribute("aria-expanded", String(isOpen));
-      });
-
-      navLinks.querySelectorAll("a").forEach((link) => {
-        link.addEventListener("click", () => {
-          navLinks.classList.remove("open");
-          navToggle.setAttribute("aria-expanded", "false");
-        });
-      });
-    }
-  </script>
+  <script src="main.js" defer></script>
 </body>
 </html>
