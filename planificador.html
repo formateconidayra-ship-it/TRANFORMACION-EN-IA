@@ -1481,25 +1481,30 @@
         texto = normalizeExtractedText(texto);
         document.getElementById('aitxt').textContent = 'Analizando módulos con IA...';
 
-        let modulos = null;
-        let nombre = '';
+        // El formato oficial "Denominación: ... Objetivo: ... Duración: NN horas" es
+        // inequívoco, así que se prioriza frente a la IA: evita horas mal asociadas
+        // entre módulos cuando el documento ya trae esa estructura.
+        let modulos = extractModulosByDenominacion(texto);
+        let nombre = modulos.length ? extractNombre(texto, file.name) : '';
 
-        try {
-          const res = await fetch(GAS_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ texto: texto.slice(0, 7000) })
-          });
+        if (!modulos.length) {
+          try {
+            const res = await fetch(GAS_URL, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ texto: texto.slice(0, 7000) })
+            });
 
-          const data = await res.json();
+            const data = await res.json();
 
-          if (!data.error && data.data) {
-            modulos = sanitizeModules(data.data.modulos || []);
-            nombre = cleanModuleText(data.data.nombre || '');
-          }
-        } catch(e) {}
+            if (!data.error && data.data) {
+              modulos = sanitizeModules(data.data.modulos || []);
+              nombre = cleanModuleText(data.data.nombre || '');
+            }
+          } catch(e) {}
+        }
 
-        if (!modulos || !modulos.length) {
+        if (!modulos.length) {
           nombre = extractNombre(texto, file.name);
           modulos = extractModulos(texto);
         }
@@ -1572,10 +1577,36 @@
         .trim();
     }
 
+    const ACRONIMOS = new Set(['IA','TIC','SEO','SEM','PDF','CSV','UE','FP','FPE','MF','UF','RD','ROI','KPI','UX','UI','API','ISO','OCR','ERP','CRM','HTML','CSS','SQL','BI','TI','PYME','PYMES']);
+
+    function normalizeCase(str) {
+      if (!str) return str;
+
+      const letras = str.replace(/[^a-zA-ZÀ-ÿ]/g, '');
+      const mayus = (str.match(/[A-ZÁÉÍÓÚÑÜ]/g) || []).length;
+      const esGritado = letras.length > 3 && mayus / letras.length > 0.6;
+      if (!esGritado) return str;
+
+      const menores = new Set(['de','del','la','las','el','los','y','en','a','al','con','para','por','un','una','su','sus','o','e']);
+      let primera = true;
+
+      return str.replace(/[A-Za-zÀ-ÿ]+/g, palabra => {
+        const upper = palabra.toUpperCase();
+        const esPrimera = primera;
+        primera = false;
+
+        if (ACRONIMOS.has(upper)) return upper;
+
+        const lower = palabra.toLowerCase();
+        if (!esPrimera && menores.has(lower)) return lower;
+        return lower.charAt(0).toUpperCase() + lower.slice(1);
+      });
+    }
+
     function cleanModuleText(text) {
       if (!text) return '';
 
-      return text
+      const limpio = text
         .replace(/\s+/g, ' ')
         .replace(/denominaci[oó]n\s*:\s*/i, '')
         .replace(/objetivo\s*:.*$/i, '')
@@ -1584,6 +1615,8 @@
         .replace(/\b\d{2,3}\s*horas?\b/gi, '')
         .replace(/[;:,-]+\s*$/g, '')
         .trim();
+
+      return normalizeCase(limpio);
     }
 
     function sanitizeModules(mods) {
@@ -1898,6 +1931,32 @@
       }
 
       return filename.replace('.pdf', '').replace(/[-_]/g, ' ');
+    }
+
+    function extractModulosByDenominacion(texto) {
+      const mods = [];
+      const seen = new Set();
+
+      // Exige que entre "Denominación:" y "Duración: NN horas" aparezca "Objetivo:",
+      // así no confunde la denominación general del certificado con la de un módulo.
+      const regex = /Denominaci[oó]n\s*:\s*([^\n\r]{4,140}?)\s*\n[\s\S]{0,800}?Objetivo\s*:[\s\S]{0,2000}?Duraci[oó]n\s*:\s*(\d{2,4})\s*horas?\b/gi;
+      let m;
+
+      while ((m = regex.exec(texto)) !== null) {
+        const nombre = cleanModuleText(m[1]);
+        const horas = parseInt(m[2], 10);
+
+        if (!nombre || nombre.length < 4) continue;
+        if (!Number.isFinite(horas) || horas <= 0 || horas > 900) continue;
+
+        const key = nombre.toLowerCase();
+        if (seen.has(key)) continue;
+        seen.add(key);
+
+        mods.push({ nombre, horas });
+      }
+
+      return mods;
     }
 
     function extractModulos(texto) {
