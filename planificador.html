@@ -1182,6 +1182,8 @@
 
           <div id="ufname" class="ufname"></div>
 
+          <button class="badd" id="btnReset" type="button" style="display:none;margin-top:10px">🗑 Limpiar y empezar de nuevo</button>
+
           <div class="aibar" id="aibar">
             <div class="spin"></div>
             <span id="aitxt">Analizando el documento con IA...</span>
@@ -1460,6 +1462,7 @@
     });
 
     async function processPDF(file) {
+      resetPlanner();
       document.getElementById('ufname').textContent = '📎 ' + file.name;
       document.getElementById('aibar').classList.add('show');
       document.getElementById('aitxt').textContent = 'Leyendo el PDF...';
@@ -1647,7 +1650,46 @@
       document.getElementById('step2').classList.add('done');
       document.getElementById('step3').classList.add('active');
       document.getElementById('btnCalc').disabled = false;
+      document.getElementById('btnReset').style.display = 'inline-flex';
     }
+
+    function resetPlanner() {
+      scheduleGlobal = [];
+      hitosGlobal = [];
+
+      document.getElementById('pdfInput').value = '';
+      document.getElementById('ufname').textContent = '';
+      document.getElementById('certName').value = '';
+      document.getElementById('modsBody').innerHTML = '';
+      document.getElementById('modsArea').style.display = 'none';
+
+      document.getElementById('fIni').value = '';
+      document.getElementById('fFin').value = '';
+
+      document.getElementById('btnCalc').disabled = true;
+      document.getElementById('bexp').style.display = 'none';
+      document.getElementById('res').classList.remove('show');
+      document.getElementById('btnReset').style.display = 'none';
+
+      document.getElementById('rtbody').innerHTML = '';
+      document.getElementById('calWrap').innerHTML = '';
+      document.getElementById('calLegend').innerHTML = '';
+      document.getElementById('infoBar').innerHTML = '';
+      document.getElementById('actMod').innerHTML = '';
+      document.getElementById('hitosList').innerHTML = '<p class="no-hitos">Sin actividades añadidas. Usa el formulario de arriba para programar pruebas y exámenes.</p>';
+
+      hideErr();
+
+      document.getElementById('step1').classList.remove('done');
+      document.getElementById('step1').classList.add('active');
+      document.getElementById('step2').classList.remove('done', 'active');
+      document.getElementById('step3').classList.remove('done', 'active');
+    }
+
+    document.getElementById('btnReset').addEventListener('click', () => {
+      resetPlanner();
+      document.getElementById('step1').scrollIntoView({behavior:'smooth', block:'start'});
+    });
 
     function renderMods(mods) {
       document.getElementById('modsBody').innerHTML = '';
