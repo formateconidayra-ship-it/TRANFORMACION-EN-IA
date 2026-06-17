@@ -1230,7 +1230,7 @@
               <input type="date" id="fIni" />
             </div>
             <div class="cf">
-              <label>Fecha límite</label>
+              <label>Fecha límite (opcional)</label>
               <input type="date" id="fFin" />
             </div>
             <div class="cf">
@@ -1523,31 +1523,41 @@
       if (!items || !items.length) return '';
 
       const lines = [];
-      let currentLine = [];
+      let currentLine = '';
       let currentY = null;
+      let prevRight = null;
 
       items.forEach(item => {
-        const str = (item.str || '').trim();
-        if (!str) return;
+        const raw = item.str || '';
+        if (!raw) return;
 
+        const x = item.transform ? item.transform[4] : 0;
         const y = item.transform ? item.transform[5] : 0;
+        const fontSize = item.transform ? Math.abs(item.transform[3]) || Math.abs(item.transform[0]) : (item.height || 10);
+        const width = item.width || 0;
 
-        if (currentY === null) {
+        if (currentY === null || Math.abs(y - currentY) > 3) {
+          if (currentLine) lines.push(currentLine);
+          currentLine = raw;
           currentY = y;
-          currentLine.push(str);
+          prevRight = x + width;
           return;
         }
 
-        if (Math.abs(y - currentY) <= 3) {
-          currentLine.push(str);
-        } else {
-          if (currentLine.length) lines.push(currentLine.join(' '));
-          currentLine = [str];
-          currentY = y;
+        // Solo insertamos espacio si hay un hueco real entre fragmentos del PDF;
+        // si no, el PDF partió la misma palabra en varios items y hay que pegarlos.
+        const gap = x - prevRight;
+        const needsSpace = gap > fontSize * 0.16;
+
+        if (needsSpace && !currentLine.endsWith(' ') && !raw.startsWith(' ')) {
+          currentLine += ' ';
         }
+
+        currentLine += raw;
+        prevRight = x + width;
       });
 
-      if (currentLine.length) lines.push(currentLine.join(' '));
+      if (currentLine) lines.push(currentLine);
       return lines.join('\n');
     }
 
@@ -1648,32 +1658,51 @@
         };
       }).filter(m => m.nom && m.h > 0);
 
-      if (!ini || !fin || hd <= 0 || !dias.length || !mods.length) {
-        showErr('Completa fechas, horas diarias, días lectivos y al menos un módulo.');
+      if (!ini || hd <= 0 || !dias.length || !mods.length) {
+        showErr('Completa la fecha de inicio, horas diarias, días lectivos y al menos un módulo.');
         return;
       }
 
-      const dI = new Date(ini), dF = new Date(fin);
-      if (dI > dF) {
-        showErr('La fecha de inicio debe ser anterior a la fecha fin.');
-        return;
-      }
-
+      const dI = new Date(ini);
+      const tH = mods.reduce((s, m) => s + m.h, 0);
+      const nec = Math.ceil(tH / hd);
       const avail = [];
       let d = new Date(dI);
 
-      while (d <= dF) {
-        const w = d.getDay();
-        if (dias.includes(w) && !esFest(d)) avail.push(new Date(d));
-        d.setDate(d.getDate() + 1);
-      }
+      if (fin) {
+        const dF = new Date(fin);
+        if (dI > dF) {
+          showErr('La fecha de inicio debe ser anterior a la fecha límite.');
+          return;
+        }
 
-      const tH = mods.reduce((s, m) => s + m.h, 0);
-      const nec = Math.ceil(tH / hd);
+        while (d <= dF) {
+          const w = d.getDay();
+          if (dias.includes(w) && !esFest(d)) avail.push(new Date(d));
+          d.setDate(d.getDate() + 1);
+        }
 
-      if (avail.length < nec) {
-        showErr(`Necesitas ${nec} días lectivos pero solo hay ${avail.length} en el rango. Amplía las fechas.`);
-        return;
+        if (avail.length < nec) {
+          showErr(`Necesitas ${nec} días lectivos pero solo hay ${avail.length} en el rango. Amplía la fecha límite.`);
+          return;
+        }
+      } else {
+        // Sin fecha límite: la herramienta avanza día a día hasta cubrir
+        // todas las horas de los módulos y calcula la fecha fin por sí sola.
+        const maxIter = 365 * 3;
+        let iter = 0;
+
+        while (avail.length < nec && iter < maxIter) {
+          const w = d.getDay();
+          if (dias.includes(w) && !esFest(d)) avail.push(new Date(d));
+          d.setDate(d.getDate() + 1);
+          iter++;
+        }
+
+        if (avail.length < nec) {
+          showErr('No se pudo calcular una fecha fin automática. Revisa los días lectivos seleccionados.');
+          return;
+        }
       }
 
       const sched = [];
