@@ -2,87 +2,83 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <url>
-    <loc>https://transformacionia.es/</loc>
-    <lastmod>2026-06-11</lastmod>
+    <loc>https://www.transformacionia.es/</loc>
     <priority>1.0</priority>
   </url>
 
   <url>
-    <loc>https://transformacionia.es/sobre-mi.html</loc>
-    <lastmod>2026-06-11</lastmod>
+    <loc>https://www.transformacionia.es/sobre-mi.html</loc>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://transformacionia.es/proyectos.html</loc>
-    <lastmod>2026-06-11</lastmod>
+    <loc>https://www.transformacionia.es/proyectos.html</loc>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://transformacionia.es/acreditaciones.html</loc>
-    <lastmod>2026-06-11</lastmod>
+    <loc>https://www.transformacionia.es/contacto.html</loc>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://transformacionia.es/planificador.html</loc>
-    <lastmod>2026-06-11</lastmod>
+    <loc>https://www.transformacionia.es/acreditaciones.html</loc>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://www.transformacionia.es/formacion-inteligencia-artificial-canarias.html</loc>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://www.transformacionia.es/formacion-transformacion-digital-canarias.html</loc>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://www.transformacionia.es/formacion-competencias-digitales-empleo.html</loc>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://transformacionia.es/formacion-inteligencia-artificial-canarias.html</loc>
-    <lastmod>2026-06-11</lastmod>
+    <loc>https://www.transformacionia.es/formacion-herramientas-digitales-analisis-datos.html</loc>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://transformacionia.es/formacion-transformacion-digital-canarias.html</loc>
-    <lastmod>2026-06-11</lastmod>
+    <loc>https://www.transformacionia.es/herramientas.html</loc>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://transformacionia.es/formacion-competencias-digitales-empleo.html</loc>
-    <lastmod>2026-06-11</lastmod>
+    <loc>https://www.transformacionia.es/blog.html</loc>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://transformacionia.es/formacion-herramientas-digitales-analisis-datos.html</loc>
-    <lastmod>2026-06-11</lastmod>
+    <loc>https://www.transformacionia.es/chatgpt-en-el-trabajo.html</loc>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://transformacionia.es/herramientas.html</loc>
-    <lastmod>2026-06-11</lastmod>
+    <loc>https://www.transformacionia.es/excel-power-bi-empresas.html</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.transformacionia.es/planificador.html</loc>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://transformacionia.es/blog.html</loc>
-    <lastmod>2026-06-11</lastmod>
-    <priority>0.7</priority>
+    <loc>https://www.transformacionia.es/aviso-legal.html</loc>
+    <priority>0.3</priority>
   </url>
 
   <url>
-    <loc>https://transformacionia.es/chatgpt-en-el-trabajo.html</loc>
-    <lastmod>2026-06-11</lastmod>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://transformacionia.es/excel-power-bi-empresas.html</loc>
-    <lastmod>2026-06-11</lastmod>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://transformacionia.es/contacto.html</loc>
-    <lastmod>2026-06-11</lastmod>
-    <priority>0.6</priority>
+    <loc>https://www.transformacionia.es/privacidad.html</loc>
+    <priority>0.3</priority>
   </url>
 
 </urlset>
