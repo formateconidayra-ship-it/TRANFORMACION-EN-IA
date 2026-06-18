@@ -1766,6 +1766,7 @@ button {
   padding: 40px;
   max-width: 600px;
   width: 100%;
+  margin: 0 auto;
   border-radius: 20px;
   border: 1px solid rgba(59, 130, 246, 0.22);
   background:
