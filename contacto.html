@@ -550,7 +550,7 @@
               Cuéntame tu caso y te responderé lo antes posible.
             </p>
 
-            <form action="https://script.google.com/macros/s/AKfycbwLLs5MxkISte5BF9PHihkO2BFWWPnIJIgTuj446Qds0uar8MGuJMc1nmx35Llg0QSfpw/exec" method="POST">
+            <form id="contactForm" action="https://script.google.com/macros/s/AKfycbwLLs5MxkISte5BF9PHihkO2BFWWPnIJIgTuj446Qds0uar8MGuJMc1nmx35Llg0QSfpw/exec" method="POST">
               <div class="form-row">
                 <div class="fg">
                   <label for="nombre">Nombre</label>
@@ -764,5 +764,27 @@
 
   <script src="js/reveal.js" defer></script>
   <script src="main.js" defer></script>
+
+  <script>
+    const contactForm = document.getElementById('contactForm');
+
+    if (contactForm) {
+      contactForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const btn = contactForm.querySelector('.contact-submit');
+        btn.disabled = true;
+        btn.textContent = 'Enviando...';
+
+        fetch(contactForm.action, {
+          method: 'POST',
+          mode: 'no-cors',
+          body: new FormData(contactForm)
+        }).finally(function () {
+          window.location.href = 'gracias.html';
+        });
+      });
+    }
+  </script>
 </body>
 </html>
