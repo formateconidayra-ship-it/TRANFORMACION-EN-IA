@@ -178,6 +178,34 @@
       .svc-page { padding: 32px 0 56px; }
       .svc-hero h1 { font-size: 1.85rem; }
     }
+
+    .faq-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+    .faq-card {
+      background: var(--bg4);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px;
+      transition: 0.22s ease;
+    }
+    .faq-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(59, 130, 246, 0.28);
+      box-shadow: var(--shadow-soft);
+    }
+    .faq-card h3 {
+      margin: 0 0 10px;
+      font-family: var(--fd);
+      font-size: 1.05rem;
+      line-height: 1.2;
+    }
+    .faq-card p { margin: 0; color: var(--muted); }
+    @media (max-width: 700px) {
+      .faq-grid { grid-template-columns: 1fr; }
+    }
   </style>
 
   <script type="application/ld+json">
@@ -194,6 +222,47 @@
     "areaServed": "Canarias",
     "url": "https://transformacionia.es/formacion-competencias-digitales-empleo.html",
     "inLanguage": "es-ES"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "¿Para quién está pensada esta formación en competencias digitales?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Para personas en búsqueda de empleo, trabajadores que quieren mejorar profesionalmente y profesionales que necesitan actualizar sus competencias digitales en Canarias."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Es una formación oficial o acreditada?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sí. La imparte Idayra Cabrera, docente acreditada FPE por el Servicio Canario de Empleo (SCE) y el SEPE."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Se imparte de forma presencial u online?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Ambas modalidades están disponibles, presencial y teleformación, según las necesidades del grupo o la entidad."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Cuánto cuesta y cómo se contrata?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "El presupuesto se adapta a cada caso según número de personas, duración y modalidad. Se solicita sin compromiso a través del formulario de contacto."
+        }
+      }
+    ]
   }
   </script>
 </head>
@@ -346,6 +415,32 @@
           Si gestionas programas de certificación profesional, prueba el
           <a href="planificador.html">Planificador FPE</a> para organizar horas y calendarios.
         </div>
+
+        <!-- PREGUNTAS FRECUENTES -->
+        <section class="sp-section" aria-labelledby="faq-h">
+          <div class="sp-section-header">
+            <h2 id="faq-h">Preguntas frecuentes</h2>
+            <p>Lo que más preguntan empresas, entidades y profesionales antes de contratar esta formación.</p>
+          </div>
+          <div class="faq-grid">
+            <article class="faq-card">
+              <h3>¿Para quién está pensada?</h3>
+              <p>Para personas en búsqueda de empleo, trabajadores y profesionales que necesitan actualizar sus competencias digitales en Canarias.</p>
+            </article>
+            <article class="faq-card">
+              <h3>¿Es una formación oficial o acreditada?</h3>
+              <p>Sí. La imparte una docente acreditada FPE por el Servicio Canario de Empleo (SCE) y el SEPE.</p>
+            </article>
+            <article class="faq-card">
+              <h3>¿Se imparte presencial u online?</h3>
+              <p>Ambas modalidades están disponibles, presencial y teleformación, según las necesidades del grupo.</p>
+            </article>
+            <article class="faq-card">
+              <h3>¿Cuánto cuesta y cómo se contrata?</h3>
+              <p>El presupuesto se adapta a cada caso (personas, duración, modalidad). Se solicita sin compromiso por el formulario de contacto.</p>
+            </article>
+          </div>
+        </section>
 
         <!-- LECTURA RECOMENDADA -->
         <p style="margin: -16px 0 24px; font-size: 0.9rem; color: var(--muted); line-height: 1.6;">
