@@ -88,6 +88,54 @@
     @media (max-width: 600px) {
       .tc-img-wrap { height: 130px; }
     }
+
+    .section-testimonios .stats {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    @media (max-width: 768px) {
+      .section-testimonios .stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    .faq-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .faq-card {
+      background: var(--bg4);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px;
+      transition: 0.22s ease;
+    }
+
+    .faq-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(59, 130, 246, 0.28);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .faq-card h3 {
+      margin: 0 0 10px;
+      font-family: var(--fd);
+      font-size: 1.16rem;
+      line-height: 1.12;
+    }
+
+    .faq-card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    @media (max-width: 1024px) {
+      .faq-grid {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 
   <script type="application/ld+json">
@@ -354,9 +402,9 @@
       <div class="container">
         <div class="sh center">
           <span class="kicker">Testimonios</span>
-          <h2 class="section-title" id="test-h">Resultados reales de mis alumnos</h2>
+          <h2 class="section-title" id="test-h">Formación valorada por quienes ya la han vivido</h2>
           <p class="section-sub">
-            Formación impartida a grupos reales en entornos orientados al empleo, con aplicación directa de herramientas digitales en el día a día.
+            Opiniones reales recogidas en las encuestas de satisfacción al finalizar cada curso, sin filtrar ni maquillar — en Excel, Power BI, SEO, marketing digital, herramientas web e inteligencia artificial.
           </p>
         </div>
 
@@ -364,6 +412,10 @@
           <div class="stat">
             <span class="counter" data-target="1700" data-prefix="+" data-suffix="h">0</span>
             <p>Horas de docencia</p>
+          </div>
+          <div class="stat">
+            <span class="counter" data-target="300" data-prefix="+" data-suffix="">0</span>
+            <p>Alumnos formados</p>
           </div>
           <div class="stat">
             <span class="counter" data-target="95" data-suffix="%">0</span>
@@ -425,6 +477,57 @@
             </blockquote>
             <footer>
               <span class="testimonio-cargo">Alumna · Formación digital</span>
+            </footer>
+          </article>
+
+          <article class="testimonio-card">
+            <div class="tc-img-wrap">
+              <picture>
+                <source srcset="img/alumnos-camara.webp" type="image/webp">
+                <img src="img/alumnos-camara.jpeg" alt="Alumnos en formación en la Cámara de Comercio de Tenerife" class="tc-img" loading="lazy" style="object-position:center 38%">
+              </picture>
+              <div class="tc-overlay" aria-hidden="true"></div>
+            </div>
+            <div class="stars" aria-label="5 estrellas">★★★★★</div>
+            <blockquote>
+              <p>"El estilo de enseñanza cercano facilita mucho el aprendizaje. El trato en clase es respetuoso, agradable y motivador."</p>
+            </blockquote>
+            <footer>
+              <span class="testimonio-cargo">Encuesta de satisfacción · Cámara de Comercio</span>
+            </footer>
+          </article>
+
+          <article class="testimonio-card">
+            <div class="tc-img-wrap">
+              <picture>
+                <source srcset="img/alumnos-formacion.webp" type="image/webp">
+                <img src="img/alumnos-formacion.jpeg" alt="Alumnos en una sesión de formación FPE en Canarias" class="tc-img" loading="lazy" style="object-position:center 35%">
+              </picture>
+              <div class="tc-overlay" aria-hidden="true"></div>
+            </div>
+            <div class="stars" aria-label="5 estrellas">★★★★★</div>
+            <blockquote>
+              <p>"Muy preparada en la materia y capaz de resolver cualquier duda de forma sencilla."</p>
+            </blockquote>
+            <footer>
+              <span class="testimonio-cargo">Encuesta de satisfacción · Formación FPE</span>
+            </footer>
+          </article>
+
+          <article class="testimonio-card">
+            <div class="tc-img-wrap">
+              <picture>
+                <source srcset="img/camara.webp" type="image/webp">
+                <img src="img/camara.jpeg" alt="Alumnos en formación de Excel y Power BI con Formaciónline" class="tc-img" loading="lazy" style="object-position:center 30%">
+              </picture>
+              <div class="tc-overlay" aria-hidden="true"></div>
+            </div>
+            <div class="stars" aria-label="5 estrellas">★★★★★</div>
+            <blockquote>
+              <p>"Su punto fuerte es la sencillez y claridad al explicar, y la capacidad para resolver cualquier duda al momento."</p>
+            </blockquote>
+            <footer>
+              <span class="testimonio-cargo">Encuesta de satisfacción · Excel y Power BI</span>
             </footer>
           </article>
 
@@ -680,6 +783,52 @@
               generar materiales y crear recursos útiles para formación y empresa.
             </p>
             <a href="proyectos.html" class="plink">Descubrir más</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider" aria-hidden="true"></div>
+
+    <section class="section section-soft" aria-labelledby="faq-h">
+      <div class="container">
+        <div class="sh center">
+          <span class="kicker">Antes de escribir</span>
+          <h2 class="section-title" id="faq-h">Preguntas frecuentes sobre la formación en IA</h2>
+          <p class="section-sub">
+            Algunas respuestas rápidas sobre cómo funciona la formación en inteligencia artificial aplicada.
+          </p>
+        </div>
+
+        <div class="faq-grid">
+          <article class="faq-card">
+            <h3>¿Necesito conocimientos previos para aprender Inteligencia Artificial?</h3>
+            <p>No. La formación está diseñada para todos los niveles, desde personas sin experiencia técnica hasta profesionales que quieren profundizar. El enfoque es práctico y aplicado al entorno laboral, sin necesidad de conocimientos de programación.</p>
+          </article>
+
+          <article class="faq-card">
+            <h3>¿Para qué sirve la formación en IA en el trabajo?</h3>
+            <p>Permite automatizar tareas repetitivas, redactar y revisar documentos más rápido, analizar datos de forma eficiente y mejorar la toma de decisiones desde el primer día en tu puesto de trabajo.</p>
+          </article>
+
+          <article class="faq-card">
+            <h3>¿Cuánto tiempo lleva aprender a usar herramientas de IA?</h3>
+            <p>Depende del nivel y el objetivo. En un curso introductorio de 20-40 horas, la mayoría adquiere autonomía suficiente para incorporar la IA en su día a día. Los programas avanzados pueden extenderse más.</p>
+          </article>
+
+          <article class="faq-card">
+            <h3>¿La formación es presencial o puede ser online?</h3>
+            <p>Se adapta a las necesidades de cada entidad o alumno: presencial en Canarias o en modalidad online, siempre con un enfoque práctico y orientado a resultados reales.</p>
+          </article>
+
+          <article class="faq-card">
+            <h3>¿Qué diferencia hay entre la formación en IA y un curso de Excel o Power BI?</h3>
+            <p>Son complementarias. Excel y Power BI gestionan y visualizan datos. La IA añade automatización, generación de contenido e interpretación de lenguaje natural. Juntas forman un perfil digital muy demandado.</p>
+          </article>
+
+          <article class="faq-card">
+            <h3>¿Cómo puedo solicitar formación en IA para mi empresa o equipo?</h3>
+            <p>A través del formulario de contacto o por WhatsApp. Se valoran las necesidades de tu equipo y se diseña un programa adaptado: temario, duración y modalidad, con respuesta en menos de 24 horas.</p>
           </article>
         </div>
       </div>
