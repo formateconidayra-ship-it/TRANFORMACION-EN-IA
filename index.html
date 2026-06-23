@@ -136,6 +136,15 @@
         grid-template-columns: 1fr;
       }
     }
+
+    #formacion .af-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    @media (max-width: 1100px) {
+      #formacion .af-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
   </style>
 
   <script type="application/ld+json">
@@ -671,6 +680,15 @@
             <a href="formacion-herramientas-digitales-analisis-datos.html" class="af-card-link">Ver formación →</a>
           </article>
 
+          <article class="af-card fade-in-up">
+            <span class="af-label">04 · Formación privada</span>
+            <h3>Formación in-company a medida para empresas</h3>
+            <p>
+              Programas privados adaptados a los datos y procesos reales de tu equipo, con fechas flexibles y facturación directa a la empresa.
+            </p>
+            <a href="formacion-privada-empresas.html" class="af-card-link">Ver formación →</a>
+          </article>
+
         </div>
       </div>
     </section>
@@ -891,6 +909,8 @@
       </div>
 
       <div class="footer-links-row">
+        <a href="formacion-privada-empresas.html">Formación privada</a>
+        <span class="footer-links-sep" aria-hidden="true">·</span>
         <a href="formacion-transformacion-digital-canarias.html">Transformación digital</a>
         <span class="footer-links-sep" aria-hidden="true">·</span>
         <a href="formacion-competencias-digitales-empleo.html">Competencias digitales</a>

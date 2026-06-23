@@ -11,6 +11,7 @@
 
 ## Qué ofrece
 
+- [Formación privada para empresas](https://transformacionia.es/formacion-privada-empresas.html): formación in-company a medida, facturada directamente a la empresa, adaptada a sus datos y procesos reales.
 - [Formación en transformación digital en Canarias](https://transformacionia.es/formacion-transformacion-digital-canarias.html): digitalización de procesos, herramientas reales, IA aplicada al trabajo.
 - [Formación en competencias digitales para el empleo](https://transformacionia.es/formacion-competencias-digitales-empleo.html): para personas en búsqueda de empleo y profesionales que necesitan actualizar competencias digitales.
 - [Formación en inteligencia artificial en Canarias](https://transformacionia.es/formacion-inteligencia-artificial-canarias.html): IA aplicada sin necesidad de perfil técnico.
