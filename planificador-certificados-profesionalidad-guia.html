@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PQ7964Q4MB"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-PQ7964Q4MB');
+  </script>
+
+  <title>Cómo planificar un certificado de profesionalidad en minutos: guía del planificador FPE | Idayra Cabrera</title>
+  <meta
+    name="description"
+    content="Guía práctica de mi herramienta gratuita para planificar certificados de profesionalidad: sube el PDF de la programación, calcula horas y fechas automáticamente y descarga el calendario."
+  />
+  <meta name="author" content="Idayra Cabrera" />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#07090f" />
+  <link rel="canonical" href="https://transformacionia.es/planificador-certificados-profesionalidad-guia.html" />
+
+  <link rel="icon" href="img/favicon.ico" sizes="any">
+  <link rel="icon" href="img/favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="img/favicon-16x16.png" type="image/png" sizes="16x16">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Cómo planificar un certificado de profesionalidad en minutos: guía del planificador FPE" />
+  <meta
+    property="og:description"
+    content="Sube el PDF de la programación, calcula horas y fechas automáticamente y descarga el calendario del certificado. Te enseño a usar mi herramienta gratuita paso a paso."
+  />
+  <meta property="og:url" content="https://transformacionia.es/planificador-certificados-profesionalidad-guia.html" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:site_name" content="Transformación IA" />
+
+  <meta property="og:image" content="https://transformacionia.es/img/og-default.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Cómo planificar un certificado de profesionalidad en minutos: guía del planificador FPE" />
+  <meta name="twitter:description" content="Guía paso a paso de mi herramienta gratuita para generar la planificación de un certificado de profesionalidad a partir del PDF de la programación." />
+  <meta name="twitter:image" content="https://transformacionia.es/img/og-default.jpg" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;600;700;800&family=Roboto:wght@300;400;500;700&display=swap">
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <style>
+    .art-page { padding: 48px 0 72px; }
+
+    .art-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 28px;
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: var(--muted);
+      transition: color 0.2s ease;
+    }
+    .art-back:hover { color: var(--cyan); }
+
+    .art-header {
+      margin-bottom: 40px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--border);
+    }
+    .art-header .kicker { margin-bottom: 16px; }
+    .art-header h1 {
+      margin: 0 0 20px;
+      font-family: var(--fd);
+      font-size: clamp(1.9rem, 4vw, 3rem);
+      line-height: 1.06;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+    }
+    .art-header-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 16px;
+      font-size: 0.84rem;
+      color: var(--muted2);
+    }
+    .art-header-meta span { display: flex; align-items: center; gap: 5px; }
+
+    .art-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 280px;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .art-body { min-width: 0; }
+    .art-body h2 {
+      margin: 40px 0 14px;
+      font-family: var(--fd);
+      font-size: clamp(1.35rem, 2.5vw, 1.75rem);
+      line-height: 1.12;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      color: var(--text);
+    }
+    .art-body h2:first-child { margin-top: 0; }
+    .art-body h3 {
+      margin: 28px 0 10px;
+      font-family: var(--fd);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .art-body p {
+      margin: 0 0 16px;
+      font-size: 1rem;
+      color: var(--muted);
+      line-height: 1.78;
+    }
+    .art-body p:last-child { margin-bottom: 0; }
+    .art-body strong { color: var(--text); font-weight: 600; }
+    .art-body ul, .art-body ol {
+      margin: 0 0 18px;
+      padding-left: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+    .art-body ul li, .art-body ol li {
+      position: relative;
+      padding-left: 18px;
+      font-size: 0.97rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+    .art-body ul li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.58em;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--cyan);
+    }
+    .art-body ol { counter-reset: ol-counter; }
+    .art-body ol li { counter-increment: ol-counter; }
+    .art-body ol li::before {
+      content: counter(ol-counter);
+      position: absolute;
+      left: 0;
+      top: 0.1em;
+      font-family: var(--fd);
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--cyan);
+    }
+    .art-highlight {
+      margin: 28px 0;
+      padding: 20px 24px;
+      background: rgba(59, 130, 246, 0.06);
+      border-left: 3px solid var(--blue);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      font-size: 0.97rem;
+      color: var(--text);
+      line-height: 1.68;
+    }
+
+    .art-sidebar {
+      display: grid;
+      gap: 16px;
+      position: sticky;
+      top: 80px;
+    }
+    .art-sidebar-card {
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.025);
+      border: 1px solid var(--border2);
+      border-radius: var(--radius);
+    }
+    .art-sidebar-card h4 {
+      margin: 0 0 12px;
+      font-family: var(--fd);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted2);
+    }
+    .art-author-name {
+      font-family: var(--fd);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+    .art-author-bio {
+      margin: 0;
+      font-size: 0.87rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .art-related-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .art-related-list li a {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.45;
+      transition: color 0.2s ease;
+    }
+    .art-related-list li a:hover { color: var(--cyan); }
+
+    @media (max-width: 900px) {
+      .art-grid { grid-template-columns: 1fr; }
+      .art-sidebar { position: static; }
+    }
+    @media (max-width: 600px) {
+      .art-page { padding: 32px 0 56px; }
+      .art-header h1 { font-size: 1.75rem; }
+    }
+    .svc-highlight {
+      margin: 32px 0;
+      padding: 22px 26px;
+      background: rgba(59, 130, 246, 0.06);
+      border-left: 3px solid var(--blue);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      font-size: 0.97rem;
+      color: var(--text);
+      line-height: 1.7;
+    }
+    .svc-highlight a {
+      color: var(--cyan);
+      text-decoration: underline;
+      text-decoration-color: rgba(6, 182, 212, 0.4);
+      text-underline-offset: 3px;
+    }
+    .svc-highlight a:hover { text-decoration-color: var(--cyan); }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Cómo planificar un certificado de profesionalidad en minutos: guía del planificador FPE",
+    "description": "Guía práctica de mi herramienta gratuita para planificar certificados de profesionalidad: sube el PDF de la programación, calcula horas y fechas automáticamente y descarga el calendario.",
+    "url": "https://transformacionia.es/planificador-certificados-profesionalidad-guia.html",
+    "inLanguage": "es-ES",
+    "author": {
+      "@type": "Person",
+      "name": "Idayra Cabrera",
+      "url": "https://transformacionia.es/"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Idayra Cabrera",
+      "url": "https://transformacionia.es/"
+    },
+    "datePublished": "2026-06-23",
+    "dateModified": "2026-06-23",
+    "mainEntityOfPage": "https://transformacionia.es/planificador-certificados-profesionalidad-guia.html"
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+  <div class="bg-glow" aria-hidden="true"></div>
+
+  <header class="navbar" role="banner">
+    <a href="index.html" class="nav-logo" aria-label="Transformación IA – Inicio">
+      <img src="img/logo-idayra-header.png" alt="Transformación IA" class="nav-logo-img">
+    </a>
+    <button class="nav-toggle" id="navTog" type="button" aria-label="Abrir menú" aria-controls="navLinks" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav-links" id="navLinks" aria-label="Menú principal">
+      <a href="sobre-mi.html">Sobre mí</a>
+      <a href="proyectos.html">Proyectos</a>
+      <a href="herramientas.html">Herramientas</a>
+      <a href="acreditaciones.html">Acreditaciones</a>
+      <a href="blog.html" aria-current="page">Blog</a>
+      <a href="contacto.html" class="nav-cta">Contacto</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="art-page">
+      <div class="container">
+
+        <a href="blog.html" class="art-back">← Volver al blog</a>
+
+        <header class="art-header">
+          <span class="kicker">Herramientas · Productividad docente</span>
+          <h1>Cómo planificar un certificado de profesionalidad en minutos: guía del planificador FPE</h1>
+          <div class="art-header-meta">
+            <span>Idayra Cabrera</span>
+            <span>6 min de lectura</span>
+            <span>Junio 2026</span>
+          </div>
+        </header>
+
+        <div class="art-grid">
+
+          <article class="art-body">
+
+            <p>
+              Cada vez que arranco un certificado de profesionalidad nuevo, la primera tarea no es dar clase:
+              es planificar. Coger la programación didáctica en PDF, sacar la denominación y la duración de
+              cada módulo, calcular cuántas horas tocan por día y por semana, encajarlo todo con los festivos
+              y construir un calendario que cuadre con la fecha de inicio y de fin del curso.
+            </p>
+            <p>
+              Hacerlo a mano en Excel, módulo a módulo, me llevaba fácilmente una tarde entera. Y cualquier
+              cambio de última hora —un festivo que se mueve, un módulo que se reordena— obligaba a rehacer
+              buena parte del cálculo. Así que construí una herramienta para resolverlo en minutos:
+              el <a href="planificador.html">planificador de certificados de profesionalidad</a>.
+            </p>
+
+            <h2>Qué hace el planificador</h2>
+            <p>
+              Es una herramienta web gratuita, sin registro, que convierte el PDF de una programación
+              didáctica en un calendario de impartición listo para usar. En concreto:
+            </p>
+            <ul>
+              <li><strong>Lee el PDF directamente:</strong> extrae el texto de la programación sin que tengas que copiar nada a mano.</li>
+              <li><strong>Detecta cada módulo formativo</strong> con su denominación y su duración en horas, aunque el documento original tenga el texto mal espaciado o en mayúsculas.</li>
+              <li><strong>Calcula el calendario de impartición</strong> repartiendo las horas según los días lectivos y el horario diario que indiques.</li>
+              <li><strong>Calcula la fecha de fin automáticamente</strong> si no tienes una fecha límite fijada, en lugar de obligarte a saberla de antemano.</li>
+              <li><strong>Genera un resumen de horas por módulo</strong> y un calendario visual que puedes revisar de un vistazo.</li>
+            </ul>
+
+            <div class="art-highlight">
+              No necesitas instalar nada ni crear cuenta. Subes el PDF, defines unos pocos parámetros
+              y obtienes la planificación completa en el navegador.
+            </div>
+
+            <h2>Cómo usarlo paso a paso</h2>
+            <ol>
+              <li><strong>Abre el planificador</strong> y sube el PDF de la programación didáctica del certificado.</li>
+              <li><strong>Revisa los módulos detectados:</strong> la herramienta extrae automáticamente la denominación y las horas de cada uno. Si algún nombre viene en mayúsculas del documento original, se normaliza a un formato legible respetando siglas como IA, SEO o FPE.</li>
+              <li><strong>Indica la fecha de inicio, los días lectivos de la semana y las horas de impartición diarias.</strong></li>
+              <li><strong>Marca los festivos</strong> que afecten al periodo de impartición, si los hay.</li>
+              <li><strong>Genera el calendario.</strong> Si no tienes todavía una fecha límite cerrada, el planificador calcula la fecha de fin estimada según las horas totales y el ritmo de impartición que has definido.</li>
+              <li><strong>Descarga o consulta el resultado:</strong> verás el total de horas por módulo y el calendario completo, día a día.</li>
+            </ol>
+            <p>
+              Si necesitas planificar un certificado distinto, el botón de <strong>limpiar y empezar de nuevo</strong>
+              resetea todos los datos cargados para que no se mezclen con la planificación anterior.
+            </p>
+
+            <h2>Por qué lo construí así</h2>
+            <p>
+              La mayoría de programaciones didácticas en PDF no tienen un formato limpio para extraer texto:
+              el espaciado entre palabras varía, los nombres de los módulos aparecen en mayúsculas y la
+              estructura del documento cambia de un certificado a otro. La primera versión de la herramienta
+              cometía errores de lectura por estos motivos, así que ajusté la extracción para que reconozca
+              los huecos reales entre palabras y para que identifique de forma fiable el bloque de
+              "Denominación", "Objetivo" y "Duración" de cada módulo, que es la estructura que usan
+              prácticamente todas las programaciones de certificados de profesionalidad.
+            </p>
+            <p>
+              También quité la obligación de fijar una fecha límite desde el principio. En la práctica,
+              muchas veces sabes cuándo empieza el curso pero no la fecha exacta de cierre hasta que ves
+              cómo se reparten las horas; por eso el planificador puede calcularla por ti.
+            </p>
+
+            <div style="margin:36px 0;padding:24px 28px;background:rgba(59,130,246,0.06);border:1px solid rgba(59,130,246,0.22);border-radius:12px;display:flex;flex-direction:column;gap:12px;">
+              <p style="margin:0;font-family:var(--fd);font-size:1rem;font-weight:700;color:var(--text);letter-spacing:-0.01em;">¿Quieres probar el planificador con tu propia programación?</p>
+              <p style="margin:0;font-size:0.92rem;color:var(--muted);line-height:1.6;">Es gratuito, funciona en el navegador y no requiere registro. Solo necesitas el PDF de la programación didáctica.</p>
+              <div><a href="planificador.html" class="btn btn-p" style="min-height:40px;padding:10px 22px;font-size:0.88rem">Abrir el planificador</a></div>
+            </div>
+
+            <h2>Para quién es útil</h2>
+            <p>
+              Lo uso yo misma en mi día a día como docente, pero está pensado para cualquier persona que
+              gestione programaciones de certificados de profesionalidad:
+            </p>
+            <ul>
+              <li><strong>Docentes FPE</strong> que necesitan convertir la programación en un calendario de impartición real.</li>
+              <li><strong>Centros de formación</strong> que planifican varios grupos y certificados en paralelo.</li>
+              <li><strong>Coordinadores y gestores de formación</strong> que necesitan calcular horas y fechas sin depender de hojas de cálculo manuales.</li>
+            </ul>
+
+            <h2>Próximas mejoras</h2>
+            <p>
+              El planificador sigue en activo y lo voy ajustando según los casos reales que me encuentro.
+              Las siguientes mejoras que tengo en mente son exportar el calendario directamente a PDF o Excel
+              y permitir guardar varias planificaciones para retomarlas más adelante. Si lo pruebas y echas
+              en falta algo concreto, puedes <a href="contacto.html">escribirme</a> y lo tengo en cuenta.
+            </p>
+
+            <!-- FORMACIÓN RELACIONADA -->
+            <div class="svc-highlight">
+              Si gestionas programaciones de certificados de profesionalidad y quieres formación en
+              herramientas digitales para optimizar tareas como esta, el programa de
+              <a href="formacion-herramientas-digitales-analisis-datos.html">herramientas digitales y
+              análisis de datos</a> está acreditado FPE por el SEPE y el Servicio Canario de Empleo (SCE).
+            </div>
+
+          </article>
+
+          <aside class="art-sidebar">
+            <div class="art-sidebar-card">
+              <h4>Autora</h4>
+              <p class="art-author-name">Idayra Cabrera</p>
+              <p class="art-author-bio">
+                Docente FPE acreditada en Canarias, especializada en competencias digitales,
+                inteligencia artificial aplicada y transformación digital.
+                Más de 1.700 horas de docencia certificadas.
+              </p>
+              <div style="margin-top:14px">
+                <a href="sobre-mi.html" class="btn btn-g" style="min-height:38px;padding:8px 14px;font-size:0.84rem">Ver perfil completo</a>
+              </div>
+            </div>
+
+            <div class="art-sidebar-card">
+              <h4>Artículo</h4>
+              <p style="margin:0 0 6px;font-size:0.86rem;color:var(--muted)"><strong style="color:var(--text)">Categoría:</strong> Herramientas</p>
+              <p style="margin:0 0 6px;font-size:0.86rem;color:var(--muted)"><strong style="color:var(--text)">Lectura:</strong> 6 minutos</p>
+              <p style="margin:0;font-size:0.86rem;color:var(--muted)"><strong style="color:var(--text)">Nivel:</strong> Sin requisitos previos</p>
+            </div>
+
+            <div class="art-sidebar-card">
+              <h4>Más artículos</h4>
+              <ul class="art-related-list">
+                <li><a href="formacion-inteligencia-artificial-canarias.html">Formación en IA en Canarias: guía práctica para empezar sin ser técnico</a></li>
+                <li><a href="excel-power-bi-empresas.html">Excel y Power BI para empresas: qué aprender primero</a></li>
+              </ul>
+            </div>
+
+            <div class="art-sidebar-card" style="background:rgba(59,130,246,0.06);border-color:rgba(59,130,246,0.25)">
+              <h4>¿Necesitas una herramienta a medida?</h4>
+              <p style="margin:0 0 14px;font-size:0.87rem;color:var(--muted);line-height:1.55">
+                Diseño herramientas digitales sencillas para resolver tareas repetitivas concretas, como esta.
+              </p>
+              <a href="contacto.html" class="btn btn-p" style="width:100%;min-height:40px;padding:10px 14px;font-size:0.88rem">Solicitar información</a>
+            </div>
+          </aside>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="divider" aria-hidden="true"></div>
+
+    <section class="section section-cta-final" aria-labelledby="art4-cta-h">
+      <div class="container">
+        <div class="cta-final">
+          <span class="kicker">Siguiente paso</span>
+          <h2 id="art4-cta-h">¿Quieres dejar de planificar a mano?</h2>
+          <p>
+            Prueba el planificador de certificados de profesionalidad gratis: sube el PDF de tu
+            programación y obtén el calendario de impartición en minutos.
+          </p>
+          <div class="cta-final-actions">
+            <a href="planificador.html" class="btn btn-p">Abrir el planificador</a>
+            <a href="blog.html" class="btn btn-g">Volver al blog</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container footer-container">
+      <div class="footer-top">
+        <a href="index.html" class="nav-logo footer-logo" aria-label="Transformación IA – Inicio">
+          <img src="img/logo-idayra-header.png" alt="Transformación IA" class="nav-logo-img">
+        </a>
+        <div class="footer-social" aria-label="Redes sociales y contacto">
+          <a href="https://wa.me/34620948523" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="WhatsApp" title="WhatsApp">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.05 4.91A9.82 9.82 0 0 0 12.03 2C6.58 2 2.13 6.42 2.13 11.88c0 1.75.46 3.46 1.33 4.96L2 22l5.3-1.39a9.9 9.9 0 0 0 4.73 1.2h.01c5.45 0 9.9-4.42 9.9-9.88 0-2.64-1.03-5.12-2.89-7.02Zm-7.02 15.23h-.01a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-3.15.83.84-3.07-.2-.31a8.13 8.13 0 0 1-1.25-4.34c0-4.48 3.67-8.13 8.18-8.13 2.18 0 4.23.84 5.77 2.37a8.06 8.06 0 0 1 2.39 5.76c0 4.48-3.67 8.21-8.09 8.21Zm4.46-6.1c-.24-.12-1.4-.69-1.62-.77-.22-.08-.38-.12-.54.12-.16.24-.62.77-.76.93-.14.16-.28.18-.52.06-.24-.12-1.01-.37-1.92-1.19-.71-.63-1.19-1.41-1.33-1.65-.14-.24-.01-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.29-.74-1.77-.2-.47-.4-.41-.54-.42h-.46c-.16 0-.42.06-.64.3-.22.24-.84.81-.84 1.97s.86 2.28.98 2.44c.12.16 1.69 2.58 4.1 3.61.57.25 1.02.4 1.37.51.58.18 1.11.15 1.53.09.47-.07 1.4-.57 1.6-1.12.2-.55.2-1.02.14-1.12-.06-.1-.22-.16-.46-.28Z"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/in/luzidayrajorgecabrera" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="LinkedIn" title="LinkedIn">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.94 8.5A1.56 1.56 0 1 1 6.94 5.38a1.56 1.56 0 0 1 0 3.12ZM5.56 9.75h2.77V18H5.56V9.75Zm4.5 0h2.66v1.13h.04c.37-.7 1.28-1.43 2.63-1.43 2.82 0 3.34 1.85 3.34 4.26V18h-2.77v-3.79c0-.9-.02-2.06-1.26-2.06-1.26 0-1.45.98-1.45 1.99V18h-2.77V9.75Z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-links-row">
+        <a href="formacion-transformacion-digital-canarias.html">Transformación digital</a>
+        <span class="footer-links-sep" aria-hidden="true">·</span>
+        <a href="formacion-competencias-digitales-empleo.html">Competencias digitales</a>
+        <span class="footer-links-sep" aria-hidden="true">·</span>
+        <a href="formacion-herramientas-digitales-analisis-datos.html">Herramientas y datos</a>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© <span id="currentYear"></span> Idayra Cabrera</span>
+        <span class="footer-bottom-sep" aria-hidden="true">·</span>
+        <a href="aviso-legal.html">Aviso legal</a>
+        <span class="footer-bottom-sep" aria-hidden="true">·</span>
+        <a href="privacidad.html">Privacidad</a>
+      </div>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/34620948523?text=Hola%20Idayra,%20he%20le%C3%ADdo%20tu%20art%C3%ADculo%20sobre%20el%20planificador%20de%20certificados%20y%20me%20interesa%20m%C3%A1s%20informaci%C3%B3n."
+    class="floating-whatsapp" target="_blank" rel="noopener noreferrer"
+    aria-label="Abrir conversación en WhatsApp" title="Hablar por WhatsApp">
+    <span class="floating-whatsapp-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M19.05 4.91A9.82 9.82 0 0 0 12.03 2C6.58 2 2.13 6.42 2.13 11.88c0 1.75.46 3.46 1.33 4.96L2 22l5.3-1.39a9.9 9.9 0 0 0 4.73 1.2h.01c5.45 0 9.9-4.42 9.9-9.88 0-2.64-1.03-5.12-2.89-7.02Zm-7.02 15.23h-.01a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-3.15.83.84-3.07-.2-.31a8.13 8.13 0 0 1-1.25-4.34c0-4.48 3.67-8.13 8.18-8.13 2.18 0 4.23.84 5.77 2.37a8.06 8.06 0 0 1 2.39 5.76c0 4.48-3.67 8.21-8.09 8.21Zm4.46-6.1c-.24-.12-1.4-.69-1.62-.77-.22-.08-.38-.12-.54.12-.16.24-.62.77-.76.93-.14.16-.28.18-.52.06-.24-.12-1.01-.37-1.92-1.19-.71-.63-1.19-1.41-1.33-1.65-.14-.24-.01-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.29-.74-1.77-.2-.47-.4-.41-.54-.42h-.46c-.16 0-.42.06-.64.3-.22.24-.84.81-.84 1.97s.86 2.28.98 2.44c.12.16 1.69 2.58 4.1 3.61.57.25 1.02.4 1.37.51.58.18 1.11.15 1.53.09.47-.07 1.4-.57 1.6-1.12.2-.55.2-1.02.14-1.12-.06-.1-.22-.16-.46-.28Z"/></svg>
+    </span>
+    <span class="floating-whatsapp-text">Hablemos</span>
+  </a>
+
+  <script src="js/reveal.js" defer></script>
+  <script src="main.js" defer></script>
+</body>
+</html>
