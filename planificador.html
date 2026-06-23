@@ -1187,7 +1187,7 @@
           </div>
 
           <div class="uzone" id="uzone">
-            <input type="file" id="pdfInput" accept=".pdf" />
+            <input type="file" id="pdfInput" accept=".pdf" aria-label="Subir PDF del certificado de profesionalidad" />
             <div class="ui">📄</div>
             <strong>Arrastra el PDF aquí o haz clic para seleccionarlo</strong>
             <p>Certificado de profesionalidad, Real Decreto o programa formativo</p>
@@ -1212,7 +1212,7 @@
 
           <div id="modsArea" style="display:none">
             <div class="crow">
-              <label>Certificado:</label>
+              <label for="certName">Certificado:</label>
               <input type="text" id="certName" placeholder="Nombre del certificado" />
             </div>
 
@@ -1241,15 +1241,15 @@
 
           <div class="cfg">
             <div class="cf">
-              <label>Fecha de inicio</label>
+              <label for="fIni">Fecha de inicio</label>
               <input type="date" id="fIni" />
             </div>
             <div class="cf">
-              <label>Fecha límite (opcional)</label>
+              <label for="fFin">Fecha límite (opcional)</label>
               <input type="date" id="fFin" />
             </div>
             <div class="cf">
-              <label>Horas lectivas por día</label>
+              <label for="hDia">Horas lectivas por día</label>
               <input type="number" id="hDia" value="5" min="1" max="12" />
             </div>
           </div>
@@ -1324,12 +1324,12 @@
 
                 <div class="act-grid">
                   <div class="act-field">
-                    <label>Módulo</label>
+                    <label for="actMod">Módulo</label>
                     <select id="actMod"></select>
                   </div>
 
                   <div class="act-field">
-                    <label>Tipo de actividad</label>
+                    <label for="actTipo">Tipo de actividad</label>
                     <select id="actTipo">
                       <option>Prueba objetiva</option>
                       <option>Prueba práctica</option>
@@ -1341,7 +1341,7 @@
                   </div>
 
                   <div class="act-field">
-                    <label>Fecha</label>
+                    <label for="actFecha">Fecha</label>
                     <input type="date" id="actFecha" />
                   </div>
 
@@ -1432,11 +1432,11 @@
     </div>
   </footer>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" defer></script>
   <script src="js/reveal.js" defer></script>
   <script src="main.js" defer></script>
 
-  <script>
+  <script defer>
     const GAS_URL = 'https://script.google.com/macros/s/AKfycbwWxLYtPaxAy57cxvvSJqtt4PvijKWpevN4XaS8269WduISjBqQhKA6aKZNN8GTq6-l/exec';
     pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
