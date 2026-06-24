@@ -1,23 +1,40 @@
 # Transformación IA — Idayra Cabrera
 
-> Idayra Cabrera es docente FPE (Formación Profesional para el Empleo) acreditada por el Servicio Canario de Empleo (SCE) y el SEPE, especializada en transformación digital, competencias digitales, inteligencia artificial aplicada, Excel avanzado y Power BI. Imparte formación en Canarias (España) en modalidad presencial y teleformación, para empresas, equipos, entidades y profesionales. Ofrece dos vías: formación FPE financiada por el SCE/SEPE (gratuita para el alumnado en los cursos públicos) y formación privada para empresas, facturada directamente. También está abierta a empleo fijo como docente o especialista en transformación digital, y a proyectos de consultoría/formación in-company.
+> Idayra Cabrera es docente FPE (Formación Profesional para el Empleo) acreditada por el Servicio Canario de Empleo (SCE) y el SEPE, especializada en transformación digital, competencias digitales, inteligencia artificial aplicada, Excel avanzado y Power BI. Imparte formación en Canarias (España) en modalidad presencial y teleformación, para empresas, equipos, entidades y profesionales. Ofrece dos vías: formación FPE financiada por el SCE/SEPE (gratuita para el alumnado en los cursos públicos) y formación privada para empresas (in-company), facturada directamente a la empresa. También está abierta a empleo fijo como docente o especialista en transformación digital, y a proyectos de consultoría/formación in-company.
 
 ## Quién es
 
-- Más de 1.700 horas de docencia certificada en Formación Profesional para el Empleo.
+- Más de 1.770 horas de docencia certificada en Formación Profesional para el Empleo.
+- Más de 300 profesionales formados. Satisfacción del alumnado: 95%. El 100% recomiendan la formación.
 - Acreditaciones SCE/SEPE en: inteligencia artificial aplicada a empresa y comercio electrónico, personalización de la experiencia del cliente con IA, competencias digitales básicas y avanzadas, herramientas web 2.0, Excel avanzado, Excel avanzado y Power BI, ofimática, posicionamiento web y marketing digital en buscadores, transformación digital de la empresa, publicación de páginas web.
 - Más de 40 programas formativos de inteligencia artificial impartidos a empresas, entidades públicas y centros de formación en Canarias.
-- Sede en La Laguna, Santa Cruz de Tenerife, Canarias, España. Área de servicio: todo el archipiélago canario, formación también en remoto/teleformación.
+- Sede en La Laguna, Santa Cruz de Tenerife, Canarias, España. Área de servicio: todo el archipiélago canario; formación también en remoto/teleformación.
+- Google Business Profile verificado en Google Maps: TransformaciónIA, Santa Cruz de Tenerife.
+
+## Entidades colaboradoras
+
+Ha impartido formación para 8 entidades: Cámara de Comercio de Santa Cruz de Tenerife, AFS Formación, Formaciónline SL, Escuela Superior de Estudios Técnicos, Asociación Aprende, Generación 21, Integralis, FOCAN.
 
 ## Qué ofrece
 
-- [Formación privada para empresas](https://transformacionia.es/formacion-privada-empresas.html): formación in-company a medida, facturada directamente a la empresa, adaptada a sus datos y procesos reales.
+### Formación privada para empresas (in-company)
+
+- [Formación privada para empresas en Canarias](https://transformacionia.es/formacion-privada-empresas.html): programa a medida adaptado a los datos y procesos reales de la empresa, con fechas y horarios flexibles, facturación directa a la empresa.
+- Temáticas disponibles: IA aplicada al trabajo, competencias digitales, Excel avanzado y Power BI, transformación digital y marketing.
+- Proceso: (1) diagnóstico inicial de necesidades → (2) propuesta y presupuesto cerrado → (3) formación trabajando con los datos y procesos reales del equipo → (4) seguimiento posterior.
+- Respuesta en menos de 24 horas. Sin necesidad de cumplir requisitos de convocatoria pública.
+
+### Formación para el empleo (FPE — pública y gratuita)
+
 - [Formación en transformación digital en Canarias](https://transformacionia.es/formacion-transformacion-digital-canarias.html): digitalización de procesos, herramientas reales, IA aplicada al trabajo.
 - [Formación en competencias digitales para el empleo](https://transformacionia.es/formacion-competencias-digitales-empleo.html): para personas en búsqueda de empleo y profesionales que necesitan actualizar competencias digitales.
-- [Formación en inteligencia artificial en Canarias](https://transformacionia.es/formacion-inteligencia-artificial-canarias.html): IA aplicada sin necesidad de perfil técnico.
+- [Formación en inteligencia artificial en Canarias](https://transformacionia.es/formacion-inteligencia-artificial-canarias.html): IA aplicada sin necesidad de perfil técnico ni conocimientos de programación.
 - [Formación en herramientas digitales y análisis de datos (Excel y Power BI)](https://transformacionia.es/formacion-herramientas-digitales-analisis-datos.html): análisis de datos para la toma de decisiones en empresas.
-- [Planificador de certificados de profesionalidad](https://transformacionia.es/planificador.html): herramienta gratuita que convierte el PDF de una programación didáctica en un calendario de impartición.
-- [Proyectos realizados](https://transformacionia.es/proyectos.html): casos reales de transformación digital, Power BI y formación.
+
+### Herramientas y proyectos
+
+- [Planificador de certificados de profesionalidad](https://transformacionia.es/planificador.html): herramienta gratuita que convierte el PDF de una programación didáctica en un calendario de impartición automático.
+- [Proyectos realizados](https://transformacionia.es/proyectos.html): casos reales de transformación digital, Power BI y formación aplicada a empresas en Canarias.
 
 ## Páginas clave
 

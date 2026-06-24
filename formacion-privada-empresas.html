@@ -189,6 +189,39 @@
     @media (max-width: 700px) {
       .compare-grid { grid-template-columns: 1fr; }
     }
+
+    .svc-entidades {
+      margin: 0 0 48px;
+      padding: 20px 24px;
+      background: var(--bg4);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+    .svc-entidades-label {
+      margin: 0 0 14px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: var(--muted);
+    }
+    .svc-entidades-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .svc-entidades-list li {
+      padding: 5px 12px;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      font-size: 0.84rem;
+      color: var(--text);
+      line-height: 1.4;
+    }
   </style>
 
   <script type="application/ld+json">
@@ -204,7 +237,27 @@
     },
     "areaServed": "Canarias",
     "url": "https://transformacionia.es/formacion-privada-empresas.html",
-    "inLanguage": "es-ES"
+    "inLanguage": "es-ES",
+    "review": [
+      {
+        "@type": "Review",
+        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+        "reviewBody": "Docente cercana, profesional y con una gran capacidad para explicar. Consigue que aprendas sin darte cuenta.",
+        "author": { "@type": "Organization", "name": "Cámara de Comercio de Tenerife" }
+      },
+      {
+        "@type": "Review",
+        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+        "reviewBody": "Formación práctica, clara y muy bien estructurada. Se nota la experiencia y el dominio de los contenidos.",
+        "author": { "@type": "Person", "name": "Alumna de Excel y Power BI" }
+      },
+      {
+        "@type": "Review",
+        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+        "reviewBody": "Su punto fuerte es la sencillez y claridad al explicar, y la capacidad para resolver cualquier duda al momento.",
+        "author": { "@type": "Person", "name": "Alumna de Excel y Power BI" }
+      }
+    ]
   }
   </script>
 
@@ -412,6 +465,21 @@
           <a href="acreditaciones.html">acreditada FPE por el Servicio Canario de Empleo (SCE) y el SEPE</a>,
           con <a href="proyectos.html" style="color: var(--cyan);">proyectos reales aplicados en empresas de Canarias</a>,
           incluida formación in-company para la Cámara de Comercio de Santa Cruz de Tenerife.
+        </div>
+
+        <!-- ENTIDADES COLABORADORAS -->
+        <div class="svc-entidades" aria-label="Entidades para las que he impartido formación">
+          <p class="svc-entidades-label">He impartido formación para:</p>
+          <ul class="svc-entidades-list">
+            <li>Cámara de Comercio de Santa Cruz de Tenerife</li>
+            <li>AFS Formación</li>
+            <li>Formaciónline SL</li>
+            <li>Escuela Superior de Estudios Técnicos</li>
+            <li>Asociación Aprende</li>
+            <li>Generación 21</li>
+            <li>Integralis</li>
+            <li>FOCAN</li>
+          </ul>
         </div>
 
         <!-- PREGUNTAS FRECUENTES -->
