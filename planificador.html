@@ -335,9 +335,9 @@
 
     .crow {
       display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 11px 14px;
+      flex-direction: column;
+      gap: 4px;
+      padding: 10px 14px 12px;
       background: rgba(59, 130, 246, .06);
       border: 1px solid rgba(59, 130, 246, .15);
       border-radius: var(--radius-sm);
@@ -345,21 +345,23 @@
     }
 
     .crow label {
-      font-size: .77rem;
+      font-size: .72rem;
       color: var(--muted2);
       font-weight: 500;
-      white-space: nowrap;
+      text-transform: uppercase;
+      letter-spacing: .04em;
     }
 
     .crow input {
-      flex: 1;
+      width: 100%;
       background: transparent;
       border: none;
       color: var(--text);
       font-family: var(--fd);
-      font-size: .94rem;
+      font-size: .97rem;
       font-weight: 700;
       outline: none;
+      min-width: 0;
     }
 
     table.mt {
