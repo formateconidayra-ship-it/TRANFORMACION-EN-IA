@@ -823,6 +823,20 @@
       outline-offset: 1px;
     }
 
+    .cd.hito-prueba-obj  { background: rgba(139,92,246,.22);  outline-color: #8b5cf6; }
+    .cd.hito-prueba-prac { background: rgba(249,115,22,.2);   outline-color: #f97316; }
+    .cd.hito-actividad   { background: rgba(34,197,94,.2);    outline-color: #22c55e; }
+    .cd.hito-examen-parc { background: rgba(236,72,153,.22);  outline-color: #ec4899; }
+    .cd.hito-examen-fin  { background: rgba(239,68,68,.3);    outline-color: #ef4444; }
+    .cd.hito-otro        { background: rgba(245,158,11,.2);   outline-color: #f59e0b; }
+
+    .cd.hito-prueba-obj::after  { color: #8b5cf6; }
+    .cd.hito-prueba-prac::after { color: #f97316; }
+    .cd.hito-actividad::after   { color: #22c55e; }
+    .cd.hito-examen-parc::after { color: #ec4899; }
+    .cd.hito-examen-fin::after  { color: #ef4444; }
+    .cd.hito-otro::after        { color: #f59e0b; }
+
     .cd.hito::after {
       content: '★';
       position: absolute;
@@ -1443,6 +1457,23 @@
     const GAS_URL = 'https://script.google.com/macros/s/AKfycbwWxLYtPaxAy57cxvvSJqtt4PvijKWpevN4XaS8269WduISjBqQhKA6aKZNN8GTq6-l/exec';
 
     const COLORES = ['mod-c0','mod-c1','mod-c2','mod-c3','mod-c4','mod-c5'];
+
+    const HITO_CLASES = {
+      'Prueba objetiva':       'hito-prueba-obj',
+      'Prueba práctica':       'hito-prueba-prac',
+      'Actividad / ejercicio': 'hito-actividad',
+      'Examen parcial':        'hito-examen-parc',
+      'Examen final':          'hito-examen-fin',
+      'Otro':                  'hito-otro'
+    };
+    const HITO_COLORES_LEG = {
+      'hito-prueba-obj':  {bg:'rgba(139,92,246,.25)', bd:'#8b5cf6'},
+      'hito-prueba-prac': {bg:'rgba(249,115,22,.22)', bd:'#f97316'},
+      'hito-actividad':   {bg:'rgba(34,197,94,.22)',  bd:'#22c55e'},
+      'hito-examen-parc': {bg:'rgba(236,72,153,.25)', bd:'#ec4899'},
+      'hito-examen-fin':  {bg:'rgba(239,68,68,.32)',  bd:'#ef4444'},
+      'hito-otro':        {bg:'rgba(245,158,11,.22)', bd:'#f59e0b'}
+    };
     const FESTIVOS = new Set([
       '2025-01-01','2025-01-06','2025-04-17','2025-04-18','2025-05-01','2025-08-15','2025-10-12','2025-11-01','2025-12-06','2025-12-08','2025-12-25','2025-02-28','2025-05-30',
       '2026-01-01','2026-01-06','2026-04-02','2026-04-03','2026-05-01','2026-08-15','2026-10-12','2026-11-01','2026-12-06','2026-12-08','2026-12-25','2026-02-28','2026-05-30',
@@ -1892,6 +1923,16 @@
       fDiv.innerHTML = `<div class="leg-dot" style="background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.3)"></div><span>Festivo</span>`;
       leg.appendChild(fDiv);
 
+      const tiposUsados = [...new Set(hitosGlobal.map(h => h.tipo))];
+      tiposUsados.forEach(tipo => {
+        const cls = HITO_CLASES[tipo] || 'hito-otro';
+        const col = HITO_COLORES_LEG[cls];
+        const div = document.createElement('div');
+        div.className = 'leg-item';
+        div.innerHTML = `<div class="leg-dot" style="background:${col.bg};border:1px solid ${col.bd};border-radius:3px;position:relative"><span style="position:absolute;bottom:-2px;right:0;font-size:7px;color:${col.bd}">★</span></div><span>${tipo}</span>`;
+        leg.appendChild(div);
+      });
+
       const wrap = document.getElementById('calWrap');
       wrap.innerHTML = '';
 
@@ -1920,7 +1961,7 @@
           else if (esFest(dd)) cls += ' fe';
           else if (w === 0 || w === 6) cls += ' wk';
 
-          if (hito) cls += ' hito';
+          if (hito) cls += ' hito ' + (HITO_CLASES[hito.tipo] || 'hito-otro');
 
           const title = hito ? ` title="${hito.tipo}: ${hito.nom}"` : '';
           cells += `<div class="${cls}"${title}>${i}</div>`;
@@ -1942,6 +1983,13 @@
         return;
       }
 
+      const anyoFecha = new Date(fecha + 'T12:00:00').getFullYear();
+      const anyoActual = new Date().getFullYear();
+      if (anyoFecha < 2020 || anyoFecha > anyoActual + 5) {
+        alert(`Año no válido (${anyoFecha}). Introduce una fecha entre 2020 y ${anyoActual + 5}.`);
+        return;
+      }
+
       const hito = {nom: mod, tipo, fecha};
       hitosGlobal.push(hito);
       renderHitos();
@@ -1950,6 +1998,11 @@
         const dI = new Date(document.getElementById('fIni').value);
         const dF = scheduleGlobal[scheduleGlobal.length - 1].ds[scheduleGlobal[scheduleGlobal.length - 1].ds.length - 1].fecha;
         buildCalendar(dI, dF, scheduleGlobal);
+        // Cambiar automáticamente a la pestaña del calendario
+        document.querySelectorAll('.tab').forEach(x => x.classList.remove('on'));
+        document.querySelectorAll('.tab-panel').forEach(x => x.classList.remove('on'));
+        document.querySelector('.tab[data-tab="calendario"]').classList.add('on');
+        document.getElementById('tab-calendario').classList.add('on');
       }
     });
 
@@ -1969,6 +2022,11 @@
         div.querySelector('.bdel-hito').addEventListener('click', () => {
           hitosGlobal.splice(i, 1);
           renderHitos();
+          if (scheduleGlobal.length > 0) {
+            const dI = new Date(document.getElementById('fIni').value);
+            const dF = scheduleGlobal[scheduleGlobal.length - 1].ds[scheduleGlobal[scheduleGlobal.length - 1].ds.length - 1].fecha;
+            buildCalendar(dI, dF, scheduleGlobal);
+          }
         });
         list.appendChild(div);
       });
