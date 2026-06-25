@@ -501,10 +501,10 @@
 
     .dbtn {
       padding: 6px 12px;
-      border: 1px solid var(--border2);
+      border: 1px solid rgba(255,255,255,.32);
       border-radius: 7px;
-      background: transparent;
-      color: var(--muted);
+      background: rgba(255,255,255,.05);
+      color: var(--text);
       font-family: var(--fb);
       font-size: .82rem;
       cursor: pointer;
@@ -512,11 +512,63 @@
     }
 
     .dbtn.on {
-      background: rgba(59, 130, 246, .12);
+      background: rgba(59, 130, 246, .18);
       border-color: var(--blue);
       color: #93c5fd;
       font-weight: 600;
     }
+
+    .bxl {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 8px;
+      border: 1px solid rgba(34,197,94,.4);
+      background: rgba(34,197,94,.1);
+      color: #86efac;
+      font-size: .82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .bxl:hover {
+      background: rgba(34,197,94,.2);
+      border-color: #22c55e;
+      box-shadow: 0 0 12px rgba(34,197,94,.2);
+    }
+
+    .toast-wrap {
+      position: fixed;
+      top: 76px;
+      right: 18px;
+      z-index: 99998;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      pointer-events: none;
+    }
+    .toast {
+      background: rgba(15,23,42,.96);
+      border: 1px solid rgba(245,158,11,.35);
+      border-left: 3px solid #f59e0b;
+      border-radius: 8px;
+      padding: 10px 14px;
+      color: var(--text);
+      font-size: .82rem;
+      max-width: 300px;
+      box-shadow: 0 4px 24px rgba(0,0,0,.55);
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      transition: opacity .3s, transform .3s;
+      pointer-events: auto;
+    }
+    .toast.out { opacity: 0; transform: translateX(16px); }
+    @keyframes toastIn { from { opacity:0; transform:translateX(16px); } to { opacity:1; transform:translateX(0); } }
+    .toast { animation: toastIn .25s ease; }
+    .t-icon { color: #f59e0b; flex-shrink: 0; }
+    .t-txt  { flex: 1; line-height: 1.45; }
 
     .acts {
       display: flex;
@@ -1293,6 +1345,7 @@
           <div class="acts">
             <button class="bcalc" id="btnCalc" disabled>Calcular cronograma</button>
             <button class="bexp show" id="bexp" style="display:none">⬇ Exportar CSV</button>
+            <button class="bxl" id="bexpxl" style="display:none">📊 Exportar Excel</button>
           </div>
 
           <p class="perr" id="perr" role="alert"></p>
@@ -1768,6 +1821,24 @@
       e.classList.add('show');
     }
 
+    function showToast(msg) {
+      let wrap = document.getElementById('toast-wrap');
+      if (!wrap) {
+        wrap = document.createElement('div');
+        wrap.id = 'toast-wrap';
+        wrap.className = 'toast-wrap';
+        document.body.appendChild(wrap);
+      }
+      const t = document.createElement('div');
+      t.className = 'toast';
+      t.innerHTML = `<span class="t-icon">⚠</span><span class="t-txt">${msg}</span>`;
+      wrap.appendChild(t);
+      setTimeout(() => {
+        t.classList.add('out');
+        setTimeout(() => t.remove(), 320);
+      }, 4500);
+    }
+
     function hideErr() {
       document.getElementById('perr').classList.remove('show');
     }
@@ -1889,6 +1960,7 @@
 
       document.getElementById('res').classList.add('show');
       document.getElementById('bexp').style.display = 'inline-flex';
+      document.getElementById('bexpxl').style.display = 'inline-flex';
       document.getElementById('res').scrollIntoView({behavior:'smooth', block:'start'});
 
       document.getElementById('bexp').onclick = () => {
@@ -1901,6 +1973,10 @@
         a.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
         a.download = `cronograma_${(document.getElementById('certName').value || 'curso').replace(/\s+/g,'-')}.csv`;
         a.click();
+      };
+
+      document.getElementById('bexpxl').onclick = () => {
+        exportarExcel(sched, hitosGlobal, document.getElementById('certName').value);
       };
     }
 
@@ -2016,6 +2092,13 @@
       if (anyoFecha < 2020 || anyoFecha > anyoActual + 5) {
         alert(`Año no válido (${anyoFecha}). Introduce una fecha entre 2020 y ${anyoActual + 5}.`);
         return;
+      }
+
+      const yaHabia = hitosGlobal.filter(h => h.fecha === fecha);
+      if (yaHabia.length > 0) {
+        const fechaLabel = new Date(fecha + 'T12:00:00').toLocaleDateString('es-ES', {weekday:'long', day:'numeric', month:'long'});
+        const yaDesc = yaHabia.map(h => h.tipo).join(', ');
+        showToast(`Ya tienes ${yaHabia.length} actividad${yaHabia.length > 1 ? 'es' : ''} el ${fechaLabel}: ${yaDesc}`);
       }
 
       const hito = {nom: mod, tipo, fecha};
@@ -2167,6 +2250,92 @@
       }
 
       return mods;
+    }
+
+    function exportarExcel(sched, hitos, certName) {
+      function doExport() {
+        const wb = XLSX.utils.book_new();
+        const MOD_BG = ['1E3A5F','0C4A6E','3B0764','14532D','451A03','450A0A'];
+        const MOD_FG = ['93C5FD','67E8F9','D8B4FE','86EFAC','FCD34D','FCA5A5'];
+        const TIPO_BG = {'Prueba objetiva':'4C1D95','Prueba práctica':'7C2D12','Actividad / ejercicio':'14532D','Examen parcial':'831843','Examen final':'7F1D1D','Otro':'78350F'};
+        const TIPO_FG = {'Prueba objetiva':'C4B5FD','Prueba práctica':'FDBA74','Actividad / ejercicio':'86EFAC','Examen parcial':'F9A8D4','Examen final':'FCA5A5','Otro':'FCD34D'};
+
+        const mk = (bg, fg, bold) => ({
+          fill: {fgColor:{rgb:bg}}, font: {color:{rgb:fg}, bold:!!bold, sz:9},
+          alignment: {vertical:'center', wrapText:true},
+          border: {bottom:{style:'thin',color:{rgb:'1E293B'}}}
+        });
+        const hdrS = {fill:{fgColor:{rgb:'0D1526'}},font:{color:{rgb:'22D3EE'},bold:true,sz:10},alignment:{horizontal:'center',vertical:'center'},border:{bottom:{style:'medium',color:{rgb:'1D4ED8'}}}};
+        const titleS = {fill:{fgColor:{rgb:'0B0F19'}},font:{color:{rgb:'06B6D4'},bold:true,sz:13},alignment:{horizontal:'center',vertical:'center'}};
+
+        // === SHEET 1: CRONOGRAMA ===
+        const ws1 = XLSX.utils.aoa_to_sheet([
+          [certName || 'Cronograma de formación', null, null, null, null],
+          ['Módulo', 'Fecha inicio', 'Fecha fin', 'Horas totales', 'Días lectivos'],
+          ...sched.map(m => [m.nom, fmt(m.ds[0].fecha), fmt(m.ds[m.ds.length-1].fecha), m.h + 'h', m.ds.length])
+        ]);
+        ['A1','B1','C1','D1','E1'].forEach(c => { if (!ws1[c]) ws1[c]={t:'s',v:''}; ws1[c].s = titleS; });
+        ['A2','B2','C2','D2','E2'].forEach(c => { ws1[c].s = hdrS; });
+        sched.forEach((m, i) => { const ci = i % MOD_BG.length, r = i + 3; ['A','B','C','D','E'].forEach(col => { const ref = col+r; if (ws1[ref]) ws1[ref].s = mk(MOD_BG[ci], MOD_FG[ci], col==='A'); }); });
+        ws1['!merges'] = [{s:{r:0,c:0},e:{r:0,c:4}}];
+        ws1['!cols'] = [{wch:38},{wch:14},{wch:14},{wch:13},{wch:13}];
+        ws1['!rows'] = [{hpt:26},{hpt:18}];
+        XLSX.utils.book_append_sheet(wb, ws1, 'Cronograma');
+
+        // === SHEET 2: ACTIVIDADES ===
+        if (hitos.length > 0) {
+          const ws2 = XLSX.utils.aoa_to_sheet([
+            ['Actividades y Evaluaciones Programadas', null, null],
+            ['Módulo / Unidad', 'Tipo de actividad', 'Fecha'],
+            ...hitos.map(h => [h.nom, h.tipo, new Date(h.fecha+'T12:00:00').toLocaleDateString('es-ES',{weekday:'long',day:'numeric',month:'long',year:'numeric'})])
+          ]);
+          ['A1','B1','C1'].forEach(c => { if (!ws2[c]) ws2[c]={t:'s',v:''}; ws2[c].s = titleS; });
+          ['A2','B2','C2'].forEach(c => { ws2[c].s = hdrS; });
+          hitos.forEach((h, i) => { const bg = TIPO_BG[h.tipo]||'1E293B', fg = TIPO_FG[h.tipo]||'F1F5F9', r = i+3; ['A','B','C'].forEach(col => { const ref = col+r; if (ws2[ref]) ws2[ref].s = mk(bg, fg, col==='B'); }); });
+          ws2['!merges'] = [{s:{r:0,c:0},e:{r:0,c:2}}];
+          ws2['!cols'] = [{wch:32},{wch:24},{wch:40}];
+          ws2['!rows'] = [{hpt:26},{hpt:18}];
+          XLSX.utils.book_append_sheet(wb, ws2, 'Actividades');
+        }
+
+        // === SHEET 3: RESUMEN ===
+        const totalH = sched.reduce((a,m) => a+m.h, 0);
+        const totalD = sched.reduce((a,m) => a+m.ds.length, 0);
+        const lastM = sched[sched.length-1]; const lastD = lastM.ds[lastM.ds.length-1].fecha;
+        const statS = {fill:{fgColor:{rgb:'0F172A'}},font:{color:{rgb:'94A3B8'},sz:9},border:{bottom:{style:'thin',color:{rgb:'1E293B'}}}};
+        const valS  = {fill:{fgColor:{rgb:'111827'}},font:{color:{rgb:'F1F5F9'},bold:true,sz:9},border:{bottom:{style:'thin',color:{rgb:'1E293B'}}}};
+        const ws3 = XLSX.utils.aoa_to_sheet([
+          ['Resumen del programa', null],
+          ['Certificado / Curso', certName || '—'],
+          ['Fecha inicio', fmt(sched[0].ds[0].fecha)],
+          ['Fecha fin', fmt(lastD)],
+          ['Total horas', totalH + 'h'],
+          ['Total días lectivos', totalD],
+          ['Número de módulos', sched.length],
+          ['Actividades programadas', hitos.length],
+          [null, null],
+          ['Módulo', 'Horas'],
+          ...sched.map(m => [m.nom, m.h + 'h'])
+        ]);
+        ['A1','B1'].forEach(c => { if (!ws3[c]) ws3[c]={t:'s',v:''}; ws3[c].s = titleS; });
+        ws3['!merges'] = [{s:{r:0,c:0},e:{r:0,c:1}}];
+        for (let r = 2; r <= 8; r++) { if (ws3['A'+r]) ws3['A'+r].s = statS; if (ws3['B'+r]) ws3['B'+r].s = valS; }
+        if (ws3['A10']) ws3['A10'].s = hdrS; if (ws3['B10']) ws3['B10'].s = hdrS;
+        sched.forEach((m,i) => { const r = i+11; if (ws3['A'+r]) ws3['A'+r].s = mk(MOD_BG[i%MOD_BG.length], MOD_FG[i%MOD_BG.length]); if (ws3['B'+r]) ws3['B'+r].s = mk(MOD_BG[i%MOD_BG.length], MOD_FG[i%MOD_BG.length], true); });
+        ws3['!cols'] = [{wch:30},{wch:20}];
+        ws3['!rows'] = [{hpt:26}];
+        XLSX.utils.book_append_sheet(wb, ws3, 'Resumen');
+
+        XLSX.writeFile(wb, (certName || 'cronograma').replace(/\s+/g,'-').toLowerCase() + '.xlsx');
+      }
+
+      if (window.XLSX) { doExport(); }
+      else {
+        const sc = document.createElement('script');
+        sc.src = 'https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx-js-style.min.js';
+        sc.onload = doExport;
+        document.head.appendChild(sc);
+      }
     }
   </script>
 <script src="js/bg-particles.js" defer></script>
