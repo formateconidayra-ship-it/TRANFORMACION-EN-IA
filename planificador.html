@@ -2253,86 +2253,141 @@
     }
 
     function exportarExcel(sched, hitos, certName) {
-      const MOD_BG = ['1E3A5F','0C4A6E','3B0764','14532D','451A03','450A0A'];
-      const MOD_FG = ['93C5FD','67E8F9','D8B4FE','86EFAC','FCD34D','FCA5A5'];
-      const TIPO_KEYS = ['Prueba objetiva','Prueba práctica','Actividad / ejercicio','Examen parcial','Examen final','Otro'];
-      const TIPO_BG  = ['4C1D95','7C2D12','14532D','831843','7F1D1D','78350F'];
-      const TIPO_FG  = ['C4B5FD','FDBA74','86EFAC','F9A8D4','FCA5A5','FCD34D'];
+      const btn = document.getElementById('bexpxl');
+      btn.textContent = '⏳ Generando…'; btn.disabled = true;
 
-      function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
-      function c(val, sid, type) {
-        return `<Cell ss:StyleID="${sid}"><Data ss:Type="${type||'String'}">${esc(val)}</Data></Cell>`;
+      function doExport() {
+        try {
+          const MOD_FG  = ['1D4ED8','0E7490','6D28D9','166534','A16207','9F1239'];
+          const MOD_FGB = ['1E40AF','164E63','5B21B6','14532D','78350F','881337'];
+          const MOD_BG  = ['DBEAFE','CFFAFE','EDE9FE','DCFCE7','FEF9C3','FFE4E6'];
+          const TIPO_K  = ['Prueba objetiva','Prueba práctica','Actividad / ejercicio','Examen parcial','Examen final','Otro'];
+          const TIPO_FG = ['5B21B6','C2410C','15803D','9D174D','B91C1C','92400E'];
+          const TIPO_BG = ['EDE9FE','FFF7ED','DCFCE7','FCE7F3','FEE2E2','FEF3C7'];
+          const totalH = sched.reduce((a,m)=>a+m.h,0);
+          const totalD = sched.reduce((a,m)=>a+m.ds.length,0);
+
+          function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+          function C(r,v,s){ return `<c r="${r}" s="${s}" t="inlineStr"><is><t xml:space="preserve">${esc(v)}</t></is></c>`; }
+          function CN(r,v,s){ return `<c r="${r}" s="${s}" t="n"><v>${v}</v></c>`; }
+
+          // fonts: 0=default,1=white-bold-11,2=white-bold-10,3=cyan-13-bold,
+          //  4-9=MOD_FG,10-15=MOD_FGB,16-21=TIPO_FG,22-27=TIPO_FG-bold,28=slate,29=dark-bold
+          const fontsXml = [
+            '<font><sz val="11"/><name val="Calibri"/></font>',
+            '<font><sz val="11"/><b/><color rgb="FFFFFFFF"/><name val="Calibri"/></font>',
+            '<font><sz val="10"/><b/><color rgb="FFFFFFFF"/><name val="Calibri"/></font>',
+            '<font><sz val="13"/><b/><color rgb="FF22D3EE"/><name val="Calibri"/></font>',
+            ...MOD_FG.map(c=>`<font><sz val="9"/><color rgb="FF${c}"/><name val="Calibri"/></font>`),
+            ...MOD_FGB.map(c=>`<font><sz val="9"/><b/><color rgb="FF${c}"/><name val="Calibri"/></font>`),
+            ...TIPO_FG.map(c=>`<font><sz val="9"/><color rgb="FF${c}"/><name val="Calibri"/></font>`),
+            ...TIPO_FG.map(c=>`<font><sz val="9"/><b/><color rgb="FF${c}"/><name val="Calibri"/></font>`),
+            '<font><sz val="9"/><color rgb="FF64748B"/><name val="Calibri"/></font>',
+            '<font><sz val="9"/><b/><color rgb="FF1E293B"/><name val="Calibri"/></font>'
+          ];
+          // fills: 0=none,1=gray125,2=title-navy,3=header-slate,4-9=MOD_BG,10-15=TIPO_BG,16=F8FAFC,17=white,18=total-dark
+          const fillsXml = [
+            '<fill><patternFill patternType="none"/></fill>',
+            '<fill><patternFill patternType="gray125"/></fill>',
+            ...[['1B2A4A'],['334155'],...MOD_BG.map(c=>[c]),...TIPO_BG.map(c=>[c]),['F8FAFC'],['FFFFFF'],['0F172A']].map(([c])=>`<fill><patternFill patternType="solid"><fgColor rgb="FF${c}"/></patternFill></fill>`)
+          ];
+          const bordersXml = [
+            '<border><left/><right/><top/><bottom/><diagonal/></border>',
+            '<border><left style="thin"><color rgb="FFCBD5E1"/></left><right style="thin"><color rgb="FFCBD5E1"/></right><top style="thin"><color rgb="FFCBD5E1"/></top><bottom style="thin"><color rgb="FFCBD5E1"/></bottom><diagonal/></border>'
+          ];
+          function xf(fi,li,bi,ha,va){
+            let a=`numFmtId="0" fontId="${fi}" fillId="${li}" borderId="${bi}" xfId="0"`;
+            if(fi>0) a+=` applyFont="1"`;
+            if(li>1) a+=` applyFill="1"`;
+            if(bi>0) a+=` applyBorder="1"`;
+            if(ha||va) a+=` applyAlignment="1"`;
+            const al=(ha||va)?`<alignment${ha?` horizontal="${ha}"`:''}${va?` vertical="${va}"`:''}/>` : '';
+            return `<xf ${a}>${al}</xf>`;
+          }
+          // xfs: 0=default,1=title,2=hdr-center,3=hdr-left,4-9=mod-normal,10-15=mod-bold,
+          //  16-21=tipo-normal,22-27=tipo-bold,28=stat-lbl,29=stat-val,30=total-right,31=total-left,32=hdr-right
+          const xfsArr = [
+            xf(0,0,0,'',''),            xf(3,2,1,'center','center'), xf(2,3,1,'center','center'), xf(2,3,1,'left','center'),
+            ...MOD_FG.map((_,i)=>xf(4+i,4+i,1,'left','center')),
+            ...MOD_FGB.map((_,i)=>xf(10+i,4+i,1,'left','center')),
+            ...TIPO_FG.map((_,i)=>xf(16+i,10+i,1,'left','center')),
+            ...TIPO_FG.map((_,i)=>xf(22+i,10+i,1,'left','center')),
+            xf(28,16,1,'left','center'), xf(29,17,1,'left','center'),
+            xf(1,18,1,'right','center'), xf(1,18,1,'left','center'), xf(2,3,1,'right','center')
+          ];
+          const stylesXml = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><fonts count="${fontsXml.length}">${fontsXml.join('')}</fonts><fills count="${fillsXml.length}">${fillsXml.join('')}</fills><borders count="${bordersXml.length}">${bordersXml.join('')}</borders><cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs><cellXfs count="${xfsArr.length}">${xfsArr.join('')}</cellXfs><cellStyles count="1"><cellStyle name="Normal" xfId="0" builtinId="0"/></cellStyles></styleSheet>`;
+
+          // Sheet 1: Cronograma
+          const rows1=[];
+          rows1.push(`<row r="1" ht="32" customHeight="1">${C('A1',certName||'Cronograma de formación',1)}${['B','C','D','E'].map(l=>C(l+'1','',1)).join('')}</row>`);
+          rows1.push(`<row r="2" ht="20" customHeight="1">${C('A2','Módulo',3)}${C('B2','Fecha inicio',2)}${C('C2','Fecha fin',2)}${C('D2','Horas',32)}${C('E2','Días',32)}</row>`);
+          sched.forEach((m,i)=>{ const ci=i%6,r=i+3; rows1.push(`<row r="${r}" ht="16" customHeight="1">${C('A'+r,m.nom,10+ci)}${C('B'+r,fmt(m.ds[0].fecha),4+ci)}${C('C'+r,fmt(m.ds[m.ds.length-1].fecha),4+ci)}${C('D'+r,m.h+'h',4+ci)}${CN('E'+r,m.ds.length,4+ci)}</row>`); });
+          const tr=sched.length+3;
+          rows1.push(`<row r="${tr}" ht="18" customHeight="1">${C('A'+tr,'TOTAL',31)}${C('B'+tr,'',30)}${C('C'+tr,'',30)}${C('D'+tr,totalH+'h',30)}${CN('E'+tr,totalD,30)}</row>`);
+          const ws1=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><sheetViews><sheetView workbookViewId="0"><pane ySplit="2" topLeftCell="A3" state="frozen"/></sheetView></sheetViews><sheetFormatPr defaultRowHeight="15"/><cols><col min="1" max="1" width="36" customWidth="1"/><col min="2" max="3" width="13" customWidth="1"/><col min="4" max="5" width="11" customWidth="1"/></cols><sheetData>${rows1.join('')}</sheetData><mergeCells count="1"><mergeCell ref="A1:E1"/></mergeCells></worksheet>`;
+
+          // Sheet 2: Actividades
+          let ws2='';
+          if(hitos.length>0){
+            const rows2=[];
+            rows2.push(`<row r="1" ht="32" customHeight="1">${C('A1','Actividades y Evaluaciones Programadas',1)}${C('B1','',1)}${C('C1','',1)}</row>`);
+            rows2.push(`<row r="2" ht="20" customHeight="1">${C('A2','Módulo / Unidad',3)}${C('B2','Tipo de actividad',2)}${C('C2','Fecha',2)}</row>`);
+            hitos.forEach((h,i)=>{ const ti=Math.max(0,TIPO_K.indexOf(h.tipo)),r=i+3; const fd=new Date(h.fecha+'T12:00:00').toLocaleDateString('es-ES',{weekday:'long',day:'numeric',month:'long',year:'numeric'}); rows2.push(`<row r="${r}" ht="16" customHeight="1">${C('A'+r,h.nom,16+ti)}${C('B'+r,h.tipo,22+ti)}${C('C'+r,fd,16+ti)}</row>`); });
+            ws2=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><sheetViews><sheetView workbookViewId="0"><pane ySplit="2" topLeftCell="A3" state="frozen"/></sheetView></sheetViews><sheetFormatPr defaultRowHeight="15"/><cols><col min="1" max="1" width="32" customWidth="1"/><col min="2" max="2" width="22" customWidth="1"/><col min="3" max="3" width="40" customWidth="1"/></cols><sheetData>${rows2.join('')}</sheetData><mergeCells count="1"><mergeCell ref="A1:C1"/></mergeCells></worksheet>`;
+          }
+
+          // Sheet 3: Resumen
+          const lastDate=sched[sched.length-1].ds[sched[sched.length-1].ds.length-1].fecha;
+          const stats=[['Certificado / Curso',certName||'—'],['Fecha inicio',fmt(sched[0].ds[0].fecha)],['Fecha fin',fmt(lastDate)],['Total horas',totalH+'h'],['Total días lectivos',String(totalD)],['Número de módulos',String(sched.length)],['Actividades programadas',String(hitos.length)]];
+          const rows3=[];
+          rows3.push(`<row r="1" ht="32" customHeight="1">${C('A1','Resumen del programa',1)}${C('B1','',1)}</row>`);
+          stats.forEach(([k,v],i)=>{ const r=i+2; rows3.push(`<row r="${r}" ht="16" customHeight="1">${C('A'+r,k,28)}${C('B'+r,v,29)}</row>`); });
+          const mr=stats.length+3;
+          rows3.push(`<row r="${stats.length+2}" ht="8" customHeight="1">${C('A'+(stats.length+2),'',0)}${C('B'+(stats.length+2),'',0)}</row>`);
+          rows3.push(`<row r="${mr}" ht="20" customHeight="1">${C('A'+mr,'Módulo',3)}${C('B'+mr,'Horas',32)}</row>`);
+          sched.forEach((m,i)=>{ const ci=i%6,r=mr+1+i; rows3.push(`<row r="${r}" ht="16" customHeight="1">${C('A'+r,m.nom,4+ci)}${C('B'+r,m.h+'h',10+ci)}</row>`); });
+          const ws3=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><sheetFormatPr defaultRowHeight="15"/><cols><col min="1" max="1" width="28" customWidth="1"/><col min="2" max="2" width="16" customWidth="1"/></cols><sheetData>${rows3.join('')}</sheetData><mergeCells count="1"><mergeCell ref="A1:B1"/></mergeCells></worksheet>`;
+
+          // Build XLSX ZIP
+          const zip=new JSZip(), hasAct=hitos.length>0;
+          zip.file('[Content_Types].xml',`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>${hasAct?'<Override PartName="/xl/worksheets/sheet2.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/><Override PartName="/xl/worksheets/sheet3.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>':'<Override PartName="/xl/worksheets/sheet2.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>'}<Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/></Types>`);
+          zip.file('_rels/.rels',`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>`);
+          const wbRels=hasAct
+            ?`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/><Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet2.xml"/><Relationship Id="rId3" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet3.xml"/><Relationship Id="rId4" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/></Relationships>`
+            :`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/><Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet2.xml"/><Relationship Id="rId3" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/></Relationships>`;
+          const wbXml=hasAct
+            ?`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets><sheet name="Cronograma" sheetId="1" r:id="rId1"/><sheet name="Actividades" sheetId="2" r:id="rId2"/><sheet name="Resumen" sheetId="3" r:id="rId3"/></sheets></workbook>`
+            :`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets><sheet name="Cronograma" sheetId="1" r:id="rId1"/><sheet name="Resumen" sheetId="2" r:id="rId2"/></sheets></workbook>`;
+          zip.file('xl/workbook.xml',wbXml);
+          zip.file('xl/_rels/workbook.xml.rels',wbRels);
+          zip.file('xl/styles.xml',stylesXml);
+          zip.file('xl/worksheets/sheet1.xml',ws1);
+          if(hasAct){ zip.file('xl/worksheets/sheet2.xml',ws2); zip.file('xl/worksheets/sheet3.xml',ws3); }
+          else { zip.file('xl/worksheets/sheet2.xml',ws3); }
+
+          zip.generateAsync({type:'blob',mimeType:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'}).then(blob=>{
+            btn.textContent='📊 Exportar Excel'; btn.disabled=false;
+            const url=URL.createObjectURL(blob), a=document.createElement('a');
+            a.href=url; a.download=(certName||'cronograma').replace(/\s+/g,'-').toLowerCase()+'.xlsx';
+            a.click(); setTimeout(()=>URL.revokeObjectURL(url),1000);
+          });
+        } catch(e) {
+          btn.textContent='📊 Exportar Excel'; btn.disabled=false;
+          showToast('Error generando el Excel: '+e.message);
+        }
       }
 
-      // Build style definitions
-      const stylesXml = [
-        `<Style ss:ID="t"><Alignment ss:Horizontal="Center" ss:Vertical="Center"/><Font ss:Bold="1" ss:Size="13" ss:Color="#06B6D4"/><Interior ss:Color="#0B0F19" ss:Pattern="Solid"/><Borders><Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="2" ss:Color="#1D4ED8"/></Borders></Style>`,
-        `<Style ss:ID="h"><Alignment ss:Horizontal="Center" ss:Vertical="Center"/><Font ss:Bold="1" ss:Size="10" ss:Color="#22D3EE"/><Interior ss:Color="#0D1526" ss:Pattern="Solid"/><Borders><Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="2" ss:Color="#1D4ED8"/></Borders></Style>`,
-        `<Style ss:ID="sl"><Font ss:Size="9" ss:Color="#94A3B8"/><Interior ss:Color="#0F172A" ss:Pattern="Solid"/><Borders><Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#1E293B"/></Borders></Style>`,
-        `<Style ss:ID="sv"><Font ss:Bold="1" ss:Size="9" ss:Color="#F1F5F9"/><Interior ss:Color="#111827" ss:Pattern="Solid"/><Borders><Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#1E293B"/></Borders></Style>`,
-        ...MOD_BG.map((bg,i) => `<Style ss:ID="m${i}"><Font ss:Size="9" ss:Color="#${MOD_FG[i]}"/><Interior ss:Color="#${bg}" ss:Pattern="Solid"/><Borders><Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#1E293B"/></Borders></Style>`),
-        ...MOD_BG.map((bg,i) => `<Style ss:ID="mb${i}"><Font ss:Bold="1" ss:Size="9" ss:Color="#${MOD_FG[i]}"/><Interior ss:Color="#${bg}" ss:Pattern="Solid"/><Borders><Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#1E293B"/></Borders></Style>`),
-        ...TIPO_BG.map((bg,i) => `<Style ss:ID="tp${i}"><Font ss:Size="9" ss:Color="#${TIPO_FG[i]}"/><Interior ss:Color="#${bg}" ss:Pattern="Solid"/><Borders><Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#1E293B"/></Borders></Style>`),
-        ...TIPO_BG.map((bg,i) => `<Style ss:ID="tpb${i}"><Font ss:Bold="1" ss:Size="9" ss:Color="#${TIPO_FG[i]}"/><Interior ss:Color="#${bg}" ss:Pattern="Solid"/><Borders><Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#1E293B"/></Borders></Style>`)
-      ].join('');
-
-      // Sheet 1: Cronograma
-      const sh1rows = [
-        `<Row ss:Height="26"><Cell ss:StyleID="t" ss:MergeAcross="4"><Data ss:Type="String">${esc(certName||'Cronograma de formación')}</Data></Cell></Row>`,
-        `<Row ss:Height="18">${['Módulo','Fecha inicio','Fecha fin','Horas totales','Días lectivos'].map(h=>c(h,'h')).join('')}</Row>`,
-        ...sched.map((m,i) => {
-          const ci = i % MOD_BG.length;
-          return `<Row>${c(m.nom,`mb${ci}`)}${c(fmt(m.ds[0].fecha),`m${ci}`)}${c(fmt(m.ds[m.ds.length-1].fecha),`m${ci}`)}${c(m.h+'h',`m${ci}`)}${c(m.ds.length,`m${ci}`,'Number')}</Row>`;
-        })
-      ].join('');
-      const sh1 = `<Worksheet ss:Name="Cronograma"><Table><Column ss:Width="280"/><Column ss:Width="100"/><Column ss:Width="100"/><Column ss:Width="90"/><Column ss:Width="90"/>${sh1rows}</Table><WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel"><FreezePanes/><FrozenNoSplit/><SplitHorizontal>2</SplitHorizontal><TopRowBottomPane>2</TopRowBottomPane></WorksheetOptions></Worksheet>`;
-
-      // Sheet 2: Actividades
-      let sh2 = '';
-      if (hitos.length > 0) {
-        const sh2rows = [
-          `<Row ss:Height="26"><Cell ss:StyleID="t" ss:MergeAcross="2"><Data ss:Type="String">Actividades y Evaluaciones Programadas</Data></Cell></Row>`,
-          `<Row ss:Height="18">${['Módulo / Unidad','Tipo de actividad','Fecha'].map(h=>c(h,'h')).join('')}</Row>`,
-          ...hitos.map(h => {
-            const ti = TIPO_KEYS.indexOf(h.tipo); const ts = ti >= 0 ? ti : 5;
-            const fd = new Date(h.fecha+'T12:00:00').toLocaleDateString('es-ES',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
-            return `<Row>${c(h.nom,`tp${ts}`)}${c(h.tipo,`tpb${ts}`)}${c(fd,`tp${ts}`)}</Row>`;
-          })
-        ].join('');
-        sh2 = `<Worksheet ss:Name="Actividades"><Table><Column ss:Width="240"/><Column ss:Width="180"/><Column ss:Width="300"/>${sh2rows}</Table></Worksheet>`;
+      if(window.JSZip){ doExport(); return; }
+      const CDNS=['https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js','https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js'];
+      let idx=0;
+      function tryLoad(){
+        if(idx>=CDNS.length){ btn.textContent='📊 Exportar Excel'; btn.disabled=false; showToast('No se pudo cargar la librería. Comprueba tu conexión.'); return; }
+        const sc=document.createElement('script'); sc.src=CDNS[idx++];
+        sc.onload=doExport; sc.onerror=()=>{ document.head.removeChild(sc); tryLoad(); };
+        document.head.appendChild(sc);
       }
+      tryLoad();
 
-      // Sheet 3: Resumen
-      const totalH = sched.reduce((a,m)=>a+m.h,0);
-      const totalD = sched.reduce((a,m)=>a+m.ds.length,0);
-      const lastDate = sched[sched.length-1].ds[sched[sched.length-1].ds.length-1].fecha;
-      const stats = [
-        ['Certificado / Curso', certName||'—'],
-        ['Fecha inicio', fmt(sched[0].ds[0].fecha)],
-        ['Fecha fin', fmt(lastDate)],
-        ['Total horas', totalH+'h'],
-        ['Total días lectivos', String(totalD)],
-        ['Número de módulos', String(sched.length)],
-        ['Actividades programadas', String(hitos.length)],
-      ];
-      const sh3rows = [
-        `<Row ss:Height="26"><Cell ss:StyleID="t" ss:MergeAcross="1"><Data ss:Type="String">Resumen del programa</Data></Cell></Row>`,
-        ...stats.map(([k,v]) => `<Row>${c(k,'sl')}${c(v,'sv')}</Row>`),
-        `<Row><Cell ss:StyleID="sl"><Data ss:Type="String"></Data></Cell><Cell ss:StyleID="sl"><Data ss:Type="String"></Data></Cell></Row>`,
-        `<Row ss:Height="18">${c('Módulo','h')}${c('Horas','h')}</Row>`,
-        ...sched.map((m,i) => { const ci = i%MOD_BG.length; return `<Row>${c(m.nom,`m${ci}`)}${c(m.h+'h',`mb${ci}`)}</Row>`; })
-      ].join('');
-      const sh3 = `<Worksheet ss:Name="Resumen"><Table><Column ss:Width="220"/><Column ss:Width="160"/>${sh3rows}</Table></Worksheet>`;
-
-      const xml = `<?xml version="1.0" encoding="UTF-8"?><?mso-application progid="Excel.Sheet"?><Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"><Styles>${stylesXml}</Styles>${sh1}${sh2}${sh3}</Workbook>`;
-
-      const blob = new Blob([xml], {type:'application/vnd.ms-excel;charset=utf-8'});
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = (certName||'cronograma').replace(/\s+/g,'-').toLowerCase() + '.xls';
-      a.click();
-      setTimeout(()=>URL.revokeObjectURL(url), 1000);
     }
   </script>
 <script src="js/bg-particles.js" defer></script>
