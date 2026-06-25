@@ -830,20 +830,29 @@
     .cd.hito-examen-fin  { background: rgba(239,68,68,.3);    outline-color: #ef4444; }
     .cd.hito-otro        { background: rgba(245,158,11,.2);   outline-color: #f59e0b; }
 
-    .cd.hito-prueba-obj::after  { color: #8b5cf6; }
-    .cd.hito-prueba-prac::after { color: #f97316; }
-    .cd.hito-actividad::after   { color: #22c55e; }
-    .cd.hito-examen-parc::after { color: #ec4899; }
-    .cd.hito-examen-fin::after  { color: #ef4444; }
-    .cd.hito-otro::after        { color: #f59e0b; }
-
-    .cd.hito::after {
-      content: '★';
+    .cd-dots {
       position: absolute;
-      bottom: -1px;
+      bottom: 2px;
+      left: 0;
       right: 0;
+      display: flex;
+      gap: 2px;
+      align-items: center;
+      justify-content: center;
+    }
+    .cd-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .cd-dot-more {
       font-size: 7px;
-      color: #f59e0b;
+      color: var(--muted);
+      line-height: 1;
+    }
+    .cd.multi-hito {
+      box-shadow: 0 0 0 1px rgba(255,255,255,.15) inset;
     }
 
     .mod-c0 { background: rgba(59, 130, 246, .18); color: #93c5fd; border: 1px solid rgba(59, 130, 246, .3) }
@@ -1903,6 +1912,11 @@
     }));
 
     function buildCalendar(ini, fin, sched) {
+      const HITO_DOT_C = {
+        'hito-prueba-obj':'#8b5cf6','hito-prueba-prac':'#f97316',
+        'hito-actividad':'#22c55e','hito-examen-parc':'#ec4899',
+        'hito-examen-fin':'#ef4444','hito-otro':'#f59e0b'
+      };
       const dateMap = {};
       sched.forEach(m => m.ds.forEach(d => {
         dateMap[d.fecha.toISOString().slice(0,10)] = COLORES[m.color];
@@ -1955,16 +1969,30 @@
           const s = dd.toISOString().slice(0,10);
           const w = dd.getDay();
           let cls = 'cd';
-          const hito = hitosGlobal.find(h => h.fecha === s);
+          const hitosDelDia = hitosGlobal.filter(h => h.fecha === s);
+          const hito = hitosDelDia[0];
 
           if (dateMap[s]) cls += ` ${dateMap[s]}`;
           else if (esFest(dd)) cls += ' fe';
           else if (w === 0 || w === 6) cls += ' wk';
 
-          if (hito) cls += ' hito ' + (HITO_CLASES[hito.tipo] || 'hito-otro');
+          if (hito) {
+            cls += ' hito ' + (HITO_CLASES[hito.tipo] || 'hito-otro');
+            if (hitosDelDia.length > 1) cls += ' multi-hito';
+          }
 
-          const title = hito ? ` title="${hito.tipo}: ${hito.nom}"` : '';
-          cells += `<div class="${cls}"${title}>${i}</div>`;
+          let dotsHtml = '';
+          if (hitosDelDia.length > 0) {
+            const dts = hitosDelDia.slice(0, 4).map(h => {
+              const c = HITO_DOT_C[HITO_CLASES[h.tipo] || 'hito-otro'];
+              return `<span class="cd-dot" style="background:${c};box-shadow:0 0 3px ${c}"></span>`;
+            }).join('');
+            dotsHtml = `<div class="cd-dots">${dts}${hitosDelDia.length > 4 ? '<span class="cd-dot-more">+</span>' : ''}</div>`;
+          }
+
+          const titleText = hitosDelDia.map(h => `${h.tipo}: ${h.nom}`).join('\n');
+          const title = titleText ? ` title="${titleText}"` : '';
+          cells += `<div class="${cls}"${title}>${i}${dotsHtml}</div>`;
         }
 
         mo.innerHTML = `<h3>${new Date(y, m, 1).toLocaleDateString('es-ES',{month:'long',year:'numeric'})}</h3><div class="cal-g"><div class="cal-hd">L</div><div class="cal-hd">M</div><div class="cal-hd">X</div><div class="cal-hd">J</div><div class="cal-hd">V</div><div class="cal-hd">S</div><div class="cal-hd">D</div>${cells}</div>`;
