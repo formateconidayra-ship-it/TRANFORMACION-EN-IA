@@ -13,24 +13,39 @@
 
     var ctx = cv.getContext('2d');
     var W, H, pts = [], mx = -9999, my = -9999;
-    var N = 72, LINK = 145, MR = 190;
+    var N, LINK, MR;
+
+    function calcConfig() {
+      var area = window.innerWidth * window.innerHeight;
+      // ~1 particle per 8000px² — more density on large screens
+      N    = Math.min(Math.max(Math.round(area / 8000), 55), 160);
+      LINK = window.innerWidth > 1200 ? 170 : window.innerWidth > 768 ? 150 : 130;
+      MR   = window.innerWidth > 1200 ? 220 : 190;
+    }
 
     function resize() {
       W = cv.width = window.innerWidth;
       H = cv.height = window.innerHeight;
+      calcConfig();
+      // Adjust particle count without full reset
+      while (pts.length < N) pts.push(mkPt());
+      if (pts.length > N) pts.length = N;
     }
-    resize();
-    window.addEventListener('resize', resize);
 
-    for (var i = 0; i < N; i++) {
-      pts.push({
-        x: Math.random() * W, y: Math.random() * H,
+    function mkPt() {
+      return {
+        x: Math.random() * (W || window.innerWidth),
+        y: Math.random() * (H || window.innerHeight),
         vx: (Math.random() - .5) * .45, vy: (Math.random() - .5) * .45,
         r: Math.random() * 1.8 + .5,
         c: Math.random() > .45 ? '6,182,212' : '59,130,246',
         a: Math.random() * .45 + .2
-      });
+      };
     }
+
+    calcConfig();
+    resize();
+    window.addEventListener('resize', resize);
 
     document.addEventListener('mousemove', function (e) { mx = e.clientX; my = e.clientY; });
 
