@@ -1958,6 +1958,14 @@
         sel.appendChild(o);
       });
 
+      // Limitar el datepicker al rango exacto del curso
+      const fActFecha = document.getElementById('actFecha');
+      const isoMin = sched[0].ds[0].fecha.toISOString().slice(0,10);
+      const lastM = sched[sched.length-1];
+      const isoMax = lastM.ds[lastM.ds.length-1].fecha.toISOString().slice(0,10);
+      fActFecha.min = isoMin;
+      fActFecha.max = isoMax;
+
       document.getElementById('res').classList.add('show');
       document.getElementById('bexp').style.display = 'inline-flex';
       document.getElementById('bexpxl').style.display = 'inline-flex';
@@ -2092,6 +2100,24 @@
       if (anyoFecha < 2020 || anyoFecha > anyoActual + 5) {
         alert(`Año no válido (${anyoFecha}). Introduce una fecha entre 2020 y ${anyoActual + 5}.`);
         return;
+      }
+
+      if (scheduleGlobal.length > 0) {
+        const lastMod = scheduleGlobal[scheduleGlobal.length - 1];
+        const firstMod = scheduleGlobal[0];
+        const fechaInicio = firstMod.ds[0].fecha;
+        const fechaFin = lastMod.ds[lastMod.ds.length - 1].fecha;
+        const fSel = new Date(fecha + 'T12:00:00');
+        if (fSel < fechaInicio) {
+          const label = fechaInicio.toLocaleDateString('es-ES', {day:'numeric', month:'long', year:'numeric'});
+          showToast(`⚠️ El curso empieza el ${label}. No puedes añadir actividades antes del inicio.`);
+          return;
+        }
+        if (fSel > fechaFin) {
+          const label = fechaFin.toLocaleDateString('es-ES', {day:'numeric', month:'long', year:'numeric'});
+          showToast(`⚠️ El curso termina el ${label}. No se pueden añadir actividades fuera del período lectivo.`);
+          return;
+        }
       }
 
       const yaHabia = hitosGlobal.filter(h => h.fecha === fecha);
