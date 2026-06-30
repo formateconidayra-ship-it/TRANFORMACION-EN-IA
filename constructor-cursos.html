@@ -1,0 +1,1745 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PQ7964Q4MB"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-PQ7964Q4MB');
+  </script>
+
+  <title>Constructor de Cursos FPE | Idayra Cabrera · Herramienta gratuita</title>
+  <meta name="description" content="Constructor inteligente de cursos para formación FPE. Crea estructura, actividades con plantillas y banco de preguntas exportable a Moodle XML. Gratis, sin APIs." />
+  <meta name="author" content="Idayra Cabrera" />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#07090f" />
+  <link rel="canonical" href="https://transformacionia.es/constructor-cursos.html" />
+
+  <link rel="icon" href="img/favicon.ico" sizes="any">
+  <link rel="icon" href="img/favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="img/favicon-16x16.png" type="image/png" sizes="16x16">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Constructor de Cursos FPE | Idayra Cabrera" />
+  <meta property="og:description" content="Crea estructura de curso, actividades guiadas y banco de preguntas. Exporta a Moodle XML. Sin APIs, sin backend, 100% gratis." />
+  <meta property="og:url" content="https://transformacionia.es/constructor-cursos.html" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:site_name" content="Transformación IA" />
+  <meta property="og:image" content="https://transformacionia.es/img/og-default.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Constructor de Cursos FPE | Idayra Cabrera" />
+  <meta name="twitter:description" content="Crea estructura de curso, actividades guiadas y banco de preguntas exportable a Moodle XML." />
+  <meta name="twitter:image" content="https://transformacionia.es/img/og-default.jpg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;600;700;800&family=Roboto:wght@300;400;500;700&display=swap">
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <style>
+    /* ═══════════════════════════════════════════
+       CONSTRUCTOR — HERO
+    ═══════════════════════════════════════════ */
+    .cons-hero { padding: 48px 0 42px; }
+    .cons-hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0,1.1fr) minmax(260px,0.9fr);
+      gap: 26px;
+      align-items: start;
+    }
+    .cons-hero-copy h1 {
+      margin: 0 0 18px;
+      font-family: var(--fd);
+      font-size: clamp(1.9rem,3.8vw,3.2rem);
+      line-height: 0.98;
+      text-transform: uppercase;
+      letter-spacing: -0.03em;
+      max-width: 16ch;
+    }
+    .cons-hero-copy p { margin:0; max-width:62ch; color:var(--muted); font-size:1rem; }
+    .cons-hero-copy p + p { margin-top:14px; }
+    .cons-hero-actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:24px; }
+    .cons-badge-row { display:flex; flex-wrap:wrap; gap:8px; margin-top:20px; }
+    .cons-badge {
+      font-size:.72rem; font-weight:600; text-transform:uppercase;
+      letter-spacing:.06em; padding:4px 10px;
+      background:rgba(6,182,212,.1); border:1px solid rgba(6,182,212,.25);
+      color:#06b6d4; border-radius:20px;
+    }
+    .cons-side { display:grid; gap:12px; align-content:start; }
+    .cons-side-card {
+      background:var(--card); border:1px solid var(--border);
+      border-radius:var(--radius); padding:18px 20px;
+    }
+    .cons-side-card h2 { font-size:.88rem; font-weight:700; color:var(--cyan); margin:0 0 8px; text-transform:uppercase; letter-spacing:.05em; }
+    .cons-side-card p { font-size:.83rem; color:var(--muted); margin:0; line-height:1.5; }
+    .cons-side-card p + p { margin-top:6px; }
+
+    /* ═══════════════════════════════════════════
+       TOOL AREA
+    ═══════════════════════════════════════════ */
+    .cons-page { padding:0 0 80px; }
+
+    .cons-import-banner {
+      background:linear-gradient(135deg,rgba(6,182,212,.08) 0%,rgba(59,130,246,.06) 100%);
+      border:1px solid rgba(6,182,212,.22);
+      border-radius:var(--radius);
+      padding:16px 20px;
+      display:flex; align-items:center; justify-content:space-between;
+      gap:14px; margin-bottom:24px; flex-wrap:wrap;
+    }
+    .cons-import-banner.has-data { border-color:rgba(34,197,94,.3); background:rgba(34,197,94,.05); }
+    .cib-icon { font-size:1.5rem; flex-shrink:0; }
+    .cib-text { flex:1; min-width:160px; }
+    .cib-text strong { display:block; font-size:.9rem; color:var(--text); margin-bottom:2px; }
+    .cib-text span { font-size:.78rem; color:var(--muted); }
+
+    /* Stats */
+    .cons-stats {
+      display:flex; flex-wrap:wrap; gap:12px;
+      padding:10px 16px; background:rgba(255,255,255,.02);
+      border:1px solid var(--border); border-radius:var(--radius-sm);
+      margin-bottom:22px;
+    }
+    .cstat { font-size:.78rem; color:var(--muted); }
+    .cstat b { color:var(--cyan); }
+
+    /* Tabs */
+    .cons-tabs {
+      display:flex; border-bottom:2px solid var(--border);
+      margin-bottom:26px; overflow-x:auto; scrollbar-width:none;
+    }
+    .cons-tabs::-webkit-scrollbar { display:none; }
+    .ctab {
+      background:none; border:none; border-bottom:2px solid transparent;
+      margin-bottom:-2px; padding:10px 20px;
+      font-size:.84rem; font-weight:600; color:var(--muted);
+      cursor:pointer; white-space:nowrap;
+      transition:color .18s, border-color .18s; letter-spacing:.02em;
+    }
+    .ctab:hover { color:var(--text); }
+    .ctab.on { color:var(--cyan); border-bottom-color:var(--cyan); }
+    .ctab-panel { display:none; }
+    .ctab-panel.on { display:block; }
+
+    /* Section label */
+    .csec h3 {
+      font-family:var(--fd); font-size:.72rem; font-weight:700;
+      text-transform:uppercase; letter-spacing:.1em; color:var(--cyan);
+      margin:0 0 14px; padding-bottom:7px; border-bottom:1px solid var(--border);
+    }
+
+    /* Field */
+    .cfield label {
+      display:block; font-size:.7rem; font-weight:600;
+      text-transform:uppercase; letter-spacing:.06em;
+      color:var(--muted2); margin-bottom:5px;
+    }
+    .cfield input, .cfield select, .cfield textarea {
+      width:100%; background:rgba(255,255,255,.04);
+      border:1px solid var(--border); border-radius:var(--radius-sm);
+      color:var(--text); font-family:var(--fb); font-size:.88rem;
+      padding:8px 10px; transition:border-color .18s; box-sizing:border-box;
+    }
+    .cfield input:focus, .cfield select:focus, .cfield textarea:focus {
+      outline:none; border-color:var(--cyan);
+    }
+    .cfield textarea { resize:vertical; min-height:66px; }
+    .cfield select option { background:#1a2235; }
+
+    /* Meta grid */
+    .cons-meta-grid {
+      display:grid;
+      grid-template-columns:1fr 130px 130px;
+      gap:12px; margin-bottom:20px;
+    }
+    .cons-meta-grid .span2 { grid-column:1 / -1; }
+
+    /* ═══════════════════════════════════════════
+       TREE
+    ═══════════════════════════════════════════ */
+    .cons-tree { display:flex; flex-direction:column; gap:10px; }
+    .tree-mod {
+      background:var(--card); border:1px solid var(--border);
+      border-radius:var(--radius); overflow:hidden;
+    }
+    .tree-mod-head {
+      display:flex; align-items:center; gap:9px;
+      padding:11px 14px; cursor:pointer; user-select:none;
+      transition:background .15s;
+    }
+    .tree-mod-head:hover { background:rgba(255,255,255,.03); }
+    .tmod-arrow { font-size:.65rem; color:var(--muted2); transition:transform .2s; flex-shrink:0; }
+    .tree-mod.open .tmod-arrow { transform:rotate(90deg); }
+    .tmod-color { width:9px; height:9px; border-radius:50%; flex-shrink:0; }
+    .mc0{background:#3b82f6} .mc1{background:#06b6d4} .mc2{background:#8b5cf6}
+    .mc3{background:#22c55e} .mc4{background:#f59e0b} .mc5{background:#f43f5e}
+    .tmod-name { flex:1; font-size:.9rem; font-weight:600; }
+    .tmod-hours { font-size:.76rem; color:var(--cyan); font-weight:600; background:rgba(6,182,212,.1); padding:2px 8px; border-radius:20px; }
+    .tmod-meta { font-size:.7rem; color:var(--muted2); }
+    .tmod-actions { display:flex; gap:3px; }
+    .tact-btn {
+      background:none; border:none; cursor:pointer;
+      color:var(--muted2); font-size:.75rem; padding:3px 6px;
+      border-radius:4px; transition:color .15s, background .15s;
+    }
+    .tact-btn:hover { color:var(--text); background:rgba(255,255,255,.07); }
+    .tact-btn.del:hover { color:#f87171; }
+
+    .tree-mod-body { display:none; padding:0 12px 12px; }
+    .tree-mod.open .tree-mod-body { display:block; }
+
+    .tree-uf {
+      margin-top:8px; background:rgba(255,255,255,.02);
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:var(--radius-sm); overflow:hidden;
+    }
+    .tree-uf-head {
+      display:flex; align-items:center; gap:8px;
+      padding:8px 12px; cursor:pointer; transition:background .15s;
+    }
+    .tree-uf-head:hover { background:rgba(255,255,255,.03); }
+    .tuf-arrow { font-size:.62rem; color:var(--muted2); transition:transform .2s; flex-shrink:0; }
+    .tree-uf.open .tuf-arrow { transform:rotate(90deg); }
+    .tuf-name { flex:1; font-size:.83rem; font-weight:500; }
+    .tuf-hours { font-size:.73rem; color:#a78bfa; background:rgba(139,92,246,.12); padding:2px 7px; border-radius:20px; }
+
+    .tree-uf-body { display:none; padding:0 10px 10px; }
+    .tree-uf.open .tree-uf-body { display:block; }
+
+    .tree-ses {
+      display:flex; align-items:center; gap:8px;
+      padding:6px 10px; margin-top:5px;
+      background:rgba(255,255,255,.02); border:1px solid rgba(255,255,255,.04);
+      border-radius:6px; font-size:.8rem;
+    }
+    .tses-dot { width:5px; height:5px; border-radius:50%; background:#22d3ee; flex-shrink:0; }
+    .tses-date { color:var(--muted); min-width:82px; font-size:.74rem; }
+    .tses-hours { color:#f59e0b; font-size:.74rem; min-width:26px; }
+    .tses-tema { flex:1; color:var(--text); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+    .tses-acts { font-size:.68rem; color:var(--cyan); flex-shrink:0; }
+    .tses-actions { display:flex; gap:2px; margin-left:4px; }
+
+    .cadd-btn {
+      display:inline-flex; align-items:center; gap:5px;
+      font-size:.77rem; font-weight:500; color:var(--cyan);
+      background:rgba(6,182,212,.07); border:1px dashed rgba(6,182,212,.28);
+      border-radius:6px; padding:5px 11px; cursor:pointer;
+      transition:background .15s, border-color .15s; margin-top:8px;
+    }
+    .cadd-btn:hover { background:rgba(6,182,212,.14); border-color:rgba(6,182,212,.5); }
+
+    .cons-empty {
+      text-align:center; padding:44px 20px;
+      color:var(--muted); font-size:.88rem;
+    }
+    .cons-empty .ce-icon { font-size:2.4rem; margin-bottom:10px; }
+    .cons-empty strong { display:block; color:var(--text); margin-bottom:4px; font-size:.95rem; }
+
+    /* ═══════════════════════════════════════════
+       MODAL
+    ═══════════════════════════════════════════ */
+    .cmodal-overlay {
+      display:none; position:fixed; inset:0;
+      background:rgba(0,0,0,.65); z-index:9000;
+      align-items:center; justify-content:center; padding:20px;
+    }
+    .cmodal-overlay.open { display:flex; }
+    .cmodal {
+      background:#111827; border:1px solid var(--border);
+      border-radius:var(--radius); padding:22px 24px;
+      width:100%; max-width:480px; max-height:90vh; overflow-y:auto; position:relative;
+    }
+    .cmodal h4 {
+      font-family:var(--fd); font-size:.95rem; font-weight:700;
+      text-transform:uppercase; letter-spacing:.04em;
+      margin:0 0 18px; color:var(--cyan);
+    }
+    .cmodal-close {
+      position:absolute; top:14px; right:14px;
+      background:none; border:none; cursor:pointer;
+      color:var(--muted2); font-size:1rem; line-height:1;
+    }
+    .cmodal-close:hover { color:var(--text); }
+    .cmodal-actions { display:flex; gap:10px; justify-content:flex-end; margin-top:18px; }
+    .cmodal .cfield + .cfield { margin-top:11px; }
+
+    /* ═══════════════════════════════════════════
+       ACTIVIDADES TAB
+    ═══════════════════════════════════════════ */
+    .act-layout {
+      display:grid; grid-template-columns:240px 1fr;
+      gap:18px; align-items:start;
+    }
+    .act-sesion-picker {
+      background:var(--card); border:1px solid var(--border);
+      border-radius:var(--radius); padding:14px;
+      position:sticky; top:76px;
+    }
+    .act-sesion-picker h4 { font-size:.72rem; text-transform:uppercase; letter-spacing:.07em; color:var(--cyan); margin:0 0 10px; font-weight:700; }
+    .act-ses-list { max-height:460px; overflow-y:auto; }
+    .act-ses-item {
+      display:flex; flex-direction:column; gap:2px;
+      padding:8px 10px; border-radius:6px; cursor:pointer;
+      transition:background .15s; margin-bottom:3px;
+      border:1px solid transparent;
+    }
+    .act-ses-item:hover { background:rgba(255,255,255,.04); }
+    .act-ses-item.on { background:rgba(6,182,212,.1); border-color:rgba(6,182,212,.25); }
+    .asi-mod { font-size:.67rem; text-transform:uppercase; letter-spacing:.04em; color:var(--muted2); }
+    .asi-date { font-size:.8rem; color:var(--text); font-weight:500; }
+    .asi-tema { font-size:.73rem; color:var(--muted); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+    .asi-count { font-size:.7rem; color:var(--cyan); }
+
+    .act-form-panel {
+      background:var(--card); border:1px solid var(--border);
+      border-radius:var(--radius); padding:20px;
+    }
+    .act-types { display:flex; flex-wrap:wrap; gap:7px; margin-bottom:14px; }
+    .atype-btn {
+      display:flex; align-items:center; gap:5px;
+      padding:6px 12px; border-radius:20px; cursor:pointer;
+      font-size:.77rem; font-weight:500;
+      border:1px solid var(--border);
+      background:none; color:var(--muted); transition:all .15s;
+    }
+    .atype-btn:hover { border-color:var(--cyan); color:var(--text); }
+    .atype-btn.on { background:rgba(6,182,212,.14); border-color:var(--cyan); color:var(--cyan); }
+
+    .act-levels { display:flex; gap:6px; margin-bottom:14px; }
+    .alevel-btn {
+      padding:4px 12px; border-radius:20px; cursor:pointer;
+      font-size:.73rem; font-weight:500;
+      border:1px solid var(--border);
+      background:none; color:var(--muted); transition:all .15s;
+    }
+    .alevel-btn.on { background:rgba(168,85,247,.14); border-color:#a855f7; color:#c084fc; }
+
+    .act-saved-list { margin-top:18px; }
+    .act-saved-item {
+      display:flex; align-items:center; gap:10px;
+      padding:9px 12px; background:rgba(255,255,255,.03);
+      border:1px solid var(--border); border-radius:8px; margin-bottom:5px;
+    }
+    .act-saved-item .asi-icon { font-size:1.15rem; }
+    .act-saved-item .asi-info { flex:1; min-width:0; }
+    .act-saved-item .asi-tit { font-size:.82rem; font-weight:500; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+    .act-saved-item .asi-det { font-size:.72rem; color:var(--muted); }
+
+    /* ═══════════════════════════════════════════
+       PREGUNTAS TAB
+    ═══════════════════════════════════════════ */
+    .preg-layout {
+      display:grid; grid-template-columns:1fr 320px;
+      gap:18px; align-items:start;
+    }
+    .preg-banco {
+      background:var(--card); border:1px solid var(--border);
+      border-radius:var(--radius); padding:16px;
+    }
+    .preg-banco-head {
+      display:flex; align-items:flex-start; justify-content:space-between;
+      margin-bottom:12px; gap:10px; flex-wrap:wrap;
+    }
+    .preg-banco-head h4 { font-size:.72rem; text-transform:uppercase; letter-spacing:.07em; color:var(--cyan); margin:0; font-weight:700; white-space:nowrap; }
+    .preg-filters { display:flex; gap:6px; flex-wrap:wrap; }
+    .preg-filters select {
+      background:rgba(255,255,255,.04); border:1px solid var(--border);
+      border-radius:6px; color:var(--text); font-size:.76rem; padding:4px 7px; cursor:pointer;
+    }
+    .preg-filters select:focus { outline:none; border-color:var(--cyan); }
+    .preg-filters select option { background:#1a2235; }
+
+    .preg-list { max-height:540px; overflow-y:auto; }
+    .preg-item {
+      padding:10px 12px; background:rgba(255,255,255,.02);
+      border:1px solid var(--border); border-radius:8px; margin-bottom:6px;
+    }
+    .preg-item-head { display:flex; align-items:flex-start; gap:8px; }
+    .preg-type-badge {
+      font-size:.63rem; font-weight:700; text-transform:uppercase;
+      padding:2px 6px; border-radius:10px; flex-shrink:0; margin-top:2px;
+    }
+    .ptb-vf { background:rgba(34,197,94,.14); color:#4ade80; }
+    .ptb-multiple { background:rgba(59,130,246,.14); color:#60a5fa; }
+    .ptb-completar { background:rgba(245,158,11,.14); color:#fbbf24; }
+    .ptb-corta { background:rgba(168,85,247,.14); color:#c084fc; }
+    .preg-item-enunciado { flex:1; font-size:.82rem; line-height:1.4; }
+    .preg-item-meta { display:flex; gap:8px; margin-top:6px; align-items:center; }
+    .preg-dif { font-size:.66rem; padding:1px 6px; border-radius:10px; }
+    .pdif-facil { background:rgba(34,197,94,.1); color:#4ade80; }
+    .pdif-media { background:rgba(245,158,11,.1); color:#fbbf24; }
+    .pdif-dificil { background:rgba(239,68,68,.1); color:#f87171; }
+    .preg-mod-label { font-size:.66rem; color:var(--muted2); }
+
+    .preg-form-panel {
+      background:var(--card); border:1px solid var(--border);
+      border-radius:var(--radius); padding:18px;
+      position:sticky; top:76px;
+    }
+    .preg-form-panel h4 { font-size:.72rem; text-transform:uppercase; letter-spacing:.07em; color:var(--cyan); margin:0 0 12px; font-weight:700; }
+
+    .preg-types { display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-bottom:12px; }
+    .ptype-btn {
+      display:flex; align-items:center; gap:5px; justify-content:center;
+      padding:7px 6px; border-radius:7px; cursor:pointer;
+      font-size:.74rem; font-weight:500;
+      border:1px solid var(--border);
+      background:none; color:var(--muted); transition:all .15s;
+    }
+    .ptype-btn.on { background:rgba(6,182,212,.12); border-color:var(--cyan); color:var(--cyan); }
+    .ptype-btn:hover:not(.on) { border-color:rgba(255,255,255,.3); color:var(--text); }
+
+    .opciones-list { display:flex; flex-direction:column; gap:6px; margin-top:8px; }
+    .opcion-row { display:flex; align-items:center; gap:6px; }
+    .opcion-letter { font-size:.7rem; font-weight:700; color:var(--muted2); min-width:14px; }
+    .opcion-row input[type=radio] { accent-color:#22d3ee; flex-shrink:0; }
+
+    /* ═══════════════════════════════════════════
+       EXPORTAR TAB
+    ═══════════════════════════════════════════ */
+    .export-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(250px,1fr)); gap:14px; }
+    .export-card {
+      background:var(--card); border:1px solid var(--border);
+      border-radius:var(--radius); padding:20px;
+      display:flex; flex-direction:column; gap:10px;
+    }
+    .export-card .ec-icon { font-size:1.9rem; }
+    .export-card h4 { font-size:.9rem; font-weight:700; color:var(--text); margin:0; }
+    .export-card p { font-size:.79rem; color:var(--muted); margin:0; line-height:1.5; flex:1; }
+    .export-card .ec-count { font-size:.77rem; color:var(--cyan); font-weight:600; }
+
+    /* ═══════════════════════════════════════════
+       BUTTONS
+    ═══════════════════════════════════════════ */
+    .btn-c {
+      display:inline-flex; align-items:center; gap:6px;
+      font-size:.82rem; font-weight:600;
+      padding:8px 16px; border-radius:var(--radius-sm);
+      cursor:pointer; border:none; transition:all .18s; text-decoration:none;
+    }
+    .btn-c-cyan { background:var(--cyan); color:#000; }
+    .btn-c-cyan:hover { background:#22d3ee; }
+    .btn-c-outline { background:none; border:1px solid var(--border); color:var(--text); }
+    .btn-c-outline:hover { border-color:var(--cyan); color:var(--cyan); }
+    .btn-c-green { background:rgba(34,197,94,.14); border:1px solid rgba(34,197,94,.28); color:#4ade80; }
+    .btn-c-green:hover { background:rgba(34,197,94,.24); }
+    .btn-c-sm { padding:5px 10px; font-size:.75rem; }
+    button[disabled].btn-c { opacity:.4; cursor:not-allowed; }
+
+    /* Toast */
+    .cons-toast-wrap { position:fixed; bottom:26px; left:50%; transform:translateX(-50%); z-index:9999; pointer-events:none; }
+    .cons-toast {
+      background:#1e293b; border:1px solid rgba(6,182,212,.35);
+      color:var(--text); font-size:.84rem; font-weight:500;
+      padding:10px 20px; border-radius:8px;
+      box-shadow:0 4px 20px rgba(0,0,0,.4);
+      opacity:0; transform:translateY(10px);
+      transition:opacity .25s, transform .25s; white-space:nowrap;
+    }
+    .cons-toast.show { opacity:1; transform:translateY(0); }
+
+    /* ═══════════════════════════════════════════
+       RESPONSIVE
+    ═══════════════════════════════════════════ */
+    @media (max-width:900px) {
+      .preg-layout { grid-template-columns:1fr; }
+      .preg-form-panel { position:static; }
+    }
+    @media (max-width:768px) {
+      .cons-hero-grid { grid-template-columns:1fr; }
+      .act-layout { grid-template-columns:1fr; }
+      .act-sesion-picker { position:static; }
+      .cons-meta-grid { grid-template-columns:1fr; }
+      .cons-meta-grid .span2 { grid-column:1; }
+    }
+
+    @media print {
+      header, footer, .cons-tabs, .cons-import-banner, .cons-stats,
+      .preg-form-panel, .tact-btn, .cadd-btn, .cib-icon,
+      .btn-c, button { display:none !important; }
+      .ctab-panel { display:block !important; }
+      .preg-layout { grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="navbar" role="banner">
+    <a href="index.html" class="nav-logo" aria-label="Transformación IA – Inicio">
+      <img src="img/logo-idayra-header.png" alt="Transformación IA" class="nav-logo-img">
+    </a>
+    <button class="nav-toggle" id="navTog" aria-label="Abrir menú" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav-links" id="navLinks" aria-label="Menú principal">
+      <a href="sobre-mi.html">Sobre mí</a>
+      <a href="proyectos.html">Proyectos</a>
+      <a href="herramientas.html">Herramientas</a>
+      <a href="formacion-privada-empresas.html">Formación privada</a>
+      <a href="acreditaciones.html">Acreditaciones</a>
+      <a href="blog.html">Blog</a>
+      <a href="contacto.html" class="nav-cta">Contacto</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="cons-hero section-hero" aria-labelledby="cons-h1">
+      <div class="container">
+        <div class="cons-hero-grid">
+          <div class="cons-hero-copy">
+            <span class="kicker">Herramienta · FPE</span>
+            <h1 id="cons-h1">Constructor inteligente de cursos</h1>
+            <p>Crea la estructura completa de tu curso, genera actividades con plantillas inteligentes y construye un banco de preguntas listo para importar en Moodle.</p>
+            <p>Sin APIs de pago, sin consumo de tokens, sin backend. Todo funciona en tu navegador.</p>
+            <div class="cons-hero-actions">
+              <a href="#cons-tool" class="btn btn-p">Empezar</a>
+              <a href="planificador.html" class="btn btn-g">Ir al planificador</a>
+            </div>
+            <div class="cons-badge-row">
+              <span class="cons-badge">Sin APIs</span>
+              <span class="cons-badge">Moodle XML</span>
+              <span class="cons-badge">100% Gratis</span>
+              <span class="cons-badge">Funciona offline</span>
+            </div>
+          </div>
+          <aside class="cons-side">
+            <div class="cons-side-card">
+              <h2>¿Qué hace esta herramienta?</h2>
+              <p>Convierte tu planificación en una estructura de curso con módulos, UFs, sesiones, actividades por plantilla y un banco de preguntas exportable.</p>
+              <p>Exporta las preguntas en formato Moodle XML listas para importar directamente en tu aula virtual.</p>
+            </div>
+            <div class="cons-side-card">
+              <h2>Conectada al planificador</h2>
+              <p>Si ya usaste el Planificador de Certificados, importa módulos y fechas con un clic. Los datos viajan por <code style="font-size:.8em;color:var(--cyan)">localStorage</code>, sin servidores.</p>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider" aria-hidden="true"></div>
+
+    <div class="cons-page" id="cons-tool">
+      <div class="container">
+
+        <!-- Banner importar -->
+        <div class="cons-import-banner" id="cImportBanner">
+          <span class="cib-icon" id="cibIcon">📥</span>
+          <div class="cib-text">
+            <strong id="cibTitle">Importar del Planificador</strong>
+            <span id="cibDesc">Comprobando datos disponibles…</span>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <button class="btn-c btn-c-cyan" id="btnImportPlan">Importar del Planificador</button>
+            <button class="btn-c btn-c-outline" id="btnManualMode">Entrada manual</button>
+          </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="cons-stats" id="consStats">
+          <span class="cstat">Módulos: <b id="stMods">0</b></span>
+          <span class="cstat">UFs: <b id="stUFs">0</b></span>
+          <span class="cstat">Sesiones: <b id="stSes">0</b></span>
+          <span class="cstat">Actividades: <b id="stActs">0</b></span>
+          <span class="cstat">Preguntas: <b id="stPregs">0</b></span>
+        </div>
+
+        <!-- Tabs -->
+        <div class="cons-tabs" role="tablist">
+          <button class="ctab on" data-tab="estructura" role="tab">📋 Estructura</button>
+          <button class="ctab" data-tab="actividades" role="tab">⚡ Actividades</button>
+          <button class="ctab" data-tab="preguntas" role="tab">❓ Preguntas</button>
+          <button class="ctab" data-tab="exportar" role="tab">📤 Exportar</button>
+        </div>
+
+        <!-- ───── TAB: ESTRUCTURA ───── -->
+        <div id="tab-estructura" class="ctab-panel on">
+
+          <div class="csec"><h3>Datos del curso</h3></div>
+          <div class="cons-meta-grid">
+            <div class="cfield span2">
+              <label for="cNombre">Nombre del curso / certificado</label>
+              <input type="text" id="cNombre" placeholder="Ej: Herramientas Web 2.0 · MF0950_2" />
+            </div>
+            <div class="cfield">
+              <label for="cCodigo">Código SEPE</label>
+              <input type="text" id="cCodigo" placeholder="MF0950_2" />
+            </div>
+            <div class="cfield">
+              <label for="cHoras">Horas totales</label>
+              <input type="number" id="cHoras" placeholder="0" min="0" />
+            </div>
+            <div class="cfield">
+              <label for="cFIni">Fecha inicio</label>
+              <input type="date" id="cFIni" />
+            </div>
+            <div class="cfield">
+              <label for="cFFin">Fecha fin</label>
+              <input type="date" id="cFFin" />
+            </div>
+            <div class="cfield">
+              <label for="cModalidad">Modalidad</label>
+              <select id="cModalidad">
+                <option value="presencial">Presencial</option>
+                <option value="teleformacion">Teleformación</option>
+                <option value="mixta">Mixta</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="csec"><h3>Módulos · UFs · Sesiones</h3></div>
+          <div class="cons-tree" id="consTree"></div>
+          <button class="cadd-btn" id="btnAddMod" style="margin-top:14px">+ Añadir módulo</button>
+
+        </div>
+
+        <!-- ───── TAB: ACTIVIDADES ───── -->
+        <div id="tab-actividades" class="ctab-panel">
+          <div class="act-layout">
+            <div class="act-sesion-picker">
+              <h4>Selecciona sesión</h4>
+              <div class="act-ses-list" id="actSesList">
+                <p style="font-size:.8rem;color:var(--muted)">Crea sesiones en la pestaña Estructura.</p>
+              </div>
+            </div>
+            <div class="act-form-panel" id="actFormPanel">
+              <div id="actFormInner">
+                <p style="color:var(--muted);font-size:.85rem">Selecciona una sesión de la lista para añadir actividades.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ───── TAB: PREGUNTAS ───── -->
+        <div id="tab-preguntas" class="ctab-panel">
+          <div class="preg-layout">
+            <div class="preg-banco">
+              <div class="preg-banco-head">
+                <h4>Banco de preguntas (<span id="pregCount">0</span>)</h4>
+                <div class="preg-filters">
+                  <select id="pfMod"><option value="all">Todos los módulos</option></select>
+                  <select id="pfTipo">
+                    <option value="all">Todos los tipos</option>
+                    <option value="vf">V/F</option>
+                    <option value="multiple">Opción múltiple</option>
+                    <option value="completar">Completar</option>
+                    <option value="corta">Resp. corta</option>
+                  </select>
+                  <select id="pfDif">
+                    <option value="all">Todas</option>
+                    <option value="facil">Fácil</option>
+                    <option value="media">Media</option>
+                    <option value="dificil">Difícil</option>
+                  </select>
+                </div>
+              </div>
+              <div class="preg-list" id="pregList">
+                <div class="cons-empty">
+                  <div class="ce-icon">❓</div>
+                  <strong>Sin preguntas todavía</strong>
+                  Usa el formulario para añadir la primera pregunta.
+                </div>
+              </div>
+            </div>
+
+            <div class="preg-form-panel">
+              <h4 id="pregFormTitle">Nueva pregunta</h4>
+              <div class="preg-types">
+                <button class="ptype-btn on" data-ptype="multiple">🔵 Múltiple</button>
+                <button class="ptype-btn" data-ptype="vf">✅ Verdadero/Falso</button>
+                <button class="ptype-btn" data-ptype="completar">✏️ Completar</button>
+                <button class="ptype-btn" data-ptype="corta">💬 Resp. corta</button>
+              </div>
+              <div class="cfield">
+                <label for="pMod">Módulo</label>
+                <select id="pMod"><option value="">— Sin asignar —</option></select>
+              </div>
+              <div class="cfield" style="margin-top:9px">
+                <label for="pDif">Dificultad</label>
+                <select id="pDif">
+                  <option value="facil">Fácil</option>
+                  <option value="media" selected>Media</option>
+                  <option value="dificil">Difícil</option>
+                </select>
+              </div>
+              <div class="cfield" style="margin-top:9px">
+                <label for="pEnunciado">Enunciado</label>
+                <textarea id="pEnunciado" rows="3" placeholder="Escribe el enunciado de la pregunta…"></textarea>
+              </div>
+              <div id="pDynFields" style="margin-top:9px"></div>
+              <div class="cfield" style="margin-top:9px">
+                <label for="pFeedback">Retroalimentación (opcional)</label>
+                <input type="text" id="pFeedback" placeholder="Explicación de la respuesta correcta…" />
+              </div>
+              <div style="display:flex;gap:8px;margin-top:14px">
+                <button class="btn-c btn-c-cyan" id="btnSavePreg" style="flex:1">💾 Guardar</button>
+                <button class="btn-c btn-c-outline btn-c-sm" id="btnClearPreg" title="Limpiar formulario">✕</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ───── TAB: EXPORTAR ───── -->
+        <div id="tab-exportar" class="ctab-panel">
+          <div class="export-grid">
+
+            <div class="export-card">
+              <div class="ec-icon">🎓</div>
+              <h4>Moodle XML — Preguntas</h4>
+              <p>Exporta el banco de preguntas en formato XML oficial de Moodle. Importa directamente en Administración → Banco de preguntas.</p>
+              <div class="ec-count" id="ecPregCount">0 preguntas</div>
+              <select id="exportModFilter" style="background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:.78rem;padding:5px 8px">
+                <option value="all">Todos los módulos</option>
+              </select>
+              <button class="btn-c btn-c-green" id="btnExportXML">⬇ Exportar XML</button>
+            </div>
+
+            <div class="export-card">
+              <div class="ec-icon">💾</div>
+              <h4>Backup JSON</h4>
+              <p>Guarda toda la estructura, actividades y preguntas en JSON. Importa el archivo para continuar donde lo dejaste en cualquier dispositivo.</p>
+              <div class="ec-count" id="ecBackupDate">Sin backup guardado</div>
+              <div style="display:flex;gap:8px;flex-wrap:wrap">
+                <button class="btn-c btn-c-outline" id="btnExportJSON">⬇ Exportar</button>
+                <label class="btn-c btn-c-outline" style="cursor:pointer">
+                  📁 Importar
+                  <input type="file" id="importJSONInput" accept=".json" style="display:none">
+                </label>
+              </div>
+            </div>
+
+            <div class="export-card">
+              <div class="ec-icon">🖨️</div>
+              <h4>Imprimir / PDF</h4>
+              <p>Genera un PDF del banco de preguntas usando la impresión del navegador. Sin librerías, sin instalaciones.</p>
+              <div class="ec-count">Via window.print()</div>
+              <button class="btn-c btn-c-outline" id="btnPrint">🖨️ Imprimir / Guardar PDF</button>
+            </div>
+
+            <div class="export-card" style="opacity:.55;border-style:dashed">
+              <div class="ec-icon">📊</div>
+              <h4>Excel OOXML <span style="font-size:.7rem;color:var(--muted);font-weight:400">— V2</span></h4>
+              <p>Exportar la estructura completa del curso en formato Excel con formato profesional. Disponible en la próxima versión.</p>
+              <div class="ec-count">Próximamente</div>
+              <button class="btn-c btn-c-outline" disabled>Disponible en V2</button>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Modal: Módulo -->
+  <div class="cmodal-overlay" id="modalMod">
+    <div class="cmodal">
+      <button class="cmodal-close" data-close="modalMod">✕</button>
+      <h4 id="modalModTitle">Nuevo módulo</h4>
+      <div class="cfield">
+        <label for="mNombre">Nombre del módulo</label>
+        <input type="text" id="mNombre" placeholder="Ej: Google Documents" />
+      </div>
+      <div class="cfield">
+        <label for="mHoras">Horas</label>
+        <input type="number" id="mHoras" min="1" placeholder="25" />
+      </div>
+      <div id="mEditId" style="display:none"></div>
+      <div class="cmodal-actions">
+        <button class="btn-c btn-c-outline" data-close="modalMod">Cancelar</button>
+        <button class="btn-c btn-c-cyan" id="btnSaveMod">Guardar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: UF -->
+  <div class="cmodal-overlay" id="modalUF">
+    <div class="cmodal">
+      <button class="cmodal-close" data-close="modalUF">✕</button>
+      <h4 id="modalUFTitle">Nueva UF</h4>
+      <div class="cfield">
+        <label for="ufNombre">Nombre de la UF</label>
+        <input type="text" id="ufNombre" placeholder="Ej: UF1: Documentos de texto" />
+      </div>
+      <div class="cfield">
+        <label for="ufHoras">Horas</label>
+        <input type="number" id="ufHoras" min="1" placeholder="10" />
+      </div>
+      <div id="ufModId" style="display:none"></div>
+      <div id="ufEditId" style="display:none"></div>
+      <div class="cmodal-actions">
+        <button class="btn-c btn-c-outline" data-close="modalUF">Cancelar</button>
+        <button class="btn-c btn-c-cyan" id="btnSaveUF">Guardar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Sesión -->
+  <div class="cmodal-overlay" id="modalSes">
+    <div class="cmodal">
+      <button class="cmodal-close" data-close="modalSes">✕</button>
+      <h4 id="modalSesTitle">Nueva sesión</h4>
+      <div class="cfield">
+        <label for="sesDate">Fecha</label>
+        <input type="date" id="sesDate" />
+      </div>
+      <div class="cfield">
+        <label for="sesHoras">Horas</label>
+        <input type="number" id="sesHoras" min="1" max="10" placeholder="3" />
+      </div>
+      <div class="cfield">
+        <label for="sesTema">Tema / título de la sesión</label>
+        <input type="text" id="sesTema" placeholder="Ej: Introducción a las herramientas colaborativas" />
+      </div>
+      <div id="sesUfId" style="display:none"></div>
+      <div id="sesModId" style="display:none"></div>
+      <div id="sesEditId" style="display:none"></div>
+      <div class="cmodal-actions">
+        <button class="btn-c btn-c-outline" data-close="modalSes">Cancelar</button>
+        <button class="btn-c btn-c-cyan" id="btnSaveSes">Guardar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="cons-toast-wrap"><div class="cons-toast" id="consToast"></div></div>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container footer-container">
+      <div class="footer-top">
+        <a href="index.html" class="nav-logo footer-logo" aria-label="Transformación IA – Inicio">
+          <img src="img/logo-idayra-header.png" alt="Transformación IA" class="nav-logo-img">
+        </a>
+        <div class="footer-social" aria-label="Redes sociales y contacto">
+          <a href="https://wa.me/34620948523" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="WhatsApp" title="WhatsApp">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.05 4.91A9.82 9.82 0 0 0 12.03 2C6.58 2 2.13 6.42 2.13 11.88c0 1.75.46 3.46 1.33 4.96L2 22l5.3-1.39a9.9 9.9 0 0 0 4.73 1.2h.01c5.45 0 9.9-4.42 9.9-9.88 0-2.64-1.03-5.12-2.89-7.02Zm-7.02 15.23h-.01a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-3.15.83.84-3.07-.2-.31a8.13 8.13 0 0 1-1.25-4.34c0-4.48 3.67-8.13 8.18-8.13 2.18 0 4.23.84 5.77 2.37a8.06 8.06 0 0 1 2.39 5.76c0 4.48-3.67 8.21-8.09 8.21Zm4.46-6.1c-.24-.12-1.4-.69-1.62-.77-.22-.08-.38-.12-.54.12-.16.24-.62.77-.76.93-.14.16-.28.18-.52.06-.24-.12-1.01-.37-1.92-1.19-.71-.63-1.19-1.41-1.33-1.65-.14-.24-.01-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.29-.74-1.77-.2-.47-.4-.41-.54-.42h-.46c-.16 0-.42.06-.64.3-.22.24-.84.81-.84 1.97s.86 2.28.98 2.44c.12.16 1.69 2.58 4.1 3.61.57.25 1.02.4 1.37.51.58.18 1.11.15 1.53.09.47-.07 1.4-.57 1.6-1.12.2-.55.2-1.02.14-1.12-.06-.1-.22-.16-.46-.28Z"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/in/luzidayrajorgecabrera" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="LinkedIn" title="LinkedIn">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.94 8.5A1.56 1.56 0 1 1 6.94 5.38a1.56 1.56 0 0 1 0 3.12ZM5.56 9.75h2.77V18H5.56V9.75Zm4.5 0h2.66v1.13h.04c.37-.7 1.28-1.43 2.63-1.43 2.82 0 3.34 1.85 3.34 4.26V18h-2.77v-3.79c0-.9-.02-2.06-1.26-2.06-1.26 0-1.45.98-1.45 1.99V18h-2.77V9.75Z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-links-row">
+        <a href="formacion-privada-empresas.html">Formación privada</a>
+        <span class="footer-links-sep" aria-hidden="true">·</span>
+        <a href="formacion-transformacion-digital-canarias.html">Transformación digital</a>
+        <span class="footer-links-sep" aria-hidden="true">·</span>
+        <a href="planificador.html">Planificador FPE</a>
+        <span class="footer-links-sep" aria-hidden="true">·</span>
+        <a href="herramientas.html">Herramientas</a>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="currentYear"></span> Idayra Cabrera</span>
+        <span class="footer-bottom-sep" aria-hidden="true">·</span>
+        <a href="aviso-legal.html">Aviso legal</a>
+        <span class="footer-bottom-sep" aria-hidden="true">·</span>
+        <a href="privacidad.html">Privacidad</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/reveal.js" defer></script>
+  <script src="main.js" defer></script>
+
+  <script>
+  /* ═══════════════════════════════════════════════════════
+     CONSTRUCTOR INTELIGENTE DE CURSOS — V1
+     TransformaciónIA · Idayra Cabrera · Sin APIs · Sin backend
+  ═══════════════════════════════════════════════════════ */
+
+  // ── STATE ──────────────────────────────────────────────
+  let state = {
+    meta: { nombre:'', codigo:'', horas:0, fechaInicio:'', fechaFin:'', modalidad:'presencial' },
+    modulos: []
+  };
+  let banco = [];
+  let activeSesion = null;
+  let activeActTipo = 'practica';
+  let activeActNivel = 'basico';
+  let activePregTipo = 'multiple';
+  let editingPregId = null;
+
+  // ── HELPERS ────────────────────────────────────────────
+  let _uid = Date.now();
+  function uid() { return (++_uid).toString(36); }
+
+  function esc(s) {
+    return String(s||'')
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  function showToast(msg) {
+    const t = document.getElementById('consToast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3800);
+  }
+
+  function fmt(dateStr) {
+    if (!dateStr) return '—';
+    return new Date(dateStr + 'T12:00:00').toLocaleDateString('es-ES', { day:'2-digit', month:'2-digit', year:'numeric' });
+  }
+
+  const MC = ['mc0','mc1','mc2','mc3','mc4','mc5'];
+
+  // ── PERSIST ────────────────────────────────────────────
+  function saveState() {
+    try {
+      localStorage.setItem('tia_constructor', JSON.stringify({ state, banco, savedAt: new Date().toISOString() }));
+    } catch(e) {}
+  }
+
+  function loadSavedState() {
+    try {
+      const raw = localStorage.getItem('tia_constructor');
+      if (!raw) return false;
+      const p = JSON.parse(raw);
+      if (p.state) state = p.state;
+      if (p.banco) banco = p.banco;
+      return true;
+    } catch(e) { return false; }
+  }
+
+  // ── IMPORT FROM PLANIFICADOR ───────────────────────────
+  function getPlanData() {
+    try { return JSON.parse(localStorage.getItem('tia_cronograma') || 'null'); } catch(e) { return null; }
+  }
+
+  function importFromPlanificador() {
+    console.log('[Constructor] Intentando importar tia_cronograma…');
+    let data;
+    try {
+      const raw = localStorage.getItem('tia_cronograma');
+      if (!raw) {
+        console.log('[Constructor] No encontrado — tia_cronograma vacío o inexistente');
+        showToast('No hay cronograma guardado. Genera primero un cronograma en el Planificador.');
+        return;
+      }
+      data = JSON.parse(raw);
+      console.log('[Constructor] Importación correcta:', data.meta?.nombre, '— módulos:', (data.schedule||[]).length);
+    } catch(e) {
+      console.error('[Constructor] Error parseando cronograma:', e.message);
+      showToast('Error al leer el cronograma guardado. El archivo puede estar dañado.');
+      return;
+    }
+
+    const sched = data.schedule || [];
+    const meta = data.meta || {};
+
+    state.meta.nombre      = meta.nombre || '';
+    state.meta.horas       = meta.horas  || sched.reduce((a,m) => a+(m.h||0), 0);
+    state.meta.fechaInicio = meta.fechaInicio || '';
+    state.meta.fechaFin    = meta.fechaFin    || '';
+
+    state.modulos = sched.map((m, i) => ({
+      id: 'mod_'+uid(),
+      nombre: m.nom || ('Módulo '+(i+1)),
+      horas: m.h || 0,
+      color: i % MC.length,
+      ufs: [{
+        id: 'uf_'+uid(),
+        nombre: 'UF principal',
+        horas: m.h || 0,
+        sesiones: (m.ds || []).map(d => ({
+          id: 'ses_'+uid(),
+          fecha: typeof d.fecha === 'string' ? d.fecha : '',
+          horas: d.horas || 3,
+          tema: '',
+          actividades: [],
+          preguntas: []
+        }))
+      }]
+    }));
+
+    syncMetaForm();
+    saveState();
+    renderAll();
+    showToast('✅ ' + state.modulos.length + ' módulos importados del planificador');
+  }
+
+  // ── SYNC META FORM ─────────────────────────────────────
+  function syncMetaForm() {
+    document.getElementById('cNombre').value   = state.meta.nombre || '';
+    document.getElementById('cCodigo').value   = state.meta.codigo || '';
+    document.getElementById('cHoras').value    = state.meta.horas  || '';
+    document.getElementById('cFIni').value     = state.meta.fechaInicio || '';
+    document.getElementById('cFFin').value     = state.meta.fechaFin    || '';
+    document.getElementById('cModalidad').value = state.meta.modalidad || 'presencial';
+  }
+
+  function readMetaForm() {
+    state.meta.nombre      = document.getElementById('cNombre').value.trim();
+    state.meta.codigo      = document.getElementById('cCodigo').value.trim();
+    state.meta.horas       = parseInt(document.getElementById('cHoras').value) || 0;
+    state.meta.fechaInicio = document.getElementById('cFIni').value;
+    state.meta.fechaFin    = document.getElementById('cFFin').value;
+    state.meta.modalidad   = document.getElementById('cModalidad').value;
+  }
+
+  // ── IMPORT BANNER ──────────────────────────────────────
+  function updateImportBanner() {
+    const banner = document.getElementById('cImportBanner');
+    console.log('[Constructor] Buscando tia_cronograma…');
+    const planData = getPlanData();
+    console.log('[Constructor]', planData ? 'Encontrado: ' + (planData.meta?.nombre || 'sin nombre') : 'No encontrado');
+
+    if (state.modulos.length > 0) {
+      banner.classList.add('has-data');
+      document.getElementById('cibIcon').textContent = '✅';
+      document.getElementById('cibTitle').textContent = state.meta.nombre || 'Curso cargado';
+      document.getElementById('cibDesc').textContent = state.modulos.length + ' módulos · ' + state.modulos.reduce((a,m)=>a+m.horas,0) + 'h totales';
+      document.getElementById('btnImportPlan').textContent = 'Reimportar del planificador';
+      document.getElementById('btnManualMode').textContent = 'Limpiar todo';
+    } else if (planData) {
+      banner.classList.remove('has-data');
+      document.getElementById('cibIcon').textContent = '📥';
+      document.getElementById('cibTitle').textContent = 'Datos del planificador disponibles';
+      document.getElementById('cibDesc').textContent = planData.meta?.nombre
+        ? '"' + planData.meta.nombre + '" · ' + (planData.schedule?.length || 0) + ' módulos'
+        : (planData.schedule?.length || 0) + ' módulos encontrados';
+      document.getElementById('btnImportPlan').style.display = '';
+    } else {
+      banner.classList.remove('has-data');
+      document.getElementById('cibIcon').textContent = '📝';
+      document.getElementById('cibTitle').textContent = 'Sin cronograma guardado';
+      document.getElementById('cibDesc').textContent = 'No hay cronograma guardado. Puedes crear el curso manualmente o ir al Planificador primero.';
+      document.getElementById('btnImportPlan').style.display = 'none';
+      document.getElementById('btnManualMode').textContent = 'Entrada manual';
+    }
+  }
+
+  // ── STATS ──────────────────────────────────────────────
+  function updateStats() {
+    let ufs=0, ses=0, acts=0;
+    state.modulos.forEach(m => {
+      ufs += m.ufs.length;
+      m.ufs.forEach(u => { ses += u.sesiones.length; u.sesiones.forEach(s => acts += s.actividades.length); });
+    });
+    document.getElementById('stMods').textContent = state.modulos.length;
+    document.getElementById('stUFs').textContent  = ufs;
+    document.getElementById('stSes').textContent  = ses;
+    document.getElementById('stActs').textContent = acts;
+    document.getElementById('stPregs').textContent = banco.length;
+    document.getElementById('pregCount').textContent = banco.length;
+    document.getElementById('ecPregCount').textContent = banco.length + ' preguntas disponibles';
+  }
+
+  // ── RENDER ALL ─────────────────────────────────────────
+  function renderAll() {
+    renderTree();
+    renderActSesList();
+    renderBanco();
+    updateStats();
+    updateModSelects();
+    updateImportBanner();
+    updateBackupDate();
+  }
+
+  function updateBackupDate() {
+    try {
+      const raw = localStorage.getItem('tia_constructor');
+      if (!raw) return;
+      const d = JSON.parse(raw).savedAt;
+      if (d) document.getElementById('ecBackupDate').textContent =
+        'Último guardado: ' + new Date(d).toLocaleString('es-ES', {day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
+    } catch(e) {}
+  }
+
+  // ── MODULE SELECTS ─────────────────────────────────────
+  function updateModSelects() {
+    const opts = state.modulos.map(m => `<option value="${m.id}">${esc(m.nombre)}</option>`).join('');
+    ['pfMod','exportModFilter'].forEach(id => {
+      const el = document.getElementById(id); if (!el) return;
+      const v = el.value;
+      el.innerHTML = '<option value="all">Todos los módulos</option>' + opts;
+      el.value = v;
+    });
+    const pm = document.getElementById('pMod');
+    if (pm) {
+      const v = pm.value;
+      pm.innerHTML = '<option value="">— Sin asignar —</option>' + opts;
+      pm.value = v;
+    }
+  }
+
+  // ── TREE ───────────────────────────────────────────────
+  function renderTree() {
+    const tree = document.getElementById('consTree');
+    if (!state.modulos.length) {
+      tree.innerHTML = '<div class="cons-empty"><div class="ce-icon">📋</div><strong>Sin módulos</strong>Pulsa "+ Añadir módulo" o importa del planificador.</div>';
+      return;
+    }
+    tree.innerHTML = '';
+    state.modulos.forEach((mod, mi) => {
+      const totalSes = mod.ufs.reduce((a,u) => a+u.sesiones.length, 0);
+      const el = document.createElement('div');
+      el.className = 'tree-mod';
+      el.innerHTML = `
+        <div class="tree-mod-head" data-mi="${mi}">
+          <span class="tmod-arrow">▶</span>
+          <span class="tmod-color ${MC[mod.color%MC.length]}"></span>
+          <span class="tmod-name">${esc(mod.nombre)}</span>
+          <span class="tmod-hours">${mod.horas}h</span>
+          <span class="tmod-meta">${mod.ufs.length} UF${mod.ufs.length!==1?'s':''} · ${totalSes} ses.</span>
+          <div class="tmod-actions">
+            <button class="tact-btn" data-action="edit-mod" data-mi="${mi}" title="Editar módulo">✏️</button>
+            <button class="tact-btn del" data-action="del-mod" data-mi="${mi}" title="Eliminar módulo">✕</button>
+          </div>
+        </div>
+        <div class="tree-mod-body">
+          ${mod.ufs.map((uf,ui) => renderUFHtml(uf,mi,ui)).join('')}
+          <button class="cadd-btn" data-action="add-uf" data-mi="${mi}">+ Añadir UF</button>
+        </div>`;
+      if (mi === 0) el.classList.add('open');
+      tree.appendChild(el);
+    });
+  }
+
+  function renderUFHtml(uf, mi, ui) {
+    const sesHtml = uf.sesiones.map((ses,si) => `
+      <div class="tree-ses">
+        <span class="tses-dot"></span>
+        <span class="tses-date">${fmt(ses.fecha)}</span>
+        <span class="tses-hours">${ses.horas}h</span>
+        <span class="tses-tema">${ses.tema ? esc(ses.tema) : '<em style="color:var(--muted2);font-style:italic">Sin tema</em>'}</span>
+        <span class="tses-acts">${ses.actividades.length ? ses.actividades.length+'act.' : ''}</span>
+        <div class="tses-actions">
+          <button class="tact-btn" data-action="edit-ses" data-mi="${mi}" data-ui="${ui}" data-si="${si}" title="Editar">✏️</button>
+          <button class="tact-btn del" data-action="del-ses" data-mi="${mi}" data-ui="${ui}" data-si="${si}" title="Eliminar">✕</button>
+        </div>
+      </div>`).join('');
+    return `
+      <div class="tree-uf open" data-mi="${mi}" data-ui="${ui}">
+        <div class="tree-uf-head">
+          <span class="tuf-arrow">▶</span>
+          <span class="tuf-name">${esc(uf.nombre)}</span>
+          <span class="tuf-hours">${uf.horas}h</span>
+          <div class="tmod-actions">
+            <button class="tact-btn" data-action="edit-uf" data-mi="${mi}" data-ui="${ui}" title="Editar UF">✏️</button>
+            <button class="tact-btn del" data-action="del-uf" data-mi="${mi}" data-ui="${ui}" title="Eliminar UF">✕</button>
+          </div>
+        </div>
+        <div class="tree-uf-body">
+          ${sesHtml}
+          <button class="cadd-btn" data-action="add-ses" data-mi="${mi}" data-ui="${ui}">+ Añadir sesión</button>
+        </div>
+      </div>`;
+  }
+
+  // ── ACTIVITY TEMPLATES ─────────────────────────────────
+  const ACT_DEF = {
+    practica:     { icon:'⚙️', label:'Práctica' },
+    individual:   { icon:'📝', label:'Individual' },
+    colaborativo: { icon:'👥', label:'Colaborativa' },
+    caso:         { icon:'🔍', label:'Caso práctico' },
+    debate:       { icon:'💬', label:'Debate' }
+  };
+
+  const TPLS = {
+    practica: {
+      basico:     { titulo:'Práctica guiada: ', descripcion:'El alumnado realizará paso a paso los procedimientos indicados en la guía.', recursos:'Ordenador, navegador web, guía de la actividad', duracion:45 },
+      intermedio: { titulo:'Práctica autónoma: ', descripcion:'El alumnado aplicará los conocimientos de forma autónoma para resolver la tarea propuesta.', recursos:'Ordenador, materiales del tema', duracion:60 },
+      avanzado:   { titulo:'Práctica avanzada: ', descripcion:'El alumnado resolverá un supuesto complejo aplicando criterios propios y herramientas avanzadas.', recursos:'Ordenador, fuentes externas, criterios de evaluación', duracion:90 }
+    },
+    individual: {
+      basico:     { titulo:'Ejercicio individual: ', descripcion:'Cada alumno/a completará de forma individual las actividades propuestas sobre el tema.', recursos:'Material del tema, hoja de respuestas', duracion:30 },
+      intermedio: { titulo:'Tarea individual: ', descripcion:'Elaboración de un trabajo escrito que demuestre la comprensión de los contenidos.', recursos:'Material del tema, procesador de texto', duracion:60 },
+      avanzado:   { titulo:'Proyecto individual: ', descripcion:'Desarrollo de un proyecto autónomo aplicando los conceptos del módulo a un caso real.', recursos:'Recursos digitales, herramientas del módulo', duracion:90 }
+    },
+    colaborativo: {
+      basico:     { titulo:'Trabajo en equipo: ', descripcion:'Grupos de 3-4 personas. Cada grupo resolverá la tarea y presentará sus resultados.', recursos:'Material compartido, herramientas colaborativas', duracion:45 },
+      intermedio: { titulo:'Proyecto colaborativo: ', descripcion:'El equipo diseñará y ejecutará una solución conjunta al reto planteado.', recursos:'Google Drive, herramientas compartidas', duracion:75 },
+      avanzado:   { titulo:'Reto colaborativo: ', descripcion:'Los equipos competirán amistosamente para resolver el reto con la mejor solución.', recursos:'Herramientas digitales avanzadas, recursos del módulo', duracion:90 }
+    },
+    caso: {
+      basico:     { titulo:'Caso práctico sencillo: ', descripcion:'Análisis de un caso real del entorno laboral. El alumnado identificará el problema y propondrá soluciones básicas.', recursos:'Ficha del caso, material de apoyo', duracion:45 },
+      intermedio: { titulo:'Caso práctico: ', descripcion:'Estudio detallado de un caso empresarial. Se analizarán causas, consecuencias y alternativas de solución.', recursos:'Ficha del caso, datos reales, herramientas de análisis', duracion:60 },
+      avanzado:   { titulo:'Caso complejo: ', descripcion:'Análisis multidimensional con variables reales. El alumnado tomará decisiones justificadas con datos.', recursos:'Datos reales, herramientas avanzadas, bibliografía', duracion:90 }
+    },
+    debate: {
+      basico:     { titulo:'Debate guiado: ', descripcion:'Debate moderado por el docente sobre un tema del módulo.', recursos:'Guion del debate, normas de participación', duracion:30 },
+      intermedio: { titulo:'Mesa redonda: ', descripcion:'Dos grupos defienden posiciones distintas sobre un tema controvertido del módulo.', recursos:'Materiales de posicionamiento, normas del debate', duracion:45 },
+      avanzado:   { titulo:'Debate de expertos: ', descripcion:'El alumnado investiga y defiende una posición experta sobre un reto real del sector.', recursos:'Investigación previa, fuentes documentadas', duracion:60 }
+    }
+  };
+
+  // ── ACTIVITIES TAB ─────────────────────────────────────
+  function renderActSesList() {
+    const list = document.getElementById('actSesList');
+    const all = [];
+    state.modulos.forEach((mod,mi) => mod.ufs.forEach((uf,ui) => uf.sesiones.forEach((ses,si) => all.push({mod,ses,mi,ui,si}))));
+    if (!all.length) {
+      list.innerHTML = '<p style="font-size:.79rem;color:var(--muted)">Crea sesiones en la pestaña Estructura.</p>';
+      return;
+    }
+    list.innerHTML = all.map(({mod,ses,mi,ui,si}) => {
+      const on = activeSesion && activeSesion.mi===mi && activeSesion.ui===ui && activeSesion.si===si;
+      return `<div class="act-ses-item ${on?'on':''}" data-mi="${mi}" data-ui="${ui}" data-si="${si}">
+        <span class="asi-mod">${esc(mod.nombre)}</span>
+        <span class="asi-date">${fmt(ses.fecha)} · ${ses.horas}h</span>
+        ${ses.tema ? `<span class="asi-tema">${esc(ses.tema)}</span>` : ''}
+        ${ses.actividades.length ? `<span class="asi-count">${ses.actividades.length} act.</span>` : ''}
+      </div>`;
+    }).join('');
+  }
+
+  function renderActForm() {
+    const panel = document.getElementById('actFormInner');
+    if (!activeSesion) {
+      panel.innerHTML = '<p style="color:var(--muted);font-size:.85rem">Selecciona una sesión de la lista.</p>';
+      return;
+    }
+    const {mi,ui,si} = activeSesion;
+    const mod = state.modulos[mi];
+    const ses = mod.ufs[ui].sesiones[si];
+    const tpl = TPLS[activeActTipo][activeActNivel];
+
+    panel.innerHTML = `
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border)">
+        <span style="font-size:.88rem;font-weight:600;color:var(--cyan)">${esc(mod.nombre)}</span>
+        <span style="font-size:.77rem;color:var(--muted)">→ ${fmt(ses.fecha)} · ${ses.horas}h</span>
+      </div>
+
+      <div class="csec"><h3>Tipo de actividad</h3></div>
+      <div class="act-types">
+        ${Object.entries(ACT_DEF).map(([k,v]) =>
+          `<button class="atype-btn ${k===activeActTipo?'on':''}" data-atype="${k}">${v.icon} ${v.label}</button>`
+        ).join('')}
+      </div>
+
+      <div class="csec"><h3>Nivel de complejidad</h3></div>
+      <div class="act-levels">
+        ${['basico','intermedio','avanzado'].map(n =>
+          `<button class="alevel-btn ${n===activeActNivel?'on':''}" data-nivel="${n}">${n==='basico'?'Básico':n==='intermedio'?'Intermedio':'Avanzado'}</button>`
+        ).join('')}
+      </div>
+
+      <div class="csec"><h3>Datos de la actividad</h3></div>
+      <div class="cfield">
+        <label for="actTitulo">Título</label>
+        <input type="text" id="actTitulo" value="${esc(tpl.titulo)}" />
+      </div>
+      <div class="cfield" style="margin-top:9px">
+        <label for="actDesc">Descripción</label>
+        <textarea id="actDesc" rows="3">${esc(tpl.descripcion)}</textarea>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:9px">
+        <div class="cfield">
+          <label for="actDur">Duración (min)</label>
+          <input type="number" id="actDur" value="${tpl.duracion}" min="5" />
+        </div>
+        <div class="cfield">
+          <label for="actRec">Recursos</label>
+          <input type="text" id="actRec" value="${esc(tpl.recursos)}" />
+        </div>
+      </div>
+      <div style="margin-top:14px">
+        <button class="btn-c btn-c-cyan" id="btnSaveAct">💾 Añadir actividad a la sesión</button>
+      </div>
+      ${ses.actividades.length ? `
+        <div class="act-saved-list">
+          <div style="font-size:.7rem;text-transform:uppercase;letter-spacing:.07em;color:var(--muted2);margin-bottom:8px;margin-top:4px">Actividades de esta sesión</div>
+          ${ses.actividades.map((a,ai) => `
+            <div class="act-saved-item">
+              <span class="asi-icon">${ACT_DEF[a.tipo]?.icon||'📌'}</span>
+              <div class="asi-info">
+                <div class="asi-tit">${esc(a.titulo)}</div>
+                <div class="asi-det">${ACT_DEF[a.tipo]?.label||a.tipo} · ${a.duracion}min · ${a.nivel}</div>
+              </div>
+              <button class="tact-btn del" data-action="del-act" data-mi="${mi}" data-ui="${ui}" data-si="${si}" data-ai="${ai}">✕</button>
+            </div>`).join('')}
+        </div>` : ''}`;
+  }
+
+  // ── QUESTION BANK ─────────────────────────────────────
+  function renderBanco() {
+    const list = document.getElementById('pregList');
+    const modF  = document.getElementById('pfMod')?.value  || 'all';
+    const tipoF = document.getElementById('pfTipo')?.value || 'all';
+    const difF  = document.getElementById('pfDif')?.value  || 'all';
+    const filtered = banco.filter(p =>
+      (modF==='all'||p.modId===modF) &&
+      (tipoF==='all'||p.tipo===tipoF) &&
+      (difF==='all'||p.dificultad===difF)
+    );
+    if (!filtered.length) {
+      list.innerHTML = `<div class="cons-empty"><div class="ce-icon">❓</div><strong>Sin preguntas</strong>${banco.length?'Cambia los filtros.':'Añade preguntas con el formulario.'}</div>`;
+      return;
+    }
+    const TL = {vf:'V/F',multiple:'Múltiple',completar:'Completar',corta:'Resp. corta'};
+    list.innerHTML = filtered.map(p => {
+      const modNom = p.modId ? (state.modulos.find(m=>m.id===p.modId)?.nombre||'') : '';
+      return `<div class="preg-item">
+        <div class="preg-item-head">
+          <span class="preg-type-badge ptb-${p.tipo}">${TL[p.tipo]||p.tipo}</span>
+          <span class="preg-item-enunciado">${esc(p.enunciado)}</span>
+        </div>
+        <div class="preg-item-meta">
+          <span class="preg-dif pdif-${p.dificultad}">${p.dificultad}</span>
+          ${modNom?`<span class="preg-mod-label">${esc(modNom)}</span>`:''}
+          <div style="display:flex;gap:4px;margin-left:auto">
+            <button class="tact-btn" data-action="edit-preg" data-id="${p.id}">✏️</button>
+            <button class="tact-btn del" data-action="del-preg" data-id="${p.id}">✕</button>
+          </div>
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  function renderPregDynFields() {
+    const c = document.getElementById('pDynFields'); if (!c) return;
+    if (activePregTipo === 'vf') {
+      c.innerHTML = `<div class="cfield"><label>Respuesta correcta</label>
+        <div style="display:flex;gap:16px;margin-top:5px">
+          <label style="display:flex;align-items:center;gap:6px;font-size:.85rem;font-weight:400;color:var(--text);cursor:pointer"><input type="radio" name="pfVF" value="true" checked style="accent-color:#22d3ee"> Verdadero</label>
+          <label style="display:flex;align-items:center;gap:6px;font-size:.85rem;font-weight:400;color:var(--text);cursor:pointer"><input type="radio" name="pfVF" value="false" style="accent-color:#22d3ee"> Falso</label>
+        </div></div>`;
+    } else if (activePregTipo === 'multiple') {
+      c.innerHTML = `<div><label style="display:block;font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--muted2);margin-bottom:7px">Opciones (marca la correcta)</label>
+        <div class="opciones-list">
+          ${['A','B','C','D'].map((l,i) => `
+            <div class="opcion-row">
+              <span class="opcion-letter">${l}</span>
+              <input type="text" class="opcion-input" data-idx="${i}" placeholder="Opción ${l}…" style="flex:1;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:5px;color:var(--text);font-size:.82rem;padding:6px 8px;box-sizing:border-box"/>
+              <input type="radio" name="pfCorrect" value="${i}" ${i===0?'checked':''} title="Respuesta correcta" style="accent-color:#22d3ee;flex-shrink:0"/>
+            </div>`).join('')}
+        </div></div>`;
+    } else if (activePregTipo === 'completar') {
+      c.innerHTML = `<div class="cfield"><label for="pRespComp">Respuesta correcta</label>
+        <input type="text" id="pRespComp" placeholder="Palabra o frase que completa el hueco…"/>
+        <p style="font-size:.71rem;color:var(--muted);margin-top:4px">Escribe el enunciado con ___ donde va el hueco.</p></div>`;
+    } else if (activePregTipo === 'corta') {
+      c.innerHTML = `<div class="cfield"><label for="pRespCorta">Respuestas aceptadas</label>
+        <input type="text" id="pRespCorta" placeholder="Resp. 1; Resp. 2; …"/>
+        <p style="font-size:.71rem;color:var(--muted);margin-top:4px">Separa múltiples respuestas válidas con punto y coma.</p></div>`;
+    }
+  }
+
+  function getPregData() {
+    const enunciado = document.getElementById('pEnunciado')?.value.trim() || '';
+    const feedback  = document.getElementById('pFeedback')?.value.trim()  || '';
+    const dificultad = document.getElementById('pDif')?.value || 'media';
+    const modId = document.getElementById('pMod')?.value || null;
+    const base = { tipo:activePregTipo, enunciado, feedback, dificultad, modId: modId||null };
+
+    if (activePregTipo === 'vf') {
+      const sel = document.querySelector('input[name="pfVF"]:checked');
+      base.correctaVF = sel ? sel.value === 'true' : true;
+    } else if (activePregTipo === 'multiple') {
+      base.opciones = Array.from(document.querySelectorAll('.opcion-input')).map(i=>i.value.trim());
+      const r = document.querySelector('input[name="pfCorrect"]:checked');
+      base.correctaIdx = r ? parseInt(r.value) : 0;
+    } else if (activePregTipo === 'completar') {
+      base.respuestas = [document.getElementById('pRespComp')?.value.trim()||''];
+    } else if (activePregTipo === 'corta') {
+      base.respuestas = (document.getElementById('pRespCorta')?.value||'').split(';').map(r=>r.trim()).filter(Boolean);
+    }
+    return base;
+  }
+
+  function clearPregForm() {
+    document.getElementById('pEnunciado').value = '';
+    document.getElementById('pFeedback').value = '';
+    document.getElementById('pDif').value = 'media';
+    document.getElementById('pMod').value = '';
+    editingPregId = null;
+    document.getElementById('pregFormTitle').textContent = 'Nueva pregunta';
+    renderPregDynFields();
+  }
+
+  function loadPregIntoForm(p) {
+    editingPregId = p.id;
+    activePregTipo = p.tipo;
+    document.querySelectorAll('.ptype-btn').forEach(b => b.classList.toggle('on', b.dataset.ptype===p.tipo));
+    document.getElementById('pEnunciado').value  = p.enunciado;
+    document.getElementById('pFeedback').value   = p.feedback||'';
+    document.getElementById('pDif').value        = p.dificultad;
+    if (p.modId) document.getElementById('pMod').value = p.modId;
+    document.getElementById('pregFormTitle').textContent = 'Editar pregunta';
+    renderPregDynFields();
+    // restore type-specific fields
+    setTimeout(() => {
+      if (p.tipo==='vf') {
+        const r = document.querySelector(`input[name="pfVF"][value="${p.correctaVF}"]`);
+        if (r) r.checked = true;
+      } else if (p.tipo==='multiple') {
+        document.querySelectorAll('.opcion-input').forEach((inp,i) => { inp.value = p.opciones?.[i]||''; });
+        const r = document.querySelector(`input[name="pfCorrect"][value="${p.correctaIdx||0}"]`);
+        if (r) r.checked = true;
+      } else if (p.tipo==='completar') {
+        const el = document.getElementById('pRespComp'); if (el) el.value = p.respuestas?.[0]||'';
+      } else if (p.tipo==='corta') {
+        const el = document.getElementById('pRespCorta'); if (el) el.value = (p.respuestas||[]).join('; ');
+      }
+    }, 0);
+  }
+
+  // ── MOODLE XML ─────────────────────────────────────────
+  function generateMoodleXML(preguntas) {
+    function cd(s){ return '<![CDATA[' + String(s||'').replace(/\]\]>/g,']]]]><![CDATA[>') + ']]>'; }
+    let xml = '<?xml version="1.0" encoding="UTF-8"?>\n<quiz>\n\n';
+    preguntas.forEach(p => {
+      const nm = p.enunciado.slice(0,60) + (p.enunciado.length>60?'…':'');
+      if (p.tipo === 'vf') {
+        const corr = p.correctaVF?'true':'false', wrong = p.correctaVF?'false':'true';
+        xml += `  <question type="truefalse">\n`;
+        xml += `    <name><text>${cd(nm)}</text></name>\n`;
+        xml += `    <questiontext format="html"><text>${cd('<p>'+p.enunciado+'</p>')}</text></questiontext>\n`;
+        xml += `    <defaultgrade>1.0000000</defaultgrade>\n`;
+        xml += `    <answer fraction="100" format="plain_text"><text>${corr}</text><feedback format="html"><text>${cd(p.feedback||'Correcto.')}</text></feedback></answer>\n`;
+        xml += `    <answer fraction="0" format="plain_text"><text>${wrong}</text><feedback format="html"><text>${cd('Incorrecto.')}</text></feedback></answer>\n`;
+        xml += `  </question>\n\n`;
+      } else if (p.tipo === 'multiple') {
+        xml += `  <question type="multichoice">\n`;
+        xml += `    <name><text>${cd(nm)}</text></name>\n`;
+        xml += `    <questiontext format="html"><text>${cd('<p>'+p.enunciado+'</p>')}</text></questiontext>\n`;
+        xml += `    <defaultgrade>1.0000000</defaultgrade>\n`;
+        xml += `    <single>true</single>\n    <shuffleanswers>true</shuffleanswers>\n`;
+        xml += `    <correctfeedback format="html"><text>Correcto.</text></correctfeedback>\n`;
+        xml += `    <partiallycorrectfeedback format="html"><text>Parcialmente correcto.</text></partiallycorrectfeedback>\n`;
+        xml += `    <incorrectfeedback format="html"><text>Incorrecto.</text></incorrectfeedback>\n`;
+        (p.opciones||[]).forEach((op,i) => {
+          if (!op) return;
+          const frac = i===p.correctaIdx?'100':'0';
+          xml += `    <answer fraction="${frac}" format="html"><text>${cd(op)}</text><feedback format="html"><text>${cd(i===p.correctaIdx?(p.feedback||'Correcto.'):' ')}</text></feedback></answer>\n`;
+        });
+        xml += `  </question>\n\n`;
+      } else {
+        xml += `  <question type="shortanswer">\n`;
+        xml += `    <name><text>${cd(nm)}</text></name>\n`;
+        xml += `    <questiontext format="html"><text>${cd('<p>'+p.enunciado+'</p>')}</text></questiontext>\n`;
+        xml += `    <defaultgrade>1.0000000</defaultgrade>\n    <usecase>0</usecase>\n`;
+        (p.respuestas||[]).forEach(r => { if (!r) return; xml += `    <answer fraction="100"><text>${cd(r)}</text><feedback format="html"><text>${cd(p.feedback||'Correcto.')}</text></feedback></answer>\n`; });
+        xml += `  </question>\n\n`;
+      }
+    });
+    return xml + '</quiz>';
+  }
+
+  // ── MODALS ─────────────────────────────────────────────
+  function openModal(id)  { document.getElementById(id).classList.add('open'); }
+  function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+  // ── EVENT DELEGATION ──────────────────────────────────
+  document.addEventListener('click', function(e) {
+    // modal close
+    const closeBtn = e.target.closest('[data-close]');
+    if (closeBtn) { closeModal(closeBtn.dataset.close); return; }
+
+    const t = e.target.closest('[data-action]');
+    if (!t) return;
+    const action = t.dataset.action;
+    const mi = parseInt(t.dataset.mi);
+    const ui = parseInt(t.dataset.ui);
+    const si = parseInt(t.dataset.si);
+    const ai = parseInt(t.dataset.ai);
+
+    if (action === 'edit-mod') {
+      const m = state.modulos[mi];
+      document.getElementById('mNombre').value = m.nombre;
+      document.getElementById('mHoras').value  = m.horas;
+      document.getElementById('mEditId').textContent = mi;
+      document.getElementById('modalModTitle').textContent = 'Editar módulo';
+      openModal('modalMod');
+    } else if (action === 'del-mod') {
+      if (confirm('¿Eliminar el módulo "'+state.modulos[mi].nombre+'" y todo su contenido?')) {
+        state.modulos.splice(mi,1); saveState(); renderAll();
+      }
+    } else if (action === 'add-uf') {
+      document.getElementById('ufNombre').value = '';
+      document.getElementById('ufHoras').value  = '';
+      document.getElementById('ufModId').textContent  = mi;
+      document.getElementById('ufEditId').textContent = '';
+      document.getElementById('modalUFTitle').textContent = 'Nueva UF';
+      openModal('modalUF');
+    } else if (action === 'edit-uf') {
+      const u = state.modulos[mi].ufs[ui];
+      document.getElementById('ufNombre').value = u.nombre;
+      document.getElementById('ufHoras').value  = u.horas;
+      document.getElementById('ufModId').textContent  = mi;
+      document.getElementById('ufEditId').textContent = ui;
+      document.getElementById('modalUFTitle').textContent = 'Editar UF';
+      openModal('modalUF');
+    } else if (action === 'del-uf') {
+      if (confirm('¿Eliminar la UF "'+state.modulos[mi].ufs[ui].nombre+'"?')) {
+        state.modulos[mi].ufs.splice(ui,1); saveState(); renderAll();
+      }
+    } else if (action === 'add-ses') {
+      document.getElementById('sesDate').value  = '';
+      document.getElementById('sesHoras').value = '3';
+      document.getElementById('sesTema').value  = '';
+      document.getElementById('sesModId').textContent  = mi;
+      document.getElementById('sesUfId').textContent   = ui;
+      document.getElementById('sesEditId').textContent = '';
+      document.getElementById('modalSesTitle').textContent = 'Nueva sesión';
+      openModal('modalSes');
+    } else if (action === 'edit-ses') {
+      const s = state.modulos[mi].ufs[ui].sesiones[si];
+      document.getElementById('sesDate').value  = s.fecha;
+      document.getElementById('sesHoras').value = s.horas;
+      document.getElementById('sesTema').value  = s.tema;
+      document.getElementById('sesModId').textContent  = mi;
+      document.getElementById('sesUfId').textContent   = ui;
+      document.getElementById('sesEditId').textContent = si;
+      document.getElementById('modalSesTitle').textContent = 'Editar sesión';
+      openModal('modalSes');
+    } else if (action === 'del-ses') {
+      state.modulos[mi].ufs[ui].sesiones.splice(si,1); saveState(); renderAll();
+    } else if (action === 'del-act') {
+      state.modulos[mi].ufs[ui].sesiones[si].actividades.splice(ai,1);
+      saveState(); renderAll();
+      if (activeSesion&&activeSesion.mi===mi&&activeSesion.ui===ui&&activeSesion.si===si) renderActForm();
+    } else if (action === 'edit-preg') {
+      const p = banco.find(x=>x.id===t.dataset.id); if(!p) return;
+      loadPregIntoForm(p);
+      document.querySelector('.preg-form-panel').scrollIntoView({behavior:'smooth',block:'nearest'});
+    } else if (action === 'del-preg') {
+      const idx = banco.findIndex(x=>x.id===t.dataset.id);
+      if (idx!==-1) { banco.splice(idx,1); saveState(); renderBanco(); updateStats(); }
+    }
+  });
+
+  // Close modal clicking overlay
+  document.querySelectorAll('.cmodal-overlay').forEach(ov => {
+    ov.addEventListener('click', e => { if (e.target===ov) closeModal(ov.id); });
+  });
+
+  // Tree expand/collapse
+  document.getElementById('consTree').addEventListener('click', function(e) {
+    const mh = e.target.closest('.tree-mod-head');
+    const uh = e.target.closest('.tree-uf-head');
+    if (mh && !e.target.closest('[data-action]')) mh.closest('.tree-mod').classList.toggle('open');
+    if (uh && !e.target.closest('[data-action]')) uh.closest('.tree-uf').classList.toggle('open');
+  });
+
+  // Session picker
+  document.getElementById('actSesList').addEventListener('click', function(e) {
+    const item = e.target.closest('.act-ses-item'); if (!item) return;
+    activeSesion = { mi:parseInt(item.dataset.mi), ui:parseInt(item.dataset.ui), si:parseInt(item.dataset.si) };
+    renderActSesList();
+    renderActForm();
+  });
+
+  // Activity type / level
+  document.getElementById('actFormPanel').addEventListener('click', function(e) {
+    const at = e.target.closest('[data-atype]');
+    const nv = e.target.closest('[data-nivel]');
+    const sv = e.target.closest('#btnSaveAct');
+    if (at) { activeActTipo = at.dataset.atype; renderActForm(); }
+    else if (nv) { activeActNivel = nv.dataset.nivel; renderActForm(); }
+    else if (sv) {
+      if (!activeSesion) return;
+      const {mi,ui,si} = activeSesion;
+      const titulo = document.getElementById('actTitulo')?.value.trim()||'';
+      if (!titulo) { showToast('Escribe un título para la actividad.'); return; }
+      state.modulos[mi].ufs[ui].sesiones[si].actividades.push({
+        id:'act_'+uid(), tipo:activeActTipo, nivel:activeActNivel,
+        titulo,
+        descripcion: document.getElementById('actDesc')?.value.trim()||'',
+        duracion: parseInt(document.getElementById('actDur')?.value)||45,
+        recursos: document.getElementById('actRec')?.value.trim()||''
+      });
+      saveState(); renderAll(); renderActForm();
+      showToast('✅ Actividad añadida');
+    }
+  });
+
+  // Question type buttons
+  document.addEventListener('click', function(e) {
+    const pb = e.target.closest('.ptype-btn');
+    if (pb && pb.dataset.ptype) {
+      activePregTipo = pb.dataset.ptype;
+      document.querySelectorAll('.ptype-btn').forEach(b => b.classList.toggle('on', b===pb));
+      renderPregDynFields();
+    }
+  });
+
+  // Save question
+  document.getElementById('btnSavePreg').addEventListener('click', function() {
+    const enunciado = document.getElementById('pEnunciado').value.trim();
+    if (!enunciado) { showToast('Escribe el enunciado de la pregunta.'); return; }
+    const data = getPregData();
+    if (data.tipo==='multiple' && (data.opciones||[]).filter(Boolean).length < 2) {
+      showToast('Añade al menos 2 opciones de respuesta.'); return;
+    }
+    if (editingPregId) {
+      const idx = banco.findIndex(p=>p.id===editingPregId);
+      if (idx!==-1) banco[idx] = {...banco[idx], ...data};
+      showToast('✅ Pregunta actualizada');
+    } else {
+      banco.push({id:'preg_'+uid(), ...data});
+      showToast('✅ Pregunta añadida al banco');
+    }
+    clearPregForm();
+    saveState(); renderBanco(); updateStats(); updateModSelects();
+  });
+
+  document.getElementById('btnClearPreg').addEventListener('click', clearPregForm);
+
+  // Filters
+  ['pfMod','pfTipo','pfDif'].forEach(id => {
+    document.getElementById(id)?.addEventListener('change', renderBanco);
+  });
+
+  // Tabs
+  document.querySelectorAll('.ctab').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.ctab').forEach(b=>b.classList.remove('on'));
+      document.querySelectorAll('.ctab-panel').forEach(p=>p.classList.remove('on'));
+      btn.classList.add('on');
+      document.getElementById('tab-'+btn.dataset.tab).classList.add('on');
+    });
+  });
+
+  // Add Module
+  document.getElementById('btnAddMod').addEventListener('click', function() {
+    document.getElementById('mNombre').value = '';
+    document.getElementById('mHoras').value  = '';
+    document.getElementById('mEditId').textContent = '';
+    document.getElementById('modalModTitle').textContent = 'Nuevo módulo';
+    openModal('modalMod');
+  });
+
+  // Save Module
+  document.getElementById('btnSaveMod').addEventListener('click', function() {
+    const nombre = document.getElementById('mNombre').value.trim();
+    const horas  = parseInt(document.getElementById('mHoras').value)||0;
+    if (!nombre) { showToast('Escribe el nombre del módulo.'); return; }
+    const editIdx = document.getElementById('mEditId').textContent;
+    if (editIdx !== '') {
+      const i = parseInt(editIdx);
+      state.modulos[i].nombre = nombre;
+      state.modulos[i].horas  = horas;
+    } else {
+      state.modulos.push({id:'mod_'+uid(), nombre, horas, color:state.modulos.length%MC.length, ufs:[]});
+    }
+    closeModal('modalMod'); saveState(); renderAll();
+  });
+
+  // Save UF
+  document.getElementById('btnSaveUF').addEventListener('click', function() {
+    const nombre = document.getElementById('ufNombre').value.trim();
+    const horas  = parseInt(document.getElementById('ufHoras').value)||0;
+    const mi = parseInt(document.getElementById('ufModId').textContent);
+    if (!nombre) { showToast('Escribe el nombre de la UF.'); return; }
+    const editIdx = document.getElementById('ufEditId').textContent;
+    if (editIdx !== '') {
+      const ui = parseInt(editIdx);
+      state.modulos[mi].ufs[ui].nombre = nombre;
+      state.modulos[mi].ufs[ui].horas  = horas;
+    } else {
+      state.modulos[mi].ufs.push({id:'uf_'+uid(), nombre, horas, sesiones:[]});
+    }
+    closeModal('modalUF'); saveState(); renderAll();
+  });
+
+  // Save Session
+  document.getElementById('btnSaveSes').addEventListener('click', function() {
+    const fecha = document.getElementById('sesDate').value;
+    const horas = parseInt(document.getElementById('sesHoras').value)||3;
+    const tema  = document.getElementById('sesTema').value.trim();
+    const mi = parseInt(document.getElementById('sesModId').textContent);
+    const ui = parseInt(document.getElementById('sesUfId').textContent);
+    if (!fecha) { showToast('Selecciona una fecha.'); return; }
+    const editIdx = document.getElementById('sesEditId').textContent;
+    if (editIdx !== '') {
+      const si = parseInt(editIdx);
+      state.modulos[mi].ufs[ui].sesiones[si].fecha = fecha;
+      state.modulos[mi].ufs[ui].sesiones[si].horas = horas;
+      state.modulos[mi].ufs[ui].sesiones[si].tema  = tema;
+    } else {
+      state.modulos[mi].ufs[ui].sesiones.push({id:'ses_'+uid(), fecha, horas, tema, actividades:[], preguntas:[]});
+    }
+    closeModal('modalSes'); saveState(); renderAll();
+    if (activeSesion&&activeSesion.mi===mi&&activeSesion.ui===ui) renderActSesList();
+  });
+
+  // Import from Planificador
+  document.getElementById('btnImportPlan').addEventListener('click', importFromPlanificador);
+
+  // Clear all
+  document.getElementById('btnManualMode').addEventListener('click', function() {
+    if (state.modulos.length && !confirm('¿Limpiar todos los datos del curso actual?')) return;
+    state = {meta:{nombre:'',codigo:'',horas:0,fechaInicio:'',fechaFin:'',modalidad:'presencial'},modulos:[]};
+    banco = [];
+    syncMetaForm();
+    saveState(); renderAll();
+  });
+
+  // Meta form auto-save
+  ['cNombre','cCodigo','cHoras','cFIni','cFFin','cModalidad'].forEach(id => {
+    document.getElementById(id)?.addEventListener('change', () => { readMetaForm(); saveState(); });
+  });
+
+  // Export XML
+  document.getElementById('btnExportXML').addEventListener('click', function() {
+    const modF = document.getElementById('exportModFilter').value;
+    const filtered = modF==='all' ? banco : banco.filter(p=>p.modId===modF);
+    if (!filtered.length) { showToast('Sin preguntas para exportar. Añade preguntas en la pestaña Preguntas.'); return; }
+    const xml = generateMoodleXML(filtered);
+    const blob = new Blob([xml], {type:'text/xml;charset=utf-8'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = (state.meta.nombre||'banco-preguntas').replace(/\s+/g,'-').toLowerCase()+'-moodle.xml';
+    a.click(); URL.revokeObjectURL(a.href);
+    showToast('✅ XML exportado — '+filtered.length+' preguntas');
+  });
+
+  // Export JSON
+  document.getElementById('btnExportJSON').addEventListener('click', function() {
+    const data = {version:'1.0', state, banco, exportedAt:new Date().toISOString()};
+    const blob = new Blob([JSON.stringify(data,null,2)], {type:'application/json'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = (state.meta.nombre||'constructor-cursos').replace(/\s+/g,'-').toLowerCase()+'.json';
+    a.click(); URL.revokeObjectURL(a.href);
+    saveState(); updateBackupDate();
+    showToast('✅ Backup JSON exportado');
+  });
+
+  // Import JSON
+  document.getElementById('importJSONInput').addEventListener('change', function(e) {
+    const file = e.target.files[0]; if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(ev) {
+      try {
+        const parsed = JSON.parse(ev.target.result);
+        if (!parsed.state?.modulos) throw new Error('Formato no válido');
+        state = parsed.state;
+        banco = parsed.banco || [];
+        syncMetaForm(); saveState(); renderAll();
+        showToast('✅ Backup importado correctamente');
+      } catch(err) { showToast('Error al importar: '+err.message); }
+    };
+    reader.readAsText(file);
+    e.target.value = '';
+  });
+
+  // Print
+  document.getElementById('btnPrint').addEventListener('click', () => window.print());
+
+  // Footer year
+  document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+  // ── INIT ───────────────────────────────────────────────
+  loadSavedState();
+  syncMetaForm();
+  renderAll();
+  renderPregDynFields();
+  </script>
+
+  <script src="js/bg-particles.js" defer></script>
+  <script src="js/cursor.js" defer></script>
+</body>
+</html>
