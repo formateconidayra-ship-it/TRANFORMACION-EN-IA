@@ -342,6 +342,12 @@
       border: 1px solid rgba(59, 130, 246, .15);
       border-radius: var(--radius-sm);
       margin-bottom: 12px;
+      transition: border-color .2s, box-shadow .2s;
+    }
+
+    .crow:focus-within {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, .18);
     }
 
     .crow label {
@@ -414,10 +420,10 @@
     }
 
     .bdel {
-      width: 28px;
-      height: 28px;
+      width: 32px;
+      height: 32px;
       border: 1px solid var(--border);
-      border-radius: 6px;
+      border-radius: 7px;
       background: transparent;
       color: var(--muted2);
       cursor: pointer;
@@ -434,14 +440,19 @@
       color: #f87171;
     }
 
+    .bdel:focus-visible {
+      outline: 2px solid var(--cyan);
+      outline-offset: 2px;
+    }
+
     .badd {
       display: inline-flex;
       align-items: center;
       gap: 5px;
       margin-top: 10px;
-      padding: 7px 12px;
+      padding: 8px 12px;
       border: 1px dashed var(--border2);
-      border-radius: 8px;
+      border-radius: 7px;
       background: transparent;
       color: var(--muted);
       font-family: var(--fb);
@@ -453,6 +464,15 @@
     .badd:hover {
       border-color: var(--cyan);
       color: var(--cyan);
+    }
+
+    .badd:focus-visible,
+    .badd-act:focus-visible,
+    .dbtn:focus-visible,
+    .tab:focus-visible,
+    .bdel-hito:focus-visible {
+      outline: 2px solid var(--cyan);
+      outline-offset: 2px;
     }
 
     .cfg {
@@ -492,6 +512,7 @@
     .act-field select:focus {
       outline: none;
       border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, .18);
     }
 
     .drow {
@@ -502,7 +523,7 @@
     }
 
     .dbtn {
-      padding: 6px 12px;
+      padding: 9px 14px;
       border: 1px solid rgba(255,255,255,.32);
       border-radius: 7px;
       background: rgba(255,255,255,.05);
@@ -523,21 +544,20 @@
     .bxl {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      padding: 8px 16px;
-      border-radius: 8px;
+      gap: 7px;
       border: 1px solid rgba(34,197,94,.55);
       background: #103a22;
       color: #4ade80;
-      font-size: .82rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: background-color .2s, border-color .2s, transform .2s;
     }
     .bxl:hover {
       background: #134a2b;
       border-color: #22c55e;
       transform: translateY(-2px);
+    }
+    .bxl:disabled {
+      opacity: .55;
+      cursor: not-allowed;
+      transform: none;
     }
     #bcons:hover {
       background: linear-gradient(135deg,#8b5cf6,#6366f1);
@@ -584,17 +604,29 @@
       margin-top: 16px;
     }
 
+    /* Base compartida: las cuatro acciones (Calcular, CSV, Excel, Constructor)
+       deben tener idéntica altura, padding, tipografía y radio de borde.
+       Solo color/fondo/borde cambian por botón para marcar su identidad. */
+    .acts > button {
+      padding: 11px 22px;
+      border-radius: var(--radius-sm);
+      font-family: var(--fb);
+      font-size: .87rem;
+      font-weight: 700;
+      line-height: 1.2;
+      cursor: pointer;
+      transition: background-color .2s, border-color .2s, color .2s, transform .2s, opacity .2s;
+    }
+
+    .acts > button:focus-visible {
+      outline: 2px solid var(--cyan);
+      outline-offset: 2px;
+    }
+
     .bcalc {
-      padding: 11px 24px;
       background: var(--blue);
       border: none;
-      border-radius: var(--radius-sm);
       color: #fff;
-      font-family: var(--fd);
-      font-weight: 700;
-      font-size: .92rem;
-      cursor: pointer;
-      transition: all .2s;
       box-shadow: 0 4px 16px rgba(59, 130, 246, .26);
     }
 
@@ -610,23 +642,16 @@
     }
 
     .bexp {
-      padding: 11px 16px;
       background: rgba(255, 255, 255, .05);
       border: 1px solid var(--border2);
-      border-radius: var(--radius-sm);
       color: var(--text);
-      font-family: var(--fb);
-      font-size: .84rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all .2s;
       display: none;
     }
 
     .bexp.show {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 7px;
     }
 
     .bexp:hover {
@@ -1028,10 +1053,10 @@
     }
 
     .bdel-hito {
-      width: 24px;
-      height: 24px;
+      width: 30px;
+      height: 30px;
       border: 1px solid var(--border);
-      border-radius: 5px;
+      border-radius: 7px;
       background: transparent;
       color: var(--muted2);
       cursor: pointer;
@@ -1078,8 +1103,7 @@
       }
 
       .planner-hero-actions .btn,
-      .acts .bcalc,
-      .acts .bexp {
+      .acts > button {
         width: 100%;
         justify-content: center;
       }
@@ -1337,29 +1361,29 @@
             </div>
           </div>
 
-          <div style="font-size:.79rem;color:var(--muted);font-weight:500;margin-bottom:8px">Días lectivos</div>
+          <div id="diasLectivosLabel" style="font-size:.79rem;color:var(--muted);font-weight:500;margin-bottom:8px">Días lectivos</div>
 
-          <div class="drow">
-            <button class="dbtn on" data-day="1">Lunes</button>
-            <button class="dbtn on" data-day="2">Martes</button>
-            <button class="dbtn on" data-day="3">Miércoles</button>
-            <button class="dbtn on" data-day="4">Jueves</button>
-            <button class="dbtn on" data-day="5">Viernes</button>
-            <button class="dbtn" data-day="6">Sábado</button>
-            <button class="dbtn" data-day="0">Domingo</button>
+          <div class="drow" role="group" aria-labelledby="diasLectivosLabel">
+            <button class="dbtn on" type="button" data-day="1" aria-pressed="true">Lunes</button>
+            <button class="dbtn on" type="button" data-day="2" aria-pressed="true">Martes</button>
+            <button class="dbtn on" type="button" data-day="3" aria-pressed="true">Miércoles</button>
+            <button class="dbtn on" type="button" data-day="4" aria-pressed="true">Jueves</button>
+            <button class="dbtn on" type="button" data-day="5" aria-pressed="true">Viernes</button>
+            <button class="dbtn" type="button" data-day="6" aria-pressed="false">Sábado</button>
+            <button class="dbtn" type="button" data-day="0" aria-pressed="false">Domingo</button>
           </div>
 
           <div class="acts">
-            <button class="bcalc" id="btnCalc" disabled>Calcular cronograma</button>
-            <button class="bexp show" id="bexp" style="display:none">
-              <svg width="17" height="17" viewBox="0 0 512 512" fill="currentColor" shape-rendering="geometricPrecision" aria-hidden="true" focusable="false" style="flex-shrink:0"><path d="M0 64C0 28.7 28.7 0 64 0L224 0l0 128c0 17.7 14.3 32 32 32l128 0 0 144-208 0c-35.3 0-64 28.7-64 64l0 144-48 0c-35.3 0-64-28.7-64-64L0 64zm384 64l-128 0L256 0 384 128zM200 352l16 0c22.1 0 40 17.9 40 40l0 8c0 8.8-7.2 16-16 16s-16-7.2-16-16l0-8c0-4.4-3.6-8-8-8l-16 0c-4.4 0-8 3.6-8 8l0 80c0 4.4 3.6 8 8 8l16 0c4.4 0 8-3.6 8-8l0-8c0-8.8 7.2-16 16-16s16 7.2 16 16l0 8c0 22.1-17.9 40-40 40l-16 0c-22.1 0-40-17.9-40-40l0-80c0-22.1 17.9-40 40-40zm133.1 0l34.9 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-34.9 0c-7.2 0-13.1 5.9-13.1 13.1c0 5.2 3 9.9 7.8 12l37.4 16.6c16.3 7.2 26.8 23.4 26.8 41.2c0 24.9-20.2 45.1-45.1 45.1L304 512c-8.8 0-16-7.2-16-16s7.2-16 16-16l42.9 0c7.2 0 13.1-5.9 13.1-13.1c0-5.2-3-9.9-7.8-12l-37.4-16.6c-16.3-7.2-26.8-23.4-26.8-41.2c0-24.9 20.2-45.1 45.1-45.1zm98.9 0c8.8 0 16 7.2 16 16l0 31.6c0 23 5.5 45.6 16 66c10.5-20.3 16-42.9 16-66l0-31.6c0-8.8 7.2-16 16-16s16 7.2 16 16l0 31.6c0 34.7-10.3 68.7-29.6 97.6l-5.1 7.7c-3 4.5-8 7.1-13.3 7.1s-10.3-2.7-13.3-7.1l-5.1-7.7c-19.3-28.9-29.6-62.9-29.6-97.6l0-31.6c0-8.8 7.2-16 16-16z"/></svg>
+            <button class="bcalc" id="btnCalc" type="button" disabled>Calcular cronograma</button>
+            <button class="bexp show" id="bexp" type="button" style="display:none">
+              <svg width="16" height="16" viewBox="0 0 512 512" fill="currentColor" shape-rendering="geometricPrecision" aria-hidden="true" focusable="false" style="flex-shrink:0"><path d="M0 64C0 28.7 28.7 0 64 0L224 0l0 128c0 17.7 14.3 32 32 32l128 0 0 144-208 0c-35.3 0-64 28.7-64 64l0 144-48 0c-35.3 0-64-28.7-64-64L0 64zm384 64l-128 0L256 0 384 128zM200 352l16 0c22.1 0 40 17.9 40 40l0 8c0 8.8-7.2 16-16 16s-16-7.2-16-16l0-8c0-4.4-3.6-8-8-8l-16 0c-4.4 0-8 3.6-8 8l0 80c0 4.4 3.6 8 8 8l16 0c4.4 0 8-3.6 8-8l0-8c0-8.8 7.2-16 16-16s16 7.2 16 16l0 8c0 22.1-17.9 40-40 40l-16 0c-22.1 0-40-17.9-40-40l0-80c0-22.1 17.9-40 40-40zm133.1 0l34.9 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-34.9 0c-7.2 0-13.1 5.9-13.1 13.1c0 5.2 3 9.9 7.8 12l37.4 16.6c16.3 7.2 26.8 23.4 26.8 41.2c0 24.9-20.2 45.1-45.1 45.1L304 512c-8.8 0-16-7.2-16-16s7.2-16 16-16l42.9 0c7.2 0 13.1-5.9 13.1-13.1c0-5.2-3-9.9-7.8-12l-37.4-16.6c-16.3-7.2-26.8-23.4-26.8-41.2c0-24.9 20.2-45.1 45.1-45.1zm98.9 0c8.8 0 16 7.2 16 16l0 31.6c0 23 5.5 45.6 16 66c10.5-20.3 16-42.9 16-66l0-31.6c0-8.8 7.2-16 16-16s16 7.2 16 16l0 31.6c0 34.7-10.3 68.7-29.6 97.6l-5.1 7.7c-3 4.5-8 7.1-13.3 7.1s-10.3-2.7-13.3-7.1l-5.1-7.7c-19.3-28.9-29.6-62.9-29.6-97.6l0-31.6c0-8.8 7.2-16 16-16z"/></svg>
               Exportar CSV
             </button>
-            <button class="bxl" id="bexpxl" style="display:none">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="#21A366" shape-rendering="geometricPrecision" aria-hidden="true" focusable="false" style="flex-shrink:0"><path d="M23 1.5q.41 0 .7.3.3.29.3.7v19q0 .41-.3.7-.29.3-.7.3H7q-.41 0-.7-.3-.3-.29-.3-.7V18H1q-.41 0-.7-.3-.3-.29-.3-.7V7q0-.41.3-.7Q.58 6 1 6h5V2.5q0-.41.3-.7.29-.3.7-.3zM6 13.28l1.42 2.66h2.14l-2.38-3.87 2.34-3.8H7.46l-1.3 2.4-.05.08-.04.09-.64-1.28-.66-1.29H2.59l2.27 3.82-2.48 3.85h2.16zM14.25 21v-3H7.5v3zm0-4.5v-3.75H12v3.75zm0-5.25V7.5H12v3.75zm0-5.25V3H7.5v3zm8.25 15v-3h-6.75v3zm0-4.5v-3.75h-6.75v3.75zm0-5.25V7.5h-6.75v3.75zm0-5.25V3h-6.75v3Z"/></svg>
+            <button class="bxl" id="bexpxl" type="button" style="display:none">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="#21A366" shape-rendering="geometricPrecision" aria-hidden="true" focusable="false" style="flex-shrink:0"><path d="M23 1.5q.41 0 .7.3.3.29.3.7v19q0 .41-.3.7-.29.3-.7.3H7q-.41 0-.7-.3-.3-.29-.3-.7V18H1q-.41 0-.7-.3-.3-.29-.3-.7V7q0-.41.3-.7Q.58 6 1 6h5V2.5q0-.41.3-.7.29-.3.7-.3zM6 13.28l1.42 2.66h2.14l-2.38-3.87 2.34-3.8H7.46l-1.3 2.4-.05.08-.04.09-.64-1.28-.66-1.29H2.59l2.27 3.82-2.48 3.85h2.16zM14.25 21v-3H7.5v3zm0-4.5v-3.75H12v3.75zm0-5.25V7.5H12v3.75zm0-5.25V3H7.5v3zm8.25 15v-3h-6.75v3zm0-4.5v-3.75h-6.75v3.75zm0-5.25V7.5h-6.75v3.75zm0-5.25V3h-6.75v3Z"/></svg>
               <span id="bexpxlLabel">Exportar Excel</span>
             </button>
-            <button class="bxl" id="bcons" style="display:none;background:linear-gradient(135deg,#7c3aed,#4f46e5);border-color:#a78bfa;color:#fff">
+            <button class="bxl" id="bcons" type="button" style="display:none;background:linear-gradient(135deg,#7c3aed,#4f46e5);border-color:#a78bfa;color:#fff">
               <svg width="16" height="16" viewBox="0 0 576 512" fill="currentColor" shape-rendering="geometricPrecision" aria-hidden="true" focusable="false" style="flex-shrink:0"><path d="M264.5 5.2c14.9-6.9 32.1-6.9 47 0l218.6 101c8.5 3.9 13.9 12.4 13.9 21.8s-5.4 17.9-13.9 21.8l-218.6 101c-14.9 6.9-32.1 6.9-47 0L45.9 149.8C37.4 145.8 32 137.3 32 128s5.4-17.9 13.9-21.8L264.5 5.2zM476.9 209.6l53.2 24.6c8.5 3.9 13.9 12.4 13.9 21.8s-5.4 17.9-13.9 21.8l-218.6 101c-14.9 6.9-32.1 6.9-47 0L45.9 277.8C37.4 273.8 32 265.3 32 256s5.4-17.9 13.9-21.8l53.2-24.6 152 70.2c23.4 10.8 50.4 10.8 73.8 0l152-70.2zm-152 198.2l152-70.2 53.2 24.6c8.5 3.9 13.9 12.4 13.9 21.8s-5.4 17.9-13.9 21.8l-218.6 101c-14.9 6.9-32.1 6.9-47 0L45.9 405.8C37.4 401.8 32 393.3 32 384s5.4-17.9 13.9-21.8l53.2-24.6 152 70.2c23.4 10.8 50.4 10.8 73.8 0z"/></svg>
               Constructor de cursos
             </button>
@@ -1385,13 +1409,13 @@
 
             <div class="info-bar" id="infoBar"></div>
 
-            <div class="tabs">
-              <button class="tab on" data-tab="tabla">Vista Tabla</button>
-              <button class="tab" data-tab="calendario">Calendario Visual</button>
-              <button class="tab" data-tab="actividades">Programar Actividades</button>
+            <div class="tabs" role="tablist" aria-label="Vistas del cronograma">
+              <button class="tab on" type="button" role="tab" id="tabbtn-tabla" data-tab="tabla" aria-selected="true" aria-controls="tab-tabla">Vista Tabla</button>
+              <button class="tab" type="button" role="tab" id="tabbtn-calendario" data-tab="calendario" aria-selected="false" aria-controls="tab-calendario">Calendario Visual</button>
+              <button class="tab" type="button" role="tab" id="tabbtn-actividades" data-tab="actividades" aria-selected="false" aria-controls="tab-actividades">Programar Actividades</button>
             </div>
 
-            <div class="tab-panel on" id="tab-tabla">
+            <div class="tab-panel on" id="tab-tabla" role="tabpanel" aria-labelledby="tabbtn-tabla">
               <div class="twrap">
                 <table class="rtbl">
                   <thead>
@@ -1407,12 +1431,12 @@
               </div>
             </div>
 
-            <div class="tab-panel" id="tab-calendario">
+            <div class="tab-panel" id="tab-calendario" role="tabpanel" aria-labelledby="tabbtn-calendario">
               <div class="cal-legend" id="calLegend"></div>
               <div class="cal-months" id="calWrap"></div>
             </div>
 
-            <div class="tab-panel" id="tab-actividades">
+            <div class="tab-panel" id="tab-actividades" role="tabpanel" aria-labelledby="tabbtn-actividades">
               <div class="act-form">
                 <h4>Añadir actividad / hito</h4>
 
@@ -1830,7 +1854,10 @@
     }
 
     document.getElementById('addMod').addEventListener('click', () => addModRow());
-    document.querySelectorAll('.dbtn').forEach(b => b.addEventListener('click', () => b.classList.toggle('on')));
+    document.querySelectorAll('.dbtn').forEach(b => b.addEventListener('click', () => {
+      const on = b.classList.toggle('on');
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
+    }));
 
     function showErr(m) {
       const e = document.getElementById('perr');
@@ -1844,6 +1871,8 @@
         wrap = document.createElement('div');
         wrap.id = 'toast-wrap';
         wrap.className = 'toast-wrap';
+        wrap.setAttribute('role', 'status');
+        wrap.setAttribute('aria-live', 'polite');
         document.body.appendChild(wrap);
       }
       const t = document.createElement('div');
@@ -2024,9 +2053,10 @@
     }
 
     document.querySelectorAll('.tab').forEach(t => t.addEventListener('click', () => {
-      document.querySelectorAll('.tab').forEach(x => x.classList.remove('on'));
+      document.querySelectorAll('.tab').forEach(x => { x.classList.remove('on'); x.setAttribute('aria-selected', 'false'); });
       document.querySelectorAll('.tab-panel').forEach(x => x.classList.remove('on'));
       t.classList.add('on');
+      t.setAttribute('aria-selected', 'true');
       document.getElementById('tab-' + t.dataset.tab).classList.add('on');
     }));
 
@@ -2171,9 +2201,11 @@
         const dF = scheduleGlobal[scheduleGlobal.length - 1].ds[scheduleGlobal[scheduleGlobal.length - 1].ds.length - 1].fecha;
         buildCalendar(dI, dF, scheduleGlobal);
         // Cambiar automáticamente a la pestaña del calendario
-        document.querySelectorAll('.tab').forEach(x => x.classList.remove('on'));
+        document.querySelectorAll('.tab').forEach(x => { x.classList.remove('on'); x.setAttribute('aria-selected', 'false'); });
         document.querySelectorAll('.tab-panel').forEach(x => x.classList.remove('on'));
-        document.querySelector('.tab[data-tab="calendario"]').classList.add('on');
+        const calTab = document.querySelector('.tab[data-tab="calendario"]');
+        calTab.classList.add('on');
+        calTab.setAttribute('aria-selected', 'true');
         document.getElementById('tab-calendario').classList.add('on');
       }
     });
