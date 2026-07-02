@@ -1585,6 +1585,7 @@
 
   <script defer>
     const GAS_URL = 'https://script.google.com/macros/s/AKfycbwWxLYtPaxAy57cxvvSJqtt4PvijKWpevN4XaS8269WduISjBqQhKA6aKZNN8GTq6-l/exec';
+    const DEBUG_PARSER = ['localhost', '127.0.0.1'].includes(location.hostname);
 
     const COLORES = ['mod-c0','mod-c1','mod-c2','mod-c3','mod-c4','mod-c5'];
 
@@ -1680,91 +1681,23 @@
         texto = normalizeExtractedText(texto);
         document.getElementById('aitxt').textContent = 'Analizando módulos con IA...';
 
-        const esCert = esCertificadoProfesional(texto);
-        let modulos = [];
-        let nombre = '';
-
-        if (esCert) {
-          // — CERTIFICADO DE PROFESIONALIDAD —
-          // P1: sección "Relación de módulos formativos" del BOE (MF/MP únicamente)
-          modulos = extractModulosByRelacion(texto);
-          if (modulos.length) nombre = extractNombre(texto, file.name);
-
-          // P2: patrón Denominación → Objetivo → Duración
-          if (!modulos.length) {
-            modulos = extractModulosByDenominacion(texto);
-            if (modulos.length) nombre = extractNombre(texto, file.name);
-          }
-
-          // P3: IA externa (GAS)
-          if (!modulos.length) {
-            let gasOk = false;
-            try {
-              const res = await fetch(GAS_URL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ texto: texto.slice(0, 7000) })
-              });
-              const data = await res.json();
-              if (!data.error && data.data && (data.data.modulos || []).length) {
-                modulos = sanitizeModules(data.data.modulos);
-                nombre = cleanModuleText(data.data.nombre || '');
-                gasOk = true;
-              }
-            } catch(e) {}
-            if (!gasOk) {
-              showToast('El servicio de IA no respondió. Se aplicó extracción local — revisa los módulos detectados.');
-            }
-          }
-
-          // P4: patrón MF/MP local por bloques
-          if (!modulos.length) {
-            nombre = extractNombre(texto, file.name);
-            modulos = extractModulos(texto);
-          }
-        } else {
-          // — ACCIÓN FORMATIVA / ESPECIALIDAD —
-          // P1: "Módulo N: nombre ... NN horas" (inline o en sección de detalle)
-          modulos = extractModulosByAccionFormativa(texto);
-          if (modulos.length) nombre = extractNombre(texto, file.name);
-
-          // P2: IA externa (GAS)
-          if (!modulos.length) {
-            let gasOk = false;
-            try {
-              const res = await fetch(GAS_URL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ texto: texto.slice(0, 7000) })
-              });
-              const data = await res.json();
-              if (!data.error && data.data && (data.data.modulos || []).length) {
-                modulos = sanitizeModules(data.data.modulos);
-                nombre = cleanModuleText(data.data.nombre || '');
-                gasOk = true;
-              }
-            } catch(e) {}
-            if (!gasOk) {
-              showToast('El servicio de IA no respondió. Se aplicó extracción local — revisa los módulos detectados.');
-            }
-          }
-
-          // P3: fallback genérico (módulos sin código oficial)
-          if (!modulos.length) {
-            nombre = extractNombre(texto, file.name);
-            modulos = extractModulos(texto);
-          }
-        }
+        const tipo = detectarEstructura(texto);
+        const codigoCurso = extractCodigoCurso(texto);
+        const { modulos, nombre, pipeline } = await ejecutarPipeline(tipo, texto, file.name);
 
         // Validar suma de horas vs. duración total
-        if (modulos.length) {
+        const totalDoc = extractDuracionTotal(texto);
+        let validacion = 'OK';
+        if (modulos.length && totalDoc) {
           const totalDetectado = modulos.reduce((s, m) => s + m.horas, 0);
-          const totalDoc = extractDuracionTotal(texto);
-          if (totalDoc && totalDetectado !== totalDoc) {
-            const tipo = esCert ? 'del certificado' : 'de la acción formativa';
-            showToast(`Módulos detectados: ${totalDetectado}h · Duración total ${tipo}: ${totalDoc}h. Revisa si falta algún módulo.`);
+          if (totalDetectado !== totalDoc) {
+            const tipoLabel = tipo === 'certificado' ? 'del certificado' : 'de la acción formativa';
+            showToast(`Módulos detectados: ${totalDetectado}h · Duración total ${tipoLabel}: ${totalDoc}h. Revisa si falta algún módulo.`);
+            validacion = `AVISO: ${totalDetectado}h detectadas ≠ ${totalDoc}h totales`;
           }
         }
+
+        logExtraccion({ tipo, pipeline, modulos, totalHoras: totalDoc, validacion, codigoCurso });
 
         document.getElementById('certName').value = nombre || file.name.replace('.pdf', '');
         renderMods(modulos.length ? modulos : [{nombre:'', horas:0}]);
@@ -2509,12 +2442,101 @@
       return mods;
     }
 
-    function esCertificadoProfesional(texto) {
-      return /\bMF\s*\d{4}_\d\b/i.test(texto) || /\bMP\s*\d{4}\b/i.test(texto);
+    // ─── INFRAESTRUCTURA: DETECCIÓN, LOGGING Y CATÁLOGO ─────────────────────
+
+    function extractCodigoCurso(texto) {
+      // Certificados: IFCT0109, ADGD0308 (4 letras + 4 dígitos)
+      const m4 = texto.match(/\b([A-Z]{4}\d{4})\b/);
+      if (m4) return m4[1];
+      // Especialidades formativas: IFCT39 (4 letras + 2-3 dígitos)
+      const m2 = texto.match(/\b([A-Z]{4}\d{2,3})\b/);
+      if (m2) return m2[1];
+      return null;
     }
 
-    function extractModulosByAccionFormativa(texto) {
-      const numMap = new Map(); // num → { nombre, horas }
+    function logExtraccion({ tipo, pipeline, modulos, totalHoras, validacion, codigoCurso }) {
+      if (!DEBUG_PARSER) return;
+      console.groupCollapsed(`%c[Parser] ${tipo} · ${pipeline}`, 'color:#22d3ee;font-weight:bold');
+      console.log('Documento detectado:', tipo);
+      console.log('Pipeline utilizado: ', pipeline);
+      console.log('Módulos encontrados:', modulos.length);
+      console.log('Horas detectadas:   ', totalHoras ?? '—');
+      console.log('Validación:         ', validacion);
+      if (codigoCurso) console.log('Código de curso:    ', codigoCurso);
+      console.groupEnd();
+    }
+
+    // ─── DETECTORES DE ESTRUCTURA ────────────────────────────────────────────
+    // Para añadir un nuevo tipo: añadir entrada en detectarEstructura() + su
+    // pipeline en ejecutarPipeline(). No hay que tocar el resto de la arquitectura.
+
+    function esAccionConModulos(texto) {
+      // "Módulo N" con al menos 2 valores de N distintos → lista de módulos numerados
+      const re = /\bM[oó]dulo(?:\s+formativo)?\s+(\d+)\b/gi;
+      const nums = new Set();
+      let m;
+      while ((m = re.exec(texto)) !== null) {
+        nums.add(parseInt(m[1], 10));
+        if (nums.size >= 2) return true;
+      }
+      return false;
+    }
+
+    function esProgramaTabla(texto) {
+      // Cabecera con "módulo/contenido/unidad/tema/bloque" + "horas/duración" en la misma línea
+      const headerRe = /^.{0,30}(?:m[oó]dulo|contenido|unidad|tema|bloque).{0,60}(?:horas?|duraci[oó]n).{0,30}$/im;
+      const hm = texto.match(headerRe);
+      if (!hm) return false;
+      // Al menos 2 filas de datos: texto ... número (sin prefijo "Módulo N:")
+      const after = texto.slice(hm.index + hm[0].length, hm.index + hm[0].length + 2000);
+      let count = 0;
+      for (const l of after.split('\n')) {
+        const t = l.trim();
+        if (!t || /^M[oó]dulo\s+\d+/i.test(t)) continue;
+        if (/^.{6,80}\s+\d{2,3}\s*(?:h(?:oras?)?)?\s*$/.test(t)) {
+          if (++count >= 2) return true;
+        }
+      }
+      return false;
+    }
+
+    function detectarEstructura(texto) {
+      // Orden de detección: primero el más específico, último el catch-all.
+      // Para añadir un tipo nuevo: insertar { tipo, test } antes de 'accion-simple'.
+      const detectores = [
+        { tipo: 'certificado',    test: t => /\bMF\s*\d{4}_\d\b/i.test(t) || /\bMP\s*\d{4}\b/i.test(t) },
+        { tipo: 'accion-modulos', test: esAccionConModulos },
+        { tipo: 'programa-tabla', test: esProgramaTabla },
+        { tipo: 'accion-simple',  test: () => true },
+      ];
+      return (detectores.find(d => d.test(texto)) || detectores[detectores.length - 1]).tipo;
+    }
+
+    // ─── HELPER GAS (único punto de llamada) ─────────────────────────────────
+
+    async function callGAS(texto) {
+      try {
+        const res = await fetch(GAS_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ texto: texto.slice(0, 7000) })
+        });
+        const data = await res.json();
+        if (!data.error && data.data && (data.data.modulos || []).length) {
+          return {
+            modulos: sanitizeModules(data.data.modulos),
+            nombre:  cleanModuleText(data.data.nombre || '')
+          };
+        }
+      } catch(e) {}
+      return null;
+    }
+
+    // ─── PARSERS ─────────────────────────────────────────────────────────────
+
+    // CASO 2 — Acción formativa con módulos numerados ("Módulo 1:", "Módulo 2:", …)
+    function extractModulosPorNumero(texto) {
+      const numMap = new Map();
 
       // Intento 1: "Módulo N: nombre ... NN horas" en la misma línea
       const reInline = /M[oó]dulo\s+(\d+)\s*[:\-–]\s*([^\n\r]{4,120}?)\s+(\d{2,3})\s*horas?\b/gi;
@@ -2523,30 +2545,30 @@
         const num = parseInt(m[1], 10);
         if (numMap.has(num)) continue;
         const nombre = cleanModuleText(m[2]);
-        const horas = parseInt(m[3], 10);
+        const horas  = parseInt(m[3], 10);
         if (!nombre || nombre.length < 4) continue;
         if (!Number.isFinite(horas) || horas <= 0 || horas > 900) continue;
         numMap.set(num, { nombre, horas });
       }
 
-      // Intento 2: nombre y duración en líneas separadas
-      // Usamos la ÚLTIMA aparición de cada "Módulo N" para que coincida con la sección
-      // de detalle (que suele venir después de la lista sin horas)
+      // Intento 2: nombre y duración en líneas/secciones separadas.
+      // Se toma la ÚLTIMA aparición de cada "Módulo N" (sección de detalle)
+      // y se buscan las horas en los siguientes ~700 caracteres.
       if (!numMap.size) {
-        const nameRe = /^M[oó]dulo\s+(\d+)\s*[:\-–]\s*([^\n\r]{4,120})/gim;
+        const nameRe  = /^M[oó]dulo\s+(\d+)\s*[:\-–]\s*([^\n\r]{4,120})/gim;
         const nameMap = new Map();
         while ((m = nameRe.exec(texto)) !== null) {
-          const num = parseInt(m[1], 10);
+          const num    = parseInt(m[1], 10);
           const nombre = cleanModuleText(m[2]);
           if (!nombre || nombre.length < 4) continue;
-          nameMap.set(num, { nombre, offset: m.index }); // sobrescribir → última aparición
+          nameMap.set(num, { nombre, offset: m.index });
         }
         for (const [num, { nombre, offset }] of nameMap) {
-          const slice = texto.slice(offset, offset + 700);
+          const slice   = texto.slice(offset, offset + 700);
           const nextMod = slice.search(/\nM[oó]dulo\s+\d+\s*[:\-–]/i);
-          const bloque = (nextMod > 50) ? slice.slice(0, nextMod) : slice;
-          const hm = bloque.match(/duraci[oó]n\s*:?\s*(\d{2,3})\s*horas?\b/i)
-                  || bloque.match(/(\d{2,3})\s*horas?\b/i);
+          const bloque  = nextMod > 50 ? slice.slice(0, nextMod) : slice;
+          const hm      = bloque.match(/duraci[oó]n\s*:?\s*(\d{2,3})\s*horas?\b/i)
+                       || bloque.match(/(\d{2,3})\s*horas?\b/i);
           if (!hm) continue;
           const horas = parseInt(hm[1], 10);
           if (!Number.isFinite(horas) || horas <= 0 || horas > 900) continue;
@@ -2570,6 +2592,146 @@
           horas,
           codigo: `M${String(num).padStart(2, '0')}`
         }));
+    }
+
+    // CASO 4 — Programas con información en tabla (columnas Módulo/Contenido + Horas)
+    function extractModulosDesdeTabla(texto) {
+      const headerRe = /^.{0,30}(?:m[oó]dulo|contenido|unidad|tema|bloque).{0,60}(?:horas?|duraci[oó]n).{0,30}$/im;
+      const hm = texto.match(headerRe);
+      if (!hm) return [];
+
+      const after    = texto.slice(hm.index + hm[0].length, hm.index + hm[0].length + 3000);
+      const mods     = [];
+      const seen     = new Set();
+      let   contador = 1;
+
+      for (const l of after.split('\n')) {
+        const t = l.trim();
+        if (!t) continue;
+        if (/^(?:total|suma|observaci[oó]n|nota\b)/i.test(t)) break;
+        if (/^M[oó]dulo\s+\d+/i.test(t)) continue; // líneas con "Módulo N:" ya cubiertas por extractModulosPorNumero
+
+        // Fila de tabla: texto seguido de número de horas al final de la línea
+        const fila = t.match(/^(.{6,100}?)\s{2,}(\d{2,3})\s*(?:h(?:oras?)?)?\s*$/i)
+                  || t.match(/^(.{6,100}?)\s+(\d{2,3})\s*(?:h(?:oras?)?)?\s*$/i);
+        if (!fila) continue;
+
+        const nombre = cleanModuleText(fila[1]);
+        const horas  = parseInt(fila[2], 10);
+        if (!nombre || nombre.length < 4) continue;
+        if (!Number.isFinite(horas) || horas <= 0 || horas > 900) continue;
+        if (/^\d+$/.test(nombre)) continue; // descartar líneas que solo tienen números
+
+        const key = nombre.toLowerCase();
+        if (seen.has(key)) continue;
+        seen.add(key);
+
+        mods.push({ nombre, horas, codigo: `M${String(contador).padStart(2, '0')}` });
+        contador++;
+      }
+
+      return mods;
+    }
+
+    // CASO 3 — Acción formativa sin módulos (nombre + duración total → un único módulo)
+    function autoModuloUnico(texto, filename) {
+      const nombre = extractNombre(texto, filename);
+      const horas  = extractDuracionTotal(texto) || 0;
+      return [{ codigo: 'M01', nombre, horas }];
+    }
+
+    // ─── PIPELINES ────────────────────────────────────────────────────────────
+
+    async function pipelineCertificado(texto, filename) {
+      let modulos = [], nombre = '', pipeline = '—';
+
+      modulos = extractModulosByRelacion(texto);
+      if (modulos.length) { nombre = extractNombre(texto, filename); pipeline = 'extractModulosByRelacion'; }
+
+      if (!modulos.length) {
+        modulos = extractModulosByDenominacion(texto);
+        if (modulos.length) { nombre = extractNombre(texto, filename); pipeline = 'extractModulosByDenominacion'; }
+      }
+
+      if (!modulos.length) {
+        const gas = await callGAS(texto);
+        if (gas) { ({ modulos, nombre } = gas); pipeline = 'GAS'; }
+        else showToast('El servicio de IA no respondió. Se aplicó extracción local — revisa los módulos detectados.');
+      }
+
+      if (!modulos.length) {
+        nombre   = extractNombre(texto, filename);
+        modulos  = extractModulos(texto);
+        pipeline = 'extractModulos (fallback)';
+      }
+
+      return { modulos, nombre, pipeline };
+    }
+
+    async function pipelineAccionModulos(texto, filename) {
+      let modulos = [], nombre = '', pipeline = '—';
+
+      modulos = extractModulosPorNumero(texto);
+      if (modulos.length) { nombre = extractNombre(texto, filename); pipeline = 'extractModulosPorNumero'; }
+
+      if (!modulos.length) {
+        const gas = await callGAS(texto);
+        if (gas) { ({ modulos, nombre } = gas); pipeline = 'GAS'; }
+        else showToast('El servicio de IA no respondió. Se aplicó extracción local — revisa los módulos detectados.');
+      }
+
+      if (!modulos.length) {
+        modulos  = extractModulosDesdeTabla(texto);
+        if (modulos.length) { nombre = extractNombre(texto, filename); pipeline = 'extractModulosDesdeTabla (fallback)'; }
+      }
+
+      if (!modulos.length) {
+        nombre   = extractNombre(texto, filename);
+        modulos  = extractModulos(texto);
+        pipeline = 'extractModulos (fallback)';
+      }
+
+      return { modulos, nombre, pipeline };
+    }
+
+    async function pipelineTabla(texto, filename) {
+      let modulos = [], nombre = '', pipeline = '—';
+
+      modulos = extractModulosDesdeTabla(texto);
+      if (modulos.length) { nombre = extractNombre(texto, filename); pipeline = 'extractModulosDesdeTabla'; }
+
+      if (!modulos.length) {
+        const gas = await callGAS(texto);
+        if (gas) { ({ modulos, nombre } = gas); pipeline = 'GAS'; }
+        else showToast('El servicio de IA no respondió. Se aplicó extracción local — revisa los módulos detectados.');
+      }
+
+      if (!modulos.length) {
+        nombre   = extractNombre(texto, filename);
+        modulos  = extractModulos(texto);
+        pipeline = 'extractModulos (fallback)';
+      }
+
+      return { modulos, nombre, pipeline };
+    }
+
+    async function pipelineSimple(texto, filename) {
+      const nombre  = extractNombre(texto, filename);
+      const modulos = autoModuloUnico(texto, filename);
+      showToast('Solo se detectó un módulo. Si la acción tiene más, añádelos manualmente.');
+      return { modulos, nombre, pipeline: 'autoModuloUnico' };
+    }
+
+    async function ejecutarPipeline(tipo, texto, filename) {
+      // Para añadir un tipo nuevo: insertar la entrada en este objeto
+      // y crear la función pipeline correspondiente. Nada más cambia.
+      const pipelines = {
+        'certificado':    pipelineCertificado,
+        'accion-modulos': pipelineAccionModulos,
+        'programa-tabla': pipelineTabla,
+        'accion-simple':  pipelineSimple,
+      };
+      return (pipelines[tipo] || pipelineSimple)(texto, filename);
     }
 
     function exportarExcel(sched, hitos, certName) {
