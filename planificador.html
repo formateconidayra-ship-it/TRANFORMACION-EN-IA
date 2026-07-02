@@ -445,6 +445,32 @@
       outline-offset: 2px;
     }
 
+    .tcod {
+      width: 86px;
+      vertical-align: middle;
+    }
+
+    .mod-cod {
+      display: inline-block;
+      font-size: .68rem;
+      font-weight: 700;
+      font-family: monospace;
+      color: var(--cyan);
+      background: rgba(34, 211, 238, .08);
+      border: 1px solid rgba(34, 211, 238, .2);
+      border-radius: 4px;
+      padding: 2px 6px;
+      white-space: nowrap;
+    }
+
+    .mod-cod-vacio {
+      color: var(--muted2);
+      font-weight: 400;
+      font-family: inherit;
+      background: transparent;
+      border-color: transparent;
+    }
+
     .badd {
       display: inline-flex;
       align-items: center;
@@ -1327,6 +1353,7 @@
               <table class="mt">
                 <thead>
                   <tr>
+                    <th style="width:86px">Código</th>
                     <th>Módulo formativo</th>
                     <th style="text-align:right;width:80px">Horas</th>
                     <th style="width:36px"></th>
@@ -1653,50 +1680,89 @@
         texto = normalizeExtractedText(texto);
         document.getElementById('aitxt').textContent = 'Analizando módulos con IA...';
 
-        // Prioridad 1: sección "Relación de módulos formativos" del BOE
-        // Solo acepta líneas MFxxxx_x: y MPxxxx: — ignora UF, cabeceras y totales
-        let modulos = extractModulosByRelacion(texto);
-        let nombre = modulos.length ? extractNombre(texto, file.name) : '';
+        const esCert = esCertificadoProfesional(texto);
+        let modulos = [];
+        let nombre = '';
 
-        // Prioridad 2: patrón Denominación → Objetivo → Duración (módulos con descripción completa)
-        if (!modulos.length) {
-          modulos = extractModulosByDenominacion(texto);
+        if (esCert) {
+          // — CERTIFICADO DE PROFESIONALIDAD —
+          // P1: sección "Relación de módulos formativos" del BOE (MF/MP únicamente)
+          modulos = extractModulosByRelacion(texto);
           if (modulos.length) nombre = extractNombre(texto, file.name);
-        }
 
-        // Prioridad 3: IA externa (GAS)
-        if (!modulos.length) {
-          let gasOk = false;
-          try {
-            const res = await fetch(GAS_URL, {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ texto: texto.slice(0, 7000) })
-            });
-            const data = await res.json();
-            if (!data.error && data.data && (data.data.modulos || []).length) {
-              modulos = sanitizeModules(data.data.modulos);
-              nombre = cleanModuleText(data.data.nombre || '');
-              gasOk = true;
+          // P2: patrón Denominación → Objetivo → Duración
+          if (!modulos.length) {
+            modulos = extractModulosByDenominacion(texto);
+            if (modulos.length) nombre = extractNombre(texto, file.name);
+          }
+
+          // P3: IA externa (GAS)
+          if (!modulos.length) {
+            let gasOk = false;
+            try {
+              const res = await fetch(GAS_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ texto: texto.slice(0, 7000) })
+              });
+              const data = await res.json();
+              if (!data.error && data.data && (data.data.modulos || []).length) {
+                modulos = sanitizeModules(data.data.modulos);
+                nombre = cleanModuleText(data.data.nombre || '');
+                gasOk = true;
+              }
+            } catch(e) {}
+            if (!gasOk) {
+              showToast('El servicio de IA no respondió. Se aplicó extracción local — revisa los módulos detectados.');
             }
-          } catch(e) {}
-          if (!gasOk) {
-            showToast('El servicio de IA no respondió. Se aplicó extracción local — revisa los módulos detectados.');
+          }
+
+          // P4: patrón MF/MP local por bloques
+          if (!modulos.length) {
+            nombre = extractNombre(texto, file.name);
+            modulos = extractModulos(texto);
+          }
+        } else {
+          // — ACCIÓN FORMATIVA / ESPECIALIDAD —
+          // P1: "Módulo N: nombre ... NN horas" (inline o en sección de detalle)
+          modulos = extractModulosByAccionFormativa(texto);
+          if (modulos.length) nombre = extractNombre(texto, file.name);
+
+          // P2: IA externa (GAS)
+          if (!modulos.length) {
+            let gasOk = false;
+            try {
+              const res = await fetch(GAS_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ texto: texto.slice(0, 7000) })
+              });
+              const data = await res.json();
+              if (!data.error && data.data && (data.data.modulos || []).length) {
+                modulos = sanitizeModules(data.data.modulos);
+                nombre = cleanModuleText(data.data.nombre || '');
+                gasOk = true;
+              }
+            } catch(e) {}
+            if (!gasOk) {
+              showToast('El servicio de IA no respondió. Se aplicó extracción local — revisa los módulos detectados.');
+            }
+          }
+
+          // P3: fallback genérico (módulos sin código oficial)
+          if (!modulos.length) {
+            nombre = extractNombre(texto, file.name);
+            modulos = extractModulos(texto);
           }
         }
 
-        // Prioridad 4: patrón MF/MP local por bloques
-        if (!modulos.length) {
-          nombre = extractNombre(texto, file.name);
-          modulos = extractModulos(texto);
-        }
-
-        // Validar suma de horas vs. duración total del certificado
+        // Validar suma de horas vs. duración total
         if (modulos.length) {
           const totalDetectado = modulos.reduce((s, m) => s + m.horas, 0);
-          const totalCert = extractDuracionTotal(texto);
-          if (totalCert && totalDetectado !== totalCert) {
-            showToast(`Módulos detectados: ${totalDetectado}h · Duración total del certificado: ${totalCert}h. Revisa si falta algún módulo.`);
+          const totalDoc = extractDuracionTotal(texto);
+          if (totalDoc && totalDetectado !== totalDoc) {
+            const tipo = esCert ? 'del certificado' : 'de la acción formativa';
+            showToast(`Módulos detectados: ${totalDetectado}h · Duración total ${tipo}: ${totalDoc}h. Revisa si falta algún módulo.`);
           }
         }
 
@@ -1882,12 +1948,15 @@
 
     function renderMods(mods) {
       document.getElementById('modsBody').innerHTML = '';
-      mods.forEach(m => addModRow(m.nombre, m.horas));
+      mods.forEach(m => addModRow(m.nombre, m.horas, m.codigo || ''));
     }
 
-    function addModRow(nom = '', h = '') {
+    function addModRow(nom = '', h = '', cod = '') {
       const tr = document.createElement('tr');
-      tr.innerHTML = `<td><input type="text" value="${nom}" placeholder="Nombre del módulo"/></td><td class="thi"><input type="number" value="${h}" min="0" placeholder="0"/></td><td><button class="bdel" type="button">✕</button></td>`;
+      const codHtml = cod
+        ? `<span class="mod-cod">${cod}</span>`
+        : `<span class="mod-cod mod-cod-vacio">—</span>`;
+      tr.innerHTML = `<td class="tcod">${codHtml}</td><td><input type="text" value="${nom}" placeholder="Nombre del módulo"/></td><td class="thi"><input type="number" value="${h}" min="0" placeholder="0"/></td><td><button class="bdel" type="button">✕</button></td>`;
       tr.querySelector('.bdel').addEventListener('click', () => tr.remove());
       document.getElementById('modsBody').appendChild(tr);
     }
@@ -2279,6 +2348,8 @@
       const patterns = [
         /denominaci[oó]n\s*:\s*([^\n\r]{10,120})/i,
         /certificado de profesionalidad[:\s]+([^\n\r]{10,120})/i,
+        /especialidad\s+formativa[:\s]+([^\n\r]{10,120})/i,
+        /acci[oó]n\s+formativa[:\s]+([^\n\r]{10,120})/i,
         /programa formativo[:\s]+([^\n\r]{10,120})/i
       ];
 
@@ -2293,8 +2364,19 @@
     }
 
     function extractDuracionTotal(texto) {
-      const m = texto.match(/duraci[oó]n\s+total\s+(?:de\s+la\s+formaci[oó]n\s+(?:asociada)?\s*)?:?\s*(\d{3,4})\s*horas?\b/i);
-      return m ? parseInt(m[1], 10) : null;
+      const patrones = [
+        /duraci[oó]n\s+total\s+(?:de\s+la\s+formaci[oó]n\s+(?:asociada)?\s*)?:?\s*(\d{2,4})\s*horas?\b/i,
+        /(?:horas?\s+totales?|total\s+de\s+horas?)\s*:?\s*(\d{2,4})\b/i,
+        /(\d{2,4})\s*horas?\s+(?:totales?|en\s+total)\b/i,
+      ];
+      for (const p of patrones) {
+        const m = texto.match(p);
+        if (m) {
+          const h = parseInt(m[1], 10);
+          if (h >= 20 && h <= 9999) return h;
+        }
+      }
+      return null;
     }
 
     function extractModulosByRelacion(texto) {
@@ -2321,7 +2403,7 @@
         if (seen.has(codigo)) continue;
         seen.add(codigo);
 
-        mods.push({ nombre, horas });
+        mods.push({ nombre, horas, codigo });
       }
 
       return mods;
@@ -2363,7 +2445,6 @@
         .filter(Boolean);
 
       blocks.forEach(block => {
-        // Ignorar bloques que no empiecen por código MF, MP o "Módulo formativo"
         if (!/^(?:MF\s*\d{4}_\d|MP\s*\d{4}|M[oó]dulo(?: formativo)?\s+(?:n[oú]m\.?\s*)?[\dIVX]+)/i.test(block)) return;
 
         const horasMatch = block.match(/(\d{2,3})\s*horas?\b/i);
@@ -2373,13 +2454,14 @@
         if (!Number.isFinite(horas) || horas <= 0 || horas > 900) return;
 
         let nombre = '';
+        let codigo = '';
 
-        const mfMatch  = block.match(/^MF\s*\d{4}_\d\s*:?\s*([^\n\r]+)/i);
-        const mpMatch  = block.match(/^MP\s*\d{4}\s*:?\s*([^\n\r]+)/i);
+        const mfMatch  = block.match(/^(MF\s*\d{4}_\d)\s*:?\s*([^\n\r]+)/i);
+        const mpMatch  = block.match(/^(MP\s*\d{4})\s*:?\s*([^\n\r]+)/i);
         const modMatch = block.match(/^M[oó]dulo(?: formativo)?\s+(?:n[oú]m\.?\s*)?[\dIVX]+\s*:?\s*([^\n\r]+)/i);
 
-        if (mfMatch && mfMatch[1]) nombre = mfMatch[1];
-        else if (mpMatch && mpMatch[1]) nombre = mpMatch[1];
+        if (mfMatch) { codigo = mfMatch[1].replace(/\s/g,'').toUpperCase(); nombre = mfMatch[2]; }
+        else if (mpMatch) { codigo = mpMatch[1].replace(/\s/g,'').toUpperCase(); nombre = mpMatch[2]; }
         else if (modMatch && modMatch[1]) nombre = modMatch[1];
         else {
           const firstLine = block.split('\n')[0] || '';
@@ -2398,7 +2480,7 @@
         if (seen.has(key)) return;
         seen.add(key);
 
-        mods.push({ nombre, horas });
+        mods.push({ nombre, horas, codigo });
       });
 
       if (!mods.length) {
@@ -2411,11 +2493,13 @@
           if (simple) {
             const nombre = cleanModuleText(simple[1]);
             const horas = parseInt(simple[2], 10);
+            const cmLine = line.match(/^(MF\s*\d{4}_\d|MP\s*\d{4})/i);
+            const codigo = cmLine ? cmLine[1].replace(/\s/g,'').toUpperCase() : '';
             if (nombre && horas > 0 && horas <= 900) {
               const key = nombre.toLowerCase();
               if (!seen.has(key)) {
                 seen.add(key);
-                mods.push({ nombre, horas });
+                mods.push({ nombre, horas, codigo });
               }
             }
           }
@@ -2423,6 +2507,69 @@
       }
 
       return mods;
+    }
+
+    function esCertificadoProfesional(texto) {
+      return /\bMF\s*\d{4}_\d\b/i.test(texto) || /\bMP\s*\d{4}\b/i.test(texto);
+    }
+
+    function extractModulosByAccionFormativa(texto) {
+      const numMap = new Map(); // num → { nombre, horas }
+
+      // Intento 1: "Módulo N: nombre ... NN horas" en la misma línea
+      const reInline = /M[oó]dulo\s+(\d+)\s*[:\-–]\s*([^\n\r]{4,120}?)\s+(\d{2,3})\s*horas?\b/gi;
+      let m;
+      while ((m = reInline.exec(texto)) !== null) {
+        const num = parseInt(m[1], 10);
+        if (numMap.has(num)) continue;
+        const nombre = cleanModuleText(m[2]);
+        const horas = parseInt(m[3], 10);
+        if (!nombre || nombre.length < 4) continue;
+        if (!Number.isFinite(horas) || horas <= 0 || horas > 900) continue;
+        numMap.set(num, { nombre, horas });
+      }
+
+      // Intento 2: nombre y duración en líneas separadas
+      // Usamos la ÚLTIMA aparición de cada "Módulo N" para que coincida con la sección
+      // de detalle (que suele venir después de la lista sin horas)
+      if (!numMap.size) {
+        const nameRe = /^M[oó]dulo\s+(\d+)\s*[:\-–]\s*([^\n\r]{4,120})/gim;
+        const nameMap = new Map();
+        while ((m = nameRe.exec(texto)) !== null) {
+          const num = parseInt(m[1], 10);
+          const nombre = cleanModuleText(m[2]);
+          if (!nombre || nombre.length < 4) continue;
+          nameMap.set(num, { nombre, offset: m.index }); // sobrescribir → última aparición
+        }
+        for (const [num, { nombre, offset }] of nameMap) {
+          const slice = texto.slice(offset, offset + 700);
+          const nextMod = slice.search(/\nM[oó]dulo\s+\d+\s*[:\-–]/i);
+          const bloque = (nextMod > 50) ? slice.slice(0, nextMod) : slice;
+          const hm = bloque.match(/duraci[oó]n\s*:?\s*(\d{2,3})\s*horas?\b/i)
+                  || bloque.match(/(\d{2,3})\s*horas?\b/i);
+          if (!hm) continue;
+          const horas = parseInt(hm[1], 10);
+          if (!Number.isFinite(horas) || horas <= 0 || horas > 900) continue;
+          if (!numMap.has(num)) numMap.set(num, { nombre, horas });
+        }
+      }
+
+      if (!numMap.size) return [];
+
+      const seen = new Set();
+      return [...numMap.entries()]
+        .sort((a, b) => a[0] - b[0])
+        .filter(([, { nombre }]) => {
+          const k = nombre.toLowerCase();
+          if (seen.has(k)) return false;
+          seen.add(k);
+          return true;
+        })
+        .map(([num, { nombre, horas }]) => ({
+          nombre,
+          horas,
+          codigo: `M${String(num).padStart(2, '0')}`
+        }));
     }
 
     function exportarExcel(sched, hitos, certName) {
