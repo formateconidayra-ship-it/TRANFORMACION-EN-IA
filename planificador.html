@@ -1653,12 +1653,18 @@
         texto = normalizeExtractedText(texto);
         document.getElementById('aitxt').textContent = 'Analizando módulos con IA...';
 
-        // El formato oficial "Denominación: ... Objetivo: ... Duración: NN horas" es
-        // inequívoco, así que se prioriza frente a la IA: evita horas mal asociadas
-        // entre módulos cuando el documento ya trae esa estructura.
-        let modulos = extractModulosByDenominacion(texto);
+        // Prioridad 1: sección "Relación de módulos formativos" del BOE
+        // Solo acepta líneas MFxxxx_x: y MPxxxx: — ignora UF, cabeceras y totales
+        let modulos = extractModulosByRelacion(texto);
         let nombre = modulos.length ? extractNombre(texto, file.name) : '';
 
+        // Prioridad 2: patrón Denominación → Objetivo → Duración (módulos con descripción completa)
+        if (!modulos.length) {
+          modulos = extractModulosByDenominacion(texto);
+          if (modulos.length) nombre = extractNombre(texto, file.name);
+        }
+
+        // Prioridad 3: IA externa (GAS)
         if (!modulos.length) {
           let gasOk = false;
           try {
@@ -1679,9 +1685,19 @@
           }
         }
 
+        // Prioridad 4: patrón MF/MP local por bloques
         if (!modulos.length) {
           nombre = extractNombre(texto, file.name);
           modulos = extractModulos(texto);
+        }
+
+        // Validar suma de horas vs. duración total del certificado
+        if (modulos.length) {
+          const totalDetectado = modulos.reduce((s, m) => s + m.horas, 0);
+          const totalCert = extractDuracionTotal(texto);
+          if (totalCert && totalDetectado !== totalCert) {
+            showToast(`Módulos detectados: ${totalDetectado}h · Duración total del certificado: ${totalCert}h. Revisa si falta algún módulo.`);
+          }
         }
 
         document.getElementById('certName').value = nombre || file.name.replace('.pdf', '');
@@ -1746,6 +1762,7 @@
         .replace(/[ \t]+/g, ' ')
         .replace(/\n{3,}/g, '\n\n')
         .replace(/(\bMF\s*\d{4}_\d\b)\s*[:\-–]?\s*/gi, '\n$1: ')
+        .replace(/(\bMP\s*\d{4}\b)\s*[:\-–]?\s*/gi, '\n$1: ')
         .replace(/(\bM[oó]dulo(?: formativo)?\s+(?:n[oú]m\.?\s*)?[\dIVX]+\b)\s*[:\-–]?\s*/gi, '\n$1: ')
         .replace(/(\d{2,3})\s*(horas|h\b)/gi, ' $1 horas ')
         .replace(/[ ]+\n/g, '\n')
@@ -2275,6 +2292,41 @@
       return filename.replace('.pdf', '').replace(/[-_]/g, ' ');
     }
 
+    function extractDuracionTotal(texto) {
+      const m = texto.match(/duraci[oó]n\s+total\s+(?:de\s+la\s+formaci[oó]n\s+(?:asociada)?\s*)?:?\s*(\d{3,4})\s*horas?\b/i);
+      return m ? parseInt(m[1], 10) : null;
+    }
+
+    function extractModulosByRelacion(texto) {
+      // Busca la sección "Relación de módulos formativos y de unidades formativas"
+      // y extrae SOLO líneas que comienzan con MFxxxx_x: o MPxxxx:
+      // Las UF se ignoran por diseño (su código empieza por UF, no MF/MP)
+      const secIdx = texto.search(/relaci[oó]n\s+de\s+m[oó]dulos\s+formativos\b/i);
+      if (secIdx === -1) return [];
+
+      const bloque = texto.slice(secIdx, secIdx + 8000);
+      const mods = [];
+      const seen = new Set();
+
+      const re = /^(MF\d{4}_\d|MP\d{4})\s*:\s*([^\n\r]+?)\s*\(?\s*(\d{2,3})\s*horas?\b/gim;
+      let m;
+
+      while ((m = re.exec(bloque)) !== null) {
+        const codigo = m[1].toUpperCase();
+        const nombre = cleanModuleText(m[2]);
+        const horas = parseInt(m[3], 10);
+
+        if (!nombre || nombre.length < 4) continue;
+        if (!Number.isFinite(horas) || horas <= 0 || horas > 900) continue;
+        if (seen.has(codigo)) continue;
+        seen.add(codigo);
+
+        mods.push({ nombre, horas });
+      }
+
+      return mods;
+    }
+
     function extractModulosByDenominacion(texto) {
       const mods = [];
       const seen = new Set();
@@ -2306,11 +2358,14 @@
       const seen = new Set();
 
       const blocks = texto
-        .split(/\n(?=(?:MF\s*\d{4}_\d|M[oó]dulo(?: formativo)?\s+(?:n[oú]m\.?\s*)?[\dIVX]+))/i)
+        .split(/\n(?=(?:MF\s*\d{4}_\d|MP\s*\d{4}|M[oó]dulo(?: formativo)?\s+(?:n[oú]m\.?\s*)?[\dIVX]+))/i)
         .map(b => b.trim())
         .filter(Boolean);
 
       blocks.forEach(block => {
+        // Ignorar bloques que no empiecen por código MF, MP o "Módulo formativo"
+        if (!/^(?:MF\s*\d{4}_\d|MP\s*\d{4}|M[oó]dulo(?: formativo)?\s+(?:n[oú]m\.?\s*)?[\dIVX]+)/i.test(block)) return;
+
         const horasMatch = block.match(/(\d{2,3})\s*horas?\b/i);
         if (!horasMatch) return;
 
@@ -2319,15 +2374,18 @@
 
         let nombre = '';
 
-        const mfMatch = block.match(/^MF\s*\d{4}_\d\s*:?\s*([^\n\r]+)/i);
+        const mfMatch  = block.match(/^MF\s*\d{4}_\d\s*:?\s*([^\n\r]+)/i);
+        const mpMatch  = block.match(/^MP\s*\d{4}\s*:?\s*([^\n\r]+)/i);
         const modMatch = block.match(/^M[oó]dulo(?: formativo)?\s+(?:n[oú]m\.?\s*)?[\dIVX]+\s*:?\s*([^\n\r]+)/i);
 
         if (mfMatch && mfMatch[1]) nombre = mfMatch[1];
+        else if (mpMatch && mpMatch[1]) nombre = mpMatch[1];
         else if (modMatch && modMatch[1]) nombre = modMatch[1];
         else {
           const firstLine = block.split('\n')[0] || '';
           nombre = firstLine
             .replace(/^MF\s*\d{4}_\d\s*:?\s*/i, '')
+            .replace(/^MP\s*\d{4}\s*:?\s*/i, '')
             .replace(/^M[oó]dulo(?: formativo)?\s+(?:n[oú]m\.?\s*)?[\dIVX]+\s*:?\s*/i, '');
         }
 
@@ -2349,7 +2407,7 @@
         for (let i = 0; i < lineas.length; i++) {
           const line = lineas[i];
 
-          const simple = line.match(/^(?:MF\s*\d{4}_\d\s*:?\s*|M[oó]dulo(?: formativo)?\s+(?:n[oú]m\.?\s*)?[\dIVX]+\s*:?\s*)(.{4,120}?)\s+(\d{2,3})\s*horas?\b/i);
+          const simple = line.match(/^(?:MF\s*\d{4}_\d\s*:?\s*|MP\s*\d{4}\s*:?\s*|M[oó]dulo(?: formativo)?\s+(?:n[oú]m\.?\s*)?[\dIVX]+\s*:?\s*)(.{4,120}?)\s+(\d{2,3})\s*horas?\b/i);
           if (simple) {
             const nombre = cleanModuleText(simple[1]);
             const horas = parseInt(simple[2], 10);
