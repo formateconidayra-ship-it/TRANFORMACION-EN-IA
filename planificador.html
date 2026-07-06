@@ -2538,7 +2538,58 @@
 
     // ─── PARSERS ─────────────────────────────────────────────────────────────
 
-    // CASO 2 — Acción formativa con módulos numerados ("Módulo 1:", "Módulo 2:", …)
+    // CASO 2A — Bloque por módulo: "Módulo N" en su propia línea, después Denominación + Duración
+    // Cubre programas formativos estilo:
+    //   Módulo 1
+    //   Denominación: POSICIONAMIENTO WEB
+    //   Duración: 30 horas
+    function extractModulosPorBloque(texto) {
+      const reHeader = /^M[oó]dulo\s+(\d+)\s*$/gim;
+      const cabeceras = [];
+      let m;
+      while ((m = reHeader.exec(texto)) !== null) {
+        cabeceras.push({ num: parseInt(m[1], 10), offset: m.index });
+      }
+      if (cabeceras.length < 2) return [];
+
+      const numMap = new Map();
+      for (let i = 0; i < cabeceras.length; i++) {
+        const { num, offset } = cabeceras[i];
+        const fin = i + 1 < cabeceras.length
+          ? cabeceras[i + 1].offset
+          : Math.min(offset + 2000, texto.length);
+        const bloque = texto.slice(offset, fin);
+
+        const denMatch = bloque.match(/denominaci[oó]n\s*:\s*([^\n\r]{4,140})/i);
+        if (!denMatch) continue;
+        const nombre = cleanModuleText(denMatch[1]);
+        if (!nombre || nombre.length < 4) continue;
+
+        const durMatch = bloque.match(/duraci[oó]n\s*:?\s*(\d{2,4})\s*horas?\b/i)
+                      || bloque.match(/(\d{2,3})\s*horas?\s*(?:lectivas|formativas|presenciales)?\b/i);
+        if (!durMatch) continue;
+        const horas = parseInt(durMatch[1], 10);
+        if (!Number.isFinite(horas) || horas <= 0 || horas > 900) continue;
+
+        if (!numMap.has(num)) numMap.set(num, { nombre, horas });
+      }
+
+      if (!numMap.size) return [];
+      const seen = new Set();
+      return [...numMap.entries()]
+        .sort((a, b) => a[0] - b[0])
+        .filter(([, { nombre }]) => {
+          const k = nombre.toLowerCase();
+          if (seen.has(k)) return false;
+          seen.add(k);
+          return true;
+        })
+        .map(([num, { nombre, horas }]) => ({
+          nombre, horas, codigo: `M${String(num).padStart(2, '0')}`
+        }));
+    }
+
+    // CASO 2B — Módulos numerados inline o con nombre en la misma línea
     function extractModulosPorNumero(texto) {
       const numMap = new Map();
 
@@ -2693,10 +2744,19 @@
     async function pipelineAccionModulos(texto, filename) {
       let modulos = [], nombre = '', pipeline = '—';
 
-      modulos = extractModulosPorNumero(texto);
-      if (modulos.length) { nombre = extractNombre(texto, filename); pipeline = 'extractModulosPorNumero'; }
-      else if (DEBUG_PARSER) console.log('[Parser] extractModulosPorNumero → 0 resultados');
+      // 1. Bloques completos: "Módulo N" en línea propia → Denominación → Duración
+      modulos = extractModulosPorBloque(texto);
+      if (modulos.length) { nombre = extractNombre(texto, filename); pipeline = 'extractModulosPorBloque'; }
+      else if (DEBUG_PARSER) console.log('[Parser] extractModulosPorBloque → 0 resultados');
 
+      // 2. Módulos inline o con nombre en la misma línea
+      if (!modulos.length) {
+        modulos = extractModulosPorNumero(texto);
+        if (modulos.length) { nombre = extractNombre(texto, filename); pipeline = 'extractModulosPorNumero'; }
+        else if (DEBUG_PARSER) console.log('[Parser] extractModulosPorNumero → 0 resultados');
+      }
+
+      // 3. GAS (IA remota)
       if (!modulos.length) {
         const gas = await callGAS(texto);
         if (gas) { ({ modulos, nombre } = gas); pipeline = 'GAS'; }
@@ -2706,20 +2766,20 @@
         }
       }
 
+      // 4. Tabla columnar
       if (!modulos.length) {
         modulos = extractModulosDesdeTabla(texto);
         if (modulos.length) { nombre = extractNombre(texto, filename); pipeline = 'extractModulosDesdeTabla'; }
         else if (DEBUG_PARSER) console.log('[Parser] extractModulosDesdeTabla → 0 resultados');
       }
 
+      // 5. El documento tiene módulos numerados detectados pero ningún parser los extrajo.
+      //    NO se usa autoModuloUnico — sería engañoso mostrar un único módulo.
       if (!modulos.length) {
-        modulos = autoModuloUnico(texto, filename);
-        if (modulos.length) { nombre = modulos[0].nombre; pipeline = 'autoModuloUnico'; }
-        else {
-          nombre = extractNombre(texto, filename);
-          pipeline = 'sin-módulos';
-          if (DEBUG_PARSER) console.log('[Parser] autoModuloUnico → sin duración detectada → entrada manual requerida');
-        }
+        nombre = extractNombre(texto, filename);
+        pipeline = 'sin-módulos';
+        if (DEBUG_PARSER) console.log('[Parser] pipelineAccionModulos → todos los parsers fallaron — entrada manual');
+        showToast('Se detectaron módulos en el documento pero no fue posible extraerlos. Introdúcelos manualmente.');
       }
 
       return { modulos, nombre, pipeline };
