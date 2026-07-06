@@ -1697,18 +1697,19 @@
           }
         }
 
-        logExtraccion({ tipo, pipeline, modulos, totalHoras: totalDoc, validacion, codigoCurso });
+        logExtraccion({ tipo, pipeline, modulos, totalHoras: totalDoc, validacion, codigoCurso, nombre });
 
         document.getElementById('certName').value = nombre || file.name.replace('.pdf', '');
-        renderMods(modulos.length ? modulos : [{nombre:'', horas:0}]);
-        finishExtraction();
-
-        if (!modulos.length) {
-          showErr('No se encontraron módulos automáticamente. Introdúcelos manualmente.');
+        if (modulos.length) {
+          renderMods(modulos);
+        } else {
+          renderMods([{nombre: '', horas: ''}]);
+          showErr('No se pudieron detectar módulos ni duración. Introduce los módulos manualmente.');
         }
+        finishExtraction();
       } catch(err) {
         document.getElementById('certName').value = file.name.replace('.pdf','').replace(/-|_/g,' ');
-        renderMods([{nombre:'', horas:0}]);
+        renderMods([{nombre: '', horas: ''}]);
         finishExtraction();
         showErr('Error leyendo el PDF. Introduce los módulos manualmente.');
       }
@@ -2454,13 +2455,16 @@
       return null;
     }
 
-    function logExtraccion({ tipo, pipeline, modulos, totalHoras, validacion, codigoCurso }) {
+    function logExtraccion({ tipo, pipeline, modulos, totalHoras, validacion, codigoCurso, nombre }) {
       if (!DEBUG_PARSER) return;
+      const sumaHoras = modulos.reduce((s, m) => s + (m.horas || 0), 0);
       console.groupCollapsed(`%c[Parser] ${tipo} · ${pipeline}`, 'color:#22d3ee;font-weight:bold');
       console.log('Documento detectado:', tipo);
       console.log('Pipeline utilizado: ', pipeline);
+      console.log('Nombre detectado:   ', nombre || '—');
       console.log('Módulos encontrados:', modulos.length);
       console.log('Horas detectadas:   ', totalHoras ?? '—');
+      console.log('Suma horas módulos: ', sumaHoras || '—');
       console.log('Validación:         ', validacion);
       if (codigoCurso) console.log('Código de curso:    ', codigoCurso);
       console.groupEnd();
@@ -2634,9 +2638,11 @@
     }
 
     // CASO 3 — Acción formativa sin módulos (nombre + duración total → un único módulo)
+    // Devuelve [] si no se detecta duración — el caller mostrará mensaje de entrada manual.
     function autoModuloUnico(texto, filename) {
+      const horas = extractDuracionTotal(texto);
+      if (!horas) return [];
       const nombre = extractNombre(texto, filename);
-      const horas  = extractDuracionTotal(texto) || 0;
       return [{ codigo: 'M01', nombre, horas }];
     }
 
@@ -2647,22 +2653,38 @@
 
       modulos = extractModulosByRelacion(texto);
       if (modulos.length) { nombre = extractNombre(texto, filename); pipeline = 'extractModulosByRelacion'; }
+      else if (DEBUG_PARSER) console.log('[Parser] extractModulosByRelacion → 0 resultados');
 
       if (!modulos.length) {
         modulos = extractModulosByDenominacion(texto);
         if (modulos.length) { nombre = extractNombre(texto, filename); pipeline = 'extractModulosByDenominacion'; }
+        else if (DEBUG_PARSER) console.log('[Parser] extractModulosByDenominacion → 0 resultados');
       }
 
       if (!modulos.length) {
         const gas = await callGAS(texto);
         if (gas) { ({ modulos, nombre } = gas); pipeline = 'GAS'; }
-        else showToast('El servicio de IA no respondió. Se aplicó extracción local — revisa los módulos detectados.');
+        else {
+          if (DEBUG_PARSER) console.log('[Parser] GAS → sin respuesta o sin resultados');
+          showToast('El servicio de IA no respondió. Se aplicó extracción local — revisa los módulos detectados.');
+        }
       }
 
       if (!modulos.length) {
-        nombre   = extractNombre(texto, filename);
-        modulos  = extractModulos(texto);
-        pipeline = 'extractModulos (fallback)';
+        nombre  = extractNombre(texto, filename);
+        modulos = extractModulos(texto);
+        if (modulos.length) { pipeline = 'extractModulos (fallback)'; }
+        else if (DEBUG_PARSER) console.log('[Parser] extractModulos → 0 resultados');
+      }
+
+      if (!modulos.length) {
+        modulos = autoModuloUnico(texto, filename);
+        if (modulos.length) { nombre = modulos[0].nombre; pipeline = 'autoModuloUnico'; }
+        else {
+          nombre = extractNombre(texto, filename);
+          pipeline = 'sin-módulos';
+          if (DEBUG_PARSER) console.log('[Parser] autoModuloUnico → sin duración detectada → entrada manual requerida');
+        }
       }
 
       return { modulos, nombre, pipeline };
@@ -2673,22 +2695,31 @@
 
       modulos = extractModulosPorNumero(texto);
       if (modulos.length) { nombre = extractNombre(texto, filename); pipeline = 'extractModulosPorNumero'; }
+      else if (DEBUG_PARSER) console.log('[Parser] extractModulosPorNumero → 0 resultados');
 
       if (!modulos.length) {
         const gas = await callGAS(texto);
         if (gas) { ({ modulos, nombre } = gas); pipeline = 'GAS'; }
-        else showToast('El servicio de IA no respondió. Se aplicó extracción local — revisa los módulos detectados.');
+        else {
+          if (DEBUG_PARSER) console.log('[Parser] GAS → sin respuesta o sin resultados');
+          showToast('El servicio de IA no respondió. Se aplicó extracción local — revisa los módulos detectados.');
+        }
       }
 
       if (!modulos.length) {
-        modulos  = extractModulosDesdeTabla(texto);
-        if (modulos.length) { nombre = extractNombre(texto, filename); pipeline = 'extractModulosDesdeTabla (fallback)'; }
+        modulos = extractModulosDesdeTabla(texto);
+        if (modulos.length) { nombre = extractNombre(texto, filename); pipeline = 'extractModulosDesdeTabla'; }
+        else if (DEBUG_PARSER) console.log('[Parser] extractModulosDesdeTabla → 0 resultados');
       }
 
       if (!modulos.length) {
-        nombre   = extractNombre(texto, filename);
-        modulos  = extractModulos(texto);
-        pipeline = 'extractModulos (fallback)';
+        modulos = autoModuloUnico(texto, filename);
+        if (modulos.length) { nombre = modulos[0].nombre; pipeline = 'autoModuloUnico'; }
+        else {
+          nombre = extractNombre(texto, filename);
+          pipeline = 'sin-módulos';
+          if (DEBUG_PARSER) console.log('[Parser] autoModuloUnico → sin duración detectada → entrada manual requerida');
+        }
       }
 
       return { modulos, nombre, pipeline };
@@ -2699,27 +2730,38 @@
 
       modulos = extractModulosDesdeTabla(texto);
       if (modulos.length) { nombre = extractNombre(texto, filename); pipeline = 'extractModulosDesdeTabla'; }
+      else if (DEBUG_PARSER) console.log('[Parser] extractModulosDesdeTabla → 0 resultados');
 
       if (!modulos.length) {
         const gas = await callGAS(texto);
         if (gas) { ({ modulos, nombre } = gas); pipeline = 'GAS'; }
-        else showToast('El servicio de IA no respondió. Se aplicó extracción local — revisa los módulos detectados.');
+        else {
+          if (DEBUG_PARSER) console.log('[Parser] GAS → sin respuesta o sin resultados');
+          showToast('El servicio de IA no respondió. Se aplicó extracción local — revisa los módulos detectados.');
+        }
       }
 
       if (!modulos.length) {
-        nombre   = extractNombre(texto, filename);
-        modulos  = extractModulos(texto);
-        pipeline = 'extractModulos (fallback)';
+        modulos = autoModuloUnico(texto, filename);
+        if (modulos.length) { nombre = modulos[0].nombre; pipeline = 'autoModuloUnico'; }
+        else {
+          nombre = extractNombre(texto, filename);
+          pipeline = 'sin-módulos';
+          if (DEBUG_PARSER) console.log('[Parser] autoModuloUnico → sin duración detectada → entrada manual requerida');
+        }
       }
 
       return { modulos, nombre, pipeline };
     }
 
     async function pipelineSimple(texto, filename) {
-      const nombre  = extractNombre(texto, filename);
       const modulos = autoModuloUnico(texto, filename);
-      showToast('Solo se detectó un módulo. Si la acción tiene más, añádelos manualmente.');
-      return { modulos, nombre, pipeline: 'autoModuloUnico' };
+      if (modulos.length) {
+        showToast('Solo se detectó un módulo. Si la acción tiene más, añádelos manualmente.');
+        return { modulos, nombre: modulos[0].nombre, pipeline: 'autoModuloUnico' };
+      }
+      if (DEBUG_PARSER) console.log('[Parser] pipelineSimple → sin duración detectada → entrada manual requerida');
+      return { modulos: [], nombre: extractNombre(texto, filename), pipeline: 'sin-módulos' };
     }
 
     async function ejecutarPipeline(tipo, texto, filename) {
