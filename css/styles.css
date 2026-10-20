@@ -50,6 +50,14 @@
 
 html {
   scroll-behavior: smooth;
+  /* Reserva la altura del menú flotante (8px de margen + 120px + aire) al saltar a anclas o enfocar */
+  scroll-padding-top: 148px;
+}
+
+@media (max-width: 768px) {
+  html {
+    scroll-padding-top: 120px; /* menú de 96px en móvil */
+  }
 }
 
 body {
@@ -156,6 +164,14 @@ button {
 
 .section-hero {
   background: transparent;
+}
+
+/* position: relative hace que overflow:hidden recorte los resplandores ::before/::after
+   también en secciones sin la clase .section (sobre-mi, proyectos, blog…) */
+.section-deep,
+.section-soft,
+.section-dark {
+  position: relative;
 }
 
 .section-deep {
@@ -1209,32 +1225,8 @@ button {
   }
 }
 
-@media (max-width: 768px) {
-  .container,
-  .navbar,
-  .footer-container {
-    width: calc(100% - 24px);
-  }
-
-  .navbar {
-    padding: 0 20px;
-    min-height: 96px;
-  }
-
-  .nav-logo-text {
-    display: none;
-  }
-
-  .nav-logo-img {
-    width: 148px;
-    height: auto;
-  }
-
-  .footer-logo .nav-logo-img {
-    width: 115px;
-    height: auto;
-  }
-
+/* Menú hamburguesa hasta 1024px: el menú completo (logo + 7 enlaces) no cabe por debajo de ~960px */
+@media (max-width: 1024px) {
   .nav-toggle {
     display: flex;
   }
@@ -1272,6 +1264,34 @@ button {
     border-radius: 10px;
     padding-inline: 14px;
   }
+}
+
+@media (max-width: 768px) {
+  .container,
+  .navbar,
+  .footer-container {
+    width: calc(100% - 24px);
+  }
+
+  .navbar {
+    padding: 0 20px;
+    min-height: 96px;
+  }
+
+  .nav-logo-text {
+    display: none;
+  }
+
+  .nav-logo-img {
+    width: 148px;
+    height: auto;
+  }
+
+  .footer-logo .nav-logo-img {
+    width: 115px;
+    height: auto;
+  }
+
 
   .section {
     padding: 62px 0;
@@ -1416,6 +1436,11 @@ button {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 20px;
   margin-bottom: 52px;
+}
+
+/* Variante de 4 columnas; las reglas responsive de .stats (más abajo) la reducen a 2 y 1 */
+.stats--4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
 .stat {
