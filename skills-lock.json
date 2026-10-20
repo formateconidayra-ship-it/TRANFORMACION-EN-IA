@@ -1,11 +1,47 @@
 {
   "version": 1,
   "skills": {
+    "a11y": {
+      "source": "dawitlabs/ui-skills",
+      "sourceType": "github",
+      "skillPath": "skills/a11y/SKILL.md",
+      "computedHash": "c02bde2aa97da3fb52e2576ff177c92f5e3780e1001a2be16813c7db4ad24a61"
+    },
+    "animate": {
+      "source": "dawitlabs/ui-skills",
+      "sourceType": "github",
+      "skillPath": "skills/animate/SKILL.md",
+      "computedHash": "2064e97e1277a097129ad55eaec5f58f6d5307f953b324083647cb810bb4a0bf"
+    },
+    "frontend-design": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "skillPath": "skills/frontend-design/SKILL.md",
+      "computedHash": "106acf230014cbb43ca34e6410371321b56ca742f9ee0442e8ec05bf02eb0384"
+    },
     "huashu-design": {
       "source": "alchaincyf/huashu-design",
       "sourceType": "github",
       "skillPath": "SKILL.md",
       "computedHash": "2eb1c3e6e49e8b5d65ad8760523355985dc3631057ad4e7727cdaf2160a73733"
+    },
+    "landing": {
+      "source": "dawitlabs/ui-skills",
+      "sourceType": "github",
+      "skillPath": "skills/landing/SKILL.md",
+      "computedHash": "1edd98123a95f532ce3e74058f5a765e967a85a5ebe71d403f776f159b659109"
+    },
+    "uicolor": {
+      "source": "dawitlabs/ui-skills",
+      "sourceType": "github",
+      "skillPath": "skills/uicolor/SKILL.md",
+      "computedHash": "b44f06a7d83d7002b8c7d3f44f451879e10abe134a28f3a2abf77c2fca384001"
+    },
+    "uiux": {
+      "source": "dawitlabs/ui-skills",
+      "sourceType": "github",
+      "skillPath": "skills/uiux/SKILL.md",
+      "computedHash": "f02ccad5d8f1e2689f18ca3955c08adaa99d4607ae5f178fcf4bbc6dfb6fff31"
     }
   }
 }
