@@ -16,7 +16,7 @@
   <title>Docente FPE en Canarias | Transformación Digital y Competencias Digitales | Idayra Cabrera</title>
   <meta
     name="description"
-    content="Docente FPE en Canarias con +1.700 horas de formación: transformación digital, competencias digitales, IA aplicada, Excel y Power BI."
+    content="Docente FPE en Canarias con +1.770 horas de formación: transformación digital, competencias digitales, IA aplicada, Excel y Power BI."
   />
   <meta name="author" content="Idayra Cabrera" />
   <meta name="robots" content="index,follow" />
@@ -156,7 +156,7 @@
         "name": "Transformación IA",
         "url": "https://transformacionia.es/",
         "logo": "https://transformacionia.es/img/logo-idayra-header.png",
-        "description": "Academia de Formación en Inteligencia Artificial, Transformación Digital y Competencias Digitales en Canarias. Dirigida por Idayra Cabrera, docente FPE con más de 1.700 horas certificadas.",
+        "description": "Academia de Formación en Inteligencia Artificial, Transformación Digital y Competencias Digitales en Canarias. Dirigida por Idayra Cabrera, docente FPE con más de 1.770 horas certificadas.",
         "areaServed": "Canarias",
         "founder": {
           "@type": "Person",
@@ -220,7 +220,7 @@
         "name": "Idayra Cabrera",
         "url": "https://transformacionia.es/",
         "jobTitle": "Docente FPE especializada en Formación en Inteligencia Artificial, Transformación Digital y Competencias Digitales en Canarias",
-        "description": "Docente FPE en Canarias con más de 1.700 horas de formación certificada en inteligencia artificial, Excel, Power BI y competencias digitales.",
+        "description": "Docente FPE en Canarias con más de 1.770 horas de formación certificada en inteligencia artificial, Excel, Power BI y competencias digitales.",
         "address": {
           "@type": "PostalAddress",
           "addressLocality": "La Laguna",
@@ -359,7 +359,7 @@
               <em>transformación digital y competencias digitales</em>
             </h1>
 
-            <p class="hero-autoridad">+1.700 horas de docencia · +15 años de experiencia · Formación certificada</p>
+            <p class="hero-autoridad">+1.770 horas de docencia · +15 años de experiencia · Formación certificada</p>
 
             <p class="hero-subtitle">
               Inteligencia artificial, herramientas digitales y formación orientada al empleo.
@@ -425,19 +425,19 @@
 
         <div class="stats" aria-label="Métricas de satisfacción">
           <div class="stat">
-            <span class="counter" data-target="1700" data-prefix="+" data-suffix="h">0</span>
+            <span class="counter" data-target="1770" data-prefix="+" data-suffix="h">+1.770h</span>
             <p>Horas de docencia</p>
           </div>
           <div class="stat">
-            <span class="counter" data-target="300" data-prefix="+" data-suffix="">0</span>
+            <span class="counter" data-target="300" data-prefix="+" data-suffix="">+300</span>
             <p>Alumnos formados</p>
           </div>
           <div class="stat">
-            <span class="counter" data-target="95" data-suffix="%">0</span>
+            <span class="counter" data-target="95" data-suffix="%">95%</span>
             <p>Satisfacción del alumnado</p>
           </div>
           <div class="stat">
-            <span class="counter" data-target="100" data-suffix="%">0</span>
+            <span class="counter" data-target="100" data-suffix="%">100%</span>
             <p>Recomiendan la formación</p>
           </div>
         </div>
@@ -606,7 +606,7 @@
         </div>
 
         <p class="colab-autoridad fade-in-up">
-          Más de 1.700 horas de formación impartida en entornos reales, colaborando con
+          Más de 1.770 horas de formación impartida en entornos reales, colaborando con
           entidades públicas y privadas en Canarias.
         </p>
       </div>
@@ -1022,7 +1022,8 @@
         const elapsed = now - startTime;
         const progress = Math.min(elapsed / duration, 1);
         const value = Math.round(easeOutQuart(progress) * target);
-        el.textContent = prefix + value.toLocaleString("es-ES") + suffix;
+        // Separador de miles explícito: toLocaleString("es-ES") no agrupa números de 4 cifras
+        el.textContent = prefix + String(value).replace(/\B(?=(\d{3})+(?!\d))/g, ".") + suffix;
         if (progress < 1) requestAnimationFrame(step);
       }
 
@@ -1041,8 +1042,10 @@
       { threshold: 0.3 }
     );
 
+    // El HTML ya contiene el valor final; con movimiento reducido no se anima
     const statsBlock = document.querySelector(".stats");
-    if (statsBlock) statsObserver.observe(statsBlock);
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (statsBlock && !reduceMotion) statsObserver.observe(statsBlock);
 
     /* ── Fade-in-up on scroll ── */
     const fadeObserver = new IntersectionObserver(
