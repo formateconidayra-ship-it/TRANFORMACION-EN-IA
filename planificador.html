@@ -1579,7 +1579,7 @@
     </div>
   </footer>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" integrity="sha512-q+4liFwdPC/bNdhUpZx6aXDx/h77yEQtn4I1slHydcbZK34nLaR3cAeYSJshoxIOq3mjEf7xJE8YWIUHMn+oCQ==" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
   <script src="js/reveal.js" defer></script>
   <script src="main.js" defer></script>
 
@@ -1668,7 +1668,8 @@
 
       try {
         const ab = await file.arrayBuffer();
-        const pdf = await pdfjsLib.getDocument({data: ab}).promise;
+        // isEvalSupported:false mitiga CVE-2024-4367 (pdf.js < 4.2.67)
+        const pdf = await pdfjsLib.getDocument({data: ab, isEvalSupported: false}).promise;
         let texto = '';
         document.getElementById('aitxt').textContent = 'Extrayendo texto del documento...';
 
