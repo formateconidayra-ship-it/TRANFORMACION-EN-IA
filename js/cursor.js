@@ -1,5 +1,7 @@
 (function () {
   if (!window.matchMedia('(pointer: fine)').matches) return;
+  // Con movimiento reducido se mantiene el cursor del sistema
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
   var cv = document.createElement('canvas');
   cv.id = 'cursor-canvas';
@@ -29,6 +31,11 @@
 
     var mx = -200, my = -200;
     var trail = [], burst = [];
+    // El bucle de dibujo solo funciona mientras hay estela o destellos visibles
+    var running = false;
+    function kick() {
+      if (!running) { running = true; requestAnimationFrame(draw); }
+    }
 
     document.addEventListener('mousemove', function (e) {
       mx = e.clientX; my = e.clientY;
@@ -48,6 +55,7 @@
           c: Math.random() > .38 ? '6,182,212' : '59,130,246'
         });
       }
+      kick();
     });
 
     document.addEventListener('click', function (e) {
@@ -62,6 +70,7 @@
           c: Math.random() > .5 ? '6,182,212' : '96,165,250'
         });
       }
+      kick();
     });
 
     var HS = 'a,button,[role=button],input,textarea,select,label,.btn,summary,[type=submit]';
@@ -99,9 +108,9 @@
         ctx.fill();
       }
 
-      requestAnimationFrame(draw);
+      if (trail.length || burst.length) requestAnimationFrame(draw);
+      else running = false;
     }
-    draw();
   }
 
   if (document.body) init();

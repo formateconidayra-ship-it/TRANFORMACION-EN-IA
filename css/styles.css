@@ -17,7 +17,7 @@
   /* Texto */
   --text: #f1f5f9;
   --muted: #94a3b8;
-  --muted2: #64748b;
+  --muted2: #7f8ca3; /* ≥ 4,5:1 sobre todos los fondos (antes #64748b, 3,3:1) */
 
   /* Marca */
   --blue: #3b82f6;
@@ -342,7 +342,7 @@ button {
 }
 
 .nav-cta {
-  background: var(--blue);
+  background: var(--blue-strong); /* blanco sobre #2563eb: 5,2:1 */
   color: #ffffff !important;
   font-weight: 700 !important;
   padding: 7px 16px !important;
@@ -353,7 +353,7 @@ button {
 
 .nav-cta:hover,
 .nav-cta:focus-visible {
-  background: var(--blue-strong);
+  background: #1d4ed8;
   color: #fff !important;
   box-shadow: 0 4px 16px rgba(59, 130, 246, 0.42);
 }

@@ -14,6 +14,8 @@
     var ctx = cv.getContext('2d');
     var W, H, pts = [], mx = -9999, my = -9999;
     var N, LINK, MR;
+    // Con movimiento reducido se dibuja un único fotograma estático
+    var still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     function calcConfig() {
       var area = window.innerWidth * window.innerHeight;
@@ -30,6 +32,7 @@
       // Adjust particle count without full reset
       while (pts.length < N) pts.push(mkPt());
       if (pts.length > N) pts.length = N;
+      if (still) requestAnimationFrame(frame);
     }
 
     function mkPt() {
@@ -51,8 +54,8 @@
 
     var last = 0;
     function frame(ts) {
-      requestAnimationFrame(frame);
-      if (ts - last < 34) return;
+      if (!still) requestAnimationFrame(frame);
+      if (!still && ts - last < 34) return;
       last = ts;
 
       ctx.clearRect(0, 0, W, H);
@@ -76,11 +79,13 @@
         ctx.fill();
       }
 
+      var LINK2 = LINK * LINK;
       for (var i = 0; i < N - 1; i++) {
         for (var j = i + 1; j < N; j++) {
           var dx = pts[i].x - pts[j].x, dy = pts[i].y - pts[j].y;
-          var d = Math.sqrt(dx * dx + dy * dy);
-          if (d < LINK) {
+          var d2 = dx * dx + dy * dy;
+          if (d2 < LINK2) { // raíz cuadrada solo para los pares cercanos
+            var d = Math.sqrt(d2);
             ctx.beginPath();
             ctx.moveTo(pts[i].x, pts[i].y);
             ctx.lineTo(pts[j].x, pts[j].y);
