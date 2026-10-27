@@ -1,0 +1,8 @@
+# GitHub Pages (Jekyll): archivos versionados que NO se publican en la web.
+# Siguen en el repositorio; solo dejan de servirse en transformacionia.es.
+exclude:
+  - graphify-out/
+  - docs/
+  - INFORME-FINAL-PRODUCCION.md
+  - skills-lock.json
+  - js/planificador.html
