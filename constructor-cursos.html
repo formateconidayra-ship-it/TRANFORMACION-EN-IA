@@ -1395,15 +1395,15 @@
         const corr = p.correctaVF?'true':'false', wrong = p.correctaVF?'false':'true';
         xml += `  <question type="truefalse">\n`;
         xml += `    <name><text>${cd(nm)}</text></name>\n`;
-        xml += `    <questiontext format="html"><text>${cd('<p>'+p.enunciado+'</p>')}</text></questiontext>\n`;
+        xml += `    <questiontext format="html"><text>${cd('<p>'+esc(p.enunciado)+'</p>')}</text></questiontext>\n`;
         xml += `    <defaultgrade>1.0000000</defaultgrade>\n`;
-        xml += `    <answer fraction="100" format="plain_text"><text>${corr}</text><feedback format="html"><text>${cd(p.feedback||'Correcto.')}</text></feedback></answer>\n`;
+        xml += `    <answer fraction="100" format="plain_text"><text>${corr}</text><feedback format="html"><text>${cd(esc(p.feedback||'Correcto.'))}</text></feedback></answer>\n`;
         xml += `    <answer fraction="0" format="plain_text"><text>${wrong}</text><feedback format="html"><text>${cd('Incorrecto.')}</text></feedback></answer>\n`;
         xml += `  </question>\n\n`;
       } else if (p.tipo === 'multiple') {
         xml += `  <question type="multichoice">\n`;
         xml += `    <name><text>${cd(nm)}</text></name>\n`;
-        xml += `    <questiontext format="html"><text>${cd('<p>'+p.enunciado+'</p>')}</text></questiontext>\n`;
+        xml += `    <questiontext format="html"><text>${cd('<p>'+esc(p.enunciado)+'</p>')}</text></questiontext>\n`;
         xml += `    <defaultgrade>1.0000000</defaultgrade>\n`;
         xml += `    <single>true</single>\n    <shuffleanswers>true</shuffleanswers>\n`;
         xml += `    <correctfeedback format="html"><text>Correcto.</text></correctfeedback>\n`;
@@ -1412,15 +1412,15 @@
         (p.opciones||[]).forEach((op,i) => {
           if (!op) return;
           const frac = i===p.correctaIdx?'100':'0';
-          xml += `    <answer fraction="${frac}" format="html"><text>${cd(op)}</text><feedback format="html"><text>${cd(i===p.correctaIdx?(p.feedback||'Correcto.'):' ')}</text></feedback></answer>\n`;
+          xml += `    <answer fraction="${frac}" format="html"><text>${cd(esc(op))}</text><feedback format="html"><text>${cd(i===p.correctaIdx?esc(p.feedback||'Correcto.'):' ')}</text></feedback></answer>\n`;
         });
         xml += `  </question>\n\n`;
       } else {
         xml += `  <question type="shortanswer">\n`;
         xml += `    <name><text>${cd(nm)}</text></name>\n`;
-        xml += `    <questiontext format="html"><text>${cd('<p>'+p.enunciado+'</p>')}</text></questiontext>\n`;
+        xml += `    <questiontext format="html"><text>${cd('<p>'+esc(p.enunciado)+'</p>')}</text></questiontext>\n`;
         xml += `    <defaultgrade>1.0000000</defaultgrade>\n    <usecase>0</usecase>\n`;
-        (p.respuestas||[]).forEach(r => { if (!r) return; xml += `    <answer fraction="100"><text>${cd(r)}</text><feedback format="html"><text>${cd(p.feedback||'Correcto.')}</text></feedback></answer>\n`; });
+        (p.respuestas||[]).forEach(r => { if (!r) return; xml += `    <answer fraction="100"><text>${cd(r)}</text><feedback format="html"><text>${cd(esc(p.feedback||'Correcto.'))}</text></feedback></answer>\n`; });
         xml += `  </question>\n\n`;
       }
     });
