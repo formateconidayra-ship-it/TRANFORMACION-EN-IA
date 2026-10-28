@@ -20,7 +20,9 @@
     function calcConfig() {
       var area = window.innerWidth * window.innerHeight;
       // ~1 particle per 8000px² — more density on large screens
-      N    = Math.min(Math.max(Math.round(area / 8000), 55), 160);
+      // En móvil basta con menos partículas: el efecto se ve igual y cuesta menos
+      var min = window.innerWidth < 768 ? 35 : 55;
+      N    = Math.min(Math.max(Math.round(area / 8000), min), 160);
       LINK = window.innerWidth > 1200 ? 170 : window.innerWidth > 768 ? 150 : 130;
       MR   = window.innerWidth > 1200 ? 220 : 190;
     }
@@ -99,6 +101,11 @@
     requestAnimationFrame(frame);
   }
 
-  if (document.body) init();
-  else document.addEventListener('DOMContentLoaded', init);
+  // Es decorativo: arranca cuando la página ya ha cargado y el navegador está libre
+  function start() {
+    if (window.requestIdleCallback) requestIdleCallback(init, { timeout: 1500 });
+    else setTimeout(init, 200);
+  }
+  if (document.readyState === 'complete') start();
+  else window.addEventListener('load', start);
 })();

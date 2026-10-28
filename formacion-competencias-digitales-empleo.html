@@ -7,7 +7,7 @@
   <!-- Consentimiento de cookies: Google Analytics solo tras aceptar -->
   <script src="js/consent.js"></script>
 
-  <title>Formación en Competencias Digitales para el Empleo | Canarias | Idayra Cabrera</title>
+  <title>Competencias digitales para el empleo en Canarias | Idayra Cabrera</title>
   <meta
     name="description"
     content="Formación en competencias digitales orientada al empleo en Canarias: mejora tu empleabilidad y adáptate al entorno laboral digital."
@@ -38,9 +38,8 @@
   <meta name="twitter:title" content="Formación en Competencias Digitales para el Empleo | Canarias | Idayra Cabrera" />
   <meta name="twitter:description" content="Formación práctica en competencias digitales para mejorar la empleabilidad en Canarias." />
   <meta name="twitter:image" content="https://transformacionia.es/img/og-default.jpg" />
-<link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;600;700;800&family=Roboto:wght@300;400;500;700&display=swap">
+  <link rel="preload" href="/fonts/roboto-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/roboto-condensed-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/styles.css" />
 
   <style>
@@ -210,10 +209,14 @@
     "description": "Formación práctica en competencias digitales para mejorar la empleabilidad en Canarias. Orientada a personas en búsqueda de empleo y profesionales que necesitan actualizar sus competencias.",
     "provider": {
       "@type": "Person",
+      "@id": "https://transformacionia.es/#person",
       "name": "Idayra Cabrera",
-      "url": "https://transformacionia.es/"
+      "url": "https://transformacionia.es/sobre-mi.html"
     },
-    "areaServed": "Canarias",
+    "areaServed": {
+      "@type": "AdministrativeArea",
+      "name": "Canarias"
+    },
     "url": "https://transformacionia.es/formacion-competencias-digitales-empleo.html",
     "inLanguage": "es-ES"
   }
@@ -237,7 +240,7 @@
         "name": "¿Es una formación oficial o acreditada?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Sí. La imparte Idayra Cabrera, docente acreditada FPE por el Servicio Canario de Empleo (SCE) y el SEPE."
+          "text": "Depende de la modalidad. Los cursos FPE financiados por el SCE o el SEPE son formación oficial del sistema de Formación Profesional para el Empleo. La formación privada a medida para empresas no conduce a una titulación oficial. En ambos casos la imparte Idayra Cabrera, docente acreditada FPE por el SCE y el SEPE."
         }
       },
       {
@@ -265,8 +268,8 @@
   <div class="bg-glow" aria-hidden="true"></div>
 
   <header class="navbar" role="banner">
-    <a href="index.html" class="nav-logo" aria-label="Transformación IA – Inicio">
-      <img src="img/logo-idayra-header.png" alt="Transformación IA" class="nav-logo-img">
+    <a href="/" class="nav-logo" aria-label="Transformación IA – Inicio">
+      <img src="img/logo-idayra-header.png" width="292" height="122" alt="Transformación IA" class="nav-logo-img">
     </a>
     <button class="nav-toggle" id="navTog" type="button" aria-label="Abrir menú" aria-controls="navLinks" aria-expanded="false">
       <span></span><span></span><span></span>
@@ -287,7 +290,7 @@
     <div class="svc-page">
       <div class="container">
 
-        <a href="index.html" class="svc-back">← Volver al inicio</a>
+        <a href="/" class="svc-back">← Volver al inicio</a>
 
         <header class="svc-hero">
           <span class="kicker">Formación para el empleo · Canarias</span>
@@ -425,7 +428,7 @@
             </article>
             <article class="faq-card">
               <h3>¿Es una formación oficial o acreditada?</h3>
-              <p>Sí. La imparte una docente acreditada FPE por el Servicio Canario de Empleo (SCE) y el SEPE.</p>
+              <p>Depende de la modalidad. Los cursos FPE financiados por el SCE o el SEPE son formación oficial del sistema de Formación Profesional para el Empleo. La formación privada a medida para empresas no conduce a una titulación oficial. En ambos casos la imparte Idayra Cabrera, docente acreditada FPE por el SCE y el SEPE.</p>
             </article>
             <article class="faq-card">
               <h3>¿Se imparte presencial u online?</h3>
@@ -433,7 +436,7 @@
             </article>
             <article class="faq-card">
               <h3>¿Cuánto cuesta y cómo se contrata?</h3>
-              <p>El presupuesto se adapta a cada caso (personas, duración, modalidad). Se solicita sin compromiso por el formulario de contacto.</p>
+              <p>Los cursos FPE financiados por el SCE o el SEPE son gratuitos para el alumnado. Para empresas, la formación privada se prepara a medida (personas, duración, modalidad) y se solicita sin compromiso por el formulario de contacto.</p>
             </article>
           </div>
         </section>
@@ -464,8 +467,8 @@
   <footer class="footer" role="contentinfo">
     <div class="container footer-container">
       <div class="footer-top">
-        <a href="index.html" class="nav-logo footer-logo" aria-label="Transformación IA – Inicio">
-          <img src="img/logo-idayra-header.png" alt="Transformación IA" class="nav-logo-img">
+        <a href="/" class="nav-logo footer-logo" aria-label="Transformación IA – Inicio">
+          <img src="img/logo-idayra-header.png" width="292" height="122" alt="Transformación IA" class="nav-logo-img">
         </a>
         <div class="footer-social" aria-label="Redes sociales y contacto">
           <a href="https://wa.me/34620948523" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="WhatsApp" title="WhatsApp">

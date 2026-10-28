@@ -1,6 +1,6 @@
 # Transformación IA — Idayra Cabrera
 
-> Idayra Cabrera es docente FPE (Formación Profesional para el Empleo) acreditada por el Servicio Canario de Empleo (SCE) y el SEPE, especializada en transformación digital, competencias digitales, inteligencia artificial aplicada, Excel avanzado y Power BI. Imparte formación en Canarias (España) en modalidad presencial y teleformación, para empresas, equipos, entidades y profesionales. Ofrece dos vías: formación FPE financiada por el SCE/SEPE (gratuita para el alumnado en los cursos públicos) y formación privada para empresas (in-company), facturada directamente a la empresa. También está abierta a empleo fijo como docente o especialista en transformación digital, y a proyectos de consultoría/formación in-company.
+> Idayra Cabrera es docente FPE (Formación Profesional para el Empleo) acreditada por el Servicio Canario de Empleo (SCE) y el SEPE, especializada en transformación digital, competencias digitales, inteligencia artificial aplicada, Excel avanzado y Power BI. Imparte formación en Canarias (España) en modalidad presencial y teleformación, para empresas, equipos, entidades y profesionales. Ofrece dos vías: formación FPE financiada por el SCE/SEPE (gratuita para el alumnado en los cursos públicos) y formación privada a medida para empresas (in-company), con presupuesto a medida. También está abierta a empleo fijo como docente o especialista en transformación digital, y a proyectos de consultoría/formación in-company.
 
 ## Quién es
 
@@ -19,9 +19,9 @@ Ha impartido formación para 8 entidades: Cámara de Comercio de Santa Cruz de T
 
 ### Formación privada para empresas (in-company)
 
-- [Formación privada para empresas en Canarias](https://transformacionia.es/formacion-privada-empresas.html): programa a medida adaptado a los datos y procesos reales de la empresa, con fechas y horarios flexibles, facturación directa a la empresa.
+- [Formación privada para empresas en Canarias](https://transformacionia.es/formacion-privada-empresas.html): programa a medida adaptado a los datos y procesos reales de la empresa, con fechas y horarios flexibles y presupuesto a medida.
 - Temáticas disponibles: IA aplicada al trabajo, competencias digitales, Excel avanzado y Power BI, transformación digital y marketing.
-- Proceso: (1) diagnóstico inicial de necesidades → (2) propuesta y presupuesto cerrado → (3) formación trabajando con los datos y procesos reales del equipo → (4) seguimiento posterior.
+- Proceso: (1) diagnóstico inicial de necesidades → (2) propuesta y presupuesto a medida → (3) formación trabajando con los datos y procesos reales del equipo → (4) seguimiento posterior.
 - Respuesta en menos de 24 horas. Sin necesidad de cumplir requisitos de convocatoria pública.
 
 ### Formación para el empleo (FPE — pública y gratuita)
@@ -34,7 +34,15 @@ Ha impartido formación para 8 entidades: Cámara de Comercio de Santa Cruz de T
 ### Herramientas y proyectos
 
 - [Planificador de certificados de profesionalidad](https://transformacionia.es/planificador.html): herramienta gratuita que convierte el PDF de una programación didáctica en un calendario de impartición automático.
+- [Constructor de cursos FPE](https://transformacionia.es/constructor-cursos.html): herramienta gratuita para crear cursos y exportar preguntas a Moodle (XML).
+- [Todas las herramientas](https://transformacionia.es/herramientas.html)
 - [Proyectos realizados](https://transformacionia.es/proyectos.html): casos reales de transformación digital, Power BI y formación aplicada a empresas en Canarias.
+
+## Artículos
+
+- [ChatGPT en el trabajo: usos reales con ejemplos](https://transformacionia.es/chatgpt-en-el-trabajo.html)
+- [Excel y Power BI para empresas: por dónde empezar](https://transformacionia.es/excel-power-bi-empresas.html)
+- [Cómo planificar un certificado de profesionalidad](https://transformacionia.es/planificador-certificados-profesionalidad-guia.html)
 
 ## Páginas clave
 

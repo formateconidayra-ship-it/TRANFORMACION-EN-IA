@@ -7,7 +7,7 @@
   <!-- Consentimiento de cookies: Google Analytics solo tras aceptar -->
   <script src="js/consent.js"></script>
 
-  <title>Docente FPE en Canarias | Transformación Digital y Competencias Digitales | Idayra Cabrera</title>
+  <title>Idayra Cabrera | Docente FPE y formación en IA en Canarias</title>
   <meta
     name="description"
     content="Docente FPE en Canarias con +1.770 horas de formación: transformación digital, competencias digitales, IA aplicada, Excel y Power BI."
@@ -44,9 +44,8 @@
     content="Docente FPE en Canarias especializada en inteligencia artificial, Excel, Power BI y competencias digitales. Formación práctica orientada al empleo."
   />
   <meta name="twitter:image" content="https://transformacionia.es/img/og-default.jpg" />
-<link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;600;700;800&family=Roboto:wght@300;400;500;700&display=swap">
+  <link rel="preload" href="/fonts/roboto-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/roboto-condensed-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/styles.css" />
 
   <style>
@@ -147,14 +146,17 @@
     "@graph": [
       {
         "@type": "Organization",
+        "@id": "https://transformacionia.es/#organization",
         "name": "Transformación IA",
         "url": "https://transformacionia.es/",
         "logo": "https://transformacionia.es/img/logo-idayra-header.png",
-        "description": "Academia de Formación en Inteligencia Artificial, Transformación Digital y Competencias Digitales en Canarias. Dirigida por Idayra Cabrera, docente FPE con más de 1.770 horas certificadas.",
-        "areaServed": "Canarias",
+        "description": "Proyecto de formación en Inteligencia Artificial, Transformación Digital y Competencias Digitales en Canarias. Dirigida por Idayra Cabrera, docente FPE con más de 1.770 horas certificadas.",
+        "areaServed": {
+          "@type": "AdministrativeArea",
+          "name": "Canarias"
+        },
         "founder": {
-          "@type": "Person",
-          "name": "Idayra Cabrera"
+          "@id": "https://transformacionia.es/#person"
         },
         "contactPoint": {
           "@type": "ContactPoint",
@@ -165,7 +167,8 @@
         "sameAs": [
           "https://www.linkedin.com/in/luzidayrajorgecabrera",
           "https://share.google/pJYeQXmN33Pkefnv4"
-        ]
+        ],
+        "alternateName": "TransformaciónIA"
       },
       {
         "@type": "Course",
@@ -173,13 +176,19 @@
         "description": "Curso práctico de inteligencia artificial aplicada al entorno laboral. Aprende a usar herramientas de IA para mejorar tu productividad y empleabilidad en Canarias. Sin conocimientos previos de programación.",
         "provider": {
           "@type": "Organization",
+          "@id": "https://transformacionia.es/#organization",
           "name": "Transformación IA",
           "url": "https://transformacionia.es/"
         },
         "educationalLevel": "Beginner to Intermediate",
         "inLanguage": "es-ES",
-        "url": "https://transformacionia.es/",
-        "teaches": ["Inteligencia artificial aplicada", "Automatización con IA", "Productividad digital", "Herramientas de IA"]
+        "url": "https://transformacionia.es/formacion-inteligencia-artificial-canarias.html",
+        "teaches": [
+          "Inteligencia artificial aplicada",
+          "Automatización con IA",
+          "Productividad digital",
+          "Herramientas de IA"
+        ]
       },
       {
         "@type": "Course",
@@ -187,13 +196,19 @@
         "description": "Curso de Excel avanzado y Power BI orientado al análisis de datos, automatización y visualización para la toma de decisiones en el entorno profesional.",
         "provider": {
           "@type": "Organization",
+          "@id": "https://transformacionia.es/#organization",
           "name": "Transformación IA",
           "url": "https://transformacionia.es/"
         },
         "educationalLevel": "Beginner to Advanced",
         "inLanguage": "es-ES",
-        "url": "https://transformacionia.es/",
-        "teaches": ["Excel avanzado", "Power BI", "Análisis de datos", "Visualización de datos"]
+        "url": "https://transformacionia.es/formacion-herramientas-digitales-analisis-datos.html",
+        "teaches": [
+          "Excel avanzado",
+          "Power BI",
+          "Análisis de datos",
+          "Visualización de datos"
+        ]
       },
       {
         "@type": "Course",
@@ -201,18 +216,24 @@
         "description": "Formación en competencias digitales para la empleabilidad y la transformación digital de profesionales y equipos en Canarias. Orientada al empleo real.",
         "provider": {
           "@type": "Organization",
+          "@id": "https://transformacionia.es/#organization",
           "name": "Transformación IA",
           "url": "https://transformacionia.es/"
         },
         "educationalLevel": "Beginner",
         "inLanguage": "es-ES",
-        "url": "https://transformacionia.es/",
-        "teaches": ["Competencias digitales", "Transformación digital", "Digitalización empresarial"]
+        "url": "https://transformacionia.es/formacion-transformacion-digital-canarias.html",
+        "teaches": [
+          "Competencias digitales",
+          "Transformación digital",
+          "Digitalización empresarial"
+        ]
       },
       {
         "@type": "Person",
+        "@id": "https://transformacionia.es/#person",
         "name": "Idayra Cabrera",
-        "url": "https://transformacionia.es/",
+        "url": "https://transformacionia.es/sobre-mi.html",
         "jobTitle": "Docente FPE especializada en Formación en Inteligencia Artificial, Transformación Digital y Competencias Digitales en Canarias",
         "description": "Docente FPE en Canarias con más de 1.770 horas de formación certificada en inteligencia artificial, Excel, Power BI y competencias digitales.",
         "address": {
@@ -239,9 +260,13 @@
       },
       {
         "@type": "WebSite",
+        "@id": "https://transformacionia.es/#website",
         "name": "Transformación IA",
         "url": "https://transformacionia.es/",
-        "inLanguage": "es-ES"
+        "inLanguage": "es-ES",
+        "publisher": {
+          "@id": "https://transformacionia.es/#organization"
+        }
       }
     ]
   }
@@ -310,8 +335,8 @@
   <div class="bg-glow" aria-hidden="true"></div>
 
   <header class="navbar" role="banner">
-    <a href="index.html" class="nav-logo" aria-label="Transformación IA – Inicio">
-      <img src="img/logo-idayra-header.png" alt="Transformación IA" class="nav-logo-img">
+    <a href="/" class="nav-logo" aria-label="Transformación IA – Inicio">
+      <img src="img/logo-idayra-header.png" width="292" height="122" alt="Transformación IA" class="nav-logo-img">
     </a>
 
     <button
@@ -442,8 +467,8 @@
           <article class="testimonio-card">
             <div class="tc-img-wrap">
               <picture>
-                <source srcset="img/formacion-excel-canarias.webp" type="image/webp">
-                <img src="img/formacion-excel-canarias.jpeg" alt="Formación en Excel en Canarias con alumnos en aula" class="tc-img" loading="lazy" style="object-position:62% center">
+                <source srcset="img/formacion-excel-canarias-800.webp 800w, img/formacion-excel-canarias.webp 1024w" sizes="(max-width: 600px) 92vw, 400px" type="image/webp">
+                <img src="img/formacion-excel-canarias.jpeg" width="1024" height="1024" alt="Formación en Excel en Canarias con alumnos en aula" class="tc-img" loading="lazy" style="object-position:62% center">
               </picture>
               <div class="tc-overlay" aria-hidden="true"></div>
             </div>
@@ -459,8 +484,8 @@
           <article class="testimonio-card">
             <div class="tc-img-wrap">
               <picture>
-                <source srcset="img/aula-formacion-profesional-canarias.webp" type="image/webp">
-                <img src="img/aula-formacion-profesional-canarias.jpeg" alt="Clase de formación profesional para el empleo en Canarias" class="tc-img" loading="lazy" style="object-position:center center">
+                <source srcset="img/aula-formacion-profesional-canarias-800.webp 800w, img/aula-formacion-profesional-canarias.webp 1600w" sizes="(max-width: 600px) 92vw, 400px" type="image/webp">
+                <img src="img/aula-formacion-profesional-canarias.jpeg" width="1600" height="1200" alt="Clase de formación profesional para el empleo en Canarias" class="tc-img" loading="lazy" style="object-position:center center">
               </picture>
               <div class="tc-overlay" aria-hidden="true"></div>
             </div>
@@ -476,8 +501,8 @@
           <article class="testimonio-card">
             <div class="tc-img-wrap">
               <picture>
-                <source srcset="img/alumnos-formacion-digital-canarias.webp" type="image/webp">
-                <img src="img/alumnos-formacion-digital-canarias.jpeg" alt="Alumnos en formación digital en Canarias aplicando herramientas" class="tc-img" loading="lazy" style="object-position:center top;filter:brightness(0.7) contrast(1.15)">
+                <source srcset="img/alumnos-formacion-digital-canarias-800.webp 800w, img/alumnos-formacion-digital-canarias.webp 1600w" sizes="(max-width: 600px) 92vw, 400px" type="image/webp">
+                <img src="img/alumnos-formacion-digital-canarias.jpeg" width="1600" height="739" alt="Alumnos en formación digital en Canarias aplicando herramientas" class="tc-img" loading="lazy" style="object-position:center top;filter:brightness(0.7) contrast(1.15)">
               </picture>
               <div class="tc-overlay" aria-hidden="true" style="background:linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.2) 40%, rgba(0,0,0,0.75) 100%)"></div>
             </div>
@@ -493,8 +518,8 @@
           <article class="testimonio-card">
             <div class="tc-img-wrap">
               <picture>
-                <source srcset="img/alumnos-camara.webp" type="image/webp">
-                <img src="img/alumnos-camara.jpeg" alt="Alumnos en formación en la Cámara de Comercio de Tenerife" class="tc-img" loading="lazy" style="object-position:center 38%">
+                <source srcset="img/alumnos-camara-800.webp 800w, img/alumnos-camara.webp 900w" sizes="(max-width: 600px) 92vw, 400px" type="image/webp">
+                <img src="img/alumnos-camara.jpeg" width="900" height="1200" alt="Alumnos en formación en la Cámara de Comercio de Tenerife" class="tc-img" loading="lazy" style="object-position:center 38%">
               </picture>
               <div class="tc-overlay" aria-hidden="true"></div>
             </div>
@@ -510,8 +535,8 @@
           <article class="testimonio-card">
             <div class="tc-img-wrap">
               <picture>
-                <source srcset="img/alumnos-formacion.webp" type="image/webp">
-                <img src="img/alumnos-formacion.jpeg" alt="Alumnos en una sesión de formación FPE en Canarias" class="tc-img" loading="lazy" style="object-position:center 35%">
+                <source srcset="img/alumnos-formacion-800.webp 800w, img/alumnos-formacion.webp 1200w" sizes="(max-width: 600px) 92vw, 400px" type="image/webp">
+                <img src="img/alumnos-formacion.jpeg" width="1200" height="900" alt="Alumnos en una sesión de formación FPE en Canarias" class="tc-img" loading="lazy" style="object-position:center 35%">
               </picture>
               <div class="tc-overlay" aria-hidden="true"></div>
             </div>
@@ -527,8 +552,8 @@
           <article class="testimonio-card">
             <div class="tc-img-wrap">
               <picture>
-                <source srcset="img/camara.webp" type="image/webp">
-                <img src="img/camara.jpeg" alt="Alumnos en formación de Excel y Power BI con Formaciónline" class="tc-img" loading="lazy" style="object-position:center 30%">
+                <source srcset="img/camara-800.webp 800w, img/camara.webp 1200w" sizes="(max-width: 600px) 92vw, 400px" type="image/webp">
+                <img src="img/camara.jpeg" width="1200" height="900" alt="Alumnos en formación de Excel y Power BI con Formaciónline" class="tc-img" loading="lazy" style="object-position:center 30%">
               </picture>
               <div class="tc-overlay" aria-hidden="true"></div>
             </div>
@@ -929,8 +954,8 @@
   <footer class="footer" role="contentinfo">
     <div class="container footer-container">
       <div class="footer-top">
-        <a href="index.html" class="nav-logo footer-logo" aria-label="Transformación IA – Inicio">
-          <img src="img/logo-idayra-header.png" alt="Transformación IA" class="nav-logo-img">
+        <a href="/" class="nav-logo footer-logo" aria-label="Transformación IA – Inicio">
+          <img src="img/logo-idayra-header.png" width="292" height="122" alt="Transformación IA" class="nav-logo-img">
         </a>
 
         <div class="footer-social" aria-label="Redes sociales y contacto">

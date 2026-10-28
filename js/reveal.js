@@ -45,9 +45,9 @@
     try { return document.getElementById(decodeURIComponent(hash.slice(1))); } catch (e) { return null; }
   }
 
-  function applyReveal(el, delayClass) {
+  function applyReveal(el, delayClass, visible) {
     // No animar lo que ya es visible al cargar
-    if (isInViewport(el)) return;
+    if (visible) return;
     if (hashTarget && el.contains(hashTarget)) return;
     // No animar navbar ni botón flotante
     if (el.closest(".navbar") || el.classList.contains("floating-whatsapp")) return;
@@ -55,17 +55,21 @@
     if (delayClass) el.classList.add(delayClass);
   }
 
+  // Primero se miden todos los elementos y después se añaden las clases:
+  // alternar lecturas y escrituras obligaría a recalcular el diseño en cada uno
+  var items = [];
   // Elementos individuales
   document.querySelectorAll(SINGLE).forEach(function (el) {
-    applyReveal(el, "");
+    items.push([el, ""]);
   });
-
   // Hijos de grids con delay escalonado
   document.querySelectorAll(GRIDS).forEach(function (grid) {
     Array.from(grid.children).forEach(function (child, idx) {
-      applyReveal(child, DELAY_CLASSES[Math.min(idx, DELAY_CLASSES.length - 1)]);
+      items.push([child, DELAY_CLASSES[Math.min(idx, DELAY_CLASSES.length - 1)]]);
     });
   });
+  var visible = items.map(function (it) { return isInViewport(it[0]); });
+  items.forEach(function (it, i) { applyReveal(it[0], it[1], visible[i]); });
 
   // Observer
   var observer = new IntersectionObserver(
@@ -112,9 +116,10 @@
   // real del kicker que tienen encima. Así también el salto nativo del navegador
   // (URL con #ancla) deja visible la cabecera completa.
   function syncHeadingMargins() {
-    document.querySelectorAll(".sh > h1[id], .sh > h2[id], .sh > h3[id]").forEach(function (h) {
-      var above = h.offsetTop - h.parentElement.offsetTop;
-      h.style.scrollMarginTop = above > 0 ? above + "px" : "";
+    var hs = Array.from(document.querySelectorAll(".sh > h1[id], .sh > h2[id], .sh > h3[id]"));
+    var above = hs.map(function (h) { return h.offsetTop - h.parentElement.offsetTop; });
+    hs.forEach(function (h, i) {
+      h.style.scrollMarginTop = above[i] > 0 ? above[i] + "px" : "";
     });
   }
   syncHeadingMargins();

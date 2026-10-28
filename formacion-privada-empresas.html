@@ -38,9 +38,8 @@
   <meta name="twitter:title" content="Formación privada para empresas en Canarias | Idayra Cabrera" />
   <meta name="twitter:description" content="Formación in-company a medida en IA, transformación digital, competencias digitales y Excel/Power BI para empresas en Canarias." />
   <meta name="twitter:image" content="https://transformacionia.es/img/og-default.jpg" />
-<link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;600;700;800&family=Roboto:wght@300;400;500;700&display=swap">
+  <link rel="preload" href="/fonts/roboto-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/roboto-condensed-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/styles.css" />
 
   <style>
@@ -226,32 +225,16 @@
     "description": "Formación in-company a medida en inteligencia artificial, transformación digital, competencias digitales y Excel/Power BI para empresas en Canarias. Presupuesto a medida.",
     "provider": {
       "@type": "Person",
+      "@id": "https://transformacionia.es/#person",
       "name": "Idayra Cabrera",
-      "url": "https://transformacionia.es/"
+      "url": "https://transformacionia.es/sobre-mi.html"
     },
-    "areaServed": "Canarias",
+    "areaServed": {
+      "@type": "AdministrativeArea",
+      "name": "Canarias"
+    },
     "url": "https://transformacionia.es/formacion-privada-empresas.html",
-    "inLanguage": "es-ES",
-    "review": [
-      {
-        "@type": "Review",
-        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
-        "reviewBody": "Docente cercana, profesional y con una gran capacidad para explicar. Consigue que aprendas sin darte cuenta.",
-        "author": { "@type": "Organization", "name": "Cámara de Comercio de Tenerife" }
-      },
-      {
-        "@type": "Review",
-        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
-        "reviewBody": "Formación práctica, clara y muy bien estructurada. Se nota la experiencia y el dominio de los contenidos.",
-        "author": { "@type": "Person", "name": "Alumna de Excel y Power BI" }
-      },
-      {
-        "@type": "Review",
-        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
-        "reviewBody": "Su punto fuerte es la sencillez y claridad al explicar, y la capacidad para resolver cualquier duda al momento.",
-        "author": { "@type": "Person", "name": "Alumna de Excel y Power BI" }
-      }
-    ]
+    "inLanguage": "es-ES"
   }
   </script>
 
@@ -301,8 +284,8 @@
   <div class="bg-glow" aria-hidden="true"></div>
 
   <header class="navbar" role="banner">
-    <a href="index.html" class="nav-logo" aria-label="Transformación IA – Inicio">
-      <img src="img/logo-idayra-header.png" alt="Transformación IA" class="nav-logo-img">
+    <a href="/" class="nav-logo" aria-label="Transformación IA – Inicio">
+      <img src="img/logo-idayra-header.png" width="292" height="122" alt="Transformación IA" class="nav-logo-img">
     </a>
     <button class="nav-toggle" id="navTog" type="button" aria-label="Abrir menú" aria-controls="navLinks" aria-expanded="false">
       <span></span><span></span><span></span>
@@ -323,7 +306,7 @@
     <div class="svc-page">
       <div class="container">
 
-        <a href="index.html" class="svc-back">← Volver al inicio</a>
+        <a href="/" class="svc-back">← Volver al inicio</a>
 
         <header class="svc-hero">
           <span class="kicker">Formación in-company · Empresas en Canarias</span>
@@ -433,7 +416,7 @@
               <div class="sp-step-num">2</div>
               <div>
                 <p class="sp-step-title">Propuesta y presupuesto</p>
-                <p class="sp-step-desc">Diseño un programa adaptado, con presupuesto cerrado antes de empezar.</p>
+                <p class="sp-step-desc">Diseño un programa adaptado y te envío la propuesta antes de empezar.</p>
               </div>
             </div>
             <div class="sp-step">
@@ -564,8 +547,8 @@
   <footer class="footer" role="contentinfo">
     <div class="container footer-container">
       <div class="footer-top">
-        <a href="index.html" class="nav-logo footer-logo" aria-label="Transformación IA – Inicio">
-          <img src="img/logo-idayra-header.png" alt="Transformación IA" class="nav-logo-img">
+        <a href="/" class="nav-logo footer-logo" aria-label="Transformación IA – Inicio">
+          <img src="img/logo-idayra-header.png" width="292" height="122" alt="Transformación IA" class="nav-logo-img">
         </a>
         <div class="footer-social" aria-label="Redes sociales y contacto">
           <a href="https://wa.me/34620948523" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="WhatsApp" title="WhatsApp">
