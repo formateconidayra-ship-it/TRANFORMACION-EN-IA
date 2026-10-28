@@ -269,6 +269,30 @@
       width: 100%;
     }
 
+    .form-trap {
+      position: absolute;
+      left: -9999px;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }
+
+    .form-status {
+      margin: 0 0 14px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(248, 113, 113, 0.4);
+      background: rgba(248, 113, 113, 0.08);
+      color: var(--text);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .form-status a {
+      color: inherit;
+      text-decoration: underline;
+    }
+
     .contact-methods {
       display: grid;
       gap: 14px;
@@ -546,7 +570,7 @@
               Cuéntame tu caso y te responderé lo antes posible.
             </p>
 
-            <form id="contactForm" action="https://script.google.com/macros/s/AKfycbwLLs5MxkISte5BF9PHihkO2BFWWPnIJIgTuj446Qds0uar8MGuJMc1nmx35Llg0QSfpw/exec" method="POST">
+            <form id="contactForm" action="https://script.google.com/macros/s/AKfycbzc1vvdV_U3isgtHVFtAfkhieU6kOduf09QaLLlsORJQoCboZdEyFTvmLDzUS1VOi65rQ/exec" method="POST" novalidate>
               <div class="form-row">
                 <div class="fg">
                   <label for="nombre">Nombre</label>
@@ -580,12 +604,20 @@
 
               <div class="fg">
                 <label for="mensaje">Mensaje</label>
-                <textarea id="mensaje" name="mensaje" required placeholder="Cuéntame brevemente qué necesitas, el tipo de proyecto o la formación que te interesa."></textarea>
+                <textarea id="mensaje" name="mensaje" required minlength="10" maxlength="5000" placeholder="Cuéntame brevemente qué necesitas, el tipo de proyecto o la formación que te interesa."></textarea>
+              </div>
+
+              <!-- Campo trampa: invisible para personas; si se rellena, el envío se descarta -->
+              <div class="form-trap" aria-hidden="true">
+                <label for="web">No rellenes este campo</label>
+                <input id="web" type="text" name="web" tabindex="-1" autocomplete="off" />
               </div>
 
               <p class="form-note">
                 Al enviar este formulario, recibiré tu mensaje por correo para responderte directamente.
               </p>
+
+              <p class="form-status" id="formStatus" role="alert" hidden></p>
 
               <button class="btn btn-p contact-submit" type="submit">Enviar mensaje</button>
             </form>
@@ -778,20 +810,87 @@
     const contactForm = document.getElementById('contactForm');
 
     if (contactForm) {
-      contactForm.addEventListener('submit', function (e) {
-        e.preventDefault();
+      const btn = contactForm.querySelector('.contact-submit');
+      const status = document.getElementById('formStatus');
+      const ALTERNATIVA = ' Si prefieres, escríbeme por <a href="https://wa.me/34620948523" target="_blank" rel="noopener noreferrer">WhatsApp</a> o a <a href="mailto:formacion@transformacionia.es">formacion@transformacionia.es</a>.';
+      const CAMPOS = {
+        nombre: 'Escribe tu nombre (mínimo 2 letras).',
+        email: 'Revisa el email: parece que no está completo.',
+        empresa: 'El nombre de la empresa es demasiado largo.',
+        motivo: 'Elige un motivo de contacto.',
+        mensaje: 'Escribe un mensaje de al menos 10 caracteres.'
+      };
+      let token = null;      // { t, s } firmado por el servidor
+      let pidiendo = null;
+      let envioId = null;    // identifica este envío para que un reintento no se duplique
 
-        const btn = contactForm.querySelector('.contact-submit');
+      function pedirToken() {
+        if (!pidiendo) {
+          pidiendo = fetch(contactForm.action + '?accion=token')
+            .then(function (r) { return r.json(); })
+            .then(function (d) { if (d.t && d.s) token = { t: d.t, s: d.s }; })
+            .catch(function () {})
+            .finally(function () { pidiendo = null; });
+        }
+        return pidiendo;
+      }
+
+      function mostrar(html, campo) {
+        status.innerHTML = html;
+        status.hidden = false;
+        if (campo && contactForm.elements[campo]) contactForm.elements[campo].focus();
+      }
+
+      function restaurar() {
+        btn.disabled = false;
+        btn.textContent = 'Enviar mensaje';
+      }
+
+      // El token se pide en cuanto la persona empieza a escribir
+      contactForm.addEventListener('focusin', function () { if (!token) pedirToken(); }, { once: true });
+
+      contactForm.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        if (btn.disabled) return;
+        status.hidden = true;
+
+        const f = contactForm.elements;
+        if (f.nombre.value.trim().length < 2) return mostrar(CAMPOS.nombre, 'nombre');
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(f.email.value.trim())) return mostrar(CAMPOS.email, 'email');
+        if (f.mensaje.value.trim().length < 10) return mostrar(CAMPOS.mensaje, 'mensaje');
+
         btn.disabled = true;
         btn.textContent = 'Enviando...';
 
-        fetch(contactForm.action, {
-          method: 'POST',
-          mode: 'no-cors',
-          body: new FormData(contactForm)
-        }).finally(function () {
-          window.location.href = 'gracias.html';
-        });
+        // Token caducado (página abierta mucho rato) o aún sin pedir: se renueva
+        if (!token || Date.now() - Number(token.t) > 90 * 60 * 1000) { token = null; await pedirToken(); }
+        if (!token) { restaurar(); return mostrar('No he podido conectar con el servidor.' + ALTERNATIVA); }
+        // El servidor rechaza envíos hechos menos de 4 s después de pedir el token
+        const espera = 4500 - (Date.now() - Number(token.t));
+        if (espera > 0) await new Promise(function (r) { setTimeout(r, espera); });
+
+        if (!envioId) envioId = Date.now().toString(36) + Math.random().toString(36).slice(2, 10);
+        const datos = new URLSearchParams(new FormData(contactForm));
+        datos.set('t', token.t);
+        datos.set('s', token.s);
+        datos.set('envioId', envioId);
+
+        const control = new AbortController();
+        const limite = setTimeout(function () { control.abort(); }, 20000);
+
+        try {
+          const r = await fetch(contactForm.action, { method: 'POST', body: datos, signal: control.signal });
+          const res = await r.json();
+          if (res.result === 'success') { window.location.href = 'gracias.html'; return; }
+          restaurar();
+          if (res.result === 'invalid') return mostrar(CAMPOS[res.campo] || 'Revisa los datos del formulario.', res.campo);
+          mostrar('No se ha podido enviar el mensaje. Inténtalo de nuevo en unos minutos.' + ALTERNATIVA);
+        } catch (err) {
+          restaurar();
+          mostrar((err.name === 'AbortError' ? 'El servidor está tardando demasiado.' : 'No se ha podido enviar el mensaje.') + ' Tu texto sigue aquí: pulsa «Enviar mensaje» para reintentarlo.' + ALTERNATIVA);
+        } finally {
+          clearTimeout(limite);
+        }
       });
     }
   </script>
