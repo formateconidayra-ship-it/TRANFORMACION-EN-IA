@@ -33,7 +33,11 @@
     <img src="img/logo-idayra-header.png" alt="Transformación IA" class="nav-logo-img">
   </a>
 
-  <nav class="nav-links">
+  <button class="nav-toggle" id="navTog" type="button" aria-label="Abrir menú" aria-controls="navLinks" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+
+  <nav class="nav-links" id="navLinks" aria-label="Menú principal">
     <a href="sobre-mi.html">Sobre mí</a>
     <a href="proyectos.html">Proyectos</a>
     <a href="herramientas.html">Herramientas</a>
@@ -123,5 +127,6 @@
   <script src="js/reveal.js" defer></script>
 <script src="js/bg-particles.js" defer></script>
   <script src="js/cursor.js" defer></script>
+<script src="main.js" defer></script>
 </body>
 </html>
