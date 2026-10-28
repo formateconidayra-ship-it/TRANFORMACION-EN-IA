@@ -2649,3 +2649,11 @@ button {
     flex: 1;
   }
 }
+
+/* ── Menú con 8 enlaces: algo menos de relleno lateral entre 1025 y 1119px para que quepa en una fila ── */
+@media (min-width: 1025px) and (max-width: 1119px) {
+  .nav-links a:not(.nav-cta) {
+    padding-left: 6px;
+    padding-right: 6px;
+  }
+}
