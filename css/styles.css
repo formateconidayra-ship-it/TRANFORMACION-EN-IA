@@ -2834,3 +2834,13 @@ a.art-back {
   margin-top: -10px;
   margin-bottom: 18px;
 }
+
+/* Fuente de las cifras de satisfacción, bajo los contadores */
+.stats-source {
+  margin: -12px auto 32px;
+  max-width: 640px;
+  text-align: center;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
