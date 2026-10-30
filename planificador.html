@@ -1612,23 +1612,27 @@
       return new Date(y, mes-1, dia);
     }
 
+    // Clave AAAA-MM-DD en hora local. toISOString() usa hora UTC y, con el horario
+    // de verano, desplaza las fechas un día.
+    const isoLocal = d => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+
     const _festCache = {};
     function getFestAnyo(y) {
       if (_festCache[y]) return _festCache[y];
       const f = new Set();
-      const iso = (yy,m,d) => new Date(yy,m-1,d).toISOString().slice(0,10);
+      const iso = (yy,m,d) => isoLocal(new Date(yy,m-1,d));
       // Festivos nacionales fijos
       [[1,1],[6,1],[1,5],[15,8],[12,10],[1,11],[6,12],[8,12],[25,12]].forEach(([d,m])=>f.add(iso(y,m,d)));
       // Semana Santa: Jueves Santo y Viernes Santo (calculados desde Pascua)
       const p = calcPascua(y);
-      f.add(new Date(p.getTime()-3*86400000).toISOString().slice(0,10));
-      f.add(new Date(p.getTime()-2*86400000).toISOString().slice(0,10));
-      // Festivos regionales (Canarias)
-      [[28,2],[30,5]].forEach(([d,m])=>f.add(iso(y,m,d)));
+      f.add(isoLocal(new Date(p.getFullYear(), p.getMonth(), p.getDate()-3)));
+      f.add(isoLocal(new Date(p.getFullYear(), p.getMonth(), p.getDate()-2)));
+      // Festivos regionales (Canarias): Día de Canarias. El 28 de febrero es de Andalucía, no de Canarias.
+      [[30,5]].forEach(([d,m])=>f.add(iso(y,m,d)));
       return (_festCache[y]=f);
     }
 
-    const esFest = d => getFestAnyo(d.getFullYear()).has(d.toISOString().slice(0,10));
+    const esFest = d => getFestAnyo(d.getFullYear()).has(isoLocal(d));
     const fmt = d => d.toLocaleDateString('es-ES',{day:'2-digit',month:'2-digit',year:'numeric'});
 
     let scheduleGlobal = [];
@@ -2021,12 +2025,12 @@
           meta: {
             nombre: document.getElementById('certName').value.trim(),
             horas: tH,
-            fechaInicio: dI.toISOString().slice(0,10),
-            fechaFin: avail[idx-1] ? avail[idx-1].toISOString().slice(0,10) : ''
+            fechaInicio: isoLocal(dI),
+            fechaFin: avail[idx-1] ? isoLocal(avail[idx-1]) : ''
           },
           schedule: sched.map(m => ({
             nom: m.nom, h: m.h, color: m.color,
-            ds: m.ds.map(d => ({ fecha: d.fecha.toISOString().slice(0,10), horas: d.horas }))
+            ds: m.ds.map(d => ({ fecha: isoLocal(d.fecha), horas: d.horas }))
           }))
         }));
       } catch(e) {}
@@ -2065,9 +2069,9 @@
 
       // Limitar el datepicker al rango exacto del curso
       const fActFecha = document.getElementById('actFecha');
-      const isoMin = sched[0].ds[0].fecha.toISOString().slice(0,10);
+      const isoMin = isoLocal(sched[0].ds[0].fecha);
       const lastM = sched[sched.length-1];
-      const isoMax = lastM.ds[lastM.ds.length-1].fecha.toISOString().slice(0,10);
+      const isoMax = isoLocal(lastM.ds[lastM.ds.length-1].fecha);
       fActFecha.min = isoMin;
       fActFecha.max = isoMax;
 
@@ -2111,7 +2115,7 @@
       };
       const dateMap = {};
       sched.forEach(m => m.ds.forEach(d => {
-        dateMap[d.fecha.toISOString().slice(0,10)] = COLORES[m.color];
+        dateMap[isoLocal(d.fecha)] = COLORES[m.color];
       }));
 
       const leg = document.getElementById('calLegend');
@@ -2158,7 +2162,7 @@
 
         for (let i = 1; i <= dim; i++) {
           const dd = new Date(y, m, i);
-          const s = dd.toISOString().slice(0,10);
+          const s = isoLocal(dd);
           const w = dd.getDay();
           let cls = 'cd';
           const hitosDelDia = hitosGlobal.filter(h => h.fecha === s);

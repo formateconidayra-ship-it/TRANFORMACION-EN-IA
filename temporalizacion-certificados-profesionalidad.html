@@ -241,41 +241,139 @@
     }
     .svc-highlight a:hover { text-decoration-color: var(--cyan); }
 
-    .art-crumbs { display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin-bottom:28px; font-size:0.86rem; color:var(--muted2); }
+    .visually-hidden { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+    .art-crumbs { display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin-bottom:24px; font-size:0.86rem; color:var(--muted2); }
     .art-crumbs a { display:inline-flex; align-items:center; min-height:44px; margin:-12px 0; color:var(--muted); font-weight:600; transition:color 0.2s ease; }
     .art-crumbs a:hover { color:var(--cyan); }
-    .art-body a, .hub-block a:not(.btn) { color:var(--cyan); text-decoration:underline; text-decoration-color:rgba(6,182,212,0.4); text-underline-offset:3px; }
-    .art-body a.btn { color:#fff; text-decoration:none; }
-    .art-table-wrap { margin:8px 0 24px; overflow-x:auto; border:1px solid var(--border2); border-radius:var(--radius-sm); }
+    .hub-block a:not(.btn):not(.hub-tool):not(.hub-guides a), .g-body p a:not(.btn), .hub-author a, .g-errors a { color:var(--cyan); text-decoration:underline; text-decoration-color:rgba(6,182,212,0.4); text-underline-offset:3px; }
+
+    /* Iconos de línea */
+    .hub-icon, .g-ico { display:inline-grid; place-items:center; width:44px; height:44px; border-radius:12px; background:rgba(6,182,212,0.1); border:1px solid rgba(6,182,212,0.25); color:var(--cyan); flex-shrink:0; }
+    .hub-icon svg, .g-ico svg { width:22px; height:22px; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+
+    /* ── Página pilar ── */
+    .hub-hero { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.05fr); gap:48px; align-items:center; margin-bottom:40px; }
+    .hub-hero h1 { margin:0 0 16px; font-family:var(--fd); font-size:clamp(2.1rem,4.6vw,3.6rem); line-height:1; text-transform:uppercase; letter-spacing:-0.02em; }
+    .hub-hero .kicker { margin-bottom:16px; }
+    .hub-lead { margin:0 0 28px; font-size:1.2rem; color:var(--muted); line-height:1.5; max-width:30ch; }
+    .hub-actions { display:flex; flex-wrap:wrap; gap:12px; }
+    .hub-shot { margin:0; transform:perspective(1400px) rotateY(-7deg) rotateX(2deg); transform-origin:left center; }
+    .hub-shot img { display:block; width:100%; height:auto; border-radius:14px; border:1px solid rgba(6,182,212,0.3); box-shadow:0 30px 80px -20px rgba(6,182,212,0.35), 0 12px 40px rgba(0,0,0,0.5); }
+    .hub-shot figcaption { margin-top:12px; font-size:0.82rem; color:var(--muted2); text-align:center; }
+    .hub-stats { list-style:none; margin:0 0 64px; padding:22px 8px; display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+    .hub-stats li { display:flex; flex-direction:column; align-items:center; gap:4px; text-align:center; padding:0 8px; }
+    .hub-stats li + li { border-left:1px solid var(--border); }
+    .hub-stats strong { font-family:var(--fd); font-size:clamp(1.6rem,3vw,2.3rem); line-height:1; color:var(--cyan); }
+    .hub-stats span { font-size:0.85rem; color:var(--muted); }
+    .hub-block { margin:0 0 64px; }
+    .hub-block h2 { margin:0 0 22px; font-family:var(--fd); font-size:clamp(1.45rem,2.6vw,1.9rem); line-height:1.1; text-transform:uppercase; letter-spacing:-0.01em; }
+    .hub-tools { display:grid; grid-template-columns:1.4fr 1fr; grid-template-rows:auto auto; gap:16px; align-items:stretch; }
+    .hub-tool { display:flex; flex-direction:column; gap:10px; padding:24px; background:var(--bg4); border:1px solid var(--border); border-radius:var(--radius); color:var(--text); transition:transform 0.2s ease, border-color 0.2s ease; }
+    .hub-tool:hover { transform:translateY(-3px); border-color:rgba(6,182,212,0.45); }
+    .hub-tool-main { grid-row:span 2; padding:0; overflow:hidden; }
+    .hub-tool:not(.hub-tool-main) { justify-content:center; }
+    .hub-tool-main img { display:block; width:100%; height:auto; border-bottom:1px solid var(--border); }
+    .hub-tool-body { display:flex; flex-direction:column; gap:8px; padding:20px 22px 22px; }
+    .hub-tool-tag { align-self:flex-start; font-size:0.74rem; font-weight:700; padding:3px 10px; border-radius:20px; color:#06b6d4; background:rgba(6,182,212,0.12); }
+    .hub-tool-title { font-family:var(--fd); font-size:1.15rem; font-weight:700; line-height:1.2; }
+    .hub-tool-text { font-size:0.92rem; color:var(--muted); line-height:1.55; }
+    .hub-uses { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:16px; }
+    .hub-use { padding:22px; background:var(--bg4); border:1px solid var(--border); border-radius:var(--radius); }
+    .hub-use h3 { margin:14px 0 6px; font-family:var(--fd); font-size:1.02rem; }
+    .hub-use p { margin:0; font-size:0.9rem; color:var(--muted); line-height:1.55; }
+    .hub-warn { margin:16px 0 0; padding:12px 16px; border-left:3px solid #f59e0b; background:rgba(245,158,11,0.07); border-radius:0 8px 8px 0; font-size:0.92rem; color:var(--text); }
+    .hub-guides { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; }
+    .hub-guides a { display:flex; flex-direction:column; gap:8px; padding:20px 22px; background:var(--bg4); border:1px solid var(--border); border-radius:var(--radius); color:var(--text); text-decoration:none; transition:border-color 0.2s ease, transform 0.2s ease; }
+    .hub-guides a:hover { border-color:rgba(6,182,212,0.45); transform:translateY(-3px); }
+    .hub-guide-cat { font-size:0.78rem; font-weight:700; color:var(--cyan); }
+    .hub-guide-title { font-family:var(--fd); font-size:1.02rem; font-weight:700; line-height:1.3; }
+    .hub-author { margin:0; max-width:70ch; font-size:0.95rem; color:var(--muted); line-height:1.7; }
+
+    /* ── Guía ── */
+    .g-header h1 { max-width:20ch; }
+    .g-lead { margin:-6px 0 18px; font-size:1.15rem; color:var(--muted); line-height:1.55; max-width:56ch; }
+    .g-body { max-width:1100px; }
+    .g-body section { margin:0 0 56px; }
+    .g-body h2 { margin:0 0 20px; font-family:var(--fd); font-size:clamp(1.4rem,2.6vw,1.8rem); line-height:1.12; text-transform:uppercase; letter-spacing:-0.01em; }
+    .g-need { list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:12px; }
+    .g-need li { display:flex; flex-direction:column; gap:6px; padding:18px; background:var(--bg4); border:1px solid var(--border); border-radius:var(--radius-sm); }
+    .g-need li .g-ico { margin-bottom:6px; }
+    .g-need strong { font-size:0.95rem; color:var(--text); line-height:1.25; }
+    .g-need span:not(.g-ico) { font-size:0.83rem; color:var(--muted); line-height:1.45; }
+    .g-steps { list-style:none; margin:0; padding:0; counter-reset:gstep; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }
+    .g-steps li { counter-increment:gstep; position:relative; display:flex; flex-direction:column; gap:6px; padding:20px 20px 20px 70px; background:var(--bg4); border:1px solid var(--border); border-radius:var(--radius-sm); min-height:100px; }
+    .g-steps li::before { content:counter(gstep); position:absolute; left:18px; top:18px; width:38px; height:38px; display:grid; place-items:center; border-radius:50%; font-family:var(--fd); font-weight:700; font-size:1.05rem; color:#fff; background:linear-gradient(135deg,#3b82f6,#06b6d4); box-shadow:0 6px 18px -6px rgba(6,182,212,0.6); }
+    .g-steps strong { font-size:1rem; color:var(--text); }
+    .g-steps span { font-size:0.88rem; color:var(--muted); line-height:1.5; }
+    .g-note { margin:16px 0 0; padding:12px 16px; border-left:3px solid var(--blue); background:rgba(59,130,246,0.06); border-radius:0 8px 8px 0; font-size:0.92rem; color:var(--text); }
+    .g-chips { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px; }
+    .g-chips span { padding:7px 14px; border-radius:999px; border:1px solid var(--border2); background:rgba(255,255,255,0.03); font-size:0.88rem; color:var(--muted); }
+    .g-chips strong { color:var(--text); }
+    .g-calc { margin:0 0 22px; font-size:1.05rem; color:var(--muted); }
+    .g-calc strong { color:var(--cyan); }
+    .g-gantt { margin:0 0 20px; padding:22px 22px 16px; background:var(--bg4); border:1px solid var(--border); border-radius:var(--radius); }
+    .g-months, .g-rows { margin-left:130px; position:relative; }
+    .g-months { height:22px; border-bottom:1px solid var(--border); margin-bottom:10px; }
+    .g-months span { position:absolute; top:0; padding-left:6px; border-left:1px solid var(--border2); font-size:0.78rem; color:var(--muted2); height:22px; }
+    .g-row { position:relative; display:flex; align-items:center; height:36px; }
+    .g-lab { position:absolute; left:-130px; width:122px; font-size:0.84rem; font-weight:600; color:var(--text); white-space:nowrap; }
+    .g-lab em { font-style:normal; font-weight:400; color:var(--muted2); }
+    .g-track { position:relative; flex:1; height:100%; }
+    .g-bar { position:absolute; top:8px; height:20px; border-radius:6px; }
+    .g-bar.c1 { background:#3b82f6; } .g-bar.c2 { background:#0ea5e9; } .g-bar.c3 { background:#8b5cf6; }
+    .g-bar.c4 { background:#10b981; } .g-bar.c5 { background:#f59e0b; } .g-bar.c6 { background:#ec4899; }
+    .g-fest { position:absolute; top:-10px; bottom:0; background:repeating-linear-gradient(45deg,rgba(248,113,113,0.35) 0 4px,transparent 4px 8px); border-left:1px solid rgba(248,113,113,0.6); border-right:1px solid rgba(248,113,113,0.6); z-index:1; }
+    .g-gantt figcaption { margin-top:12px; display:flex; align-items:center; gap:8px; font-size:0.82rem; color:var(--muted2); }
+    .g-fest-key { display:inline-block; width:14px; height:14px; border:1px solid rgba(248,113,113,0.6); background:repeating-linear-gradient(45deg,rgba(248,113,113,0.35) 0 3px,transparent 3px 6px); }
+    .g-callouts { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:16px; }
+    .g-callouts div, .g-errors li { display:flex; flex-direction:column; gap:6px; padding:18px 20px; background:var(--bg4); border:1px solid var(--border); border-radius:var(--radius-sm); }
+    .g-callouts strong, .g-errors strong { color:var(--text); font-size:0.98rem; }
+    .g-callouts span, .g-errors span { color:var(--muted); font-size:0.9rem; line-height:1.5; }
+    .g-details { border:1px solid var(--border); border-radius:var(--radius-sm); padding:0 18px; }
+    .g-details summary { cursor:pointer; min-height:48px; display:flex; align-items:center; font-weight:600; color:var(--cyan); }
+    .g-details[open] { padding-bottom:16px; }
+    .g-small { margin:8px 0 0; font-size:0.82rem; color:var(--muted2); }
+    .g-errors { list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px; }
+    .g-errors li { position:relative; padding-left:52px; }
+    .g-errors li::before { content:"✕"; position:absolute; left:16px; top:17px; width:24px; height:24px; display:grid; place-items:center; border-radius:50%; font-size:0.75rem; font-weight:700; color:#f87171; background:rgba(248,113,113,0.12); }
+    .g-cta { display:grid; grid-template-columns:minmax(0,0.9fr) minmax(0,1.1fr); gap:28px; align-items:center; padding:28px; background:radial-gradient(circle at top left,rgba(6,182,212,0.12),transparent 60%),var(--bg4); border:1px solid rgba(6,182,212,0.3); border-radius:var(--radius); }
+    .g-body .g-cta h2 { margin-bottom:10px; }
+    .g-cta p { margin:0 0 18px; color:var(--muted); line-height:1.6; }
+    .g-cta img { display:block; width:100%; height:auto; border-radius:10px; border:1px solid var(--border2); box-shadow:0 20px 50px -20px rgba(0,0,0,0.6); }
+    .g-law, .g-author { max-width:70ch; font-size:0.9rem; color:var(--muted); line-height:1.65; }
+    .g-law { margin:0 0 14px; } .g-author { margin:0; }
+    .g-law strong { color:var(--text); }
+
+    .art-table-wrap { margin:4px 0 8px; overflow-x:auto; border:1px solid var(--border2); border-radius:var(--radius-sm); }
     .art-table { width:100%; border-collapse:collapse; font-size:0.92rem; min-width:460px; }
     .art-table caption { padding:12px 16px; text-align:left; font-size:0.84rem; color:var(--muted2); caption-side:top; }
     .art-table th, .art-table td { padding:10px 16px; text-align:left; border-top:1px solid var(--border); color:var(--muted); }
     .art-table thead th { color:var(--text); font-weight:600; background:rgba(255,255,255,0.03); }
     .art-table tbody th, .art-table tfoot th { color:var(--text); font-weight:600; white-space:nowrap; }
     .art-table tfoot td, .art-table tfoot th { color:var(--text); font-weight:600; background:rgba(6,182,212,0.06); }
-    .art-cta { margin:36px 0; padding:24px 28px; background:rgba(59,130,246,0.06); border:1px solid rgba(59,130,246,0.22); border-radius:12px; display:flex; flex-direction:column; gap:12px; }
-    .art-body .art-cta p { margin:0; }
-    .art-body .art-cta .art-cta-title { font-family:var(--fd); font-size:1rem; font-weight:700; color:var(--text); }
-    .hub-header { max-width:820px; }
-    .hub-lead { margin:0 0 24px; font-size:1.08rem; color:var(--muted); line-height:1.7; max-width:66ch; }
-    .hub-actions { display:flex; flex-wrap:wrap; gap:12px; }
-    .hub-block { margin:0 0 52px; }
-    .hub-block h2 { margin:0 0 10px; font-family:var(--fd); font-size:clamp(1.35rem,2.5vw,1.75rem); line-height:1.12; text-transform:uppercase; letter-spacing:-0.01em; }
-    .hub-intro { margin:0 0 20px; max-width:70ch; color:var(--muted); line-height:1.7; }
-    .hub-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; }
-    .hub-grid-2 { grid-template-columns:repeat(2,minmax(0,1fr)); margin-bottom:8px; }
-    .hub-card { background:var(--bg4); border:1px solid var(--border); border-radius:var(--radius); padding:22px; }
-    .hub-card h3 { margin:0 0 10px; font-family:var(--fd); font-size:1.05rem; line-height:1.25; }
-    .hub-block .hub-card h3 a { color:var(--text); text-decoration:none; }
-    .hub-block .hub-card h3 a:hover { color:var(--cyan); }
-    .hub-card p { margin:0 0 10px; color:var(--muted); font-size:0.93rem; line-height:1.6; }
-    .hub-card p:last-child { margin-bottom:0; }
-    .hub-card-links { font-weight:600; }
-    .hub-list { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:14px; max-width:780px; }
-    .hub-list li { padding:16px 20px; background:var(--bg4); border:1px solid var(--border); border-radius:var(--radius-sm); }
-    .hub-list li a { display:block; margin-bottom:4px; font-weight:600; }
-    .hub-list li span { color:var(--muted); font-size:0.92rem; }
-    @media (max-width:900px) { .hub-grid, .hub-grid-2 { grid-template-columns:1fr; } }
+
+    @media (max-width:900px) {
+      .hub-hero, .g-cta { grid-template-columns:1fr; }
+      .hub-shot { transform:none; }
+      .hub-tools, .hub-guides { grid-template-columns:1fr; }
+      .hub-uses { grid-template-columns:1fr 1fr; }
+      .g-need { grid-template-columns:1fr 1fr; }
+      .g-steps { grid-template-columns:1fr; }
+    }
+    @media (max-width:600px) {
+      .hub-stats { grid-template-columns:1fr 1fr; row-gap:18px; }
+      .hub-stats li:nth-child(3) { border-left:0; }
+      .hub-uses, .g-callouts { grid-template-columns:1fr; }
+      .g-months, .g-rows { margin-left:92px; }
+      .g-lab { left:-92px; width:88px; font-size:0.76rem; }
+      .g-lab em { display:none; }
+      .g-gantt { padding:16px 14px 12px; }
+      .g-months span { font-size:0.7rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .hub-tool, .hub-guides a { transition:none; }
+      .hub-tool:hover, .hub-guides a:hover { transform:none; }
+    }
   </style>
 
   <script type="application/ld+json">
@@ -362,172 +460,128 @@
           <span aria-current="page">Temporalización</span>
         </nav>
 
-        <header class="art-header">
+        <header class="art-header g-header">
           <span class="kicker">Docencia FPE · Planificación</span>
-          <h1>Temporalización de un certificado de profesionalidad: guía paso a paso con ejemplo resuelto</h1>
+          <h1>Temporalización de un certificado de profesionalidad</h1>
+          <p class="g-lead">Cómo repartir las horas de cada módulo en el calendario, en 6 pasos y con un ejemplo resuelto.</p>
           <div class="art-header-meta">
             <span>Idayra Cabrera</span>
-            <span>8 min de lectura</span>
+            <span>5 min de lectura</span>
             <span>Octubre 2026</span>
           </div>
         </header>
 
-        <div class="art-grid">
+        <div class="g-body">
 
-          <article class="art-body">
-
-            <p>
-              Antes de la primera clase de un certificado de profesionalidad hay un trabajo que no se ve:
-              la <strong>temporalización</strong>. Consiste en repartir las horas de cada módulo y de cada
-              unidad formativa en días concretos del calendario, respetando el horario del grupo, los festivos
-              y el orden en el que deben impartirse. El centro la necesita para organizar el curso y para la
-              documentación que se presenta al servicio de empleo.
-            </p>
-            <p>
-              Si buscas cómo hacerla, casi todo lo que encontrarás son PDF oficiales con plantillas vacías.
-              En esta guía te explico el método completo, con un ejemplo resuelto día a día, y al final te
-              enseño cómo hacerlo en un minuto con una herramienta gratuita.
-            </p>
-
-            <h2>Qué datos necesitas antes de empezar</h2>
-            <ul>
-              <li><strong>La estructura del certificado:</strong> sus módulos formativos (MF), las unidades formativas (UF) en las que se dividen y las horas de cada una. Están en el real decreto del certificado y en su ficha del catálogo del SEPE.</li>
-              <li><strong>La fecha de inicio</strong> del curso.</li>
-              <li><strong>Los días y el horario de clase:</strong> por ejemplo, de lunes a viernes de 16:00 a 20:00, es decir, 4 horas al día.</li>
-              <li><strong>Los festivos del periodo:</strong> nacionales, autonómicos y también los <strong>locales del municipio</strong> donde se imparte el curso, que son los que más se olvidan.</li>
-              <li><strong>Las condiciones de la convocatoria o del centro:</strong> fecha límite de finalización, límite de horas diarias o cualquier instrucción específica del servicio de empleo.</li>
+          <section aria-labelledby="g-need-h">
+            <h2 id="g-need-h">Antes de empezar necesitas</h2>
+            <ul class="g-need">
+              <li><span class="g-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 4h9l3 3v13H6V4Z"/><path d="M9 11h6M9 15h4"/></svg></span><strong>Estructura del certificado</strong><span>Módulos, unidades formativas y horas (real decreto o ficha del SEPE)</span></li>
+              <li><span class="g-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/></svg></span><strong>Fecha de inicio</strong><span>El primer día de clase</span></li>
+              <li><span class="g-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg></span><strong>Días y horario</strong><span>Por ejemplo, L–V de 16:00 a 20:00</span></li>
+              <li><span class="g-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 21V4h11l-2 4 2 4H6"/></svg></span><strong>Festivos</strong><span>Nacionales, autonómicos y locales del municipio</span></li>
+              <li><span class="g-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3 3 20h18L12 3Z"/><path d="M12 10v4M12 17v.01"/></svg></span><strong>Límites</strong><span>Fecha tope y horas diarias que marque la convocatoria</span></li>
             </ul>
+          </section>
 
-            <h2>El método en seis pasos</h2>
-            <ol>
-              <li><strong>Ordena las unidades de impartición.</strong> Haz una lista con cada UF (o con el módulo completo, si no está dividido) en el orden en que la vas a impartir. Respeta la secuencia que indique el certificado: en algunos, una unidad formativa exige haber cursado otra antes.</li>
-              <li><strong>Calcula los días lectivos necesarios.</strong> Divide las horas totales entre las horas diarias. Es el número mínimo de días de clase que vas a necesitar.</li>
-              <li><strong>Construye el calendario lectivo.</strong> Desde la fecha de inicio, marca solo los días de clase y quita fines de semana y festivos.</li>
-              <li><strong>Reparte las horas en orden.</strong> Ve llenando cada día con las horas de la unidad que toca. Cuando una unidad termina a mitad de jornada, la siguiente empieza ese mismo día, en la hora siguiente.</li>
-              <li><strong>Reserva la evaluación.</strong> La evaluación final de cada módulo forma parte de sus horas. Sitúala en las últimas horas de cada módulo para que no quede fuera del calendario.</li>
-              <li><strong>Comprueba que todo cuadra.</strong> La suma de horas por unidad debe coincidir exactamente con el certificado y la fecha final no puede pasar de la fecha límite.</li>
+          <section aria-labelledby="g-steps-h">
+            <h2 id="g-steps-h">El método en 6 pasos</h2>
+            <ol class="g-steps">
+              <li><strong>Ordena las unidades</strong><span>En el orden de impartición. Algunos certificados exigen dar una unidad formativa antes que otra.</span></li>
+              <li><strong>Calcula los días</strong><span>Horas totales ÷ horas al día = días de clase necesarios.</span></li>
+              <li><strong>Monta el calendario</strong><span>Desde la fecha de inicio, solo días de clase: sin fines de semana ni festivos.</span></li>
+              <li><strong>Reparte en orden</strong><span>Llena cada día con la unidad que toca. Si una termina a mitad de jornada, la siguiente empieza ese mismo día.</span></li>
+              <li><strong>Reserva la evaluación</strong><span>La prueba final de cada módulo va dentro de sus horas, al final del módulo.</span></li>
+              <li><strong>Comprueba</strong><span>Las horas cuadran con el certificado y no te pasas de la fecha tope.</span></li>
             </ol>
+            <p class="g-note">Las prácticas en empresa (módulo MP) no van en el calendario del aula: se planifican aparte, con el horario de la empresa.</p>
+          </section>
 
-            <div class="art-highlight">
-              El módulo de formación práctica en centros de trabajo (MP) no entra en el calendario del aula:
-              se planifica aparte, con el horario de la empresa donde el alumnado hace las prácticas.
+          <section aria-labelledby="g-ex-h">
+            <h2 id="g-ex-h">Ejemplo resuelto</h2>
+            <div class="g-chips" aria-label="Datos del ejemplo">
+              <span><strong>300 h</strong> de aula</span>
+              <span><strong>4 h/día</strong>, L–V</span>
+              <span>Inicio <strong>11/01/2027</strong></span>
+              <span>Festivos <strong>25 y 26/03</strong></span>
             </div>
+            <p class="g-calc">300 h ÷ 4 h = <strong>75 días de clase</strong> → termina el <strong>27 de abril</strong></p>
 
-            <h2>Ejemplo resuelto</h2>
-            <p>
-              Para que veas el método aplicado, uso un <strong>certificado de ejemplo</strong> (las horas son
-              ilustrativas, no corresponden a un certificado real) con 300 horas de formación en el aula:
-            </p>
-            <ul>
-              <li><strong>MF1</strong>, 120 horas, dividido en UF1 (30 h) y UF2 (90 h).</li>
-              <li><strong>MF2</strong>, 60 horas, sin unidades formativas.</li>
-              <li><strong>MF3</strong>, 120 horas, dividido en UF1, UF2 y UF3 (40 h cada una).</li>
-            </ul>
-            <p>
-              El grupo tiene clase <strong>de lunes a viernes de 16:00 a 20:00</strong> (4 horas al día) y
-              empieza el <strong>lunes 11 de enero de 2027</strong>. En el periodo caen como festivos el
-              Jueves Santo y el Viernes Santo (25 y 26 de marzo de 2027); en un caso real tendrías que añadir
-              los festivos locales de tu municipio.
-            </p>
-            <p>
-              <strong>Días lectivos necesarios:</strong> 300 horas ÷ 4 horas al día = <strong>75 días de clase</strong>.
-              Repartidos en orden, queda así:
-            </p>
-
-            <div class="art-table-wrap">
-              <table class="art-table">
-                <caption>Temporalización del certificado de ejemplo (4 horas al día, de lunes a viernes)</caption>
-                <thead>
-                  <tr><th scope="col">Unidad</th><th scope="col">Horas</th><th scope="col">Empieza</th><th scope="col">Termina</th></tr>
-                </thead>
-                <tbody>
-                  <tr><th scope="row">MF1 · UF1</th><td>30</td><td>Lun 11/01</td><td>Mié 20/01, 18:00</td></tr>
-                  <tr><th scope="row">MF1 · UF2</th><td>90</td><td>Mié 20/01, 18:00</td><td>Vie 19/02</td></tr>
-                  <tr><th scope="row">MF2</th><td>60</td><td>Lun 22/02</td><td>Vie 12/03</td></tr>
-                  <tr><th scope="row">MF3 · UF1</th><td>40</td><td>Lun 15/03</td><td>Mar 30/03</td></tr>
-                  <tr><th scope="row">MF3 · UF2</th><td>40</td><td>Mié 31/03</td><td>Mar 13/04</td></tr>
-                  <tr><th scope="row">MF3 · UF3</th><td>40</td><td>Mié 14/04</td><td>Mar 27/04</td></tr>
-                </tbody>
-                <tfoot>
-                  <tr><th scope="row">Total</th><td>300</td><td>11/01/2027</td><td>27/04/2027</td></tr>
-                </tfoot>
-              </table>
-            </div>
-
-            <p>Tres detalles del ejemplo que conviene mirar:</p>
-            <ul>
-              <li><strong>Cambio de unidad a mitad de jornada.</strong> La UF1 necesita 30 horas, que son 7 días y medio. Termina el miércoles 20 de enero a las 18:00 y la UF2 empieza ese mismo día de 18:00 a 20:00. Si redondeas a días completos, pierdes o te sobran horas.</li>
-              <li><strong>Los festivos empujan el calendario.</strong> La UF1 del MF3 tiene 40 horas (10 días), pero tarda dos semanas largas en completarse porque en medio caen el Jueves y el Viernes Santo.</li>
-              <li><strong>La fecha de fin sale del cálculo.</strong> 75 días lectivos llevan el curso hasta el 27 de abril. Si la convocatoria te pide terminar antes, tendrás que aumentar las horas diarias o añadir días de clase.</li>
-            </ul>
-
-            <h2>Errores frecuentes</h2>
-            <ul>
-              <li><strong>Olvidar los festivos locales.</strong> Cada municipio tiene dos, y en Canarias además hay festivos insulares. Uno olvidado descuadra todo lo que viene detrás.</li>
-              <li><strong>Redondear días.</strong> Contar «8 días» para una unidad de 30 horas con jornadas de 4 horas. Parece poco, pero acumulado en varias unidades mueve la fecha final.</li>
-              <li><strong>Saltarse la secuencia.</strong> Programar una unidad antes que otra que el certificado exige cursar primero.</li>
-              <li><strong>Dejar la evaluación fuera.</strong> Programar todas las horas como contenido y no saber dónde encajar la prueba final de cada módulo.</li>
-              <li><strong>Rehacerlo todo a mano con cada cambio.</strong> Un festivo nuevo o un cambio de horario obliga a recalcular desde ese punto. En una hoja de cálculo manual es donde se cuelan los errores.</li>
-            </ul>
-
-            <div class="art-cta">
-              <p class="art-cta-title">Hazlo en un minuto con el planificador</p>
-              <p>
-                Construí el <a href="planificador.html">planificador de certificados de profesionalidad</a>
-                para no repetir este cálculo a mano en cada curso. Subes el PDF del certificado, indicas la
-                fecha de inicio, los días y las horas diarias, y genera el cronograma completo con los festivos
-                nacionales y de Canarias ya calculados. Lo exportas a Excel o CSV. Es gratuito y funciona en
-                el navegador, sin registro.
-              </p>
-              <p>
-                Un detalle: el planificador empieza cada módulo en una jornada nueva, sin compartir día entre
-                dos unidades. Con el ejemplo de esta guía, el día en que termina la UF1 se queda con 2 horas y
-                el curso acaba un día más tarde, el 28 de abril.
-              </p>
-              <div><a href="planificador.html" class="btn btn-p">Abrir el planificador</a></div>
-            </div>
-
-            <h2>Una nota sobre la nueva ley de FP</h2>
-            <p>
-              Con la Ley Orgánica 3/2022 de ordenación e integración de la Formación Profesional, los
-              certificados de profesionalidad pasan a formar parte del nuevo sistema de grados (son ofertas de
-              grado C) y parte de la terminología se está actualizando. La lógica de la temporalización no
-              cambia: unidades con horas fijas repartidas en orden sobre un calendario lectivo real. Antes de
-              entregarla, consulta siempre las instrucciones vigentes de tu servicio de empleo y del centro.
-            </p>
-
-          </article>
-
-          <aside class="art-sidebar">
-            <div class="art-sidebar-card">
-              <h4>Autora</h4>
-              <p class="art-author-name">Idayra Cabrera</p>
-              <p class="art-author-bio">
-                Docente FPE acreditada por el SCE y el SEPE en 15 especialidades.
-                Más de 1.770 horas de docencia certificadas y creadora del planificador de certificados.
-              </p>
-              <div style="margin-top:14px">
-                <a href="sobre-mi.html" class="btn btn-g" style="min-height:38px;padding:8px 14px;font-size:0.84rem">Ver perfil completo</a>
+            <figure class="g-gantt" aria-label="Línea de tiempo del ejemplo">
+              <div class="g-months" aria-hidden="true">
+                <span style="left:0">Enero</span><span style="left:19.63%">Febrero</span><span style="left:45.79%">Marzo</span><span style="left:74.77%">Abril</span>
               </div>
+              <div class="g-rows">
+                <div class="g-fest" style="left:68.22%;width:1.87%" title="Jueves y Viernes Santo"></div>
+                <div class="g-row"><span class="g-lab">MF1 · UF1 <em>30 h</em></span><span class="g-track"><span class="g-bar c1" style="left:0;width:9.35%"></span></span></div>
+                <div class="g-row"><span class="g-lab">MF1 · UF2 <em>90 h</em></span><span class="g-track"><span class="g-bar c2" style="left:8.41%;width:28.97%"></span></span></div>
+                <div class="g-row"><span class="g-lab">MF2 <em>60 h</em></span><span class="g-track"><span class="g-bar c3" style="left:39.25%;width:17.76%"></span></span></div>
+                <div class="g-row"><span class="g-lab">MF3 · UF1 <em>40 h</em></span><span class="g-track"><span class="g-bar c4" style="left:58.88%;width:14.95%"></span></span></div>
+                <div class="g-row"><span class="g-lab">MF3 · UF2 <em>40 h</em></span><span class="g-track"><span class="g-bar c5" style="left:73.83%;width:13.08%"></span></span></div>
+                <div class="g-row"><span class="g-lab">MF3 · UF3 <em>40 h</em></span><span class="g-track"><span class="g-bar c6" style="left:86.92%;width:13.08%"></span></span></div>
+              </div>
+              <figcaption><span class="g-fest-key" aria-hidden="true"></span> Semana Santa: el calendario se alarga dos días</figcaption>
+            </figure>
+
+            <div class="g-callouts">
+              <div><strong>Cambio a mitad de jornada</strong><span>La UF1 son 30 h = 7,5 días. Acaba el 20/01 a las 18:00 y la UF2 empieza a continuación.</span></div>
+              <div><strong>Los festivos empujan</strong><span>La UF1 del MF3 son 10 días de clase, pero tarda más de dos semanas por Semana Santa.</span></div>
             </div>
 
-            <div class="art-sidebar-card">
-              <h4>Más para docentes FPE</h4>
-              <ul class="art-related-list">
-                <li><a href="ia-docentes-fpe.html">IA y herramientas para docentes de FPE</a></li>
-                <li><a href="planificador-certificados-profesionalidad-guia.html">Guía de uso del planificador</a></li>
-                <li><a href="constructor-cursos.html">Constructor de cursos con exportación a Moodle</a></li>
-              </ul>
-            </div>
+            <details class="g-details">
+              <summary>Ver las fechas exactas de cada unidad</summary>
+              <div class="art-table-wrap">
+                <table class="art-table">
+                  <caption>Temporalización del certificado de ejemplo (4 h al día, de lunes a viernes)</caption>
+                  <thead>
+                    <tr><th scope="col">Unidad</th><th scope="col">Horas</th><th scope="col">Empieza</th><th scope="col">Termina</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><th scope="row">MF1 · UF1</th><td>30</td><td>Lun 11/01</td><td>Mié 20/01, 18:00</td></tr>
+                    <tr><th scope="row">MF1 · UF2</th><td>90</td><td>Mié 20/01, 18:00</td><td>Vie 19/02</td></tr>
+                    <tr><th scope="row">MF2</th><td>60</td><td>Lun 22/02</td><td>Vie 12/03</td></tr>
+                    <tr><th scope="row">MF3 · UF1</th><td>40</td><td>Lun 15/03</td><td>Mar 30/03</td></tr>
+                    <tr><th scope="row">MF3 · UF2</th><td>40</td><td>Mié 31/03</td><td>Mar 13/04</td></tr>
+                    <tr><th scope="row">MF3 · UF3</th><td>40</td><td>Mié 14/04</td><td>Mar 27/04</td></tr>
+                  </tbody>
+                  <tfoot>
+                    <tr><th scope="row">Total</th><td>300</td><td>11/01/2027</td><td>27/04/2027</td></tr>
+                  </tfoot>
+                </table>
+              </div>
+              <p class="g-small">Las horas del ejemplo son ilustrativas, no corresponden a un certificado real.</p>
+            </details>
+          </section>
 
-            <div class="art-sidebar-card" style="background:rgba(59,130,246,0.06);border-color:rgba(59,130,246,0.25)">
-              <h4>¿Formación para tu equipo docente?</h4>
-              <p style="margin:0 0 14px;font-size:0.87rem;color:var(--muted);line-height:1.55">
-                Formación práctica en IA y herramientas digitales para centros y equipos de formación.
-              </p>
-              <a href="contacto.html" class="btn btn-p" style="width:100%;min-height:40px;padding:10px 14px;font-size:0.88rem">Escríbeme</a>
+          <section aria-labelledby="g-err-h">
+            <h2 id="g-err-h">Errores frecuentes</h2>
+            <ul class="g-errors">
+              <li><strong>Olvidar festivos locales</strong><span>Cada municipio tiene dos, y en Canarias hay también insulares.</span></li>
+              <li><strong>Redondear días</strong><span>30 h a 4 h/día son 7,5 días, no 8.</span></li>
+              <li><strong>Saltarse la secuencia</strong><span>Dar una unidad antes de la que el certificado exige.</span></li>
+              <li><strong>Dejar fuera la evaluación</strong><span>Y no tener dónde encajar la prueba final.</span></li>
+              <li><strong>Rehacerlo a mano</strong><span>Cada cambio de calendario obliga a recalcular todo lo que viene detrás.</span></li>
+            </ul>
+          </section>
+
+          <section class="g-cta" aria-labelledby="g-cta-h">
+            <div class="g-cta-copy">
+              <h2 id="g-cta-h">Hazlo en un minuto</h2>
+              <p>El <a href="planificador.html">planificador</a> lee el PDF del certificado y genera el cronograma con los festivos nacionales y de Canarias. Gratis y sin registro.</p>
+              <a href="planificador.html" class="btn btn-p">Abrir el planificador</a>
+              <p class="g-small">Empieza cada módulo en una jornada nueva: con este ejemplo, termina el 28 de abril.</p>
             </div>
-          </aside>
+            <img src="img/planificador-tabla-720.webp" srcset="img/planificador-tabla-720.webp 720w, img/planificador-tabla.webp 1200w"
+                 sizes="(max-width: 900px) 92vw, 520px" width="1200" height="678" loading="lazy"
+                 alt="Resultado del planificador con el ejemplo de esta guía: 300 horas, 76 días lectivos y fechas de cada unidad">
+          </section>
+
+          <p class="g-law">
+            <strong>Nueva ley de FP.</strong> Con la Ley Orgánica 3/2022, los certificados pasan a ser ofertas de grado C y parte de la
+            terminología cambia. El método de temporalización es el mismo. Consulta siempre las instrucciones vigentes de tu servicio de empleo.
+          </p>
+
+          <p class="g-author">Por <a href="sobre-mi.html">Idayra Cabrera</a>, docente FPE acreditada por el SCE y el SEPE. Más recursos en <a href="ia-docentes-fpe.html">IA y herramientas para docentes de FPE</a>.</p>
 
         </div>
       </div>
@@ -540,10 +594,7 @@
         <div class="cta-final">
           <span class="kicker">Siguiente paso</span>
           <h2 id="temp-cta-h">Deja de temporalizar a mano</h2>
-          <p>
-            Sube el PDF de tu certificado al planificador y obtén el cronograma completo,
-            con los festivos ya descontados, en un minuto.
-          </p>
+          <p>Sube el PDF de tu certificado y obtén el cronograma completo, con los festivos ya descontados.</p>
           <div class="cta-final-actions">
             <a href="planificador.html" class="btn btn-p">Abrir el planificador</a>
             <a href="ia-docentes-fpe.html" class="btn btn-g">Más recursos para docentes</a>
