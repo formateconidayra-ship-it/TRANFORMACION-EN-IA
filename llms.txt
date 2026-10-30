@@ -31,6 +31,10 @@ Ha impartido formación para 8 entidades: Cámara de Comercio de Santa Cruz de T
 - [Formación en inteligencia artificial en Canarias](https://transformacionia.es/formacion-inteligencia-artificial-canarias.html): IA aplicada sin necesidad de perfil técnico ni conocimientos de programación.
 - [Formación en herramientas digitales y análisis de datos (Excel y Power BI)](https://transformacionia.es/formacion-herramientas-digitales-analisis-datos.html): análisis de datos para la toma de decisiones en empresas.
 
+### Herramientas y recursos para docentes FPE
+
+- [IA y herramientas para docentes de FPE](https://transformacionia.es/ia-docentes-fpe.html): página que reúne las herramientas gratuitas, las guías prácticas y el uso de la IA en la docencia FPE.
+
 ### Herramientas y proyectos
 
 - [Planificador de certificados de profesionalidad](https://transformacionia.es/planificador.html): herramienta gratuita que convierte el PDF de una programación didáctica en un calendario de impartición automático.
@@ -43,6 +47,7 @@ Ha impartido formación para 8 entidades: Cámara de Comercio de Santa Cruz de T
 - [ChatGPT en el trabajo: usos reales con ejemplos](https://transformacionia.es/chatgpt-en-el-trabajo.html)
 - [Excel y Power BI para empresas: por dónde empezar](https://transformacionia.es/excel-power-bi-empresas.html)
 - [Cómo planificar un certificado de profesionalidad](https://transformacionia.es/planificador-certificados-profesionalidad-guia.html)
+- [Temporalización de un certificado de profesionalidad: guía paso a paso con ejemplo resuelto](https://transformacionia.es/temporalizacion-certificados-profesionalidad.html)
 
 ## Páginas clave
 

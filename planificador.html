@@ -1954,7 +1954,9 @@
 
       const dI = new Date(ini);
       const tH = mods.reduce((s, m) => s + m.h, 0);
-      const nec = Math.ceil(tH / hd);
+      // Cada módulo empieza en un día nuevo: los días necesarios se cuentan
+      // módulo a módulo (no con el total), o el último quedaría recortado.
+      const nec = mods.reduce((s, m) => s + Math.ceil(m.h / hd), 0);
       const avail = [];
       let d = new Date(dI);
 

@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Consentimiento de cookies: Google Analytics solo tras aceptar -->
+  <script src="js/consent.js"></script>
+
+  <title>Temporalización de un certificado de profesionalidad | Guía</title>
+  <meta
+    name="description"
+    content="Cómo temporalizar un certificado de profesionalidad paso a paso: reparto de horas por módulo y UF, festivos y un ejemplo resuelto día a día."
+  />
+  <meta name="author" content="Idayra Cabrera" />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#07090f" />
+  <link rel="canonical" href="https://transformacionia.es/temporalizacion-certificados-profesionalidad.html" />
+
+  <link rel="icon" href="img/favicon.ico" sizes="any">
+  <link rel="icon" href="img/favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="img/favicon-16x16.png" type="image/png" sizes="16x16">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Temporalización de un certificado de profesionalidad: guía paso a paso con ejemplo resuelto" />
+  <meta
+    property="og:description"
+    content="Cómo temporalizar un certificado de profesionalidad paso a paso: reparto de horas por módulo y UF, festivos y un ejemplo resuelto día a día."
+  />
+  <meta property="og:url" content="https://transformacionia.es/temporalizacion-certificados-profesionalidad.html" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:site_name" content="Transformación IA" />
+
+  <meta property="og:image" content="https://transformacionia.es/img/og-default.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Temporalización de un certificado de profesionalidad: guía paso a paso con ejemplo resuelto" />
+  <meta name="twitter:description" content="Cómo temporalizar un certificado de profesionalidad paso a paso: reparto de horas por módulo y UF, festivos y un ejemplo resuelto día a día." />
+  <meta name="twitter:image" content="https://transformacionia.es/img/og-default.jpg" />
+  <link rel="preload" href="/fonts/roboto-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/roboto-condensed-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <style>
+    .art-page { padding: 48px 0 72px; }
+
+    .art-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 28px;
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: var(--muted);
+      transition: color 0.2s ease;
+    }
+    .art-back:hover { color: var(--cyan); }
+
+    .art-header {
+      margin-bottom: 40px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--border);
+    }
+    .art-header .kicker { margin-bottom: 16px; }
+    .art-header h1 {
+      margin: 0 0 20px;
+      font-family: var(--fd);
+      font-size: clamp(1.9rem, 4vw, 3rem);
+      line-height: 1.06;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+    }
+    .art-header-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 16px;
+      font-size: 0.84rem;
+      color: var(--muted2);
+    }
+    .art-header-meta span { display: flex; align-items: center; gap: 5px; }
+
+    .art-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 280px;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .art-body { min-width: 0; }
+    .art-body h2 {
+      margin: 40px 0 14px;
+      font-family: var(--fd);
+      font-size: clamp(1.35rem, 2.5vw, 1.75rem);
+      line-height: 1.12;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      color: var(--text);
+    }
+    .art-body h2:first-child { margin-top: 0; }
+    .art-body h3 {
+      margin: 28px 0 10px;
+      font-family: var(--fd);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .art-body p {
+      margin: 0 0 16px;
+      font-size: 1rem;
+      color: var(--muted);
+      line-height: 1.78;
+    }
+    .art-body p:last-child { margin-bottom: 0; }
+    .art-body strong { color: var(--text); font-weight: 600; }
+    .art-body ul, .art-body ol {
+      margin: 0 0 18px;
+      padding-left: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+    .art-body ul li, .art-body ol li {
+      position: relative;
+      padding-left: 18px;
+      font-size: 0.97rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+    .art-body ul li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.58em;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--cyan);
+    }
+    .art-body ol { counter-reset: ol-counter; }
+    .art-body ol li { counter-increment: ol-counter; }
+    .art-body ol li::before {
+      content: counter(ol-counter);
+      position: absolute;
+      left: 0;
+      top: 0.1em;
+      font-family: var(--fd);
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--cyan);
+    }
+    .art-highlight {
+      margin: 28px 0;
+      padding: 20px 24px;
+      background: rgba(59, 130, 246, 0.06);
+      border-left: 3px solid var(--blue);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      font-size: 0.97rem;
+      color: var(--text);
+      line-height: 1.68;
+    }
+
+    .art-sidebar {
+      display: grid;
+      gap: 16px;
+      position: sticky;
+      top: 80px;
+    }
+    .art-sidebar-card {
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.025);
+      border: 1px solid var(--border2);
+      border-radius: var(--radius);
+    }
+    .art-sidebar-card h4 {
+      margin: 0 0 12px;
+      font-family: var(--fd);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted2);
+    }
+    .art-author-name {
+      font-family: var(--fd);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+    .art-author-bio {
+      margin: 0;
+      font-size: 0.87rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .art-related-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .art-related-list li a {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.45;
+      transition: color 0.2s ease;
+    }
+    .art-related-list li a:hover { color: var(--cyan); }
+
+    @media (max-width: 900px) {
+      .art-grid { grid-template-columns: 1fr; }
+      .art-sidebar { position: static; }
+    }
+    @media (max-width: 600px) {
+      .art-page { padding: 32px 0 56px; }
+      .art-header h1 { font-size: 1.75rem; }
+    }
+    .svc-highlight {
+      margin: 32px 0;
+      padding: 22px 26px;
+      background: rgba(59, 130, 246, 0.06);
+      border-left: 3px solid var(--blue);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      font-size: 0.97rem;
+      color: var(--text);
+      line-height: 1.7;
+    }
+    .svc-highlight a {
+      color: var(--cyan);
+      text-decoration: underline;
+      text-decoration-color: rgba(6, 182, 212, 0.4);
+      text-underline-offset: 3px;
+    }
+    .svc-highlight a:hover { text-decoration-color: var(--cyan); }
+
+    .art-crumbs { display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin-bottom:28px; font-size:0.86rem; color:var(--muted2); }
+    .art-crumbs a { display:inline-flex; align-items:center; min-height:44px; margin:-12px 0; color:var(--muted); font-weight:600; transition:color 0.2s ease; }
+    .art-crumbs a:hover { color:var(--cyan); }
+    .art-body a, .hub-block a:not(.btn) { color:var(--cyan); text-decoration:underline; text-decoration-color:rgba(6,182,212,0.4); text-underline-offset:3px; }
+    .art-body a.btn { color:#fff; text-decoration:none; }
+    .art-table-wrap { margin:8px 0 24px; overflow-x:auto; border:1px solid var(--border2); border-radius:var(--radius-sm); }
+    .art-table { width:100%; border-collapse:collapse; font-size:0.92rem; min-width:460px; }
+    .art-table caption { padding:12px 16px; text-align:left; font-size:0.84rem; color:var(--muted2); caption-side:top; }
+    .art-table th, .art-table td { padding:10px 16px; text-align:left; border-top:1px solid var(--border); color:var(--muted); }
+    .art-table thead th { color:var(--text); font-weight:600; background:rgba(255,255,255,0.03); }
+    .art-table tbody th, .art-table tfoot th { color:var(--text); font-weight:600; white-space:nowrap; }
+    .art-table tfoot td, .art-table tfoot th { color:var(--text); font-weight:600; background:rgba(6,182,212,0.06); }
+    .art-cta { margin:36px 0; padding:24px 28px; background:rgba(59,130,246,0.06); border:1px solid rgba(59,130,246,0.22); border-radius:12px; display:flex; flex-direction:column; gap:12px; }
+    .art-body .art-cta p { margin:0; }
+    .art-body .art-cta .art-cta-title { font-family:var(--fd); font-size:1rem; font-weight:700; color:var(--text); }
+    .hub-header { max-width:820px; }
+    .hub-lead { margin:0 0 24px; font-size:1.08rem; color:var(--muted); line-height:1.7; max-width:66ch; }
+    .hub-actions { display:flex; flex-wrap:wrap; gap:12px; }
+    .hub-block { margin:0 0 52px; }
+    .hub-block h2 { margin:0 0 10px; font-family:var(--fd); font-size:clamp(1.35rem,2.5vw,1.75rem); line-height:1.12; text-transform:uppercase; letter-spacing:-0.01em; }
+    .hub-intro { margin:0 0 20px; max-width:70ch; color:var(--muted); line-height:1.7; }
+    .hub-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; }
+    .hub-grid-2 { grid-template-columns:repeat(2,minmax(0,1fr)); margin-bottom:8px; }
+    .hub-card { background:var(--bg4); border:1px solid var(--border); border-radius:var(--radius); padding:22px; }
+    .hub-card h3 { margin:0 0 10px; font-family:var(--fd); font-size:1.05rem; line-height:1.25; }
+    .hub-block .hub-card h3 a { color:var(--text); text-decoration:none; }
+    .hub-block .hub-card h3 a:hover { color:var(--cyan); }
+    .hub-card p { margin:0 0 10px; color:var(--muted); font-size:0.93rem; line-height:1.6; }
+    .hub-card p:last-child { margin-bottom:0; }
+    .hub-card-links { font-weight:600; }
+    .hub-list { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:14px; max-width:780px; }
+    .hub-list li { padding:16px 20px; background:var(--bg4); border:1px solid var(--border); border-radius:var(--radius-sm); }
+    .hub-list li a { display:block; margin-bottom:4px; font-weight:600; }
+    .hub-list li span { color:var(--muted); font-size:0.92rem; }
+    @media (max-width:900px) { .hub-grid, .hub-grid-2 { grid-template-columns:1fr; } }
+  </style>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "headline": "Temporalización de un certificado de profesionalidad: guía paso a paso con ejemplo resuelto",
+      "description": "Cómo temporalizar un certificado de profesionalidad paso a paso: reparto de horas por módulo y UF, festivos y un ejemplo resuelto día a día.",
+      "url": "https://transformacionia.es/temporalizacion-certificados-profesionalidad.html",
+      "inLanguage": "es-ES",
+      "author": {
+        "@type": "Person",
+        "@id": "https://transformacionia.es/#person",
+        "name": "Idayra Cabrera",
+        "url": "https://transformacionia.es/sobre-mi.html"
+      },
+      "publisher": {
+        "@id": "https://transformacionia.es/#person"
+      },
+      "datePublished": "2026-10-30",
+      "dateModified": "2026-10-30",
+      "mainEntityOfPage": "https://transformacionia.es/temporalizacion-certificados-profesionalidad.html",
+      "image": "https://transformacionia.es/img/og-default.jpg"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://transformacionia.es/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "IA para docentes FPE",
+          "item": "https://transformacionia.es/ia-docentes-fpe.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Temporalización",
+          "item": "https://transformacionia.es/temporalizacion-certificados-profesionalidad.html"
+        }
+      ]
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+  <div class="bg-glow" aria-hidden="true"></div>
+
+  <header class="navbar" role="banner">
+    <a href="/" class="nav-logo" aria-label="Transformación IA – Inicio">
+      <img src="img/logo-idayra-header.png" width="292" height="122" alt="Transformación IA" class="nav-logo-img">
+    </a>
+    <button class="nav-toggle" id="navTog" type="button" aria-label="Abrir menú" aria-controls="navLinks" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav-links" id="navLinks" aria-label="Menú principal">
+      <a href="sobre-mi.html">Sobre mí</a>
+      <a href="proyectos.html">Proyectos</a>
+      <a href="herramientas.html">Herramientas</a>
+      <a href="formacion-privada-empresas.html">Formación privada</a>
+      <a href="https://campus.transformacionia.es" target="_blank" rel="noopener" aria-label="Campus (se abre en una pestaña nueva)">Campus</a>
+      <a href="acreditaciones.html">Acreditaciones</a>
+      <a href="blog.html">Blog</a>
+      <a href="contacto.html" class="nav-cta">Contacto</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="art-page">
+      <div class="container">
+
+        <nav class="art-crumbs" aria-label="Ruta de navegación">
+          <a href="/">Inicio</a> <span aria-hidden="true">/</span>
+          <a href="ia-docentes-fpe.html">IA para docentes FPE</a> <span aria-hidden="true">/</span>
+          <span aria-current="page">Temporalización</span>
+        </nav>
+
+        <header class="art-header">
+          <span class="kicker">Docencia FPE · Planificación</span>
+          <h1>Temporalización de un certificado de profesionalidad: guía paso a paso con ejemplo resuelto</h1>
+          <div class="art-header-meta">
+            <span>Idayra Cabrera</span>
+            <span>8 min de lectura</span>
+            <span>Octubre 2026</span>
+          </div>
+        </header>
+
+        <div class="art-grid">
+
+          <article class="art-body">
+
+            <p>
+              Antes de la primera clase de un certificado de profesionalidad hay un trabajo que no se ve:
+              la <strong>temporalización</strong>. Consiste en repartir las horas de cada módulo y de cada
+              unidad formativa en días concretos del calendario, respetando el horario del grupo, los festivos
+              y el orden en el que deben impartirse. El centro la necesita para organizar el curso y para la
+              documentación que se presenta al servicio de empleo.
+            </p>
+            <p>
+              Si buscas cómo hacerla, casi todo lo que encontrarás son PDF oficiales con plantillas vacías.
+              En esta guía te explico el método completo, con un ejemplo resuelto día a día, y al final te
+              enseño cómo hacerlo en un minuto con una herramienta gratuita.
+            </p>
+
+            <h2>Qué datos necesitas antes de empezar</h2>
+            <ul>
+              <li><strong>La estructura del certificado:</strong> sus módulos formativos (MF), las unidades formativas (UF) en las que se dividen y las horas de cada una. Están en el real decreto del certificado y en su ficha del catálogo del SEPE.</li>
+              <li><strong>La fecha de inicio</strong> del curso.</li>
+              <li><strong>Los días y el horario de clase:</strong> por ejemplo, de lunes a viernes de 16:00 a 20:00, es decir, 4 horas al día.</li>
+              <li><strong>Los festivos del periodo:</strong> nacionales, autonómicos y también los <strong>locales del municipio</strong> donde se imparte el curso, que son los que más se olvidan.</li>
+              <li><strong>Las condiciones de la convocatoria o del centro:</strong> fecha límite de finalización, límite de horas diarias o cualquier instrucción específica del servicio de empleo.</li>
+            </ul>
+
+            <h2>El método en seis pasos</h2>
+            <ol>
+              <li><strong>Ordena las unidades de impartición.</strong> Haz una lista con cada UF (o con el módulo completo, si no está dividido) en el orden en que la vas a impartir. Respeta la secuencia que indique el certificado: en algunos, una unidad formativa exige haber cursado otra antes.</li>
+              <li><strong>Calcula los días lectivos necesarios.</strong> Divide las horas totales entre las horas diarias. Es el número mínimo de días de clase que vas a necesitar.</li>
+              <li><strong>Construye el calendario lectivo.</strong> Desde la fecha de inicio, marca solo los días de clase y quita fines de semana y festivos.</li>
+              <li><strong>Reparte las horas en orden.</strong> Ve llenando cada día con las horas de la unidad que toca. Cuando una unidad termina a mitad de jornada, la siguiente empieza ese mismo día, en la hora siguiente.</li>
+              <li><strong>Reserva la evaluación.</strong> La evaluación final de cada módulo forma parte de sus horas. Sitúala en las últimas horas de cada módulo para que no quede fuera del calendario.</li>
+              <li><strong>Comprueba que todo cuadra.</strong> La suma de horas por unidad debe coincidir exactamente con el certificado y la fecha final no puede pasar de la fecha límite.</li>
+            </ol>
+
+            <div class="art-highlight">
+              El módulo de formación práctica en centros de trabajo (MP) no entra en el calendario del aula:
+              se planifica aparte, con el horario de la empresa donde el alumnado hace las prácticas.
+            </div>
+
+            <h2>Ejemplo resuelto</h2>
+            <p>
+              Para que veas el método aplicado, uso un <strong>certificado de ejemplo</strong> (las horas son
+              ilustrativas, no corresponden a un certificado real) con 300 horas de formación en el aula:
+            </p>
+            <ul>
+              <li><strong>MF1</strong>, 120 horas, dividido en UF1 (30 h) y UF2 (90 h).</li>
+              <li><strong>MF2</strong>, 60 horas, sin unidades formativas.</li>
+              <li><strong>MF3</strong>, 120 horas, dividido en UF1, UF2 y UF3 (40 h cada una).</li>
+            </ul>
+            <p>
+              El grupo tiene clase <strong>de lunes a viernes de 16:00 a 20:00</strong> (4 horas al día) y
+              empieza el <strong>lunes 11 de enero de 2027</strong>. En el periodo caen como festivos el
+              Jueves Santo y el Viernes Santo (25 y 26 de marzo de 2027); en un caso real tendrías que añadir
+              los festivos locales de tu municipio.
+            </p>
+            <p>
+              <strong>Días lectivos necesarios:</strong> 300 horas ÷ 4 horas al día = <strong>75 días de clase</strong>.
+              Repartidos en orden, queda así:
+            </p>
+
+            <div class="art-table-wrap">
+              <table class="art-table">
+                <caption>Temporalización del certificado de ejemplo (4 horas al día, de lunes a viernes)</caption>
+                <thead>
+                  <tr><th scope="col">Unidad</th><th scope="col">Horas</th><th scope="col">Empieza</th><th scope="col">Termina</th></tr>
+                </thead>
+                <tbody>
+                  <tr><th scope="row">MF1 · UF1</th><td>30</td><td>Lun 11/01</td><td>Mié 20/01, 18:00</td></tr>
+                  <tr><th scope="row">MF1 · UF2</th><td>90</td><td>Mié 20/01, 18:00</td><td>Vie 19/02</td></tr>
+                  <tr><th scope="row">MF2</th><td>60</td><td>Lun 22/02</td><td>Vie 12/03</td></tr>
+                  <tr><th scope="row">MF3 · UF1</th><td>40</td><td>Lun 15/03</td><td>Mar 30/03</td></tr>
+                  <tr><th scope="row">MF3 · UF2</th><td>40</td><td>Mié 31/03</td><td>Mar 13/04</td></tr>
+                  <tr><th scope="row">MF3 · UF3</th><td>40</td><td>Mié 14/04</td><td>Mar 27/04</td></tr>
+                </tbody>
+                <tfoot>
+                  <tr><th scope="row">Total</th><td>300</td><td>11/01/2027</td><td>27/04/2027</td></tr>
+                </tfoot>
+              </table>
+            </div>
+
+            <p>Tres detalles del ejemplo que conviene mirar:</p>
+            <ul>
+              <li><strong>Cambio de unidad a mitad de jornada.</strong> La UF1 necesita 30 horas, que son 7 días y medio. Termina el miércoles 20 de enero a las 18:00 y la UF2 empieza ese mismo día de 18:00 a 20:00. Si redondeas a días completos, pierdes o te sobran horas.</li>
+              <li><strong>Los festivos empujan el calendario.</strong> La UF1 del MF3 tiene 40 horas (10 días), pero tarda dos semanas largas en completarse porque en medio caen el Jueves y el Viernes Santo.</li>
+              <li><strong>La fecha de fin sale del cálculo.</strong> 75 días lectivos llevan el curso hasta el 27 de abril. Si la convocatoria te pide terminar antes, tendrás que aumentar las horas diarias o añadir días de clase.</li>
+            </ul>
+
+            <h2>Errores frecuentes</h2>
+            <ul>
+              <li><strong>Olvidar los festivos locales.</strong> Cada municipio tiene dos, y en Canarias además hay festivos insulares. Uno olvidado descuadra todo lo que viene detrás.</li>
+              <li><strong>Redondear días.</strong> Contar «8 días» para una unidad de 30 horas con jornadas de 4 horas. Parece poco, pero acumulado en varias unidades mueve la fecha final.</li>
+              <li><strong>Saltarse la secuencia.</strong> Programar una unidad antes que otra que el certificado exige cursar primero.</li>
+              <li><strong>Dejar la evaluación fuera.</strong> Programar todas las horas como contenido y no saber dónde encajar la prueba final de cada módulo.</li>
+              <li><strong>Rehacerlo todo a mano con cada cambio.</strong> Un festivo nuevo o un cambio de horario obliga a recalcular desde ese punto. En una hoja de cálculo manual es donde se cuelan los errores.</li>
+            </ul>
+
+            <div class="art-cta">
+              <p class="art-cta-title">Hazlo en un minuto con el planificador</p>
+              <p>
+                Construí el <a href="planificador.html">planificador de certificados de profesionalidad</a>
+                para no repetir este cálculo a mano en cada curso. Subes el PDF del certificado, indicas la
+                fecha de inicio, los días y las horas diarias, y genera el cronograma completo con los festivos
+                nacionales y de Canarias ya calculados. Lo exportas a Excel o CSV. Es gratuito y funciona en
+                el navegador, sin registro.
+              </p>
+              <p>
+                Un detalle: el planificador empieza cada módulo en una jornada nueva, sin compartir día entre
+                dos unidades. Con el ejemplo de esta guía, el día en que termina la UF1 se queda con 2 horas y
+                el curso acaba un día más tarde, el 28 de abril.
+              </p>
+              <div><a href="planificador.html" class="btn btn-p">Abrir el planificador</a></div>
+            </div>
+
+            <h2>Una nota sobre la nueva ley de FP</h2>
+            <p>
+              Con la Ley Orgánica 3/2022 de ordenación e integración de la Formación Profesional, los
+              certificados de profesionalidad pasan a formar parte del nuevo sistema de grados (son ofertas de
+              grado C) y parte de la terminología se está actualizando. La lógica de la temporalización no
+              cambia: unidades con horas fijas repartidas en orden sobre un calendario lectivo real. Antes de
+              entregarla, consulta siempre las instrucciones vigentes de tu servicio de empleo y del centro.
+            </p>
+
+          </article>
+
+          <aside class="art-sidebar">
+            <div class="art-sidebar-card">
+              <h4>Autora</h4>
+              <p class="art-author-name">Idayra Cabrera</p>
+              <p class="art-author-bio">
+                Docente FPE acreditada por el SCE y el SEPE en 15 especialidades.
+                Más de 1.770 horas de docencia certificadas y creadora del planificador de certificados.
+              </p>
+              <div style="margin-top:14px">
+                <a href="sobre-mi.html" class="btn btn-g" style="min-height:38px;padding:8px 14px;font-size:0.84rem">Ver perfil completo</a>
+              </div>
+            </div>
+
+            <div class="art-sidebar-card">
+              <h4>Más para docentes FPE</h4>
+              <ul class="art-related-list">
+                <li><a href="ia-docentes-fpe.html">IA y herramientas para docentes de FPE</a></li>
+                <li><a href="planificador-certificados-profesionalidad-guia.html">Guía de uso del planificador</a></li>
+                <li><a href="constructor-cursos.html">Constructor de cursos con exportación a Moodle</a></li>
+              </ul>
+            </div>
+
+            <div class="art-sidebar-card" style="background:rgba(59,130,246,0.06);border-color:rgba(59,130,246,0.25)">
+              <h4>¿Formación para tu equipo docente?</h4>
+              <p style="margin:0 0 14px;font-size:0.87rem;color:var(--muted);line-height:1.55">
+                Formación práctica en IA y herramientas digitales para centros y equipos de formación.
+              </p>
+              <a href="contacto.html" class="btn btn-p" style="width:100%;min-height:40px;padding:10px 14px;font-size:0.88rem">Escríbeme</a>
+            </div>
+          </aside>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="divider" aria-hidden="true"></div>
+
+    <section class="section section-cta-final" aria-labelledby="temp-cta-h">
+      <div class="container">
+        <div class="cta-final">
+          <span class="kicker">Siguiente paso</span>
+          <h2 id="temp-cta-h">Deja de temporalizar a mano</h2>
+          <p>
+            Sube el PDF de tu certificado al planificador y obtén el cronograma completo,
+            con los festivos ya descontados, en un minuto.
+          </p>
+          <div class="cta-final-actions">
+            <a href="planificador.html" class="btn btn-p">Abrir el planificador</a>
+            <a href="ia-docentes-fpe.html" class="btn btn-g">Más recursos para docentes</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container footer-container">
+      <div class="footer-top">
+        <a href="/" class="nav-logo footer-logo" aria-label="Transformación IA – Inicio">
+          <img src="img/logo-idayra-header.png" width="292" height="122" alt="Transformación IA" class="nav-logo-img">
+        </a>
+        <div class="footer-social" aria-label="Redes sociales y contacto">
+          <a href="https://wa.me/34620948523" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="WhatsApp" title="WhatsApp">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.05 4.91A9.82 9.82 0 0 0 12.03 2C6.58 2 2.13 6.42 2.13 11.88c0 1.75.46 3.46 1.33 4.96L2 22l5.3-1.39a9.9 9.9 0 0 0 4.73 1.2h.01c5.45 0 9.9-4.42 9.9-9.88 0-2.64-1.03-5.12-2.89-7.02Zm-7.02 15.23h-.01a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-3.15.83.84-3.07-.2-.31a8.13 8.13 0 0 1-1.25-4.34c0-4.48 3.67-8.13 8.18-8.13 2.18 0 4.23.84 5.77 2.37a8.06 8.06 0 0 1 2.39 5.76c0 4.48-3.67 8.21-8.09 8.21Zm4.46-6.1c-.24-.12-1.4-.69-1.62-.77-.22-.08-.38-.12-.54.12-.16.24-.62.77-.76.93-.14.16-.28.18-.52.06-.24-.12-1.01-.37-1.92-1.19-.71-.63-1.19-1.41-1.33-1.65-.14-.24-.01-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.29-.74-1.77-.2-.47-.4-.41-.54-.42h-.46c-.16 0-.42.06-.64.3-.22.24-.84.81-.84 1.97s.86 2.28.98 2.44c.12.16 1.69 2.58 4.1 3.61.57.25 1.02.4 1.37.51.58.18 1.11.15 1.53.09.47-.07 1.4-.57 1.6-1.12.2-.55.2-1.02.14-1.12-.06-.1-.22-.16-.46-.28Z"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/in/luzidayrajorgecabrera" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="LinkedIn" title="LinkedIn">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.94 8.5A1.56 1.56 0 1 1 6.94 5.38a1.56 1.56 0 0 1 0 3.12ZM5.56 9.75h2.77V18H5.56V9.75Zm4.5 0h2.66v1.13h.04c.37-.7 1.28-1.43 2.63-1.43 2.82 0 3.34 1.85 3.34 4.26V18h-2.77v-3.79c0-.9-.02-2.06-1.26-2.06-1.26 0-1.45.98-1.45 1.99V18h-2.77V9.75Z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-links-row">
+        <a href="formacion-privada-empresas.html">Formación privada</a>
+        <span class="footer-links-sep" aria-hidden="true">·</span>
+        <a href="formacion-transformacion-digital-canarias.html">Transformación digital</a>
+        <span class="footer-links-sep" aria-hidden="true">·</span>
+        <a href="formacion-competencias-digitales-empleo.html">Competencias digitales</a>
+        <span class="footer-links-sep" aria-hidden="true">·</span>
+        <a href="formacion-herramientas-digitales-analisis-datos.html">Herramientas y datos</a>
+        <span class="footer-links-sep" aria-hidden="true">·</span>
+        <a href="ia-docentes-fpe.html">IA para docentes FPE</a>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© <span id="currentYear"></span> Idayra Cabrera</span>
+        <span class="footer-bottom-sep" aria-hidden="true">·</span>
+        <a href="aviso-legal.html">Aviso legal</a>
+        <span class="footer-bottom-sep" aria-hidden="true">·</span>
+        <a href="privacidad.html">Privacidad</a>
+        <span class="footer-bottom-sep" aria-hidden="true">·</span>
+        <a href="cookies.html">Cookies</a>
+      </div>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/34620948523?text=Hola%20Idayra,%20he%20le%C3%ADdo%20tu%20gu%C3%ADa%20de%20temporalizaci%C3%B3n%20y%20me%20interesa%20m%C3%A1s%20informaci%C3%B3n."
+    class="floating-whatsapp" target="_blank" rel="noopener noreferrer"
+    aria-label="Abrir conversación en WhatsApp" title="Hablar por WhatsApp">
+    <span class="floating-whatsapp-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M19.05 4.91A9.82 9.82 0 0 0 12.03 2C6.58 2 2.13 6.42 2.13 11.88c0 1.75.46 3.46 1.33 4.96L2 22l5.3-1.39a9.9 9.9 0 0 0 4.73 1.2h.01c5.45 0 9.9-4.42 9.9-9.88 0-2.64-1.03-5.12-2.89-7.02Zm-7.02 15.23h-.01a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-3.15.83.84-3.07-.2-.31a8.13 8.13 0 0 1-1.25-4.34c0-4.48 3.67-8.13 8.18-8.13 2.18 0 4.23.84 5.77 2.37a8.06 8.06 0 0 1 2.39 5.76c0 4.48-3.67 8.21-8.09 8.21Zm4.46-6.1c-.24-.12-1.4-.69-1.62-.77-.22-.08-.38-.12-.54.12-.16.24-.62.77-.76.93-.14.16-.28.18-.52.06-.24-.12-1.01-.37-1.92-1.19-.71-.63-1.19-1.41-1.33-1.65-.14-.24-.01-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.29-.74-1.77-.2-.47-.4-.41-.54-.42h-.46c-.16 0-.42.06-.64.3-.22.24-.84.81-.84 1.97s.86 2.28.98 2.44c.12.16 1.69 2.58 4.1 3.61.57.25 1.02.4 1.37.51.58.18 1.11.15 1.53.09.47-.07 1.4-.57 1.6-1.12.2-.55.2-1.02.14-1.12-.06-.1-.22-.16-.46-.28Z"/></svg>
+    </span>
+    <span class="floating-whatsapp-text">Hablemos</span>
+  </a>
+
+  <script src="js/reveal.js" defer></script>
+  <script src="main.js" defer></script>
+<script src="js/bg-particles.js" defer></script>
+  <script src="js/cursor.js" defer></script>
+</body>
+</html>
